@@ -1,0 +1,20 @@
+﻿@model IEnumerable<StoreOnLine.DataBase.Model.Products.Product>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@foreach (var p in Model)
+{
+    <div>
+        <h3>@p.ProductName</h3>
+        @p.ProductDescription
+        <h4>@p.ProductSalePrice.ToString("c")</h4>
+    </div>
+}
