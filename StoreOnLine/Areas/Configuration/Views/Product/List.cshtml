@@ -1,4 +1,5 @@
-﻿@model IEnumerable<StoreOnLine.DataBase.Model.Products.Product>
+﻿@using StoreOnLine.HtmlHelpers
+@model StoreOnLine.Areas.Configuration.Models.ProductsListViewModel
 
 @{
     ViewBag.Title = "List";
@@ -10,11 +11,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@foreach (var p in Model)
+@foreach (var p in Model.Products)
 {
-    <div>
-        <h3>@p.ProductName</h3>
-        @p.ProductDescription
-        <h4>@p.ProductSalePrice.ToString("c")</h4>
-    </div>
+    @Html.Partial("ProductSumary",p);
+    
 }
+
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x }))
+</div>

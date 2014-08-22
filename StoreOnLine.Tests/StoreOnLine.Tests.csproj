@@ -95,10 +95,15 @@
   </Choose>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Area\Configuration\ProductController.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StoreOnLine.DataBase\StoreOnLine.DataBase.csproj">
+      <Project>{888f27bc-b38c-486f-98a2-ece55ae6b349}</Project>
+      <Name>StoreOnLine.DataBase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoreOnLine\StoreOnLine.csproj">
       <Project>{3b561301-1e9b-4b97-9f68-888fe66f031c}</Project>
       <Name>StoreOnLine</Name>

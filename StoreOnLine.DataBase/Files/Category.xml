@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+
+  <Category CategoryName="Basicos" CategoryDescription="Se Consideran productos basicos a los productos que poseen codigos de barras" CategoryPhoto="" CategoryIcon="" />
+  <Category CategoryName="Chocotejas y Tejas" CategoryDescription="Agrupa a las chocotejas y tejas en general" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Bombones Diabeticos" CategoryDescription="Bombones sin azucar, se venden al peso" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Bombones Surtidos" CategoryDescription="Bombones normales que se vende al peso" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Licor" CategoryDescription="Todo aquel producto que posee alcohol" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Paleta" CategoryDescription="Paletas de chocolates" />
+  <Category CategoryName="Materiales" CategoryDescription="Materiales que sirven como decoracion a los productos" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Basicos Decorados" CategoryDescription="Productos Basicos que poseen una decoracion extra" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Cajas" CategoryDescription="Productos que se venden en presentacion de cajas" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Estuche" CategoryDescription="Estuches para almacenar productos" CategoryPhoto="" CategoryIcon="" />
+  <Category CategoryName="Otros" CategoryDescription="Aquellos productos que no se pueden agrupar en otras categorias" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Canastas" CategoryDescription="Canastas de chocolates" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Arreglos" CategoryDescription="Productos con arreglos en general" CategoryPhoto="" CategoryIcon=""/>
+  <Category CategoryName="Pruebas" CategoryDescription="Preubas del sistema" CategoryPhoto="" CategoryIcon=""/>
+</root>

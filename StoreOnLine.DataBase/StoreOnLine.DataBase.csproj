@@ -78,6 +78,7 @@
     <Compile Include="Abstract\IProductsRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Default\Sources.cs" />
+    <Compile Include="Entities\DataBaseConfiguration.cs" />
     <Compile Include="Entities\DataBaseContext.cs" />
     <Compile Include="Entities\DataBaseExtension.cs" />
     <Compile Include="Entities\DataBaseGeneric.cs" />
@@ -109,6 +110,7 @@
     <Content Include="Default\Img\red.png" />
     <Content Include="Default\Img\simple.png" />
     <Content Include="Default\Img\yellow.png" />
+    <Content Include="Files\Category.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreOnLine.Util\StoreOnLine.Util.csproj">
@@ -116,7 +118,9 @@
       <Name>StoreOnLine.Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Img\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

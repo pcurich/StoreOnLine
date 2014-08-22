@@ -9,12 +9,12 @@ using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            Database.SetInitializer<StoreOnLineContext>(new DataBaseInitializer.StoreOnLineInitializerCreateDatabaseIfNotExists());
+            Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
