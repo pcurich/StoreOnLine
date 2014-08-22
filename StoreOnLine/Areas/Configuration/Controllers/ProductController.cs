@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Configuration.Models;
 using StoreOnLine.DataBase.Abstract;
@@ -17,11 +18,13 @@ namespace StoreOnLine.Areas.Configuration.Controllers
         }
 
         // GET: /Configuration/Product/List
-        public ViewResult List(int page = 1)
+        public ViewResult List(String category, int page = 1)
         {
+            var categoryId = Convert.ToInt32(category);
             var model = new ProductsListViewModel
             {
                 Products = _repository.Products
+                .Where(p => p.ProductCategoryId == categoryId)
                 .OrderBy(p => p.Id)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
@@ -31,7 +34,8 @@ namespace StoreOnLine.Areas.Configuration.Controllers
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
                     TotalItem = _repository.Products.Count()
-                }
+                },
+                CurrentCategoryId = categoryId
             };
             return View(model);
 

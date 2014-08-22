@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.Util.Xml;
 
 namespace StoreOnLine.DataBase.Entities
 {
@@ -17,31 +16,16 @@ namespace StoreOnLine.DataBase.Entities
                 // base.Seed(context);
             }
 
-            //public override void InitializeDatabase(StoreOnLineContext context)
-            //{
-            //    //if (context.Database.Exists())
-            //    //{
-            //    //    context.Database.ExecuteSqlCommand("");
-            //    //}
-            //}
         }
 
         public class StoreOnLineInitializerDropCreateDatabaseAlways : DropCreateDatabaseAlways<StoreOnLineContext>
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                LoadCategory();
-                var cat = new Category { CategoryName = "Category 1" };
-                context.Categories.Add(cat);
-                context.SaveChanges();
-
-                var cam = new Campaign { CampaignName = "Campaign 1" };
-                context.Campaigns.Add(cam);
-                context.SaveChanges();
-
-                var uni = new Unit { UnitName = "Unit 1" };
-                context.Units.Add(uni);
-                context.SaveChanges();
+                LoadCategory(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Category.xml");
+                LoadCampaign(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Campaign.xml");
+                LoadUnit(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
+                //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
 
                 var pbs = new List<ProductBase>
                 {
@@ -57,57 +41,6 @@ namespace StoreOnLine.DataBase.Entities
                     context.ProductBases.Add(pb);
                 }
             }
-
-            private static void LoadCategory()
-            {
-                string[] rootx1 = System.IO.Directory.GetDirectories(System.AppDomain.CurrentDomain.BaseDirectory);
-
-                List<KeyValuePair<string, string>> xmlPairs = new List<KeyValuePair<string, string>>();
-
-                XDocument xml = Util.Xml.XmlFile.Load("C:/Users/Pedro/Documents/GitHub/StoreOnLine/StoreOnLine.DataBase/Files/Category.xml");
-                var categories = (from categ in xml.Descendants("Category") select categ).ToList();
-
-                foreach (XElement category in categories)
-                {
-                    XAttribute xElement = category.Attribute("CategoryName");
-                    if (xElement != null)
-                        Console.WriteLine(xElement.Value);
-                }
-
-                //if (xml.Root != null)
-                //{
-                //    string root = xml.Root.Name.ToString();
-                //    IEnumerable<XElement> xElements = Util.Xml.XmlFile.Elements(xml, root);
-                    //xmlPairs.AddRange(
-                    //   from xElement in xElements
-                    //   from att in xElement.Attributes(xElement.Name)
-                    //   select new KeyValuePair<string, string>(att.Name.LocalName, att.Value)
-                    //   );
-                    //foreach (var xElement in xElements)
-                    //{
-                    //    IEnumerable<XAttribute> attributes = xElement.Attributes(xElement.Name);
-                    //    foreach (var att in attributes)
-                    //    {
-                    //        xmlPairs.Add(new KeyValuePair<string, string>(att.Name.LocalName, att.Value));
-                    //    }
-                    //}
-
-                    //foreach (var xmlPair in xmlPairs)
-                    //{
-                    //    Console.WriteLine(xmlPair.Value + " - " + xmlPair.Value);
-                    //}
-                    
-             //   }
-
-            }
-
-            //public override void InitializeDatabase(StoreOnLineContext context)
-            //{
-            //    //if (context.Database.Exists())
-            //    //{
-            //    //    context.Database.ExecuteSqlCommand("");
-            //    //}
-            //}
         }
 
         public class StoreOnLineInitializerCreateDatabaseIfNotExists : CreateDatabaseIfNotExists<StoreOnLineContext>
@@ -136,5 +69,55 @@ namespace StoreOnLine.DataBase.Entities
                 }
             }
         }
+
+        #region LoadMethods
+
+        private static void LoadCategory(StoreOnLineContext context, String str)
+        {
+            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            var elemt = XmlSerialization<List<Category>>.Deserialize(str);
+            foreach (var e in elemt)
+            {
+                context.Categories.Add(e);
+            }
+            context.SaveChanges();
+        }
+
+        private static void LoadCampaign(StoreOnLineContext context, String str)
+        {
+            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            var elemt = XmlSerialization<List<Campaign>>.Deserialize(str);
+            foreach (var e in elemt)
+            {
+                context.Campaigns.Add(e);
+            }
+            context.SaveChanges();
+        }
+
+        private static void LoadUnit(StoreOnLineContext context, String str)
+        {
+            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            var elemt = XmlSerialization<List<Unit>>.Deserialize(str);
+
+            foreach (var e in elemt)
+            {
+                context.Units.Add(e);
+            }
+            context.SaveChanges();
+        }
+
+        private static void Export(String str)
+        {
+            var pbs = new List<Unit>
+                {
+                    new Unit {UniCode = "X", UnitDescription = "X", UnitName ="X" }
+                };
+            XmlSerialization<List<Unit>>.Serialize(pbs, str);
+        }
+
+        #endregion
     }
 }

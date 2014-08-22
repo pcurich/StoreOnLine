@@ -1,7 +1,10 @@
-﻿using StoreOnLine.DataBase.Model.Products;
+﻿using System.Collections.Generic;
+using System.IO;
+using StoreOnLine.DataBase.Model.Products;
 using System;
 using System.Data.Entity;
 using StoreOnLine.DataBase.Model.Providers;
+using StoreOnLine.Util.Xml;
 
 namespace StoreOnLine.DataBase.Entities
 {

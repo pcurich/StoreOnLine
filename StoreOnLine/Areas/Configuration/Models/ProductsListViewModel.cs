@@ -10,5 +10,6 @@ namespace StoreOnLine.Areas.Configuration.Models
     {
         public IEnumerable<Product> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public int CurrentCategoryId { get; set; }
     }
 }

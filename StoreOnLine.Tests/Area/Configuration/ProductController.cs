@@ -47,7 +47,7 @@ namespace StoreOnLine.Tests.Area.Configuration
         {
             //Arrange - define an HTML helper - we need to do this in order to apply the extension method
             HtmlHelper myHelpers = null;
-           
+
             //Arrange - Create Paggination Info
             PagingInfo pagingInfo = new PagingInfo
             {
@@ -67,6 +67,32 @@ namespace StoreOnLine.Tests.Area.Configuration
                 + @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>"
                 + @"<a class=""btn btn-default"" href=""Page3"">3</a>",
                 result.ToString());
+        }
+
+        [TestMethod]
+        public void Can_Send_Pagination_View_Model()
+        {
+            // Arrange
+            Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
+            mock.Setup(m => m.Products).Returns(new Product[] {
+                new Product {Id = 1, ProductName = "P1"},
+                new Product {Id = 2, ProductName = "P2"},
+                new Product {Id = 3, ProductName = "P3"},
+                new Product {Id = 4, ProductName = "P4"},
+                new Product {Id = 5, ProductName = "P5"}
+            });
+            // Arrange
+            ProductController controller = new ProductController(mock.Object);
+            controller.PageSize = 3;
+            // Act
+            ProductsListViewModel result= (ProductsListViewModel)controller.List(0, 2).Model;
+            // Assert
+            PagingInfo pageInfo = result.PagingInfo;
+            Assert.AreEqual(pageInfo.CurrentPage, 2);
+            Assert.AreEqual(pageInfo.ItemsPerPage, 3);
+            Assert.AreEqual(pageInfo.TotalItem, 5);
+            Assert.AreEqual(pageInfo.TotalPages, 2);
+
         }
     }
 }

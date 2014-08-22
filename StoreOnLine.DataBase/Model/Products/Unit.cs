@@ -1,4 +1,5 @@
-﻿using StoreOnLine.DataBase.Entities;
+﻿using System.Xml.Serialization;
+using StoreOnLine.DataBase.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace StoreOnLine.DataBase.Model.Products
         public String UnitDescription { get; set; }
         public String UniCode { get; set; }
 
+        [XmlIgnore]
         public IEnumerable<Product> Products { get; set; }
 
 
