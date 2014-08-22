@@ -22,7 +22,7 @@ namespace StoreOnLine.Areas.Configuration
                 AreaName = "Configuration",
                 controller = "Product",
                 action = "List",
-                category = (string)null,
+                categoryId = (string)null,
                 page = 1
             });
 
