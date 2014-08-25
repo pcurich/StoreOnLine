@@ -5,6 +5,7 @@ namespace StoreOnLine.DataBase.Abstract
 {
     public interface IProductsRepository
     {
-        IEnumerable<Product> Products { get; }
+        IEnumerable<ProductBase> ProductBases  { get; }
+        IEnumerable<ProductComposite> ProductComposites{ get; }
     }
 }

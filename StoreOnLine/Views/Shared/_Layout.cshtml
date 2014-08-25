@@ -27,13 +27,20 @@
         </div>
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+    <div class="row panel">
+        <div class="col-xs-12">
+            @*<div id="categories" class="col-xs-3">
+            @Html.Action("Menu", "Nav", new { Area = "Configuration" })
+        </div>
+        <div class="col-xs-8">*@
+            @RenderBody()
+            @*        </div>*@
+        </div>
     </div>
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
 
     <script src="~/Scripts/jquery-1.11.1.js"></script>
     <script src="~/Scripts/bootstrap.js"></script>

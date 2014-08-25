@@ -30,6 +30,9 @@ namespace StoreOnLine.Infrastructure
 
             //_kernel.Bind<IProductsRepository>().ToConstant(mock.Object);
             _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
+            _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();
+            _kernel.Bind<IUnitRepository>().To<UnitRepository>();
         }
 
         public object GetService(Type serviceType)

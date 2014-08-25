@@ -14,28 +14,27 @@ namespace StoreOnLine.Areas.Configuration
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute(
-                name: null,
-                url: "",
-            defaults: new
-            {
-                AreaName = "Configuration",
-                controller = "Product",
-                action = "List",
-                categoryId = (string)null,
-                page = 1
-            });
+            //context.MapRoute(null,
+            //     "Page{page}",
+            //     new { controller = "Product", action = "List", category = (string)null },
+            //     new { page = @"\d+" }
+            // );
 
-            context.MapRoute(
-               name: null,
-               url: "Configuration/{controller}/{action}/Page{page}",
-               defaults: new { controller = "Product", action = "List" }
-           );
+            //context.MapRoute("Configuration_Category",
+            //    "{category}",
+            //    new { controller = "Product", action = "List", page = 1 }
+            //);
+
+            //context.MapRoute("Configuration_Category_Page",
+            //    "{category}/Page{page}",
+            //    new { controller = "Product", action = "List" },
+            //    new { page = @"\d+" }
+            //);
 
             context.MapRoute(
                 "Configuration_default",
-                "Configuration/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Configuration/{controller}/{action}/{category}/{page}",
+                new { controller = "ProductBase", action = "List", category = (string)null, page = UrlParameter.Optional }
             );
         }
     }

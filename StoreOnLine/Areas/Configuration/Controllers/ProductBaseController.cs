@@ -7,12 +7,12 @@ using StoreOnLine.DataBase.Model.Products;
 
 namespace StoreOnLine.Areas.Configuration.Controllers
 {
-    public class ProductController : Controller
+    public class ProductBaseController : Controller
     {
         private readonly IProductsRepository _repository;
         public int PageSize = 4;
 
-        public ProductController(IProductsRepository productRepository)
+        public ProductBaseController(IProductsRepository productRepository)
         {
             _repository = productRepository;
         }
@@ -20,11 +20,11 @@ namespace StoreOnLine.Areas.Configuration.Controllers
         // GET: /Configuration/Product/List
         public ViewResult List(String category, int page = 1)
         {
-            var categoryId = Convert.ToInt32(category);
+            //var categoryId = Convert.ToInt32(category);
             var model = new ProductsListViewModel
             {
-                Products = _repository.Products
-                .Where(p => p.ProductCategoryId == categoryId)
+                Products = _repository.ProductBases
+                .Where(p => p.ProductCategory.CategoryName == category)
                 .OrderBy(p => p.Id)
                 .Skip((page - 1) * PageSize)
                 .Take(PageSize),
@@ -33,12 +33,14 @@ namespace StoreOnLine.Areas.Configuration.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItem = _repository.Products.Count()
+                    TotalItem = category == null ?
+                                _repository.ProductBases.Count() :
+                                _repository.ProductBases.Count(e => e.ProductCategory.CategoryName == category)
                 },
-                CurrentCategoryId = categoryId
+
+                CurrentCategory = category
             };
             return View(model);
-
         }
     }
 }

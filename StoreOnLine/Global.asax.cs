@@ -14,7 +14,7 @@ namespace StoreOnLine
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
+            //Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

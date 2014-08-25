@@ -124,8 +124,17 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Configuration\Views\web.config" />
-    <Content Include="Areas\Configuration\Views\Product\List.cshtml" />
+    <Content Include="Areas\Configuration\Views\ProductBase\List.cshtml" />
     <Content Include="Areas\Configuration\Views\Shared\ProductSumary.cshtml" />
+    <Content Include="Areas\Configuration\Views\Nav\MenuCategory.cshtml" />
+    <Content Include="Areas\Configuration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Shopping\Views\web.config" />
+    <Content Include="Areas\Shopping\Views\Nav\MenuCategory.cshtml" />
+    <Content Include="Areas\Shopping\Views\Nav\MenuCampaing.cshtml" />
+    <Content Include="Areas\Shopping\Views\ProductBase\List.cshtml" />
+    <Content Include="Areas\Shopping\Views\ProductConcrete\List.cshtml" />
+    <Content Include="Areas\Shopping\Views\Shared\ProductSumary.cshtml" />
+    <Content Include="Areas\Shopping\Views\Cart\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -141,9 +150,16 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Configuration\ConfigurationAreaRegistration.cs" />
-    <Compile Include="Areas\Configuration\Controllers\ProductController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\NavController.cs" />
+    <Compile Include="Areas\Configuration\Controllers\ProductBaseController.cs" />
     <Compile Include="Areas\Configuration\Models\PagingInfo.cs" />
     <Compile Include="Areas\Configuration\Models\ProductsListViewModel.cs" />
+    <Compile Include="Areas\Shopping\Controllers\CartController.cs" />
+    <Compile Include="Areas\Shopping\Controllers\NavController.cs" />
+    <Compile Include="Areas\Shopping\Controllers\ProductBaseController.cs" />
+    <Compile Include="Areas\Shopping\Controllers\ProductConcreteController.cs" />
+    <Compile Include="Areas\Shopping\Models\CartIndexViewModel.cs" />
+    <Compile Include="Areas\Shopping\ShoppingAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -22,9 +22,10 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                LoadCategory(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Category.xml");
-                LoadCampaign(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Campaign.xml");
-                LoadUnit(context, @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
+                String path = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                LoadCategory(context, path+"Category.xml");
+                LoadCampaign(context, path+"Campaign.xml");
+                LoadUnit(context, path+"Unit.xml");
                 //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
 
                 var pbs = new List<ProductBase>

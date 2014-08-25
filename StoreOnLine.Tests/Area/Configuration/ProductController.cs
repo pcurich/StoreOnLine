@@ -20,20 +20,20 @@ namespace StoreOnLine.Tests.Area.Configuration
         {
             //Arrange
             var mock = new Mock<IProductsRepository>();
-            mock.Setup(m => m.Products).Returns(new[]
+            mock.Setup(m => m.ProductBases).Returns(new[]
             {
-                new Product{Id = 1, ProductName = "p1"},
-                new Product{Id = 2, ProductName = "p2"},
-                new Product{Id = 3, ProductName = "p3"},
-                new Product{Id = 4, ProductName = "p4"},
-                new Product{Id = 5, ProductName = "p5"},
-                new Product{Id = 6, ProductName = "p6"}
+                new ProductBase{Id = 1, ProductName = "p1"},
+                new ProductBase{Id = 2, ProductName = "p2"},
+                new ProductBase{Id = 3, ProductName = "p3"},
+                new ProductBase{Id = 4, ProductName = "p4"},
+                new ProductBase{Id = 5, ProductName = "p5"},
+                new ProductBase{Id = 6, ProductName = "p6"}
             });
 
-            var controller = new ProductController(mock.Object) { PageSize = 3 };
+            var controller = new ProductBaseController(mock.Object) { PageSize = 3 };
 
             //Act
-            var result = (IEnumerable<Product>)controller.List(2).Model;
+            var result = (IEnumerable<Product>)controller.List("1",2).Model;
 
             //Asert
             var prodArray = result.ToArray();
@@ -74,18 +74,18 @@ namespace StoreOnLine.Tests.Area.Configuration
         {
             // Arrange
             Mock<IProductsRepository> mock = new Mock<IProductsRepository>();
-            mock.Setup(m => m.Products).Returns(new Product[] {
-                new Product {Id = 1, ProductName = "P1"},
-                new Product {Id = 2, ProductName = "P2"},
-                new Product {Id = 3, ProductName = "P3"},
-                new Product {Id = 4, ProductName = "P4"},
-                new Product {Id = 5, ProductName = "P5"}
+            mock.Setup(m => m.ProductBases).Returns(new ProductBase[] {
+                new ProductBase {Id = 1, ProductName = "P1"},
+                new ProductBase {Id = 2, ProductName = "P2"},
+                new ProductBase {Id = 3, ProductName = "P3"},
+                new ProductBase {Id = 4, ProductName = "P4"},
+                new ProductBase {Id = 5, ProductName = "P5"}
             });
             // Arrange
-            ProductController controller = new ProductController(mock.Object);
+            ProductBaseController controller = new ProductBaseController(mock.Object);
             controller.PageSize = 3;
             // Act
-            ProductsListViewModel result= (ProductsListViewModel)controller.List(0, 2).Model;
+            ProductsListViewModel result= (ProductsListViewModel)controller.List("0", 2).Model;
             // Assert
             PagingInfo pageInfo = result.PagingInfo;
             Assert.AreEqual(pageInfo.CurrentPage, 2);
