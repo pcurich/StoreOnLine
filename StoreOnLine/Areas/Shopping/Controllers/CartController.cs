@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Shopping.Models;
 using StoreOnLine.DataBase.Abstract;
@@ -19,55 +16,45 @@ namespace StoreOnLine.Areas.Shopping.Controllers
             _repository = repo;
         }
 
-        public ViewResult Index(string returnUrl)
+        public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel
             {
-                Cart = GetCart(),
+                Cart = cart,
                 ReturnUrl = returnUrl
             });
         }
 
-        public RedirectToRouteResult AddToCart(int productId, string returnUrl)
+        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
             ProductBase productBase = _repository.ProductBases.FirstOrDefault(p => p.Id == productId);
             if (productBase != null)
             {
-                GetCart().AddItem(productBase, 1);
+                cart.AddItem(productBase, 1);
             }
             else
             {
                 ProductComposite productComposite = _repository.ProductComposites.FirstOrDefault(p => p.Id == productId);
-                GetCart().AddItem(productComposite, 1);
+                cart.AddItem(productComposite, 1);
             }
 
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public RedirectToRouteResult RemoveFromCart(int productId, string returnUrl)
+        public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
         {
             ProductBase productBase = _repository.ProductBases.FirstOrDefault(p => p.Id == productId);
             if (productBase != null)
             {
-                GetCart().RemoveLine(productBase);
+                cart.RemoveLine(productBase);
             }
             else
             {
                 ProductComposite productComposite = _repository.ProductComposites.FirstOrDefault(p => p.Id == productId);
-                GetCart().RemoveLine(productComposite);
+                cart.RemoveLine(productComposite);
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-
-        private Cart GetCart()
-        {
-            Cart cart = (Cart)Session["Cart"];
-            if (cart == null)
-            {
-                cart = new Cart();
-                Session["Cart"] = cart;
-            }
-            return cart;
-        }
+         
     }
 }

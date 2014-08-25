@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using StoreOnLine.Areas.Configuration.Models;
+﻿using StoreOnLine.Areas.Configuration.Models;
 using StoreOnLine.DataBase.Abstract;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace StoreOnLine.Areas.Shopping.Controllers
 {

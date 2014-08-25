@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.Shopping;
+using StoreOnLine.Infrastructure.Binders;
 
 namespace StoreOnLine
 {
@@ -15,6 +12,7 @@ namespace StoreOnLine
         {
             AreaRegistration.RegisterAllAreas();
             //Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }
