@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Text;
 using System.Web.Mvc;
-using StoreOnLine.Areas.Configuration.Models;
+using StoreOnLine.Areas.Management.Models;
 
 namespace StoreOnLine.HtmlHelpers
 {

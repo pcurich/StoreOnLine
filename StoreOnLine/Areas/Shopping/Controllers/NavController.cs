@@ -24,8 +24,7 @@ namespace StoreOnLine.Areas.Shopping.Controllers
                                                        .Select(x => x.CategoryName)
                                                        .Distinct()
                                                        .OrderBy(x => x);
-
-            return PartialView(categories);
+            return PartialView("FlexMenuCategory",categories);
         }
 
         public PartialViewResult MenuCampaing(string category = null)
@@ -39,5 +38,5 @@ namespace StoreOnLine.Areas.Shopping.Controllers
 
             return PartialView(categories);
         }
-	}
+    }
 }

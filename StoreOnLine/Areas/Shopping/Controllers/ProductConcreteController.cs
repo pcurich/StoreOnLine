@@ -1,4 +1,4 @@
-﻿using StoreOnLine.Areas.Configuration.Models;
+﻿using StoreOnLine.Areas.Management.Models;
 using StoreOnLine.DataBase.Abstract;
 using System;
 using System.Linq;
