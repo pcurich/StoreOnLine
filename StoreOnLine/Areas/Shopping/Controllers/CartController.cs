@@ -10,10 +10,12 @@ namespace StoreOnLine.Areas.Shopping.Controllers
     public class CartController : Controller
     {
         private readonly IProductsRepository _repository;
+        private readonly IOrderProcessor _orderProcessor;
 
-        public CartController(IProductsRepository repo)
+        public CartController(IProductsRepository repo, IOrderProcessor proc)
         {
             _repository = repo;
+            _orderProcessor = proc;
         }
 
         public ViewResult Index(Cart cart, string returnUrl)
@@ -55,6 +57,34 @@ namespace StoreOnLine.Areas.Shopping.Controllers
             }
             return RedirectToAction("Index", new { returnUrl });
         }
-         
+
+        public PartialViewResult Summary(Cart cart)
+        {
+            return PartialView(cart);
+        }
+
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
+        }
+
+        [HttpPost]
+        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        {
+            if (!cart.Lines.Any())
+            {
+                ModelState.AddModelError("", "Sorry, your cart is empty!");
+            }
+            if (ModelState.IsValid)
+            {
+                _orderProcessor.ProcessOrder(cart, shippingDetails);
+                cart.Clear();
+                return View("Completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
+        }
     }
 }

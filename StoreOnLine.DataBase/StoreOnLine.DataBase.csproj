@@ -78,6 +78,7 @@
     <Compile Include="Abstract\ICampaingRepository.cs" />
     <Compile Include="Abstract\ICartRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFCampaingRepository.cs" />
     <Compile Include="Concrete\EFUnitRepository.cs" />
+    <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Default\Sources.cs" />
     <Compile Include="Entities\DataBaseConfiguration.cs" />
     <Compile Include="Entities\DataBaseContext.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Entities\DataBaseGeneric.cs" />
     <Compile Include="Entities\DataBaseId.cs" />
     <Compile Include="Entities\DataBaseInitializer.cs" />
+    <Compile Include="Model\Configuration\EmailSettings.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />
     <Compile Include="Model\Products\Campaign .cs" />
     <Compile Include="Model\Products\Category.cs" />
@@ -103,6 +106,8 @@
     <Compile Include="Model\Providers\Supplier.cs" />
     <Compile Include="Model\Shopping\Cart.cs" />
     <Compile Include="Model\Shopping\CartLine.cs" />
+    <Compile Include="Model\Shopping\Shipping.cs" />
+    <Compile Include="Model\Shopping\ShippingDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

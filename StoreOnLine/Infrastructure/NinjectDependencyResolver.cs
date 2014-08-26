@@ -1,9 +1,10 @@
-﻿using Moq;
+﻿using System.Configuration;
 using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Concrete;
+using StoreOnLine.DataBase.Model.Configuration;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Abstract;
 
@@ -19,20 +20,21 @@ namespace StoreOnLine.Infrastructure
             AddBindings();
         }
 
+
+
         private void AddBindings()
         {
-            //var mock = new Mock<IProductsRepository>();
-            //mock.Setup(m => m.Products).Returns(new List<Product> {
-            //    new Product { ProductName = "Football", ProductBasePrice = 25M },
-            //    new Product { ProductName = "Surf board", ProductBasePrice = 179M },
-            //    new Product { ProductName = "Running shoes", ProductBasePrice = 95M }
-            //    });
+            var emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
 
-            //_kernel.Bind<IProductsRepository>().ToConstant(mock.Object);
             _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();
             _kernel.Bind<IUnitRepository>().To<UnitRepository>();
+            _kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+
         }
 
         public object GetService(Type serviceType)

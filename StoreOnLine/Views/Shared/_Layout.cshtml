@@ -7,6 +7,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>
@@ -20,6 +21,7 @@
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
+            @Html.Action("Summary", "Cart",new {Area="Shopping"})
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                 </ul>
