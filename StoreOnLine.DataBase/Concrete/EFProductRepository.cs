@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Data.Entity;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
@@ -34,74 +36,18 @@ namespace StoreOnLine.DataBase.Concrete
             }
         }
 
-        public int SaveProductBase(ProductBase product)
+        public IEnumerable<Category> Categories
         {
-            if (product.Id == 0)
-            {
-                _context.ProductBases.Add(product);
-
-            }
-            else
-            {
-                var dbEntry = _context.ProductBases.Find((product.Id));
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(product))
-                {
-                    if (!property.Name.Equals("Id") && property.GetValue(product) != null)
-                    {
-                        var value = property.GetValue(product);
-                        if (value != null) property.SetValue(dbEntry, value);
-                    }
-                }
-
-            }
-            _context.SaveChanges();
-            return product.Id;
+            get { return _context.Categories; }
+        }
+        public IEnumerable<Campaign> Campaigns
+        {
+            get { return _context.Campaigns; }
         }
 
-        public int SaveProductComposite(ProductComposite product)
+        public IEnumerable<Unit> Units
         {
-            if (product.Id == 0)
-            {
-                _context.ProductComposites.Add(product);
-
-            }
-            else
-            {
-                var dbEntry = _context.ProductComposites.Find((product.Id));
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(product))
-                {
-                    if (!property.Name.Equals("Id") && property.GetValue(product) != null)
-                    {
-                        var value = property.GetValue(product);
-                        if (value != null) property.SetValue(dbEntry, value);
-                    }
-                }
-
-            }
-            _context.SaveChanges();
-            return product.Id;
-        }
-
-        public Product DeleteProductBase(int productId)
-        {
-            ProductBase dbEntry = _context.ProductBases.Find(productId);
-            if (dbEntry != null)
-            {
-                _context.ProductBases.Remove(dbEntry);
-                _context.SaveChanges();
-            }
-            return dbEntry;
-        }
-
-        public Product DeleteProductComposite(int productId)
-        {
-            ProductComposite dbEntry = _context.ProductComposites.Find(productId);
-            if (dbEntry != null)
-            {
-                _context.ProductComposites.Remove(dbEntry);
-                _context.SaveChanges();
-            }
-            return dbEntry;
+            get { return _context.Units; }
         }
     }
 }

@@ -358,8 +358,6 @@
     <Content Include="Areas\Shopping\Views\Cart\Completed.cshtml" />
     <Content Include="Areas\Shopping\Views\Nav\FlexMenuCategory.cshtml" />
     <Content Include="Areas\Shopping\Views\Nav\FlexMenuCategory.Mobile.cshtml" />
-    <Content Include="Areas\Management\Views\AdminProductBase\Index.cshtml" />
-    <Content Include="Areas\Management\Views\AdminProductBase\Edit.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\jquery-1.11.1.min.js" />
@@ -372,14 +370,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Areas\Management\Controllers\AdminProductBaseController.cs" />
+    <Compile Include="Areas\Management\Controllers\AdminController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Areas\Management\Controllers\NavController.cs" />
     <Compile Include="Areas\Management\Controllers\ProductBaseController.cs" />
