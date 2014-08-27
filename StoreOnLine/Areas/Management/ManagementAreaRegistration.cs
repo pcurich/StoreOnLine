@@ -2,7 +2,7 @@
 
 namespace StoreOnLine.Areas.Management
 {
-    public class ConfigurationAreaRegistration : AreaRegistration
+    public class ManagementAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
