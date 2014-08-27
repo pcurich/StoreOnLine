@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<ArrayOfUnit>
+    <Unit>
+        <UnitName>KILOGRAMOS</UnitName>
+        <UnitDescription>KILOGRAMOS</UnitDescription>
+        <UniCode>01</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>LIBRAS</UnitName>
+        <UnitDescription>LIBRAS</UnitDescription>
+        <UniCode>02</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>TONELADAS LARGAS</UnitName>
+        <UnitDescription>TONELADAS LARGAS</UnitDescription>
+        <UniCode>03</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>TONELADAS MÉTRICAS</UnitName>
+        <UnitDescription>TONELADAS MÉTRICAS</UnitDescription>
+        <UniCode>04</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>TONELADAS CORTAS</UnitName>
+        <UnitDescription>TONELADAS CORTAS</UnitDescription>
+        <UniCode>05</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>GRAMOS</UnitName>
+        <UnitDescription>GRAMOS</UnitDescription>
+        <UniCode>06</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>UNIDADES</UnitName>
+        <UnitDescription>UNIDADES</UnitDescription>
+        <UniCode>07</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>LITROS</UnitName>
+        <UnitDescription>LITROS</UnitDescription>
+        <UniCode>08</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>GALONES</UnitName>
+        <UnitDescription>GALONES</UnitDescription>
+        <UniCode>09</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>BARRILES</UnitName>
+        <UnitDescription>BARRILES</UnitDescription>
+        <UniCode>10</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>LATAS</UnitName>
+        <UnitDescription>LATAS</UnitDescription>
+        <UniCode>11</UniCode>
+    </Unit>
+    <Unit>
+        <UnitName>CAJAS</UnitName>
+        <UnitDescription>CAJAS</UnitDescription>
+        <UniCode>12</UniCode>
+    </Unit>
+	<Unit>
+        <UnitName>MILLARES</UnitName>
+        <UnitDescription>MILLARES</UnitDescription>
+        <UniCode>13</UniCode>
+    </Unit>
+	<Unit>
+        <UnitName>METROS CÚBICOS</UnitName>
+        <UnitDescription>METROS CÚBICOS</UnitDescription>
+        <UniCode>14</UniCode>
+    </Unit>
+	<Unit>
+        <UnitName>METROS</UnitName>
+        <UnitDescription>METROS</UnitDescription>
+        <UniCode>15</UniCode>
+    </Unit>
+	<Unit>
+        <UnitName>OTROS (ESPECIFICAR)</UnitName>
+        <UnitDescription>OTROS (ESPECIFICAR)</UnitDescription>
+        <UniCode>99</UniCode>
+    </Unit>
+</ArrayOfUnit>

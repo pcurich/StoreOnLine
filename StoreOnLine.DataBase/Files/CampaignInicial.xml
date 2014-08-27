@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<ArrayOfCampaign xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Campaign>
+    <CampaignName>Anual</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles todo el año</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+<Campaign>
+    <CampaignName>Dia de San Valentin</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan para las campañas de san valentin</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Pascuas</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas de pascuas</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+    <Campaign>
+    <CampaignName>Dia de la Secretaria</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas del dia de la secretaria</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+      <Campaign>
+    <CampaignName>Dia de la Madre</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas del dia de la madre</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Dia del Padre</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas del dia del padre</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Dia del Maestro</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas del dia del maestro</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Fiestas Patrias</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas de fiestas patrias</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Dia del Níño</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas del dia del niño</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Halloween</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas de halloween</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+  <Campaign>
+    <CampaignName>Navidad</CampaignName>
+    <CampaignDescription>Conjunto de Productos que estan disponibles para las campañas de navidad</CampaignDescription>
+    <CampaingStartTime xsi:nil="true" />
+    <CampaingEndTime xsi:nil="true" />
+  </Campaign>
+</ArrayOfCampaign>

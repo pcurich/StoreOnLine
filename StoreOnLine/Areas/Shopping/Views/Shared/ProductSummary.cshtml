@@ -1,0 +1,25 @@
+﻿@model StoreOnLine.DataBase.Model.Products.Product
+
+
+<div class="well">
+    <h3>
+        <strong>@Model.ProductName</strong>
+        <span class="pull-right label label-primary">@Model.ProductSalePrice.ToString("c")</span>
+    </h3>
+    @using (Html.BeginForm("AddToCart", "Cart"))
+    {
+        <div class="pull-right">
+           @* @Html.TextBoxFor(x => x.Id,new {name="productId"})<br/>*@
+            @Html.HiddenFor(x => x.Id,new {@Name="productId",@id="productId"})
+            @if (Request.Url != null)
+            {
+                @*@Html.Label("returnUrl", Request.Url.PathAndQuery)*@
+                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            }
+            <input type="submit" class="btn btn-success" value="Add to cart" />
+        </div>
+    }
+    <span class="lead">Model.ProductDescription</span>
+</div>
+
+
