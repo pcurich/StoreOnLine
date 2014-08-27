@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using StoreOnLine.Areas.Configuration.Models;
+using StoreOnLine.Areas.Management.Models;
 using StoreOnLine.DataBase.Abstract;
 
 namespace StoreOnLine.Areas.Shopping.Controllers
