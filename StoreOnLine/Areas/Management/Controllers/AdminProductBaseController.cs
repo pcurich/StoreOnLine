@@ -11,7 +11,7 @@ namespace StoreOnLine.Areas.Management.Controllers
     public class AdminProductBaseController : Controller
     {
         private readonly IProductsRepository _repository;
-
+ 
         public AdminProductBaseController(IProductsRepository repo)
         {
             _repository = repo;
