@@ -13,11 +13,10 @@ namespace StoreOnLine.DataBase.Model.Products
         public String CategoryDescription { get; set; }
         
         [XmlIgnore]
-        public IEnumerable<Imagen> CategoryPhoto { get; set; }
+        public List<Imagen> CategoryPhoto { get; set; }
+
         [XmlIgnore]
-        public Imagen CategoryIcon { get; set; }
-        [XmlIgnore]
-        public IEnumerable<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
 
  
     }

@@ -1,6 +1,8 @@
-﻿using System.Web;
+﻿using System.Data.Entity;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Shopping;
 using StoreOnLine.Infrastructure.Binders;
 

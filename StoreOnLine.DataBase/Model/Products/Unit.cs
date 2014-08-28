@@ -12,7 +12,7 @@ namespace StoreOnLine.DataBase.Model.Products
         public String UniCode { get; set; }
 
         [XmlIgnore]
-        public IEnumerable<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
 
 
     }

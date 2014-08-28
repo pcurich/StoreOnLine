@@ -4,6 +4,7 @@ using StoreOnLine.DataBase.Model.Products;
 using System;
 using System.Data.Entity;
 using StoreOnLine.DataBase.Model.Providers;
+using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.Util.Xml;
 
 namespace StoreOnLine.DataBase.Entities
@@ -35,5 +36,6 @@ namespace StoreOnLine.DataBase.Entities
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Imagen> Imagens { get; set; }
     }
 }

@@ -7,6 +7,8 @@ using StoreOnLine.DataBase.Concrete;
 using StoreOnLine.DataBase.Model.Configuration;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.Infrastructure.Abstract;
+using StoreOnLine.Infrastructure.Concrete;
 
 namespace StoreOnLine.Infrastructure
 {
@@ -34,6 +36,7 @@ namespace StoreOnLine.Infrastructure
             _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();
             _kernel.Bind<IUnitRepository>().To<UnitRepository>();
             _kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+            _kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
 
         }
 

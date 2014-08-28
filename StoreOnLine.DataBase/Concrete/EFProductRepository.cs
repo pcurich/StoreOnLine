@@ -17,6 +17,7 @@ namespace StoreOnLine.DataBase.Concrete
             get
             {
                 return _context.ProductBases
+                    .Include(o => o.ProductImagens)
                     .Include(o => o.ProductCategory)
                     .Include(o => o.ProductCampaign)
                     .Include(o => o.ProductUnit);
@@ -28,7 +29,8 @@ namespace StoreOnLine.DataBase.Concrete
             get
             {
                 return _context.ProductComposites
-                .Include(o => o.ProductCategory)
+                    .Include(o => o.ProductImagens)
+                    .Include(o => o.ProductCategory)
                     .Include(o => o.ProductCampaign)
                     .Include(o => o.ProductUnit);
             }

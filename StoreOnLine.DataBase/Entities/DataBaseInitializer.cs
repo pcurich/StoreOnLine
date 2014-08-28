@@ -22,25 +22,26 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                String path = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                LoadCategory(context, path+"Category.xml");
-                LoadCampaign(context, path+"Campaign.xml");
-                LoadUnit(context, path+"Unit.xml");
+                String path = @"C:\Users\\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                LoadCategory(context, path + "Category.xml");
+                LoadCampaign(context, path + "Campaign.xml");
+                LoadUnit(context, path + "Unit.xml");
                 //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
 
                 var pbs = new List<ProductBase>
                 {
-                    new ProductBase {ProductName = "Football", ProductBasePrice = 25M, ProductCampaignId = 1, ProductCategoryId = 1, ProductUnitId = 1},
-                    new ProductBase {ProductName = "Surf board", ProductBasePrice = 179M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1},
-                    new ProductBase {ProductName = "Running shoes", ProductBasePrice = 95M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1},
-                    new ProductBase {ProductName = "Tshirt", ProductBasePrice = 95M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1},
-                    new ProductBase {ProductName = "Shorts ", ProductBasePrice = 95M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1}
+                    new ProductBase {ProductName = "Football", ProductDescription = "", ProductBasePrice = 25M, ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1, ProductUnitId = 1, ProductImagens = null},
+                    new ProductBase {ProductName = "Surf board", ProductDescription = "", ProductBasePrice = 179M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductImagens = null},
+                    new ProductBase {ProductName = "Running shoes", ProductDescription = "", ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductImagens = null},
+                    new ProductBase {ProductName = "Tshirt", ProductDescription = "", ProductBasePrice = 95M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductImagens = null},
+                    new ProductBase {ProductName = "Shorts ", ProductDescription = "",ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductImagens = null}
                 };
 
                 foreach (var pb in pbs)
                 {
                     context.ProductBases.Add(pb);
                 }
+                context.SaveChanges();
             }
         }
 

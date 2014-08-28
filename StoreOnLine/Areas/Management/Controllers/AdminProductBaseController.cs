@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Resources;
 
 namespace StoreOnLine.Areas.Management.Controllers
 {
+    [Authorize]
     public class AdminProductBaseController : Controller
     {
         private readonly IProductsRepository _repository;
@@ -29,11 +31,20 @@ namespace StoreOnLine.Areas.Management.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductBase product)
+        public ActionResult Edit(ProductBase product, HttpPostedFileBase image = null)
         {
-            
+
             if (ModelState.IsValid)
             {
+                var imagen = new Imagen();
+                if (image != null)
+                {
+                    imagen.ImageMimeType = image.ContentType;
+                    imagen.ImageData = new byte[image.ContentLength];
+                    product.ProductImagens.Add(imagen);
+
+                    image.InputStream.Read(imagen.ImageData, 0, image.ContentLength);
+                }
                 _repository.SaveProductBase(product);
                 TempData["message"] = string.Format("{0} has been saved", product.ProductName);
                 return RedirectToAction("Index");
@@ -53,7 +64,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             Product deletedProduct = _repository.DeleteProductBase(productId);
             if (deletedProduct != null)
             {
-                TempData["message"] = string.Format("{0} was deleted",deletedProduct.ProductName);
+                TempData["message"] = string.Format("{0} was deleted", deletedProduct.ProductName);
             }
             return RedirectToAction("Index");
         }

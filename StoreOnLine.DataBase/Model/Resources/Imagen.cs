@@ -5,6 +5,8 @@ namespace StoreOnLine.DataBase.Model.Resources
 {
     public class Imagen : DataBaseId
     {
-        public Byte[] Photo { get; set; }
+        public Byte[] ImageData { get; set; }
+        public String ImageMimeType { get; set; }
+        public Boolean IsPrincipal { get; set; }
     }
 }
