@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StoreOnLine.Areas.Management.Models;
+using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Const;
+using StoreOnLine.DataBase.Model.Resources;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using StoreOnLine.Areas.Management.Models;
-using StoreOnLine.DataBase.Abstract;
-using StoreOnLine.DataBase.Const;
-using StoreOnLine.DataBase.Model.Products;
-using StoreOnLine.DataBase.Model.Resources;
 
 namespace StoreOnLine.Areas.Management.Controllers
 {
@@ -54,7 +52,16 @@ namespace StoreOnLine.Areas.Management.Controllers
                 if (imagen != null)
                 {
                     var map = new Bitmap(Image.FromStream(imagen.InputStream), new Size(150, 150));
-                    var newImagen = new Imagen();
+                    var newImagen =
+                        _imagenRepository.Imagens
+                        .SingleOrDefault(i => i.ObjectName == model.UnitName &&
+                                              i.ObjectId == model.Id && i.IsPrincipal);
+                    if (newImagen != null)
+                    {
+                        newImagen.IsPrincipal = false;
+                        _imagenRepository.SaveImagen(newImagen);
+                    }
+                    newImagen = new Imagen();
                     newImagen.ImageData = Util.Img.ImgTransform.ConvertBitMapToByteArray(map);
                     newImagen.ImageMimeType = ImageFormat.Jpeg.ToString();
                     newImagen.ObjectName = model.UnitName;
@@ -104,5 +111,5 @@ namespace StoreOnLine.Areas.Management.Controllers
                 _imagenRepository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
             return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
         }
-	}
+    }
 }

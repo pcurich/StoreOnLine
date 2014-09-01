@@ -1,4 +1,5 @@
-﻿using StoreOnLine.DataBase.Abstract;
+﻿using System.Linq;
+using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Products;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace StoreOnLine.DataBase.Concrete
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Unit> Units { get { return _context.Units; } }
+        public IEnumerable<Unit> Units { get { return _context.Units.Where(o => !o.IsDeleted); } }
         
         public int SaveUnit(Unit unit)
         {

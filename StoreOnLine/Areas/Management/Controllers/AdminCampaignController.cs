@@ -30,7 +30,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ActionResult Index()
         {
-            var db = _repository.Campaigns.Where(o=>!o.IsDeleted);
+            var db = _repository.Campaigns.Where(o => !o.IsDeleted);
             var view = db.Select(category => new CampaignView().ToView(category)).ToList();
             return View(view);
         }
@@ -52,7 +52,17 @@ namespace StoreOnLine.Areas.Management.Controllers
                 if (imagen != null)
                 {
                     var map = new Bitmap(Image.FromStream(imagen.InputStream), new Size(150, 150));
-                    var newImagen = new Imagen();
+                    var newImagen =
+                        _imagenRepository.Imagens
+                        .SingleOrDefault(i => i.ObjectName == model.CampaignName &&
+                                              i.ObjectId == model.Id && i.IsPrincipal);
+                    if (newImagen != null)
+                    {
+                        newImagen.IsPrincipal = false;
+                        _imagenRepository.SaveImagen(newImagen);
+                    }
+
+                    newImagen = new Imagen();
                     newImagen.ImageData = Util.Img.ImgTransform.ConvertBitMapToByteArray(map);
                     newImagen.ImageMimeType = ImageFormat.Jpeg.ToString();
                     newImagen.ObjectName = model.CampaignName;
@@ -60,6 +70,7 @@ namespace StoreOnLine.Areas.Management.Controllers
                     newImagen.IsPrincipal = true;
                     imagen.InputStream.Read(newImagen.ImageData, 0, imagen.ContentLength);
                     _repository.SaveCampaign(model.ToBd(model, newImagen));
+
                 }
                 else
                 {

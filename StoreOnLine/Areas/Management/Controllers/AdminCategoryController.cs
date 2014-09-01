@@ -52,7 +52,17 @@ namespace StoreOnLine.Areas.Management.Controllers
                 if (imagen != null)
                 {
                     var map = new Bitmap(Image.FromStream(imagen.InputStream), new Size(150, 150));
-                    var newImagen = new Imagen();
+                    var newImagen =
+                        _imagenRepository.Imagens
+                        .SingleOrDefault(i => i.ObjectName == model.CategoryName &&
+                                              i.ObjectId == model.Id && i.IsPrincipal);
+                    if (newImagen != null)
+                    {
+                        newImagen.IsPrincipal = false;
+                        _imagenRepository.SaveImagen(newImagen);
+                    }
+
+                    newImagen = new Imagen();
                     newImagen.ImageData = Util.Img.ImgTransform.ConvertBitMapToByteArray(map);
                     newImagen.ImageMimeType = ImageFormat.Jpeg.ToString();
                     newImagen.ObjectName = model.CategoryName;

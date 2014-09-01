@@ -98,6 +98,7 @@
     <Compile Include="Entities\DataBaseId.cs" />
     <Compile Include="Entities\DataBaseInitializer.cs" />
     <Compile Include="Model\Configuration\EmailSettings.cs" />
+    <Compile Include="Model\Resources\Feature.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />
     <Compile Include="Model\Products\Campaign .cs" />
     <Compile Include="Model\Products\Category.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Model\Products\Unit.cs" />
     <Compile Include="Model\Providers\Contact.cs" />
     <Compile Include="Model\Providers\Supplier.cs" />
+    <Compile Include="Model\Resources\Measure.cs" />
     <Compile Include="Model\Shopping\Cart.cs" />
     <Compile Include="Model\Shopping\CartLine.cs" />
     <Compile Include="Model\Shopping\Shipping.cs" />

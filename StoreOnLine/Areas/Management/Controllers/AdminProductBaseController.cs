@@ -41,7 +41,7 @@ namespace StoreOnLine.Areas.Management.Controllers
                 {
                     imagen.ImageMimeType = image.ContentType;
                     imagen.ImageData = new byte[image.ContentLength];
-                    product.ProductImagens.Add(imagen);
+                    //product.ProductImagens.Add(imagen);
 
                     image.InputStream.Read(imagen.ImageData, 0, image.ContentLength);
                 }
@@ -74,7 +74,8 @@ namespace StoreOnLine.Areas.Management.Controllers
             Product prod = _repository.ProductBases.FirstOrDefault(p => p.Id == productId);
             if (prod != null)
             {
-                return File(prod.ProductImagens.First(o => o.IsPrincipal).ImageData, prod.ProductImagens.First(o => o.IsPrincipal).ImageMimeType);
+                return null;
+                //return File(prod.ImageData, prod.First(o => o.IsPrincipal).ImageMimeType);
             }
             else
             {

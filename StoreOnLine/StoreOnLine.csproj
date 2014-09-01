@@ -488,6 +488,8 @@
     <Compile Include="Areas\Management\Models\CampaignView.cs" />
     <Compile Include="Areas\Management\Models\CategoryView.cs" />
     <Compile Include="Areas\Management\Models\PagingInfo.cs" />
+    <Compile Include="Areas\Management\Models\ProductBaseView.cs" />
+    <Compile Include="Areas\Management\Models\ProductCompositeView.cs" />
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />

@@ -29,6 +29,9 @@
                     <thead>
                         <tr>
                             <th>
+                                Imagen
+                            </th>
+                            <th>
                                 @Html.DisplayNameFor(model => model.CampaignName)
                             </th>
                             <th>
@@ -44,6 +47,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td>
+                                    <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetImage", "AdminCampaign", new { Area = "Management", name = item.CampaignName, id = item.Id })" alt=""/>
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CampaignName)
                                 </td>

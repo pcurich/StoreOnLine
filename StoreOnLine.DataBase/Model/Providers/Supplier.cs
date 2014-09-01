@@ -15,7 +15,7 @@ namespace StoreOnLine.DataBase.Model.Providers
         public String SupplierDescription { get; set; }
         public String SupplierDocument { get; set; }
 
-        public IEnumerable<Contact> SupplierRepreseContacts { get; set; }
-        public IEnumerable<Product> SupplierProducts { get; set; }
+        public List<Contact> SupplierRepreseContacts { get; set; }
+        public List<Product> SupplierProducts { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,51 @@ namespace StoreOnLine.DataBase.Concrete
 
         public IEnumerable<Imagen> Imagens
         {
-            get { return _context.Imagens; }
+            get { return _context.Imagens.Where(o => !o.IsDeleted); }
+        }
+
+        public int SaveImagen(Imagen imagen)
+        {
+            if (imagen.Id == 0)
+            {
+                _context.Imagens.Add(imagen);
+            }
+            else
+            {
+                var dbEntry = _context.Imagens.Find((imagen.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(imagen))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(imagen) != null)
+                    {
+                        var value = property.GetValue(imagen);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return imagen.Id;
+        }
+
+        public Imagen DeleteImagen(int imagenId, bool physical = false)
+        {
+            var dbEntry = _context.Imagens.Find(imagenId);
+            if (dbEntry != null)
+            {
+                if (physical)
+                {
+                    _context.Imagens.Remove(dbEntry);
+                }
+                else
+                {
+                    dbEntry.IsDeleted = true;
+                    dbEntry.IsStatus = false;
+                    _context.Entry(dbEntry).State = EntityState.Modified;
+                }
+
+                _context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }
