@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Xml.Serialization;
 using StoreOnLine.DataBase.Entities;
@@ -11,13 +12,13 @@ namespace StoreOnLine.DataBase.Model.Products
     {
         public String CategoryName { get; set; }
         public String CategoryDescription { get; set; }
-        
+
         [XmlIgnore]
-        public List<Imagen> CategoryPhoto { get; set; }
+        public Imagen CategoryPhoto { get; set; }
 
         [XmlIgnore]
         public List<Product> Products { get; set; }
 
- 
+
     }
 }

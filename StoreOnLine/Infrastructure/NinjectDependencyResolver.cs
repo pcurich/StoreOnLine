@@ -37,6 +37,7 @@ namespace StoreOnLine.Infrastructure
             _kernel.Bind<IUnitRepository>().To<UnitRepository>();
             _kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
             _kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+            _kernel.Bind<IImagenRepository>().To<ImagenRepository>();
 
         }
 

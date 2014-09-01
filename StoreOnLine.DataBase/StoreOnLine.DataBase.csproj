@@ -78,15 +78,18 @@
     <Compile Include="Abstract\ICampaingRepository.cs" />
     <Compile Include="Abstract\ICartRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\IImagenRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
+    <Compile Include="Concrete\EFImagenRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFCampaingRepository.cs" />
     <Compile Include="Concrete\EFUnitRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
+    <Compile Include="Const\ObjectName.cs" />
     <Compile Include="Default\Sources.cs" />
     <Compile Include="Entities\DataBaseConfiguration.cs" />
     <Compile Include="Entities\DataBaseContext.cs" />
@@ -125,7 +128,9 @@
     <Content Include="Default\Img\red.png" />
     <Content Include="Default\Img\simple.png" />
     <Content Include="Default\Img\yellow.png" />
+    <Content Include="Files\Campaign.xml" />
     <Content Include="Files\Category.xml" />
+    <Content Include="Files\Unit.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreOnLine.Util\StoreOnLine.Util.csproj">

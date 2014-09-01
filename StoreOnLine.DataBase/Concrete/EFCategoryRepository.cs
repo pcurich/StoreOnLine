@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Abstract;
+﻿using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Products;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 
 namespace StoreOnLine.DataBase.Concrete
 {
@@ -13,6 +11,50 @@ namespace StoreOnLine.DataBase.Concrete
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Category> Categories { get { return _context.Categories; } }
+        public IEnumerable<Category> Categories { get { return _context.Categories.Include(o=>o.CategoryPhoto); } }
+
+        public int SaveCategory(Category category)
+        {
+            if (category.Id == 0)
+            {
+                _context.Categories.Add(category);
+            }
+            else
+            {
+                var dbEntry = _context.Categories.Find((category.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(category))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(category) != null)
+                    {
+                        var value = property.GetValue(category);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return category.Id;
+        }
+
+        public Category DeleteCategory(int categoryId, bool physical=false)
+        {
+            var dbEntry = _context.Categories.Find(categoryId);
+            if (dbEntry != null)
+            {
+                if (physical)
+                {
+                    _context.Categories.Remove(dbEntry);
+                }
+                else
+                {
+                    dbEntry.IsDeleted = true;
+                    dbEntry.IsStatus = false;
+                    _context.Entry(dbEntry).State = EntityState.Modified;
+                }
+
+                _context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

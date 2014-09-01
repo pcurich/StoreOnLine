@@ -3,81 +3,81 @@
     <Unit>
         <UnitName>KILOGRAMOS</UnitName>
         <UnitDescription>KILOGRAMOS</UnitDescription>
-        <UniCode>01</UniCode>
+        <UnitCode>01</UnitCode>
     </Unit>
     <Unit>
         <UnitName>LIBRAS</UnitName>
         <UnitDescription>LIBRAS</UnitDescription>
-        <UniCode>02</UniCode>
+        <UnitCode>02</UnitCode>
     </Unit>
     <Unit>
         <UnitName>TONELADAS LARGAS</UnitName>
         <UnitDescription>TONELADAS LARGAS</UnitDescription>
-        <UniCode>03</UniCode>
+        <UnitCode>03</UnitCode>
     </Unit>
     <Unit>
         <UnitName>TONELADAS MÉTRICAS</UnitName>
         <UnitDescription>TONELADAS MÉTRICAS</UnitDescription>
-        <UniCode>04</UniCode>
+        <UnitCode>04</UnitCode>
     </Unit>
     <Unit>
         <UnitName>TONELADAS CORTAS</UnitName>
         <UnitDescription>TONELADAS CORTAS</UnitDescription>
-        <UniCode>05</UniCode>
+        <UnitCode>05</UnitCode>
     </Unit>
     <Unit>
         <UnitName>GRAMOS</UnitName>
         <UnitDescription>GRAMOS</UnitDescription>
-        <UniCode>06</UniCode>
+        <UnitCode>06</UnitCode>
     </Unit>
     <Unit>
         <UnitName>UNIDADES</UnitName>
         <UnitDescription>UNIDADES</UnitDescription>
-        <UniCode>07</UniCode>
+        <UnitCode>07</UnitCode>
     </Unit>
     <Unit>
         <UnitName>LITROS</UnitName>
         <UnitDescription>LITROS</UnitDescription>
-        <UniCode>08</UniCode>
+        <UnitCode>08</UnitCode>
     </Unit>
     <Unit>
         <UnitName>GALONES</UnitName>
         <UnitDescription>GALONES</UnitDescription>
-        <UniCode>09</UniCode>
+        <UnitCode>09</UnitCode>
     </Unit>
     <Unit>
         <UnitName>BARRILES</UnitName>
         <UnitDescription>BARRILES</UnitDescription>
-        <UniCode>10</UniCode>
+        <UnitCode>10</UnitCode>
     </Unit>
     <Unit>
         <UnitName>LATAS</UnitName>
         <UnitDescription>LATAS</UnitDescription>
-        <UniCode>11</UniCode>
+        <UnitCode>11</UnitCode>
     </Unit>
     <Unit>
         <UnitName>CAJAS</UnitName>
         <UnitDescription>CAJAS</UnitDescription>
-        <UniCode>12</UniCode>
+        <UnitCode>12</UnitCode>
     </Unit>
 	<Unit>
         <UnitName>MILLARES</UnitName>
         <UnitDescription>MILLARES</UnitDescription>
-        <UniCode>13</UniCode>
+        <UnitCode>13</UnitCode>
     </Unit>
 	<Unit>
         <UnitName>METROS CÚBICOS</UnitName>
         <UnitDescription>METROS CÚBICOS</UnitDescription>
-        <UniCode>14</UniCode>
+        <UnitCode>14</UnitCode>
     </Unit>
 	<Unit>
         <UnitName>METROS</UnitName>
         <UnitDescription>METROS</UnitDescription>
-        <UniCode>15</UniCode>
+        <UnitCode>15</UnitCode>
     </Unit>
 	<Unit>
         <UnitName>OTROS (ESPECIFICAR)</UnitName>
         <UnitDescription>OTROS (ESPECIFICAR)</UnitDescription>
-        <UniCode>99</UniCode>
+        <UnitCode>99</UnitCode>
     </Unit>
 </ArrayOfUnit>

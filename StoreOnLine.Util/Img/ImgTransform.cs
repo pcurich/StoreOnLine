@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 
 namespace StoreOnLine.Util.Img
@@ -31,6 +32,20 @@ namespace StoreOnLine.Util.Img
                 System.Diagnostics.Debug.WriteLine(ex.Message);
             }
             return bm;
+        }
+
+        public static byte[] ConvertBitMapToByteArray(Bitmap bitmap)
+        {
+            byte[] result = null;
+
+            if (bitmap != null)
+            {
+                var stream = new MemoryStream();
+                bitmap.Save(stream, ImageFormat.Jpeg);
+                result = stream.ToArray();
+            }
+
+            return result;
         }
     }
 }

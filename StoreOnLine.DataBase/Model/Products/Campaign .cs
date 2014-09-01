@@ -10,12 +10,14 @@ namespace StoreOnLine.DataBase.Model.Products
     {
         public String CampaignName { get; set; }
         public String CampaignDescription { get; set; }
+
         [XmlIgnore]
-        public List<Imagen> CampaignPhoto { get; set; }
+        public Imagen CampaignPhoto { get; set; }
 
         public DateTime? CampaingStartTime { get; set; }
         public DateTime? CampaingEndTime { get; set; }
 
-
+        [XmlIgnore]
+        public List<Product> Products { get; set; }
     }
 }

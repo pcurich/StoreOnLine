@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StoreOnLine.Util.Xml
 {
-    class ReplacedField
-    {
-        public string Pattern;
-        public string Field;
-        public bool HasChanged;
-    }
+    //class ReplacedField
+    //{
+    //    public string Pattern;
+    //    public string Field;
+    //    public bool HasChanged;
+    //}
 }

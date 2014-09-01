@@ -69,5 +69,17 @@ namespace StoreOnLine.Areas.Management.Controllers
             return RedirectToAction("Index");
         }
 
+        public FileContentResult GetImage(int productId)
+        {
+            Product prod = _repository.ProductBases.FirstOrDefault(p => p.Id == productId);
+            if (prod != null)
+            {
+                return File(prod.ProductImagens.First(o => o.IsPrincipal).ImageData, prod.ProductImagens.First(o => o.IsPrincipal).ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

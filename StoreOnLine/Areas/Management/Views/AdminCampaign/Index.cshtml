@@ -1,0 +1,103 @@
+﻿@model IEnumerable<StoreOnLine.Areas.Management.Models.CampaignView>
+
+@{
+    ViewBag.Title = "Admin: Categories";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+          (string)ViewBag.Big,
+          (string)ViewBag.Small,
+          (string)ViewBag.Area,
+          (string)ViewBag.Controller,
+          (string)ViewBag.View)
+          );}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                @Html.ActionLink("Crear Nuevo", "Create", "AdminCampaign", null, new { @class = " btn btn-primary pull-righ" })
+            </div>
+            <div class="panel-body">
+                <table id="DataTableCampaign" class="table hover ">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CampaignName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CampaignDescription)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsStatus)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CampaignName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CampaignDescription)
+                                </td>
+                                <td>
+                                    @if (item.IsStatus)
+                                    {
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    }
+
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-default btn-xs">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                        @Html.ActionLink("Edit", "Edit", "AdminCampaign", new { CampaignId = item.Id }, new { @style = "color: black" })
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        @Html.ActionLink("Delete", "Delete", "AdminCampaign", new { CampaignId = item.Id }, new { @style = "color: white" })
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DataTableCampaign').dataTable({
+                "order": [[0, "asc"]],
+                "paging": false,
+                //"pagingType": "full_numbers",
+                "scrollY": "200px",
+                "scrollCollapse": true,
+                "jQueryUI": true,
+                "oLanguage": {
+                    "sSearch": "<b> Buscar :</b>  ",
+                    "sInfo": "Mostrando _START_ de _END_  registros"
+                }
+            });
+        });
+
+    </script>
+
+}

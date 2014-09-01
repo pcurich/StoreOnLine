@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.Util.Xml;
 
 namespace StoreOnLine.DataBase.Entities
@@ -22,10 +26,12 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                String path = @"C:\Users\\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                LoadCategory(context, path + "Category.xml");
-                LoadCampaign(context, path + "Campaign.xml");
-                LoadUnit(context, path + "Unit.xml");
+                String pathFile = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                String pathImg = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
+                LoadImagen(context, pathImg);
+                LoadCategory(context, pathFile + "Category.xml");
+                LoadCampaign(context, pathFile + "Campaign.xml");
+                LoadUnit(context, pathFile + "Unit.xml");
                 //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
 
                 var pbs = new List<ProductBase>
@@ -115,9 +121,33 @@ namespace StoreOnLine.DataBase.Entities
         {
             var pbs = new List<Unit>
                 {
-                    new Unit {UniCode = "X", UnitDescription = "X", UnitName ="X" }
+                    new Unit {UnitCode = "X", UnitDescription = "X", UnitName ="X" }
                 };
             XmlSerialization<List<Unit>>.Serialize(pbs, str);
+        }
+
+        private static void LoadImagen(StoreOnLineContext context, String str)
+        {
+            var directory = new DirectoryInfo(str);
+            foreach (var dir in directory.GetFiles())
+            {
+                var map = new Bitmap(Image.FromFile(dir.FullName), new Size(150, 150));
+
+                var imagen =new Imagen();
+                imagen.ImageData = Util.Img.ImgTransform.ConvertBitMapToByteArray(map);
+                imagen.ImageMimeType = ImageFormat.Jpeg.ToString();
+                imagen.ObjectId = 0;
+
+                imagen.ObjectName = dir.Name.Contains("Campaign") ? Const.ObjectName.CampaignName :
+                    dir.Name.Contains("Category") ? Const.ObjectName.CategoryName :
+                    dir.Name.Contains("Unit") ? Const.ObjectName.UnitName :
+                    dir.Name.Contains("ProductBase") ? Const.ObjectName.ProductBaseName :
+                    dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductConcreteName : Const.ObjectName.Default;
+
+                imagen.IsPrincipal = true;
+                context.Imagens.Add(imagen);
+            }
+            context.SaveChanges();
         }
 
         #endregion

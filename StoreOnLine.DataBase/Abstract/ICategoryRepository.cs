@@ -6,5 +6,7 @@ namespace StoreOnLine.DataBase.Abstract
     public interface ICategoryRepository
     {
         IEnumerable<Category> Categories { get; }
+        int SaveCategory(Category category);
+        Category DeleteCategory(int categoryId, bool physical=false);
     }
 }

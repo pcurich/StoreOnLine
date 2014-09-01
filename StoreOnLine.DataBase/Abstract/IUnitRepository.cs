@@ -5,6 +5,8 @@ namespace StoreOnLine.DataBase.Abstract
 {
     public interface IUnitRepository
     {
-        IEnumerable<Unit> Units { get; } 
+        IEnumerable<Unit> Units { get; }
+        int SaveUnit(Unit unit);
+        Unit DeleteUnit(int unitId, bool physical = false);
     }
 }

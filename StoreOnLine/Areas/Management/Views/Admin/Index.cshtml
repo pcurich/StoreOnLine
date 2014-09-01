@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Admin: Section";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+        (string)ViewBag.Big,
+        (string)ViewBag.Small,
+        (string)ViewBag.Area,
+        (string)ViewBag.Controller,
+        (string)ViewBag.View)
+        );}
+
+<div class="container-fluid">
+    <h2>Secciones</h2>
+</div>
+
+<div class="container-fluid">
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>Administrar Categorias</h3>
+                <a href="@Url.Action("Index", "AdminCategory", new { Area = "Management" })" class="thumbnail">
+                    <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImageCategory", "Admin", new { Area = "Management" })" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>Administrar Campañas</h3>
+                <a href="@Url.Action("Index", "AdminCampaign", new { Area = "Management" })" class="thumbnail">
+                    <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImageCampaign", "Admin", new { Area = "Management" })" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6 col-md-4">
+        <div class="thumbnail">
+            <div class="caption">
+                <h3>Administrar Unidades</h3>
+                <a href="@Url.Action("Index", "AdminUnit", new { Area = "Management" })" class="thumbnail">
+                    <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImageUnit", "Admin", new { Area = "Management" })" alt=""/>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

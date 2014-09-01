@@ -1,21 +1,60 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Abstract;
+﻿using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Products;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Entity;
 
 namespace StoreOnLine.DataBase.Concrete
 {
-    public class CampaingRepository:ICampaingRepository
+    public class CampaingRepository : ICampaingRepository
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Campaign> Campaigns
+        public IEnumerable<Campaign> Campaigns { get { return _context.Campaigns.Include(o => o.CampaignPhoto); } }
+
+        public int SaveCampaign(Campaign campaign)
         {
-            get { return _context.Campaigns; }
+            if (campaign.Id == 0)
+            {
+                _context.Campaigns.Add(campaign);
+            }
+            else
+            {
+                var dbEntry = _context.Campaigns.Find((campaign.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(campaign))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(campaign) != null)
+                    {
+                        var value = property.GetValue(campaign);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return campaign.Id;
+        }
+
+        public Campaign DeleteCampaign(int campaignId, bool physical = false)
+        {
+            var dbEntry = _context.Campaigns.Find(campaignId);
+            if (dbEntry != null)
+            {
+                if (physical)
+                {
+                    _context.Campaigns.Remove(dbEntry);
+                }
+                else
+                {
+                    dbEntry.IsDeleted = true;
+                    dbEntry.IsStatus = false;
+                    _context.Entry(dbEntry).State = EntityState.Modified;
+                }
+
+                _context.SaveChanges();
+            }
+            return dbEntry;
         }
     }
 }
