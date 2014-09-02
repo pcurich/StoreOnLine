@@ -1,7 +1,10 @@
-﻿using System;
+﻿using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Providers;
+using StoreOnLine.DataBase.Model.Resources;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.Serialization;
 
 namespace StoreOnLine.Areas.Management.Models
 {

@@ -17,7 +17,7 @@
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=4EA408BF4A7D4781B966F938D615E469/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements /&gt;&lt;/Session&gt;</s:String>
 	<s:Boolean x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=6558E16F8BE2447DB95C2581E1E6D634/@KeyIndexDefined">True</s:Boolean>
 	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=6558E16F8BE2447DB95C2581E1E6D634/Name/@EntryValue">Can_Generate_Page_Link #2</s:String>
-	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=6558E16F8BE2447DB95C2581E1E6D634/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements /&gt;&lt;/Session&gt;</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestSessionPersistentData/=6558E16F8BE2447DB95C2581E1E6D634/XmlSerializedElements/@EntryValue">&lt;Session&gt;&lt;Elements&gt;&lt;UnitTestElement Provider="MSTest" Id="MsTest:StoreOnLine.Tests.TestRoute" type="MsTestTestClassElement" TypeName="StoreOnLine.Tests.TestRoute" Project="1F781F91-61C6-47C5-9470-2EBC933D7E50" /&gt;&lt;/Elements&gt;&lt;/Session&gt;</s:String>
 	
 	
 	

@@ -1,0 +1,108 @@
+﻿@model StoreOnLine.Areas.Management.Models.ProductCompositeView
+
+@{
+    ViewBag.Title = "Admin: Edit " + ViewBag.ProductComposite;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+          (string)ViewBag.Big,
+          (string)ViewBag.Small,
+          (string)ViewBag.Area,
+          (string)ViewBag.Controller,
+          (string)ViewBag.Action)
+          );}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h3>Editar Categoria <b> @Model.ProductName</b></h3>
+            </div>
+
+            @using (Html.BeginForm("Edit", "AdminProductComposite", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.Id)
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ProductName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese un nombre para la categoria" } })
+                                    @Html.ValidationMessageFor(m => m.ProductName)
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="bootstrap-switch bootstrap-switch-small">
+                                        @Html.CheckBoxFor(m=>m.IsStatus)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductDescription, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ProductDescription, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una breve descripcion del producto" } })
+                                    @Html.ValidationMessageFor(m => m.ProductDescription)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label class="control-label"><b>Imagen</b></label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetImage", "AdminProductComposite", new { Area = "Management", name = Model.ProductName, id = Model.Id })" alt=""/>
+                                    <a class='btn' href='javascript:;'>
+                                        <input type="file" name="Imagen" id="Imagen" onchange='$("#upload-file-info").html($(this).val());'>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", new { Area = "Management" }, new { @class = "btn btn-default" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#IsStatus').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff:'false'
+            });
+        });
+
+    </script>
+}

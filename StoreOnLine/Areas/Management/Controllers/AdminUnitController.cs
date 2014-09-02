@@ -23,7 +23,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.Small = "Configuracion de unidades de medidas";
             ViewBag.Area = "Management";
             ViewBag.Controller = "AdminUnit";
-            ViewBag.View = "Index";
+            ViewBag.Action = "Index";
             _repository = repo;
             _imagenRepository = repoImagen;
         }
@@ -37,7 +37,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ViewResult Edit(int unitId)
         {
-            ViewBag.View = "Edit";
+            ViewBag.Action = "Edit";
             var unit = _repository.Units.FirstOrDefault(p => p.Id == unitId);
             if (unit != null) ViewBag.Unit = unit.UnitName;
 

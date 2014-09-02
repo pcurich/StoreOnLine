@@ -23,7 +23,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.Small = "Configuracion de Campañas";
             ViewBag.Area = "Management";
             ViewBag.Controller = "AdminCategory";
-            ViewBag.View = "Index";
+            ViewBag.Action = "Index";
             _repository = repo;
             _imagenRepository = repoImagen;
         }
@@ -37,7 +37,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ViewResult Edit(int campaignId)
         {
-            ViewBag.View = "Edit";
+            ViewBag.Action = "Edit";
             var campaign = _repository.Campaigns.FirstOrDefault(p => p.Id == campaignId);
             if (campaign != null) ViewBag.Campaign = campaign.CampaignName;
 

@@ -16,7 +16,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.Small = "Sistema de Configuracion";
             ViewBag.Area = "Management";
             ViewBag.Controller = "Admin";
-            ViewBag.View = "Index";
+            ViewBag.Action = "Index";
             _repository = repo;
         }
 
@@ -53,6 +53,38 @@ namespace StoreOnLine.Areas.Management.Controllers
             return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
         }
 
+        public FileContentResult GetImageFeature()
+        {
+            var imagen = _repository.Imagens
+                .FirstOrDefault(p => p.ObjectName == ObjectName.FeatureName && p.IsPrincipal) ?? _repository.Imagens
+                    .FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+        }
+
+        public FileContentResult GetImageProductComposite()
+        {
+            var imagen = _repository.Imagens
+                .FirstOrDefault(p => p.ObjectName == ObjectName.ProductCompositeName && p.IsPrincipal) ?? _repository.Imagens
+                    .FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+        }
+
+        public FileContentResult GetImageProductBase()
+        {
+            var imagen = _repository.Imagens
+                .FirstOrDefault(p => p.ObjectName == ObjectName.ProductBaseName && p.IsPrincipal) ?? _repository.Imagens
+                    .FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+        }
+
+        public FileContentResult GetImageSupplier()
+        {
+            var imagen = _repository.Imagens
+                .FirstOrDefault(p => p.ObjectName == ObjectName.SupplierName && p.IsPrincipal) ?? _repository.Imagens
+                    .FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+        }
+        
         #endregion
 
 

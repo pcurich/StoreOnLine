@@ -23,7 +23,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.Small = "Configuracion de Categorias";
             ViewBag.Area = "Management";
             ViewBag.Controller = "AdminCategory";
-            ViewBag.View = "Index";
+            ViewBag.Action = "Index";
             _repository = repo;
             _imagenRepository = repoImagen;
         }
@@ -37,7 +37,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ViewResult Edit(int categoryId)
         {
-            ViewBag.View = "Edit";
+            ViewBag.Action = "Edit";
             var category = _repository.Categories.FirstOrDefault(p => p.Id == categoryId);
             if (category != null) ViewBag.Category = category.CategoryName;
 

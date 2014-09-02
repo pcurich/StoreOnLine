@@ -133,7 +133,7 @@ namespace StoreOnLine.DataBase.Entities
             {
                 var map = new Bitmap(Image.FromFile(dir.FullName), new Size(150, 150));
 
-                var imagen =new Imagen();
+                var imagen = new Imagen();
                 imagen.ImageData = Util.Img.ImgTransform.ConvertBitMapToByteArray(map);
                 imagen.ImageMimeType = ImageFormat.Jpeg.ToString();
                 imagen.ObjectId = 0;
@@ -141,8 +141,9 @@ namespace StoreOnLine.DataBase.Entities
                 imagen.ObjectName = dir.Name.Contains("Campaign") ? Const.ObjectName.CampaignName :
                     dir.Name.Contains("Category") ? Const.ObjectName.CategoryName :
                     dir.Name.Contains("Unit") ? Const.ObjectName.UnitName :
+                    dir.Name.Contains("Feature") ? Const.ObjectName.FeatureName :
                     dir.Name.Contains("ProductBase") ? Const.ObjectName.ProductBaseName :
-                    dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductConcreteName : Const.ObjectName.Default;
+                    dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductCompositeName : Const.ObjectName.Default;
 
                 imagen.IsPrincipal = true;
                 context.Imagens.Add(imagen);

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StoreOnLine.DataBase.Const
 {
@@ -11,8 +7,11 @@ namespace StoreOnLine.DataBase.Const
         public const String CategoryName = "Category";
         public const String CampaignName = "Campaign";
         public const String UnitName = "Unit";
+        public const String FeatureName = "Feature";
+
+        public const String SupplierName = "Supplier";
         public const String ProductBaseName = "ProductBase";
-        public const String ProductConcreteName = "ProductConcrete";
+        public const String ProductCompositeName = "ProductComposite";
         public const String Default = "Default";
  
     }

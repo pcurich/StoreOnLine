@@ -4,10 +4,10 @@ namespace StoreOnLine.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
+ 
         public ActionResult Index()
         {
+
             return View();
         }
 
@@ -18,10 +18,10 @@ namespace StoreOnLine.Controllers
             return View();
         }
 
-        //
-        // GET: /Home/Create
         public ActionResult Create()
         {
+            ViewBag.Controller = "Customer";
+            ViewBag.Action = "Create";
             return View();
         }
 
