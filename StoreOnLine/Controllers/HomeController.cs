@@ -1,13 +1,17 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
+using StoreOnLine.Infrastructure;
 
 namespace StoreOnLine.Controllers
 {
+    //[Authorize(Roles = "trader")] // applies to all actions
     public class HomeController : Controller
     {
- 
+        
+        //[ShowMessage] // applies to just this action
+        //[OutputCache(Duration = 60)] // applies to just this action
         public ActionResult Index()
         {
-
             return View();
         }
 
@@ -18,6 +22,7 @@ namespace StoreOnLine.Controllers
             return View();
         }
 
+        [CustomAuth(false)]
         public ActionResult Create()
         {
             ViewBag.Controller = "Customer";
@@ -86,6 +91,22 @@ namespace StoreOnLine.Controllers
             }
             catch
             {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Login(string username, string password, string returnUrl)
+        {
+            bool result = FormsAuthentication.Authenticate(username, password);
+            if (result)
+            {
+                FormsAuthentication.SetAuthCookie(username, false);
+                return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
+            }
+            else
+            {
+                ModelState.AddModelError("", "Incorrect username or password");
                 return View();
             }
         }

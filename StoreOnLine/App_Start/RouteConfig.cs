@@ -15,7 +15,7 @@ namespace StoreOnLine
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapMvcAttributeRoutes();//Attribute Routing
+            //routes.MapMvcAttributeRoutes();//Attribute Routing
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                             new
