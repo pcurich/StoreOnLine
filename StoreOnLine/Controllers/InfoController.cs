@@ -1,5 +1,7 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
+using StoreOnLine.Infrastructure;
 
 namespace StoreOnLine.Controllers
 {
@@ -70,9 +72,30 @@ namespace StoreOnLine.Controllers
             return HttpNotFound("hola ");
         }
 
+
+        [CustomAuthentication]
+        [Authorize(Users = "bob@google.com")]
+        public string List()
+        {
+            return "This is the List action on the Home controller";
+        }
         public HttpStatusCodeResult ResultHttpUnauthorizedResult()
         {
             return new HttpUnauthorizedResult("hola");
+        }
+
+        //[RangeException]
+        [HandleError(ExceptionType = typeof(ArgumentOutOfRangeException),View = "RangeError")]
+        public string RangeTest(int id)
+        {
+            if (id > 100)
+            {
+                return String.Format("The id value is: {0}", id);
+            }
+            else
+            {
+                throw new ArgumentOutOfRangeException("id", id, "");
+            }
         }
 	}
 }

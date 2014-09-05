@@ -423,7 +423,9 @@
     <Content Include="Areas\Management\Views\Shared\ProductSumary.cshtml" />
     <Content Include="Areas\Management\Views\Nav\MenuCategory.cshtml" />
     <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Shopping\Views\web.config" />
+    <Content Include="Areas\Shopping\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Shopping\Views\ProductBase\List.cshtml" />
     <Content Include="Areas\Shopping\Views\ProductConcrete\List.cshtml" />
     <Content Include="Areas\Shopping\Views\Shared\ProductSummary.cshtml" />
@@ -448,6 +450,7 @@
     <Content Include="Areas\Management\Views\AdminUnit\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Index.cshtml" />
+    <Content Include="Views\Shared\RangeError.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -528,8 +531,10 @@
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
     <Compile Include="Infrastructure\CustomAuthAttribute.cs" />
+    <Compile Include="Infrastructure\CustomAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\CustomRedirectResult.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
+    <Compile Include="Infrastructure\RangeExceptionAttribute.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -547,6 +552,7 @@
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Info\Index.cshtml" />
     <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Content\RangeErrorPage.html" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

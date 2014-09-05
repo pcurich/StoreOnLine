@@ -26,8 +26,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                String pathFile = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                String pathImg = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
+                String pathFile = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                String pathImg = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
                 LoadCategory(context, pathFile + "Category.xml");
                 LoadCampaign(context, pathFile + "Campaign.xml");
