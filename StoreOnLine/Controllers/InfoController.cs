@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using StoreOnLine.Infrastructure;
+using StoreOnLine.Infrastructure.Filters;
 
 namespace StoreOnLine.Controllers
 {
@@ -9,6 +10,8 @@ namespace StoreOnLine.Controllers
     {
         //
         // GET: /Info/
+        [SimpleMessage(Message = "A", Order = 1)]
+        [SimpleMessage(Message = "B", Order = 2)]
         public ActionResult Index()
         {
             var queryString = Request.QueryString;
@@ -27,7 +30,7 @@ namespace StoreOnLine.Controllers
             var user = User;
             var tempData = TempData;
 
-           
+
             return View();
         }
         public void ProduceOutput()
@@ -85,7 +88,7 @@ namespace StoreOnLine.Controllers
         }
 
         //[RangeException]
-        [HandleError(ExceptionType = typeof(ArgumentOutOfRangeException),View = "RangeError")]
+        [HandleError(ExceptionType = typeof(ArgumentOutOfRangeException), View = "RangeError")]
         public string RangeTest(int id)
         {
             if (id > 100)
@@ -97,5 +100,19 @@ namespace StoreOnLine.Controllers
                 throw new ArgumentOutOfRangeException("id", id, "");
             }
         }
-	}
+
+        [CustomAction]
+        public string FilterTestA()
+        {
+            return "This is the FilterTest action";
+        }
+
+        //[ProfileAction]
+        //[ProfileResult]
+        [ProfileAll]
+        public string FilterTestP()
+        {
+            return "This is the ActionFilterTest action";
+        }
+    }
 }

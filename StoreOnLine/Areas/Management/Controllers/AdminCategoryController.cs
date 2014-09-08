@@ -19,7 +19,7 @@ namespace StoreOnLine.Areas.Management.Controllers
         //Management/AdminCategory
         public AdminCategoryController(ICategoryRepository repo, IImagenRepository repoImagen)
         {
-            ViewBag.Big = "Admin: Categorias";
+            ViewBag.Big = "Administrar: Categorias";
             ViewBag.Small = "Configuracion de Categorias";
             ViewBag.Area = "Management";
             ViewBag.Controller = "AdminCategory";

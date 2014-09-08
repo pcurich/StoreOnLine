@@ -19,7 +19,7 @@ namespace StoreOnLine.Areas.Management.Controllers
         //Management/AdminCampaign/
         public AdminCampaignController(ICampaingRepository repo, IImagenRepository repoImagen)
         {
-            ViewBag.Big = "Admin: Campañas";
+            ViewBag.Big = "Administrar: Campañas";
             ViewBag.Small = "Configuracion de Campañas";
             ViewBag.Area = "Management";
             ViewBag.Controller = "AdminCategory";

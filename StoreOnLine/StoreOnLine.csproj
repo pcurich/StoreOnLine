@@ -491,6 +491,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Management\Controllers\AdminCampaignController.cs" />
@@ -530,11 +531,16 @@
     <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
-    <Compile Include="Infrastructure\CustomAuthAttribute.cs" />
-    <Compile Include="Infrastructure\CustomAuthenticationAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\CustomAuthAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\CustomAuthenticationAttribute.cs" />
     <Compile Include="Infrastructure\CustomRedirectResult.cs" />
+    <Compile Include="Infrastructure\Filters\CustomActionAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\ProfileActionAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\ProfileAllAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\ProfileResultAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\SimpleMessageAttribute.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
-    <Compile Include="Infrastructure\RangeExceptionAttribute.cs" />
+    <Compile Include="Infrastructure\Filters\RangeExceptionAttribute.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

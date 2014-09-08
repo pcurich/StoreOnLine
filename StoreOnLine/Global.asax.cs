@@ -16,6 +16,7 @@ namespace StoreOnLine
             //Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
         }
     }
 }

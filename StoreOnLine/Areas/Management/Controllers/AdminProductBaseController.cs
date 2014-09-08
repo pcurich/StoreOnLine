@@ -16,6 +16,11 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public AdminProductBaseController(IProductsRepository repo)
         {
+            ViewBag.Big = "Administrar: Productos Base";
+            ViewBag.Small = "Configuracion de Categorias de Productos Base";
+            ViewBag.Area = "Management";
+            ViewBag.Controller = "AdminProductBase";
+            ViewBag.Action = "Index";
             _repository = repo;
         }
 
