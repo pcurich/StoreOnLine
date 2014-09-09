@@ -1,4 +1,5 @@
-﻿using StoreOnLine.DataBase.Model.Products;
+﻿using System.Web.Mvc;
+using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
 using System;
@@ -10,49 +11,73 @@ namespace StoreOnLine.Areas.Management.Models
 {
     public class ProductBaseView
     {
-        //[Required(ErrorMessage = "Please enter a product name")]
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        [Display(Name = "Esta Activo?")]
+        public bool IsStatus { get; set; }
+
+        [Required(ErrorMessage = "Ingrese un nombre para el Producto Base")]
+        [StringLength(20, ErrorMessage = "El nombre debe ser mayor a 5 caracteres y menor a 30", MinimumLength = 5)]
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre")]
         public String ProductName { get; set; }
 
-        //[Required(ErrorMessage = "Please enter a description")]
         [DataType(DataType.MultilineText)]
+        [Display(Name = "Descripcion")]
         public String ProductDescription { get; set; }
 
-        //[Required]
-        //[Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
+        [Required]
+        [Range(0.00, 10000, ErrorMessage = "Ingrese un valor positivo menor a 10000")]
         [DataType(DataType.Currency)]
         public Decimal ProductBasePrice { get; set; }
 
-        //[Required]
-        // [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a positive price")]
+        [Required]
+        [Range(0.00, 10000, ErrorMessage = "Ingrese un valor positivo menor a 10000")]
         [DataType(DataType.Currency)]
         public Decimal ProductSalePrice { get; set; }
 
-        //[NotMapped]
-        //public XmlDocument ProductDetails { get; set; }
-
-
-        [XmlIgnore]
-        public Category ProductCategory { get; set; }
-        // [Required(ErrorMessage = "Please specify a category")]
+        [Display(Name = "Categoria")]
+        [Required(ErrorMessage = "Seleccione una categoria")]
+        [DataType(DataType.Currency)]
         public int ProductCategoryId { get; set; }
 
-        [XmlIgnore]
-        public Campaign ProductCampaign { get; set; }
-        //[Required(ErrorMessage = "Please specify a campaign")]
+        [Display(Name = "Campaña")]
+        [Required(ErrorMessage = "Seleccione una campaña")]
         public int ProductCampaignId { get; set; }
 
-        [XmlIgnore]
-        public Unit ProductUnit { get; set; }
-        //[Required(ErrorMessage = "Please specify a unit")]
+        [Display(Name = "Unidad")]
+        [Required(ErrorMessage = "Seleccione una unidad de medida")]
         public int ProductUnitId { get; set; }
 
-        [XmlIgnore]
         public List<Imagen> ProductImagens { get; set; }
 
-        [XmlIgnore]
-        public Supplier Supplier { get; set; }
-        public int SupplierId { get; set; }
+        [Display(Name = "Proveedor")]
+        [Required(ErrorMessage = "Seleccione un proveedor")]
+        public int ProductSupplierId { get; set; }
 
         public List<Feature> Details { get; set; }
+
+        public ProductBase ToBd(ProductBaseView view, Imagen imagen)
+        {
+            return new ProductBase
+            {
+                Id = view.Id,
+                IsStatus = view.IsStatus,
+                ProductName = view.ProductName,
+                ProductDescription = view.ProductDescription 
+            };
+        }
+
+        public ProductBaseView ToView(ProductBase db)
+        {
+            return new ProductBaseView
+            {
+                Id = db.Id,
+                IsStatus = db.IsStatus,
+                ProductName = db.ProductName,
+                ProductDescription = db.ProductDescription
+            };
+        }
     }
 }

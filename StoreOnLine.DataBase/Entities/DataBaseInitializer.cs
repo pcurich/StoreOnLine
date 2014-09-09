@@ -87,6 +87,7 @@ namespace StoreOnLine.DataBase.Entities
             var elemt = XmlSerialization<List<Category>>.Deserialize(str);
             foreach (var e in elemt)
             {
+                e.IsStatus = true;
                 context.Categories.Add(e);
             }
             context.SaveChanges();
@@ -99,6 +100,7 @@ namespace StoreOnLine.DataBase.Entities
             var elemt = XmlSerialization<List<Campaign>>.Deserialize(str);
             foreach (var e in elemt)
             {
+                e.IsStatus = true;
                 context.Campaigns.Add(e);
             }
             context.SaveChanges();
@@ -112,6 +114,7 @@ namespace StoreOnLine.DataBase.Entities
 
             foreach (var e in elemt)
             {
+                e.IsStatus = true;
                 context.Units.Add(e);
             }
             context.SaveChanges();
@@ -121,7 +124,7 @@ namespace StoreOnLine.DataBase.Entities
         {
             var pbs = new List<Unit>
                 {
-                    new Unit {UnitCode = "X", UnitDescription = "X", UnitName ="X" }
+                    new Unit {UnitCode = "X", UnitDescription = "X", UnitName ="X",IsStatus = true}
                 };
             XmlSerialization<List<Unit>>.Serialize(pbs, str);
         }
@@ -146,6 +149,7 @@ namespace StoreOnLine.DataBase.Entities
                     dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductCompositeName : Const.ObjectName.Default;
 
                 imagen.IsPrincipal = true;
+                imagen.IsStatus = true;
                 context.Imagens.Add(imagen);
             }
             context.SaveChanges();

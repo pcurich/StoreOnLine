@@ -1,74 +1,170 @@
-﻿@model StoreOnLine.DataBase.Model.Products.ProductBase
+﻿@model  StoreOnLine.Areas.Management.Models.ProductBaseView
 
 @{
-    ViewBag.Title = "title";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin: Edit " + ViewBag.ProductBase;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="panel">
-    <div class="panel-heading">
-        <h3>Edit @Model.ProductName</h3>
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
     </div>
-    @using (Html.BeginForm("Edit", "AdminProductBase", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        <div class="panel-body">
-            @Html.HiddenFor(m => m.Id)
-            @foreach (var property in ViewData.ModelMetadata.Properties)
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h3>Edit Producto Base: @Model.ProductName</h3>
+            </div>
+
+            @using (Html.BeginForm("Edit", "AdminProductBase", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
             {
-                if (property.PropertyName != "Id" && property.PropertyName != "IsStatus" &&
-            property.PropertyName != "IsDeleted" && property.PropertyName != "AddedUser" &&
-            property.PropertyName != "ModificationUser" && property.PropertyName != "ModificationDate" &&
-            property.PropertyName != "AddedDate")
-                {
-
-                    switch (property.PropertyName)
-                    {
-                        case "ImageData":
-                        case "ImageMimeType":
-
-                            break;
-                        default:
-                <div class="form-group">
-                    <label>@(property.DisplayName ?? property.PropertyName)</label>
-                    @if (property.PropertyName == "ProductDescription")
-                    {
-                        @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
-                    }
-                    else
-                    {
-                        @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
-                    }
-                    @Html.ValidationMessage(property.PropertyName)
-                </div>
-                    break;
-                    }
-
-                }
-                <div class="form-group">
-                    <div style="position: relative;">
-                        <label>Image</label>
-                        <a class='btn' href='javascript:;'>Choose File...
-                            <input type="file" name="Image" size="40"
-                                style="position: absolute; z-index: 2; top: 0; left: 0; filter: alpha(opacity=0); opacity: 0; background-color: transparent; color: transparent;"
-                                onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <span class='label label-info' id="upload-file-info"></span>
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.Id)
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ProductName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese un nombre para el producto" } })
+                                    @Html.ValidationMessageFor(m => m.ProductName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="bootstrap-switch bootstrap-switch-small">
+                                        @Html.CheckBoxFor(m => m.IsStatus)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductDescription, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ProductDescription, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una breve descripcion del producto base" } })
+                                    @Html.ValidationMessageFor(m => m.ProductDescription)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    <label class="control-label"><b>Imagen</b></label>
+                                </div>
+                                <div class="col-lg-6">
+                                    @{
+                if (Model.ProductImagens != null)
+                {
+                                        @Html.Partial("Pictures", Model.ProductImagens);
+                }
+                                        <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetDefault", "AdminImg", new { Area = "Management" })" alt=""/>
+                                        <a class='btn' href='javascript:;'>
+                                            <input type="file" name="Imagen" id="Imagen" onchange='$("#upload-file-info").html($(this).val());'>
+                                        </a>
+                                    }
 
-                    @if (Model.ProductImagens.FirstOrDefault(o => o.IsPrincipal) == null)
-                    {
-                        <div class="form-control-static">No Image</div>
-                    }
-                    else
-                    {
-                        <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Product", new {Area="Management", Model.Id })" alt=""/>
-                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductCategoryId, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.ProductCategoryId,
+                                        (List<SelectListItem>)ViewBag.Categories,
+                                        "------------------------------",
+                                        htmlAttributes: new { @class = "form-control btn btn-primary  " })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductUnitId, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.ProductUnitId,
+                                        (List<SelectListItem>)ViewBag.ProductUnit,
+                                        "------------------------------",
+                                        htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductCampaignId, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.ProductCampaignId,
+                                        (List<SelectListItem>)ViewBag.GetCampaings,
+                                        "------------------------------",
+                                        htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ProductSupplierId, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.ProductSupplierId,
+                                    (List<SelectListItem>)ViewBag.ProductSupplier,
+                                    "------------------------------",
+                                    htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    @Html.ActionLink("Cancelar", "Index", new { Area = "Management" }, new { @class = "btn btn-default" })
                 </div>
             }
         </div>
-        <div class="panel-footer">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            @Html.ActionLink("Cancel and return to List", "Index", null, new { @class = "btn btn-default" })
-        </div>
-    }
+    </div>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#IsStatus').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff: 'false'
+            });
+        });
+
+    </script>
+}

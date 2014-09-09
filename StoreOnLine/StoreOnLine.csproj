@@ -125,6 +125,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-select.css" />
+    <Content Include="Content\bootstrap-select.min.css" />
     <Content Include="Content\bootstrap-switch\bootstrap2\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-switch\bootstrap2\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap-switch\bootstrap3\bootstrap-switch.css" />
@@ -414,6 +416,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-select.min.js" />
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -451,6 +455,9 @@
     <Content Include="Areas\Management\Views\AdminProductComposite\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Index.cshtml" />
     <Content Include="Views\Shared\RangeError.cshtml" />
+    <Content Include="Areas\Management\Views\Shared\Pictures.cshtml" />
+    <Content Include="Scripts\bootstrap-select.js.map" />
+    <Content Include="Content\bootstrap-select.css.map" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -497,6 +504,7 @@
     <Compile Include="Areas\Management\Controllers\AdminCampaignController.cs" />
     <Compile Include="Areas\Management\Controllers\AdminCategoryController.cs" />
     <Compile Include="Areas\Management\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Management\Controllers\AdminImgController.cs" />
     <Compile Include="Areas\Management\Controllers\AdminProductBaseController.cs" />
     <Compile Include="Areas\Management\Controllers\AdminProductCompositeController.cs" />
     <Compile Include="Areas\Management\Controllers\AdminSupplierController.cs" />
@@ -568,6 +576,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Management\Views\AdminImg\" />
     <Folder Include="Areas\Management\Views\AdminSupplier\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Models\" />
