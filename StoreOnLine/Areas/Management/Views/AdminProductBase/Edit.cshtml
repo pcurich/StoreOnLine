@@ -72,17 +72,23 @@
                                     <label class="control-label"><b>Imagen</b></label>
                                 </div>
                                 <div class="col-lg-6">
-                                    @{
-                if (Model.ProductImagens != null)
-                {
-                                        @Html.Partial("Pictures", Model.ProductImagens);
-                }
-                                        <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetDefault", "AdminImg", new { Area = "Management" })" alt=""/>
-                                        <a class='btn' href='javascript:;'>
-                                            <input type="file" name="Imagen" id="Imagen" onchange='$("#upload-file-info").html($(this).val());'>
-                                        </a>
-                                    }
+                                    <div class="form-group">
+                                        <div class="col-lg-3">
+                                            <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetDefault", "AdminImg", new { Area = "Management" })" alt=""/>
+                                            <a class='btn' href='javascript:;'>
+                                                <input type="file" name="image" id="image" onchange='$("#upload-file-info").html($(this).val());'>
+                                            </a>
+                                        </div>
+                                        @{
+                                            <div class="col-lg-9">
+                                                @if (Model.ProductImagens != null)
+                                                {
+                                                    @Html.Partial("Pictures", model: Model.ProductImagens);
+                                                }
+                                            </div>
+                                        }
 
+                                    </div>
                                 </div>
                             </div>
                         </div>

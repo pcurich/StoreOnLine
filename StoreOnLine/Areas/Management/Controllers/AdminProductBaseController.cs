@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Management.Models;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Concrete;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Resources;
 
@@ -14,10 +15,11 @@ namespace StoreOnLine.Areas.Management.Controllers
     public class AdminProductBaseController : Controller
     {
         private readonly IProductsRepository _repository;
+        private readonly ImagenRepository _repositoryImagen;
         private readonly ICategoryRepository _repositoryCategory;
         private readonly ICampaingRepository _repositoryCampaing;
 
-        public AdminProductBaseController(IProductsRepository repo, ICategoryRepository repositoryCategory, ICampaingRepository repositoryCampaing)
+        public AdminProductBaseController(IProductsRepository repo, ICategoryRepository repositoryCategory, ICampaingRepository repositoryCampaing, ImagenRepository repositoryImagen)
         {
             ViewBag.Big = "Administrar: Productos Base";
             ViewBag.Small = "Configuracion de Categorias de Productos Base";
@@ -27,6 +29,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             _repository = repo;
             _repositoryCategory = repositoryCategory;
             _repositoryCampaing = repositoryCampaing;
+            _repositoryImagen = repositoryImagen;
         }
 
         public ViewResult Index()
@@ -41,7 +44,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.ProductUnit = GetCategories();
             ViewBag.GetCampaings = GetCampaings();
             ViewBag.ProductSupplier = GetCategories();
- 
+
 
             var product = _repository.ProductBases.FirstOrDefault(p => p.Id == productId);
             if (product != null) ViewBag.ProductBase = product.ProductName;
@@ -59,8 +62,30 @@ namespace StoreOnLine.Areas.Management.Controllers
                 {
                     imagen.ImageMimeType = image.ContentType;
                     imagen.ImageData = new byte[image.ContentLength];
-                    //product.ProductImagens.Add(imagen);
+                    imagen.ObjectName = product.ProductName;
+                    imagen.ObjectId = product.Id;
 
+                    if (product.Id == 0)
+                    {
+                        product.ProductImagens = new List<Imagen>();
+                        imagen.Secuence = 1;
+                    }
+                    else
+                    {
+                        var firstOrDefault = _repository.ProductBases.FirstOrDefault(o => o.Id == product.Id);
+                        if (firstOrDefault != null)
+                        {
+                            product.ProductImagens = firstOrDefault.ProductImagens;
+                            for (var i = 0; i < product.ProductImagens.Count; i++)
+                            {
+                                product.ProductImagens[i].IsPrincipal = false;
+                                product.ProductImagens[i].Secuence = i;
+                                _repositoryImagen.SaveImagen(product.ProductImagens[i]);
+                            }
+                            imagen.Secuence = product.ProductImagens.Count;
+                        }
+                    }
+                    product.ProductImagens.Add(imagen);
                     image.InputStream.Read(imagen.ImageData, 0, image.ContentLength);
                 }
                 _repository.SaveProductBase(product);

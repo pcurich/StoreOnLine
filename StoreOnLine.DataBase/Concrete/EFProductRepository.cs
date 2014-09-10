@@ -21,6 +21,7 @@ namespace StoreOnLine.DataBase.Concrete
                     .Include(o => o.ProductCategory)
                     .Include(o => o.ProductCampaign)
                     .Include(o => o.ProductUnit)
+                    .Include(o => o.ProductImagens)
                     .Where(o => !o.IsDeleted);
             }
         }

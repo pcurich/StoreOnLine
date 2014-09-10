@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.Util.Xml;
 
@@ -26,21 +27,22 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                String pathFile = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                String pathImg = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
+                String pathFile = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                String pathImg = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
                 LoadCategory(context, pathFile + "Category.xml");
                 LoadCampaign(context, pathFile + "Campaign.xml");
                 LoadUnit(context, pathFile + "Unit.xml");
+                LoadSupplier(context, pathFile + "Unit.xml");
                 //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
 
                 var pbs = new List<ProductBase>
                 {
-                    new ProductBase {ProductName = "Football", ProductDescription = "", ProductBasePrice = 25M, ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1, ProductUnitId = 1 },
-                    new ProductBase {ProductName = "Surf board", ProductDescription = "", ProductBasePrice = 179M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1 },
-                    new ProductBase {ProductName = "Running shoes", ProductDescription = "", ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1 },
-                    new ProductBase {ProductName = "Tshirt", ProductDescription = "", ProductBasePrice = 95M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1 },
-                    new ProductBase {ProductName = "Shorts ", ProductDescription = "",ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1 }
+                    new ProductBase {ProductName = "Football", ProductDescription = "", ProductBasePrice = 25M, ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1, ProductUnitId = 1, ProductSupplierId = 1 },
+                    new ProductBase {ProductName = "Surf board", ProductDescription = "", ProductBasePrice = 179M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductSupplierId = 1 },
+                    new ProductBase {ProductName = "Running shoes", ProductDescription = "", ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductSupplierId = 1 },
+                    new ProductBase {ProductName = "Tshirt", ProductDescription = "", ProductBasePrice = 95M, ProductSalePrice =2.5M,ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductSupplierId = 1 },
+                    new ProductBase {ProductName = "Shorts ", ProductDescription = "",ProductBasePrice = 95M,ProductSalePrice =2.5M, ProductCampaignId = 1, ProductCategoryId = 1,ProductUnitId = 1, ProductSupplierId = 1 }
                 };
 
                 foreach (var pb in pbs)
@@ -49,6 +51,7 @@ namespace StoreOnLine.DataBase.Entities
                 }
                 context.SaveChanges();
             }
+
         }
 
         public class StoreOnLineInitializerCreateDatabaseIfNotExists : CreateDatabaseIfNotExists<StoreOnLineContext>
@@ -57,9 +60,9 @@ namespace StoreOnLine.DataBase.Entities
             {
                 var pbs = new List<ProductBase>
                 {
-                    new ProductBase {ProductName = "Football", ProductBasePrice = 25M},
-                    new ProductBase {ProductName = "Surf board", ProductBasePrice = 179M},
-                    new ProductBase {ProductName = "Running shoes", ProductBasePrice = 95M}
+                    new ProductBase {ProductName = "Football", ProductBasePrice = 25M, ProductSupplierId = 1},
+                    new ProductBase {ProductName = "Surf board", ProductBasePrice = 179M, ProductSupplierId = 1},
+                    new ProductBase {ProductName = "Running shoes", ProductBasePrice = 95M, ProductSupplierId = 1}
                 };
 
                 foreach (var pb in pbs)
@@ -116,6 +119,24 @@ namespace StoreOnLine.DataBase.Entities
             {
                 e.IsStatus = true;
                 context.Units.Add(e);
+            }
+            context.SaveChanges();
+        }
+
+        private static void LoadSupplier(StoreOnLineContext context, String str)
+        {
+            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+
+            var elemt = XmlSerialization<List<Unit>>.Deserialize(str);
+
+            var pbs = new List<Supplier>
+                {
+                    new Supplier {SupplierName = "SupplierName" },
+                };
+
+            foreach (var pb in pbs)
+            {
+                context.Suppliers.Add(pb);
             }
             context.SaveChanges();
         }

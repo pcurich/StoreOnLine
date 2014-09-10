@@ -1,17 +1,20 @@
-﻿@model IEnumerable<StoreOnLine.DataBase.Model.Resources.Imagen>
+﻿@using StoreOnLine.DataBase.Model.Resources
+@model List<StoreOnLine.DataBase.Model.Resources.Imagen>
 
-<div id="cPictures" class="carousel slide">
-    <div class="carousel-inner">
-        @foreach (var img in Model)
-        {
-            <div class="item">
-                <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetImageProductBase", "AdminImg", new { Area = "Management", id = @img.Id })" alt=""/>
-                <div class="carousel-caption">
-                    <h4>@img.ObjectName</h4>
+<div id="cPictures">
+    <div class="carousel slide">
+        <div class="carousel-inner">
+            @foreach (var t in Model)
+            {
+                <div class="item @(t.IsPrincipal ? "active" : "")">
+                    <img width="50" height="50" src="@Url.Action("GetImageProductBase", "AdminImg", new { Area = "Management", id = t.ObjectId, secuence = t.Secuence })" alt=""/>
+                    <div class="carousel-caption">
+                        <h4>@t.ObjectName</h4>
+                    </div>
                 </div>
-            </div>
-        }
-
+            }
+        </div>
+        <a class="left carousel-control" href="#cPictures" data-slide="prev"><</a>
+        <a class="right carousel-control" href="#cPictures" data-slide="next">></a>
     </div>
 </div>
-

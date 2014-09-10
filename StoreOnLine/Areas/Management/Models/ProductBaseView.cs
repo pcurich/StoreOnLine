@@ -1,11 +1,9 @@
-﻿using System.Web.Mvc;
-using StoreOnLine.DataBase.Model.Products;
-using StoreOnLine.DataBase.Model.Providers;
+﻿using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Resources;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Xml.Serialization;
+using System.Web.Mvc;
 
 namespace StoreOnLine.Areas.Management.Models
 {
@@ -50,11 +48,11 @@ namespace StoreOnLine.Areas.Management.Models
         [Required(ErrorMessage = "Seleccione una unidad de medida")]
         public int ProductUnitId { get; set; }
 
-        public List<Imagen> ProductImagens { get; set; }
-
         [Display(Name = "Proveedor")]
         [Required(ErrorMessage = "Seleccione un proveedor")]
         public int ProductSupplierId { get; set; }
+
+        public List<Imagen> ProductImagens { get; set; }
 
         public List<Feature> Details { get; set; }
 
@@ -65,7 +63,14 @@ namespace StoreOnLine.Areas.Management.Models
                 Id = view.Id,
                 IsStatus = view.IsStatus,
                 ProductName = view.ProductName,
-                ProductDescription = view.ProductDescription 
+                ProductDescription = view.ProductDescription,
+                ProductBasePrice = view.ProductBasePrice,
+                ProductSalePrice = view.ProductSalePrice,
+                ProductCategoryId = view.ProductCategoryId,
+                ProductCampaignId = view.ProductCampaignId,
+                ProductUnitId = view.ProductUnitId,
+                ProductSupplierId = view.ProductSupplierId,
+                ProductImagens = view.ProductImagens
             };
         }
 
@@ -76,7 +81,14 @@ namespace StoreOnLine.Areas.Management.Models
                 Id = db.Id,
                 IsStatus = db.IsStatus,
                 ProductName = db.ProductName,
-                ProductDescription = db.ProductDescription
+                ProductDescription = db.ProductDescription,
+                ProductBasePrice = db.ProductBasePrice,
+                ProductSalePrice = db.ProductSalePrice,
+                ProductCategoryId = db.ProductCategoryId,
+                ProductCampaignId = db.ProductCampaignId,
+                ProductUnitId = db.ProductUnitId,
+                ProductSupplierId = db.ProductSupplierId,
+                ProductImagens = db.ProductImagens
             };
         }
     }

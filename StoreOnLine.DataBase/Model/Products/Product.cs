@@ -30,9 +30,10 @@ namespace StoreOnLine.DataBase.Model.Products
         [XmlIgnore]
         public List<Imagen> ProductImagens { get; set; }
 
-        //[XmlIgnore]
-        //public Supplier Supplier { get; set; }
-        //public int SupplierId { get; set; }
+        [XmlIgnore]
+        public Supplier ProductSupplier  { get; set; }
+        public int ProductSupplierId { get; set; }
+
         [XmlIgnore]
         public List<Feature> Features { get; set; }
 

@@ -21,17 +21,17 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public FileContentResult GetDefault()
         {
-            var imagen =_repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+            var imagen = _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
             return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
         }
-        
 
-        public FileContentResult GetImageProductBase(int id)
+
+        public FileContentResult GetImageProductBase(int id, int secuence = 0)
         {
             var imagen =
-                _repository.Imagens.FirstOrDefault(p => p.Id == id) ??
-                _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+                _repository.Imagens.FirstOrDefault(p => p.ObjectId == id && p.Secuence==secuence) ??
+                _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default && p.Secuence==secuence);
             return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
         }
-	}
+    }
 }
