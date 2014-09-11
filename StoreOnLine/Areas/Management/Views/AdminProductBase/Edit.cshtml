@@ -95,59 +95,63 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ProductCategoryId, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.ProductCategoryId,
-                                        (List<SelectListItem>)ViewBag.Categories,
-                                        "------------------------------",
-                                        htmlAttributes: new { @class = "form-control btn btn-primary  " })
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ProductUnitId, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.ProductUnitId,
-                                        (List<SelectListItem>)ViewBag.ProductUnit,
-                                        "------------------------------",
-                                        htmlAttributes: new { @class = "form-control btn btn-primary" })
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductCategoryId, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.DropDownListFor(m => m.ProductCategoryId,
+                                            (List<SelectListItem>)ViewBag.Categories,
+                                            "------------------------------",
+                                            htmlAttributes: new { @class = "form-control btn btn-primary  " })
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ProductCampaignId, new { @class = "control-label" })
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductUnitId, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.DropDownListFor(m => m.ProductUnitId,
+                                            (List<SelectListItem>)ViewBag.ProductUnit,
+                                            "------------------------------",
+                                            htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    </div>
                                 </div>
-                                <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.ProductCampaignId,
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductCampaignId, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.DropDownListFor(m => m.ProductCampaignId,
                                         (List<SelectListItem>)ViewBag.GetCampaings,
                                         "------------------------------",
                                         htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductSupplierId, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.DropDownListFor(m => m.ProductSupplierId,
+                                    (List<SelectListItem>)ViewBag.ProductSupplier,
+                                    "------------------------------",
+                                    htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ProductSupplierId, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.ProductSupplierId,
-                                    (List<SelectListItem>)ViewBag.ProductSupplier,
-                                    "------------------------------",
-                                    htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                </div>
-                            </div>
                         </div>
+                    </div>
+                    <div class="row">
                     </div>
                 </div>
                 <div class="panel-footer">
