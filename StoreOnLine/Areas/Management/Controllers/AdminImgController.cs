@@ -19,10 +19,18 @@ namespace StoreOnLine.Areas.Management.Controllers
             _repository = repo;
         }
 
-        public FileContentResult GetDefault()
+        public FileContentResult GetDefault(int id=0)
         {
-            var imagen = _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
-            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+            if (id == 0)
+            {
+                var imagen = _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
+                return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+            }
+            else
+            {
+                var imagen = _repository.Imagens.FirstOrDefault(p => p.ObjectId == id);
+                return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+            }
         }
 
 

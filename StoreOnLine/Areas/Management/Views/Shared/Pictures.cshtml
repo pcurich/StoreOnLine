@@ -1,20 +1,24 @@
 ﻿@using StoreOnLine.DataBase.Model.Resources
 @model List<StoreOnLine.DataBase.Model.Resources.Imagen>
 
-<div id="cPictures">
-    <div class="carousel slide">
-        <div class="carousel-inner">
-            @foreach (var t in Model)
-            {
-                <div class="item @(t.IsPrincipal ? "active" : "")">
-                    <img width="50" height="50" src="@Url.Action("GetImageProductBase", "AdminImg", new { Area = "Management", id = t.ObjectId, secuence = t.Secuence })" alt=""/>
-                    <div class="carousel-caption">
-                        <h4>@t.ObjectName</h4>
-                    </div>
-                </div>
-            }
-        </div>
-        <a class="left carousel-control" href="#cPictures" data-slide="prev"><</a>
-        <a class="right carousel-control" href="#cPictures" data-slide="next">></a>
+
+<div id="cPictures" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        @foreach (var t in Model)
+        {
+            <li data-target="#cPictures" data-slide-to="@t.Secuence" @(t.IsPrincipal ? "class=active" : "")></li>
+        }
+    </ol>
+    <div class="carousel-inner">
+        @foreach (var t in Model)
+        {
+            <div class="item @(t.IsPrincipal ? "active" : "")">
+                <img style="align-items: center" width="50" height="50" src="@Url.Action("GetImageProductBase", "AdminImg", new { Area = "Management", id = t.ObjectId, secuence = t.Secuence })" alt="@t.ObjectName"/>
+            </div>
+        }
     </div>
+    <a class="left carousel-control" role="button" href="#cPictures" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="right carousel-control" role="button" href="#cPictures" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 </div>
+

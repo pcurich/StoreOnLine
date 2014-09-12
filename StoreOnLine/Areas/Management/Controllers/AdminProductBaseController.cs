@@ -34,7 +34,18 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ViewResult Index()
         {
-            return View(_repository.ProductBases);
+            var db = _repository.ProductBases.Where(o => !o.IsDeleted);
+            var view = db.Select(productBase => new ProductBaseView().ToView(productBase)).ToList();
+            return View(view);
+        }
+
+        public ViewResult Create()
+        {
+            ViewBag.Categories = GetCategories();
+            ViewBag.ProductUnit = GetCategories();
+            ViewBag.GetCampaings = GetCampaings();
+            ViewBag.ProductSupplier = GetCategories();
+            return View("Edit",  new ProductBaseView {ProductImagens = new List<Imagen>()});
         }
 
         public ViewResult Edit(int productId)
@@ -95,12 +106,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             // there is something wrong with the data values
             return View(product);
         }
-
-        public ViewResult Create()
-        {
-            return View("Edit", new ProductBase());
-        }
-
+ 
         [HttpPost]
         public ActionResult Delete(int productId)
         {

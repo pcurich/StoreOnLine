@@ -25,7 +25,7 @@
                 @Html.ActionLink("Crear Nuevo", "Create", "AdminCategory", null, new { @class = " btn btn-primary pull-righ" })
             </div>
             <div class="panel-body">
-                <table id="DataTableCategory" class="table hover ">
+                <table id="DataTableCategory" class="table table-striped ">
                     <thead>
                         <tr>
                             <th>
@@ -50,16 +50,8 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CategoryDescription)
                                 </td>
-                                <td>
-                                    @if (item.IsStatus)
-                                    {
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    }
-
+                                <td>@if (item.IsStatus){<i class="glyphicon glyphicon-ok"></i>}
+                                    else{<i class="glyphicon glyphicon-remove"></i>}
                                 </td>
                                 <td>
                                     <button type="button" class="btn btn-default btn-xs">

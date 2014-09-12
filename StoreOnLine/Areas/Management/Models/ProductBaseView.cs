@@ -28,11 +28,13 @@ namespace StoreOnLine.Areas.Management.Models
         [Required]
         [Range(0.00, 10000, ErrorMessage = "Ingrese un valor positivo menor a 10000")]
         [DataType(DataType.Currency)]
+        [Display(Name = "Precio Base")]
         public Decimal ProductBasePrice { get; set; }
 
         [Required]
         [Range(0.00, 10000, ErrorMessage = "Ingrese un valor positivo menor a 10000")]
         [DataType(DataType.Currency)]
+        [Display(Name = "Precio Venta")]
         public Decimal ProductSalePrice { get; set; }
 
         [Display(Name = "Categoria")]
@@ -52,6 +54,7 @@ namespace StoreOnLine.Areas.Management.Models
         [Required(ErrorMessage = "Seleccione un proveedor")]
         public int ProductSupplierId { get; set; }
 
+        [Display(Name = "Imagen")]
         public List<Imagen> ProductImagens { get; set; }
 
         public List<Feature> Details { get; set; }

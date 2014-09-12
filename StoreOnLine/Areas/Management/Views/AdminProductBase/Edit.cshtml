@@ -74,20 +74,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="col-lg-3">
-                                            <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetDefault", "AdminImg", new { Area = "Management" })" alt=""/>
+                                            <img class="img-thumbnail" width="50" height="50" alt="" src="@{var imagen = Model.ProductImagens.SingleOrDefault(o=>o.IsPrincipal);
+                                                                                                          @(imagen != null ? 
+                                                                                                          Url.Action("GetDefault", "AdminImg", new {Area = "Management", id = imagen.ObjectId}) :
+                                                                                                          Url.Action("GetDefault", "AdminImg", new {Area = "Management", id = 0}))}"/>
                                             <a class='btn' href='javascript:;'>
                                                 <input type="file" name="image" id="image" onchange='$("#upload-file-info").html($(this).val());'>
                                             </a>
                                         </div>
-                                        @{
-                                            <div class="col-lg-9">
-                                                @if (Model.ProductImagens != null)
-                                                {
-                                                    @Html.Partial("Pictures", model: Model.ProductImagens);
-                                                }
-                                            </div>
-                                        }
-
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +89,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         @Html.LabelFor(m => m.ProductCategoryId, new { @class = "control-label" })
@@ -108,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         @Html.LabelFor(m => m.ProductUnitId, new { @class = "control-label" })
@@ -121,7 +115,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         @Html.LabelFor(m => m.ProductCampaignId, new { @class = "control-label" })
@@ -134,7 +128,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <div class="col-lg-3">
                                         @Html.LabelFor(m => m.ProductSupplierId, new { @class = "control-label" })
@@ -149,6 +143,35 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductBasePrice, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.EditorFor(m => m.ProductBasePrice, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "0.00" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="col-lg-3">
+                                        @Html.LabelFor(m => m.ProductSalePrice, new { @class = "control-label" })
+                                    </div>
+                                    <div class="col-lg-9">
+                                        @Html.EditorFor(m => m.ProductSalePrice, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "0.00" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                @{
+                                    if (Model.ProductImagens != null)
+                                    {
+                                        @Html.Partial("Pictures", model: Model.ProductImagens);
+                                    }
+                                }
+                            </div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -176,5 +199,12 @@
             });
         });
 
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('.myCarousel').carousel({
+                interval: 200
+            });
+        });
     </script>
 }
