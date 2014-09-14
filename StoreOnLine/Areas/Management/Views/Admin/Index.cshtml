@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Admin: Section";
+﻿@using StoreOnLine.DataBase.Const
+@{
+    ViewBag.Title = "AdminImg: Section";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -21,7 +22,7 @@
             <div class="caption">
                 <h3>Categorias</h3>
                 <a href="@Url.Action("Index", "AdminCategory", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageCategory", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.CategoryName  })" alt=""/>
                 </a>
             </div>
         </div>
@@ -31,7 +32,7 @@
             <div class="caption">
                 <h3>Campañas</h3>
                 <a href="@Url.Action("Index", "AdminCampaign", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageCampaign", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.CampaignName  })" alt=""/>
                 </a>
             </div>
         </div>
@@ -40,8 +41,8 @@
         <div class="thumbnail">
             <div class="caption">
                 <h3>Caracteristicas</h3>
-                <a href="@Url.Action("Index", "AdminFeature", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageFeature", "Admin", new { Area = "Management" })" alt=""/>
+                <a href="@Url.Action("Index", "AdminUnitFeacture", new { Area = "Management" })" class="thumbnail">
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.FeatureName  })" alt=""/>
                 </a>
             </div>
         </div>
@@ -51,7 +52,7 @@
             <div class="caption">
                 <h3>Unidades</h3>
                 <a href="@Url.Action("Index", "AdminUnit", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageUnit", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.UnitName  })" alt=""/>
                 </a>
             </div>
         </div>
@@ -63,7 +64,7 @@
             <div class="caption">
                 <h3>Proveedores</h3>
                 <a href="@Url.Action("Index", "AdminSupplier", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageSupplier", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.SupplierName })" alt=""/>
                 </a>
             </div>
         </div>
@@ -73,7 +74,7 @@
             <div class="caption">
                 <h3>Producto Base</h3>
                 <a href="@Url.Action("Index", "AdminProductBase", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageProductBase", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.ProductBaseName  })" alt=""/>
                 </a>
             </div>
         </div>
@@ -83,7 +84,7 @@
             <div class="caption">
                 <h3>Producto Compuesto</h3>
                 <a href="@Url.Action("Index", "AdminProductComposite", new { Area = "Management" })" class="thumbnail">
-                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageProductComposite", "Admin", new { Area = "Management" })" alt=""/>
+                    <img class="img-thumbnail" width="100" height="100" src="@Url.Action("GetImageDefault", "AdminImg", new { Area = "Management", defaultName=@ObjectName.ProductCompositeName  })" alt=""/>
                 </a>
             </div>
         </div>

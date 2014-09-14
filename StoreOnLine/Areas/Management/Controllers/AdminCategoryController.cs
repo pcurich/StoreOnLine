@@ -105,15 +105,7 @@ namespace StoreOnLine.Areas.Management.Controllers
                 TempData["message"] = string.Format("{0} fue eliminado", deletedCategory.CategoryName);
             }
             return RedirectToAction("Index");
-        }
-
-        public FileContentResult GetImage(String name, int id)
-        {
-            var imagen =
-                _imagenRepository.Imagens.FirstOrDefault(p => p.ObjectName == name && p.ObjectId == id && p.IsPrincipal) ??
-                _imagenRepository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
-            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
-        }
-
+        } 
+ 
     }
 }

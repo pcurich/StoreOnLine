@@ -12,7 +12,15 @@ namespace StoreOnLine.DataBase.Concrete
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Campaign> Campaigns { get { return _context.Campaigns.Include(o => o.CampaignPhoto).Where(o => !o.IsDeleted); } }
+        public IEnumerable<Campaign> Campaigns
+        {
+            get
+            {
+                return _context.Campaigns
+                    .Include(o => o.CampaignPhoto)
+                    .Where(o => !o.IsDeleted);
+            }
+        }
 
         public int SaveCampaign(Campaign campaign)
         {
@@ -40,21 +48,19 @@ namespace StoreOnLine.DataBase.Concrete
         public Campaign DeleteCampaign(int campaignId, bool physical = false)
         {
             var dbEntry = _context.Campaigns.Find(campaignId);
-            if (dbEntry != null)
+            if (dbEntry == null) return null;
+            if (physical)
             {
-                if (physical)
-                {
-                    _context.Campaigns.Remove(dbEntry);
-                }
-                else
-                {
-                    dbEntry.IsDeleted = true;
-                    dbEntry.IsStatus = false;
-                    _context.Entry(dbEntry).State = EntityState.Modified;
-                }
-
-                _context.SaveChanges();
+                _context.Campaigns.Remove(dbEntry);
             }
+            else
+            {
+                dbEntry.IsDeleted = true;
+                dbEntry.IsStatus = false;
+                _context.Entry(dbEntry).State = EntityState.Modified;
+            }
+
+            _context.SaveChanges();
             return dbEntry;
         }
     }

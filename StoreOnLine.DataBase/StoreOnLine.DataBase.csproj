@@ -81,12 +81,14 @@
     <Compile Include="Abstract\IImagenRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
+    <Compile Include="Abstract\ISupplierRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
     <Compile Include="Concrete\EFImagenRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFCampaingRepository.cs" />
+    <Compile Include="Concrete\EFSupplierRepository.cs" />
     <Compile Include="Concrete\EFUnitRepository.cs" />
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Const\ObjectName.cs" />

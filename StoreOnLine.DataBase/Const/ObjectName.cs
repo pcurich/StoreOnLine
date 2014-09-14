@@ -4,15 +4,15 @@ namespace StoreOnLine.DataBase.Const
 {
     public static class ObjectName
     {
-        public const String CategoryName = "Category";
-        public const String CampaignName = "Campaign";
-        public const String UnitName = "Unit";
-        public const String FeatureName = "Feature";
-
-        public const String SupplierName = "Supplier";
-        public const String ProductBaseName = "ProductBase";
-        public const String ProductCompositeName = "ProductComposite";
-        public const String Default = "Default";
+        public const string CategoryName = "Category";
+        public const string CampaignName = "Campaign";
+        public const string UnitName = "Unit";
+        public const string FeatureName = "Feature";
  
+        public const string SupplierName = "Supplier";
+        public const string ProductBaseName = "ProductBase";
+        public const string ProductCompositeName = "ProductComposite";
+        public const string Default = "Default";
+        
     }
 }

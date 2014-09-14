@@ -99,11 +99,9 @@ namespace StoreOnLine.DataBase.Concrete
         public Product DeleteProductComposite(int productId)
         {
             ProductComposite dbEntry = _context.ProductComposites.Find(productId);
-            if (dbEntry != null)
-            {
-                _context.ProductComposites.Remove(dbEntry);
-                _context.SaveChanges();
-            }
+            if (dbEntry == null) return null;
+            _context.ProductComposites.Remove(dbEntry);
+            _context.SaveChanges();
             return dbEntry;
         }
     }

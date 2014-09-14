@@ -25,7 +25,7 @@
                 @Html.ActionLink("Crear Nuevo", "Create", "AdminUnit", null, new { @class = " btn btn-primary pull-righ" })
             </div>
             <div class="panel-body">
-                <table id="DataTableUnit" class="table hover ">
+                <table id="DataTableUnit" class="table table-striped">
                     <thead>
                         <tr>
                             <th>
@@ -37,7 +37,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.UnitDescription)
                             </th>
-                            <th>
+                            <th class="text-center">
                                 @Html.DisplayNameFor(model => model.IsStatus)
                             </th>
                             <th></th>
@@ -48,7 +48,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.UnitName)
+                                    @Html.ActionLink(item.UnitName, "Edit", new { unitId = item.Id })
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.UnitCode)
@@ -56,26 +56,17 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.UnitDescription)
                                 </td>
-                                <td>
-                                    @if (item.IsStatus)
-                                    {
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    }
+                                <td class="text-center">
+                                    @if (item.IsStatus){<i class="glyphicon glyphicon-ok"></i>}
+                                    else{<i class="glyphicon glyphicon-remove"></i>}
 
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-default btn-xs">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                        @Html.ActionLink("Edit", "Edit", "AdminUnit", new { UnitId = item.Id }, new { @style = "color: black" })
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                        @Html.ActionLink("Delete", "Delete", "AdminUnit", new { UnitId = item.Id }, new { @style = "color: white" })
-                                    </button>
+                                <td class="text-center">
+                                    @using (Html.BeginForm("Delete", "AdminSupplier"))
+                                    {
+                                        @Html.Hidden("unitId", item.Id)
+                                        <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                                    }
                                 </td>
                             </tr>
                         }

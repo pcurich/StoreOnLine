@@ -105,14 +105,5 @@ namespace StoreOnLine.Areas.Management.Controllers
             }
             return RedirectToAction("Index");
         }
-
-        public FileContentResult GetImage(String name, int id)
-        {
-            var imagen =
-                _imagenRepository.Imagens.FirstOrDefault(p => p.ObjectName == name && p.ObjectId == id && p.IsPrincipal) ??
-                _imagenRepository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default);
-            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
-        }
-
     }
 }

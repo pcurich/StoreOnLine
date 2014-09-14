@@ -27,8 +27,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                String pathFile = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                String pathImg = @"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
+                String pathFile = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                String pathImg = @"C:\Users\pedro\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
                 LoadCategory(context, pathFile + "Category.xml");
                 LoadCampaign(context, pathFile + "Campaign.xml");
@@ -153,7 +153,7 @@ namespace StoreOnLine.DataBase.Entities
         private static void LoadImagen(StoreOnLineContext context, String str)
         {
             var directory = new DirectoryInfo(str);
-            foreach (var dir in directory.GetFiles())
+            foreach (var dir in directory.EnumerateFiles("*.*", SearchOption.AllDirectories).Where(s => s.Extension.EndsWith(".jpg") || s.Extension.EndsWith(".JPG")))
             {
                 var map = new Bitmap(Image.FromFile(dir.FullName), new Size(150, 150));
 
@@ -167,6 +167,7 @@ namespace StoreOnLine.DataBase.Entities
                     dir.Name.Contains("Unit") ? Const.ObjectName.UnitName :
                     dir.Name.Contains("Feature") ? Const.ObjectName.FeatureName :
                     dir.Name.Contains("ProductBase") ? Const.ObjectName.ProductBaseName :
+                    dir.Name.Contains("Supplier") ? Const.ObjectName.SupplierName :
                     dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductCompositeName : Const.ObjectName.Default;
 
                 imagen.IsPrincipal = true;

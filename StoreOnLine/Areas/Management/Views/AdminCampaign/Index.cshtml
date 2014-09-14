@@ -25,11 +25,10 @@
                 @Html.ActionLink("Crear Nuevo", "Create", "AdminCampaign", null, new { @class = " btn btn-primary pull-righ" })
             </div>
             <div class="panel-body">
-                <table id="DataTableCampaign" class="table hover ">
+                <table id="DataTableCampaign" class="table table-striped">
                     <thead>
                         <tr>
-                            <th>
-                                Imagen
+                            <th>Imagen
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.CampaignName)
@@ -37,7 +36,7 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.CampaignDescription)
                             </th>
-                            <th>
+                            <th class="text-center">
                                 @Html.DisplayNameFor(model => model.IsStatus)
                             </th>
                             <th></th>
@@ -48,34 +47,27 @@
                         {
                             <tr>
                                 <td>
-                                    <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetImage", "AdminCampaign", new { Area = "Management", name = item.CampaignName, id = item.Id })" alt=""/>
+                                    <img class="img-thumbnail" width="50" height="50" src="@Url.Action("GetImage", "AdminImg", new { Area = "Management", name = item.CampaignName, id = item.Id })" alt=""/>
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.CampaignName)
+                                    @Html.ActionLink(item.CampaignName, "Edit", new { campaignId = item.Id })
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.CampaignDescription)
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     @if (item.IsStatus)
-                                    {
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    }
+                                    {<i class="glyphicon glyphicon-ok"></i>}
                                     else
-                                    {
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    }
+                                    {<i class="glyphicon glyphicon-remove"></i>}
 
                                 </td>
-                                <td>
-                                    <button type="button" class="btn btn-default btn-xs">
-                                        <span class="glyphicon glyphicon-edit"></span>
-                                        @Html.ActionLink("Edit", "Edit", "AdminCampaign", new { CampaignId = item.Id }, new { @style = "color: black" })
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-xs">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                        @Html.ActionLink("Delete", "Delete", "AdminCampaign", new { CampaignId = item.Id }, new { @style = "color: white" })
-                                    </button>
+                                <td class="text-center">
+                                    @using (Html.BeginForm("Delete", "AdminCampaign"))
+                                    {
+                                        @Html.Hidden("categoryId", item.Id)
+                                        <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                                    }
                                 </td>
                             </tr>
                         }

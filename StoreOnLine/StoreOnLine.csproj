@@ -458,6 +458,8 @@
     <Content Include="Areas\Management\Views\Shared\Pictures.cshtml" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
+    <Content Include="Areas\Management\Views\AdminSupplier\Index.cshtml" />
+    <Content Include="Areas\Management\Views\AdminSupplier\Edit.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -518,6 +520,7 @@
     <Compile Include="Areas\Management\Models\ProductBaseView.cs" />
     <Compile Include="Areas\Management\Models\ProductCompositeView.cs" />
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
+    <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
@@ -577,7 +580,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
-    <Folder Include="Areas\Management\Views\AdminSupplier\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>

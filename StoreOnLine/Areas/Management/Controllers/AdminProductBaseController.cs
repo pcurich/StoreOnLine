@@ -34,7 +34,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ViewResult Index()
         {
-            var db = _repository.ProductBases.Where(o => !o.IsDeleted);
+            var db = _repository.ProductBases;
             var view = db.Select(productBase => new ProductBaseView().ToView(productBase)).ToList();
             return View(view);
         }
@@ -45,7 +45,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.ProductUnit = GetCategories();
             ViewBag.GetCampaings = GetCampaings();
             ViewBag.ProductSupplier = GetCategories();
-            return View("Edit",  new ProductBaseView {ProductImagens = new List<Imagen>()});
+            return View("Edit",  new ProductBaseView {ProductImagens = new List<Imagen>(), IsStatus =true});
         }
 
         public ViewResult Edit(int productId)
@@ -64,47 +64,44 @@ namespace StoreOnLine.Areas.Management.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(ProductBase product, HttpPostedFileBase image = null)
+        public ActionResult Edit(ProductBaseView product, HttpPostedFileBase image = null)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(product);
+            var imagen = new Imagen();
+            if (image != null)
             {
-                var imagen = new Imagen();
-                if (image != null)
-                {
-                    imagen.ImageMimeType = image.ContentType;
-                    imagen.ImageData = new byte[image.ContentLength];
-                    imagen.ObjectName = product.ProductName;
-                    imagen.ObjectId = product.Id;
+                imagen.ImageMimeType = image.ContentType;
+                imagen.ImageData = new byte[image.ContentLength];
+                imagen.ObjectName = product.ProductName;
+                imagen.ObjectId = product.Id;
 
-                    if (product.Id == 0)
-                    {
-                        product.ProductImagens = new List<Imagen>();
-                        imagen.Secuence = 1;
-                    }
-                    else
-                    {
-                        var firstOrDefault = _repository.ProductBases.FirstOrDefault(o => o.Id == product.Id);
-                        if (firstOrDefault != null)
-                        {
-                            product.ProductImagens = firstOrDefault.ProductImagens;
-                            for (var i = 0; i < product.ProductImagens.Count; i++)
-                            {
-                                product.ProductImagens[i].IsPrincipal = false;
-                                product.ProductImagens[i].Secuence = i;
-                                _repositoryImagen.SaveImagen(product.ProductImagens[i]);
-                            }
-                            imagen.Secuence = product.ProductImagens.Count;
-                        }
-                    }
-                    product.ProductImagens.Add(imagen);
-                    image.InputStream.Read(imagen.ImageData, 0, image.ContentLength);
+                if (product.Id == 0)
+                {
+                    product.ProductImagens = new List<Imagen>();
+                    imagen.Secuence = 1;
                 }
-                _repository.SaveProductBase(product);
-                TempData["message"] = string.Format("{0} has been saved", product.ProductName);
-                return RedirectToAction("Index");
+                else
+                {
+                    var firstOrDefault = _repository.ProductBases.FirstOrDefault(o => o.Id == product.Id);
+                    if (firstOrDefault != null)
+                    {
+                        product.ProductImagens = firstOrDefault.ProductImagens;
+                        for (var i = 0; i < product.ProductImagens.Count; i++)
+                        {
+                            product.ProductImagens[i].IsPrincipal = false;
+                            product.ProductImagens[i].Secuence = i;
+                            _repositoryImagen.SaveImagen(product.ProductImagens[i]);
+                        }
+                        imagen.Secuence = product.ProductImagens.Count;
+                    }
+                }
+                product.ProductImagens.Add(imagen);
+                image.InputStream.Read(imagen.ImageData, 0, image.ContentLength);
             }
+            _repository.SaveProductBase(product.ToBd(product, imagen));
+            TempData["message"] = string.Format("{0} has been saved", product.ProductName);
+            return RedirectToAction("Index");
             // there is something wrong with the data values
-            return View(product);
         }
  
         [HttpPost]

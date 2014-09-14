@@ -41,5 +41,13 @@ namespace StoreOnLine.Areas.Management.Controllers
                 _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default && p.Secuence==secuence);
             return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
         }
+
+        public FileContentResult GetImageDefault(string defaultName)
+        {
+            var imagen =
+                _repository.Imagens.FirstOrDefault(p => p.ObjectName == defaultName && p.ObjectId==0) ??
+                _repository.Imagens.FirstOrDefault(p => p.ObjectName == ObjectName.Default );
+            return imagen != null ? File(imagen.ImageData, imagen.ImageMimeType) : null;
+        }
     }
 }
