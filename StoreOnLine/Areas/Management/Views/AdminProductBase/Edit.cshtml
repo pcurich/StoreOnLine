@@ -1,4 +1,5 @@
-﻿@model  StoreOnLine.Areas.Management.Models.ProductBaseView
+﻿@using StoreOnLine.Models
+@model  StoreOnLine.Areas.Management.Models.ProductBaseView
 
 @{
     ViewBag.Title = "Admin: Edit " + ViewBag.ProductBase;
@@ -14,6 +15,12 @@
               (string)ViewBag.Controller,
               (string)ViewBag.Action)
               );}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        @Html.Partial("ProgressBars",model:new ProgressBarView()) 
     </div>
 </div>
 
@@ -74,10 +81,10 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <div class="col-lg-3">
-                                            <img class="img-thumbnail" width="50" height="50" alt="" src="@{var imagen = Model.ProductImagens.SingleOrDefault(o=>o.IsPrincipal);
-                                                                                                          @(imagen != null ? 
-                                                                                                          Url.Action("GetDefault", "AdminImg", new {Area = "Management", id = imagen.ObjectId}) :
-                                                                                                          Url.Action("GetDefault", "AdminImg", new {Area = "Management", id = 0}))}"/>
+                                            <img class="img-thumbnail" width="50" height="50" alt="" src="@{var imagen = Model.ProductImagens.SingleOrDefault(o => o.IsPrincipal);
+                                                                                                          @(imagen != null ?
+                                                                                                          Url.Action("GetDefault", "AdminImg", new { Area = "Management", id = imagen.ObjectId }) :
+                                                                                                          Url.Action("GetDefault", "AdminImg", new { Area = "Management", id = 0 }))}"/>
                                             <a class='btn' href='javascript:;'>
                                                 <input type="file" name="image" id="image" onchange='$("#upload-file-info").html($(this).val());'>
                                             </a>
@@ -165,10 +172,10 @@
                             </div>
                             <div class="col-lg-12">
                                 @{
-                                    if (Model.ProductImagens != null)
-                                    {
-                                        @Html.Partial("Pictures", model: Model.ProductImagens);
-                                    }
+                                                                                                            if (Model.ProductImagens != null)
+                                                                                                            {
+                                    @Html.Partial("Pictures", model: Model.ProductImagens);
+                                                                                                            }
                                 }
                             </div>
 

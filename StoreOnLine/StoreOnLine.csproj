@@ -553,6 +553,8 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Filters\RangeExceptionAttribute.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />
+    <Compile Include="Models\IProgressBar.cs" />
+    <Compile Include="Models\ProgressBarView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -570,6 +572,7 @@
     <Content Include="Views\Info\Index.cshtml" />
     <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Content\RangeErrorPage.html" />
+    <Content Include="Views\Shared\ProgressBars.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -581,7 +584,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
     <Folder Include="Areas\Security\Views\Shared\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreOnLine.DataBase\StoreOnLine.DataBase.csproj">

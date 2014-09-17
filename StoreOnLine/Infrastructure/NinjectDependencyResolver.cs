@@ -9,6 +9,7 @@ using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.Infrastructure.Abstract;
 using StoreOnLine.Infrastructure.Concrete;
+using StoreOnLine.Models;
 
 namespace StoreOnLine.Infrastructure
 {
@@ -40,6 +41,8 @@ namespace StoreOnLine.Infrastructure
             _kernel.Bind<IImagenRepository>().To<ImagenRepository>();
             _kernel.Bind<ISupplierRepository>().To<SupplierRepository>();
 
+
+            _kernel.Bind<IProgressBar>().To<ProgressBarView>().InSingletonScope();
         }
 
         public object GetService(Type serviceType)

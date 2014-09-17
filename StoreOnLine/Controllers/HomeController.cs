@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 using System.Web.Security;
 using StoreOnLine.Infrastructure;
 
@@ -7,12 +9,26 @@ namespace StoreOnLine.Controllers
     //[Authorize(Roles = "trader")] // applies to all actions
     public class HomeController : Controller
     {
-        
+
         //[ShowMessage] // applies to just this action
         //[OutputCache(Duration = 60)] // applies to just this action
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Index(int i)
         {
-            return View();
+            var remote = new RemoteService();
+            return View("Index", (object)remote.GetRemoteData());
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var data = await Task<string>.Factory.StartNew(() => new RemoteService().GetRemoteData());
+            return View("Index", (object)data);
+        }
+
+        public async Task<ActionResult> ConsumeAsyncMethod()
+        {
+            string data = await new RemoteService().GetRemoteDataAsync();
+            return View("Index", (object)data);
         }
 
         //
@@ -109,6 +125,24 @@ namespace StoreOnLine.Controllers
                 ModelState.AddModelError("", "Incorrect username or password");
                 return View();
             }
+        }
+    }
+
+    public class RemoteService
+    {
+        public string GetRemoteData()
+        {
+            Thread.Sleep(20000);
+            return "Hola";
+        }
+
+        public async Task<string> GetRemoteDataAsync()
+        {
+            return await Task<string>.Factory.StartNew(() =>
+            {
+                Thread.Sleep(20000);
+                return "Hello from the other side of the world";
+            });
         }
     }
 }

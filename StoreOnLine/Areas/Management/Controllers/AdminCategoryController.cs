@@ -1,4 +1,5 @@
-﻿using StoreOnLine.Areas.Management.Models;
+﻿using System.Web.SessionState;
+using StoreOnLine.Areas.Management.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Const;
 using StoreOnLine.DataBase.Model.Resources;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace StoreOnLine.Areas.Management.Controllers
 {
+    [SessionState(SessionStateBehavior.Disabled)]
     public class AdminCategoryController : Controller
     {
         private readonly ICategoryRepository _repository;
@@ -105,7 +107,14 @@ namespace StoreOnLine.Areas.Management.Controllers
                 TempData["message"] = string.Format("{0} fue eliminado", deletedCategory.CategoryName);
             }
             return RedirectToAction("Index");
-        } 
- 
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            Response.Write(String.Format("El request {0} action ", actionName));
+        }
+
+
+
     }
 }
