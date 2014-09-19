@@ -1,1 +1,6 @@
 *.suo
+*.dll
+*.cache
+*.cache
+StoreOnLine.DataBase/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache

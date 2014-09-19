@@ -550,6 +550,7 @@
     <Compile Include="Infrastructure\Filters\ProfileAllAttribute.cs" />
     <Compile Include="Infrastructure\Filters\ProfileResultAttribute.cs" />
     <Compile Include="Infrastructure\Filters\SimpleMessageAttribute.cs" />
+    <Compile Include="Infrastructure\Helper\CustomHelpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Filters\RangeExceptionAttribute.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />

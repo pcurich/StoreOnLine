@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-lg-9">
                                         @Html.DropDownListFor(m => m.ProductCategoryId,
-                                            (List<SelectListItem>)ViewBag.Categories,
+                                            (List<SelectListItem>)ViewBag.Categories,/*new SelectList(Enum.GetNames(typeof (CategoryView))),*/
                                             "------------------------------",
                                             htmlAttributes: new { @class = "form-control btn btn-primary  " })
                                     </div>
