@@ -3,6 +3,12 @@
 @{
     ViewBag.Title = "Admin: Edit " + ViewBag.Campaign;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody",
+        Url= Url.Action("GetPeopleData")
+        
+    };
 }
 
 <div class="row">
