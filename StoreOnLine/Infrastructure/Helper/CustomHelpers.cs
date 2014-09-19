@@ -34,16 +34,32 @@ namespace StoreOnLine.Infrastructure.Helper
         {
             var tagProgress = new TagBuilder("div");
             tagProgress.AddCssClass("progress");
+            var tagBar = new TagBuilder("div");
+            tagBar.MergeAttribute("role", "progressbar");
+            tagBar.MergeAttribute("aria-valuenow", "80");
+            tagBar.MergeAttribute("aria-valuemin", "0");
+            tagBar.MergeAttribute("aria-valuemax", "100");
+            tagBar.MergeAttribute("style", "width: 80%");
+            tagBar.MergeAttribute("role", "progressbar");
+            tagBar.AddCssClass("progress-bar progress-bar-danger");
 
-            return null;
+            var tagSpan = new TagBuilder("span");
+            tagSpan.AddCssClass("sr-only");
+            tagSpan.SetInnerText("80% completado (peligro / error)");
 
-//            <div class="">
-//  <div class="progress-bar progress-bar-danger" role="progressbar"
-//       aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-//       style="width: 80%">
-//    <span class="sr-only">80% completado (peligro / error)</span>
-//  </div>
-//</div>
+            tagBar.InnerHtml = tagSpan.ToString();
+
+            tagProgress.InnerHtml = tagBar.ToString();
+
+            return new MvcHtmlString(tagProgress.ToString()); ;
+
+            //<div class="progress">
+            //  <div class="progress-bar progress-bar-danger" role="progressbar"
+            //       aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
+            //       style="width: 80%">
+            //    <span class="sr-only">80% completado (peligro / error)</span>
+            //  </div>
+            //</div>
         }
     }
 }

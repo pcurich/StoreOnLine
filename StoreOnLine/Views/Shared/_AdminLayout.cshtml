@@ -29,12 +29,22 @@
 <script src="~/Scripts/jquery-1.11.1.js"></script>
 <script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 <script src="~/Scripts/bootstrap.js"></script>
 <script src="~/Scripts/modernizr-2.6.2.js"></script>
 <script src="~/Scripts/DataTables-1.10.2/jquery.dataTables.js"></script>
 <script src="~/Scripts/DataTables-1.10.2/dataTables.bootstrap.js"></script>
 <script src="~/Scripts/bootstrap-switch.js"></script>
+<script src="~/Scripts/jquery-notify.js"></script>
+
+<script type="text/javascript">
+    function myAlert() {
+        $.notify("Do not press this button", '@TempData["message"]');
+    }
+</script>
 
 @RenderSection("Scripts", false)
+
+
 
 </html>

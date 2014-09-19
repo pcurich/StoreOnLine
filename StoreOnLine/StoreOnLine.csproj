@@ -408,6 +408,8 @@
     <Content Include="Content\jquery.mobile.structure-1.4.2.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.2.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.2.min.css" />
+    <Content Include="Content\notify.css" />
+    <Content Include="Content\notify.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -454,6 +456,10 @@
     <Content Include="Areas\Management\Views\AdminUnit\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Index.cshtml" />
+    <Content Include="Scripts\jquery-notify.js" />
+    <Content Include="Scripts\jquery-notify.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\Shared\RangeError.cshtml" />
     <Content Include="Areas\Management\Views\Shared\Pictures.cshtml" />
     <Content Include="Scripts\bootstrap-select.js.map" />

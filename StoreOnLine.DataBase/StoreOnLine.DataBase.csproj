@@ -111,6 +111,9 @@
     <Compile Include="Model\Providers\Contact.cs" />
     <Compile Include="Model\Providers\Supplier.cs" />
     <Compile Include="Model\Resources\Measure.cs" />
+    <Compile Include="Model\Security\Address.cs" />
+    <Compile Include="Model\Security\Person.cs" />
+    <Compile Include="Model\Security\Rol.cs" />
     <Compile Include="Model\Shopping\Cart.cs" />
     <Compile Include="Model\Shopping\CartLine.cs" />
     <Compile Include="Model\Shopping\Shipping.cs" />
