@@ -41,6 +41,7 @@ namespace StoreOnLine.DataBase.Entities
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Ubigeo> Ubigeos { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 

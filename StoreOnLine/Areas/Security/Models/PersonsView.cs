@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Model.Security;
@@ -28,18 +29,30 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Fecha de Nacimiento")]
         public DateTime BirthDate { get; set; }
 
-        public Address HomeAddress { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Correo Electronico")]
+        public string Eamil { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Nume")]
+        public string PhoneNumber { get; set; }
+
+        public List<DocumentView> Documents { get; set; }
+        public List<ContactNumberView> ContactNumbers { get; set; }
+        public List<AddressView> HomeAddress { get; set; }
+
         public UserView User { get; set; }
-        public Role Role { get; set; }
+        public RoleView Role { get; set; }
 
         public PersonView()
         {
-            HomeAddress=new Address();
+            Documents = new List<DocumentView>();
+            ContactNumbers = new List<ContactNumberView>();
+            HomeAddress = new List<AddressView>();
             User = new UserView();
-            Role=new Role();
+            Role = new RoleView();
             IsStatus = true;
         }
-
 
         public Person ToBd(PersonView view)
         {
@@ -50,9 +63,9 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = view.BirthDate,
-                HomeAddress = view.HomeAddress,
+                // HomeAddress = view.HomeAddress,
                 User = view.User.ToBd(view.User),
-                Role = view.Role
+                Role = view.Role.ToBd(view.Role)
 
             };
         }
@@ -66,9 +79,8 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate,
-                HomeAddress = db.HomeAddress,
                 User = new UserView().ToView(db.User),
-                Role = db.Role
+                Role = new RoleView().ToView(db.Role)
             };
         }
     }
@@ -100,6 +112,158 @@ namespace StoreOnLine.Areas.Security.Models
             {
                 UserPassword = db.UserPassword,
                 UserName = db.UserName
+            };
+        }
+    }
+
+    public class RoleView
+    {
+        [DataType(DataType.Text)]
+        [Display(Name = "Rol")]
+        public string RoleName { get; set; }
+
+        public Role ToBd(RoleView view)
+        {
+            return new Role
+            {
+                RoleName = view.RoleName
+            };
+        }
+
+        public RoleView ToView(Role db)
+        {
+            return new RoleView
+            {
+                RoleName = db.RoleName
+            };
+        }
+    }
+
+    public class DocumentView
+    {
+        [DataType(DataType.Text)]
+        [Display(Name = "Tipo Doc")]
+        public string DocumentTypeName { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Numero")]
+        public string DocumentValue { get; set; }
+
+        public Document ToBd(DocumentView view)
+        {
+            return new Document
+            {
+                DocumentTypeName = view.DocumentTypeName,
+                DocumentValue = view.DocumentValue
+            };
+        }
+
+        public DocumentView ToView(Document db)
+        {
+            return new DocumentView
+            {
+                DocumentTypeName = db.DocumentTypeName,
+                DocumentValue = db.DocumentValue
+            };
+        }
+    }
+
+    public class ContactNumberView
+    {
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Numero")]
+        public string Number { get; set; }
+
+        [Display(Name = "principal")]
+        public bool IsPrincipal { get; set; }
+
+        public ContactNumber ToBd(ContactNumberView view)
+        {
+            return new ContactNumber
+            {
+                Number = view.Number,
+                IsPrincipal = view.IsPrincipal
+            };
+        }
+
+        public ContactNumberView ToView(ContactNumber db)
+        {
+            return new ContactNumberView
+            {
+                IsPrincipal = db.IsPrincipal,
+                Number = db.Number
+            };
+        }
+    }
+
+    public class AddressView
+    {
+        [DataType(DataType.Text)]
+        [Display(Name = "Direccion1")]
+        public string Line1 { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Direccion2")]
+        public string Line2 { get; set; }
+
+        public UbigeoView Ubigeo { get; set; }
+
+        public Address ToBd(AddressView view)
+        {
+            return new Address
+            {
+                Line1 = view.Line1,
+                Line2 = view.Line2,
+                Ubigeo = view.Ubigeo.ToBd(view.Ubigeo)
+            };
+        }
+
+        public AddressView ToView(Address db)
+        {
+            return new AddressView
+            {
+                Line1 = db.Line1,
+                Line2 = db.Line2,
+                Ubigeo = new UbigeoView().ToView(db.Ubigeo)
+            };
+        }
+    }
+
+    public class UbigeoView
+    {
+        [Display(Name = "Departamento")]
+        [Required(ErrorMessage = "Seleccione un Departamento")]
+        public string CodDpto { get; set; }
+
+        [Display(Name = "Provincia")]
+        [Required(ErrorMessage = "Seleccione una Provincia")]
+        public string CodProv { get; set; }
+
+        [Display(Name = "Distrito")]
+        [Required(ErrorMessage = "Seleccione un Distrito")]
+        public string CodDist { get; set; }
+
+        public string NameUbiGeo { get; set; }
+
+        public Ubigeo ToBd(UbigeoView view)
+        {
+            return new Ubigeo
+            {
+                CodDpto = view.CodDpto,
+                CodProv = view.CodProv,
+                CodDist = view.CodDist,
+                NameUbiGeo = view.NameUbiGeo,
+            };
+        }
+
+        public UbigeoView ToView(Ubigeo db)
+        {
+            return new UbigeoView
+            {
+                CodDpto = db.CodDpto,
+                CodProv = db.CodProv,
+                CodDist = db.CodDist,
+                NameUbiGeo = db.NameUbiGeo,
             };
         }
     }

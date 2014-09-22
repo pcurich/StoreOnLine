@@ -1,14 +1,16 @@
-﻿using System;
+﻿using System.Data.Entity.Core.Metadata.Edm;
+using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Providers;
+using StoreOnLine.DataBase.Model.Resources;
+using StoreOnLine.DataBase.Model.Security;
+using StoreOnLine.Util.Xml;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using StoreOnLine.DataBase.Model.Products;
-using StoreOnLine.DataBase.Model.Providers;
-using StoreOnLine.DataBase.Model.Resources;
-using StoreOnLine.Util.Xml;
 
 namespace StoreOnLine.DataBase.Entities
 {
@@ -28,14 +30,15 @@ namespace StoreOnLine.DataBase.Entities
             protected override void Seed(StoreOnLineContext context)
             {
                 var path = "pedro";//gmc
-                String pathFile = @"C:\Users\"+path+@"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
-                String pathImg = @"C:\Users\"+path+@"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
+                String pathFile = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
+                String pathImg = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
                 LoadCategory(context, pathFile + "Category.xml");
                 LoadCampaign(context, pathFile + "Campaign.xml");
                 LoadUnit(context, pathFile + "Unit.xml");
-                LoadSupplier(context, pathFile + "Unit.xml");
-                //Export(@"C:\Users\gmc\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\Unit.xml");
+                LoadUbigeo(context, pathFile + "Ubigeo.xml");
+               LoadSupplier(context, pathFile + "Unit.xml");
+                 //Export(pathFile+"Ubigeo.xml");
 
                 var pbs = new List<ProductBase>
                 {
@@ -124,6 +127,20 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
+        private static void LoadUbigeo(StoreOnLineContext context, String str)
+        {
+
+            var elemt = XmlSerialization<List<Ubigeo>>.Deserialize(str);
+           
+            foreach (var pb in elemt)
+            {
+                context.Ubigeos.Add(pb);
+            }
+            context.SaveChanges();
+
+            
+        }
+
         private static void LoadSupplier(StoreOnLineContext context, String str)
         {
             string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
@@ -144,11 +161,12 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void Export(String str)
         {
-            var pbs = new List<Unit>
+            var pbs = new List<Ubigeo>
                 {
-                    new Unit {UnitCode = "X", UnitDescription = "X", UnitName ="X",IsStatus = true}
+                    new Ubigeo  { CodDist ="00", CodDpto = "00", CodProv = "00",NameUbiGeo="s", IsStatus = true},
+                    new Ubigeo  { CodDist ="00", CodDpto = "00", CodProv = "00",NameUbiGeo="s", IsStatus = true}
                 };
-            XmlSerialization<List<Unit>>.Serialize(pbs, str);
+            XmlSerialization<List<Ubigeo>>.Serialize(pbs, str);
         }
 
         private static void LoadImagen(StoreOnLineContext context, String str)

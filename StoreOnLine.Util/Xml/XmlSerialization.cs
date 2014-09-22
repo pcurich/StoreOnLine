@@ -11,7 +11,7 @@ namespace StoreOnLine.Util.Xml
             Stream stream = new FileStream(file, FileMode.Append);
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
-            xmlSerializer.Serialize(stream, o, ns);
+            //xmlSerializer.Serialize(stream, o, ns);
             xmlSerializer.Serialize(stream, o);
             stream.Close();
             stream.Dispose();
