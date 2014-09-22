@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-
+@using StoreOnLine.Infrastructure.Helper
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -12,18 +12,24 @@
     <link href="~/Content/DataTables-1.10.2/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.2/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css" rel="stylesheet" />
-
+    
 </head>
-<body>
-    <div class="container">
-        @if (TempData["message"] != null)
+    <body>
+        @(Html.Loader(new {@style ="style='max-height: 100%; max-width: 100%;'"}))
+
+@*        <div id="loading" class="ui-loader-default " style="display: none">
+            <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+        </div>*@
+
+        <div class="container">
+            @*@if (TempData["message"] != null)
         {
             <div class="alert alert-success">@TempData["message"]</div>
-        }
-        @RenderBody()
-    </div>
+        }*@
+            @RenderBody()
+        </div>
 
-</body>
+    </body>
 
 
 <script src="~/Scripts/jquery-1.11.1.js"></script>
@@ -35,13 +41,29 @@
 <script src="~/Scripts/DataTables-1.10.2/jquery.dataTables.js"></script>
 <script src="~/Scripts/DataTables-1.10.2/dataTables.bootstrap.js"></script>
 <script src="~/Scripts/bootstrap-switch.js"></script>
-<script src="~/Scripts/jquery-notify.js"></script>
+<script src="~/Scripts/notify.js"></script>
 
-<script type="text/javascript">
-    function myAlert() {
-        $.notify("Do not press this button", '@TempData["message"]');
+
+
+@*<script type="text/javascript">
+    function OnBegin() {
+        alert("This is the OnBegin Callback");
     }
-</script>
+
+    function OnSuccess(data) {
+        $.notify("Do not press this button", '@TempData["message"]');
+        //alert("This is the OnSuccessCallback: " + data);
+    }
+
+    function OnFailure(request, error) {
+        alert("This is the OnFailure Callback:" + error);
+    }
+
+    function OnComplete(request, status) {
+        alert("This is the OnComplete Callback: " + status);
+    }
+</script>*@
+
 
 @RenderSection("Scripts", false)
 

@@ -10,6 +10,8 @@ namespace StoreOnLine.DataBase.Model.Security
         public DateTime BirthDate { get; set; }
         public Address HomeAddress { get; set; }
         public bool IsApproved { get; set; }
+
+        public User User { get; set; }
         public Role Role { get; set; }
     }
 

@@ -1,0 +1,179 @@
+﻿@model StoreOnLine.Areas.Security.Models.PersonView
+@{
+    ViewBag.Title = "Security: Edit " + ViewBag.UserName;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody",
+        Url = Url.Action("Edit", "Person"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+
+    };
+}
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                <h3>Editar Uuario <b>@Model.User.UserName</b></h3>
+            </div>
+            @using (Ajax.BeginForm("Edit", "Person", ajaxOpts, new { @class = "form-horizontal" }))
+            {
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.Id)
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.User.UserName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.User.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.ValidationMessageFor(m => m.User.UserName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.User.UserPassword, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.User.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.ValidationMessageFor(m => m.User.UserPassword)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="bootstrap-switch bootstrap-switch-small">
+                                        @Html.CheckBoxFor(m => m.IsStatus)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el el nombre" } })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese los apellidos" } })
+                                    @Html.ValidationMessageFor(m => m.LastName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.BirthDate, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
+                                    @Html.ValidationMessageFor(m => m.BirthDate)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el el nombre" } })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese los apellidos" } })
+                                    @Html.ValidationMessageFor(m => m.LastName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.BirthDate, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
+                                    @Html.ValidationMessageFor(m => m.BirthDate)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <div id="loading" class="ui-icon-loading" style="display: none">
+                        <p>Loading Data</p>
+                    </div>
+                    @Html.ActionLink("Cancelar", "Index", new { Area = "Management" }, new { @class = "btn btn-default" })
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#IsStatus').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff: 'false'
+            });
+        });
+
+        function OnSuccess(data) {
+            var salida = '@TempData["message"]';
+            $.notify("ui-loader-default", "Do not press this button" + salida, "success");
+            //alert("This is the OnSuccessCallback: " + "@TempData["message"]");
+        }
+    </script>
+}
+

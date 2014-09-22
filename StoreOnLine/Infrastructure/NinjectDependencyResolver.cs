@@ -40,6 +40,7 @@ namespace StoreOnLine.Infrastructure
             _kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
             _kernel.Bind<IImagenRepository>().To<ImagenRepository>();
             _kernel.Bind<ISupplierRepository>().To<SupplierRepository>();
+            _kernel.Bind<IPerson>().To<PersonRepository>();
 
 
             _kernel.Bind<IProgressBar>().To<ProgressBarView>().InSingletonScope();

@@ -408,8 +408,6 @@
     <Content Include="Content\jquery.mobile.structure-1.4.2.min.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.2.css" />
     <Content Include="Content\jquery.mobile.theme-1.4.2.min.css" />
-    <Content Include="Content\notify.css" />
-    <Content Include="Content\notify.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -456,16 +454,17 @@
     <Content Include="Areas\Management\Views\AdminUnit\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Edit.cshtml" />
     <Content Include="Areas\Management\Views\AdminProductComposite\Index.cshtml" />
-    <Content Include="Scripts\jquery-notify.js" />
-    <Content Include="Scripts\jquery-notify.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\notify.js" />
     <Content Include="Views\Shared\RangeError.cshtml" />
     <Content Include="Areas\Management\Views\Shared\Pictures.cshtml" />
     <Content Include="Scripts\bootstrap-select.js.map" />
     <Content Include="Content\bootstrap-select.css.map" />
     <Content Include="Areas\Management\Views\AdminSupplier\Index.cshtml" />
     <Content Include="Areas\Management\Views\AdminSupplier\Edit.cshtml" />
+    <Content Include="Areas\Security\Views\Person\Index.cshtml" />
+    <Content Include="Areas\Security\Views\Person\Edit.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -529,6 +528,8 @@
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Security\Controllers\PersonController.cs" />
+    <Compile Include="Areas\Security\Models\PersonsView.cs" />
     <Compile Include="Areas\Security\SecurityAreaRegistration.cs" />
     <Compile Include="Areas\Security\Models\LoginViewModel.cs" />
     <Compile Include="Areas\Shopping\Controllers\CartController.cs" />
@@ -557,6 +558,7 @@
     <Compile Include="Infrastructure\Filters\ProfileResultAttribute.cs" />
     <Compile Include="Infrastructure\Filters\SimpleMessageAttribute.cs" />
     <Compile Include="Infrastructure\Helper\CustomHelpers.cs" />
+    <Compile Include="Infrastructure\Helper\ImagenHelpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Filters\RangeExceptionAttribute.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />
@@ -591,6 +593,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
     <Folder Include="Areas\Security\Views\Shared\" />
+    <Folder Include="Areas\Security\Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StoreOnLine.DataBase\StoreOnLine.DataBase.csproj">

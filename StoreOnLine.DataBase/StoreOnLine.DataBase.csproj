@@ -80,12 +80,14 @@
     <Compile Include="Abstract\ICategoryRepository.cs" />
     <Compile Include="Abstract\IImagenRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
+    <Compile Include="Abstract\IPerson.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
     <Compile Include="Abstract\ISupplierRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
     <Compile Include="Concrete\EFImagenRepository.cs" />
+    <Compile Include="Concrete\EFPerson.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFCampaingRepository.cs" />
     <Compile Include="Concrete\EFSupplierRepository.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Model\Security\Address.cs" />
     <Compile Include="Model\Security\Person.cs" />
     <Compile Include="Model\Security\Rol.cs" />
+    <Compile Include="Model\Security\User.cs" />
     <Compile Include="Model\Shopping\Cart.cs" />
     <Compile Include="Model\Shopping\CartLine.cs" />
     <Compile Include="Model\Shopping\Shipping.cs" />

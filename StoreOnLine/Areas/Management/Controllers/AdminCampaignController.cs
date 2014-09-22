@@ -30,7 +30,7 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         public ActionResult Index()
         {
-            var db = _repository.Campaigns.Where(o => !o.IsDeleted);
+            var db = _repository.Campaigns;
             var view = db.Select(category => new CampaignView().ToView(category)).ToList();
             return View(view);
         }

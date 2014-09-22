@@ -27,7 +27,7 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                var path = "gmc";//pedro
+                var path = "pedro";//gmc
                 String pathFile = @"C:\Users\"+path+@"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
                 String pathImg = @"C:\Users\"+path+@"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);

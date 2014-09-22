@@ -4,54 +4,55 @@ using System.Data.Entity;
 using System.Linq;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.DataBase.Concrete
 {
-    public class CampaingRepository : ICampaingRepository
+    public class PersonRepository : IPerson
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Campaign> Campaigns
+        public IEnumerable<Person> Persons
         {
             get
             {
-                return _context.Campaigns
-                    .Include(o => o.CampaignPhoto)
+                return _context.Persons
+                    .Include(o => o.HomeAddress)
+                    .Include(o=>o.User)
+                    .Include(o => o.Role)
                     .Where(o => !o.IsDeleted);
             }
         }
-
-        public int SaveCampaign(Campaign campaign)
+        public int SavePerson(Person person)
         {
-            if (campaign.Id == 0)
+            if (person.Id == 0)
             {
-                _context.Campaigns.Add(campaign);
+                _context.Persons.Add(person);
             }
             else
             {
-                var dbEntry = _context.Campaigns.Find((campaign.Id));
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(campaign))
+                var dbEntry = _context.Persons.Find((person.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(person))
                 {
-                    if (!property.Name.Equals("Id") && property.GetValue(campaign) != null)
+                    if (!property.Name.Equals("Id") && property.GetValue(person) != null)
                     {
-                        var value = property.GetValue(campaign);
+                        var value = property.GetValue(person);
                         if (value != null) property.SetValue(dbEntry, value);
                     }
                 }
 
             }
             _context.SaveChanges();
-            return campaign.Id;
+            return person.Id;
         }
 
-        public Campaign DeleteCampaign(int campaignId, bool physical = false)
+        public Person DeletePerson(int personId, bool physical = false)
         {
-            var dbEntry = _context.Campaigns.Find(campaignId);
+            var dbEntry = _context.Persons.Find(personId);
             if (dbEntry == null) return null;
             if (physical)
             {
-                _context.Campaigns.Remove(dbEntry);
+                _context.Persons.Remove(dbEntry);
             }
             else
             {

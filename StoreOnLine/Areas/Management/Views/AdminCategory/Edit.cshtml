@@ -3,28 +3,44 @@
 @{
     ViewBag.Title = "Admin: Edit " + ViewBag.Category;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOption = new AjaxOptions
+    {
+        Url = Url.Action("Edit", "AdminCategory"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+        OnSuccess = "OnSuccess"
+
+
+    };
 }
 
 <div class="row">
     <div class="col-lg-12">
         @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
-          (string)ViewBag.Big,
-          (string)ViewBag.Small,
-          (string)ViewBag.Area,
-          (string)ViewBag.Controller,
-          (string)ViewBag.Action)
-          );}
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
     </div>
 </div>
+
+<div class="progress progress-striped">
+    <div class="progress-bar progress-bar-success">0%</div>
+</div>
+
+<div id="status"></div>
 
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
-                <h3>Editar Categoria <b> @Model.CategoryName</b></h3>
+                <h3>Editar Categoria <b>@Model.CategoryName</b></h3>
             </div>
-
-            @using (Html.BeginForm("Edit", "AdminCategory", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+            @*"Edit", "AdminCategory", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }*@
+            @using (Ajax.BeginForm("Edit", "AdminCategory", ajaxOption, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
             {
                 @Html.ValidationSummary()
                 @Html.HiddenFor(m => m.Id)
@@ -48,7 +64,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="bootstrap-switch bootstrap-switch-small">
-                                        @Html.CheckBoxFor(m=>m.IsStatus)
+                                        @Html.CheckBoxFor(m => m.IsStatus)
                                     </div>
                                 </div>
                             </div>
@@ -83,6 +99,9 @@
                 </div>
                 <div class="panel-footer">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <div id="loading" class="ui-icon-loading" style="display: none">
+                        <p>Loading Data</p>
+                    </div>
                     @Html.ActionLink("Cancelar", "Index", new { Area = "Management" }, new { @class = "btn btn-default" })
                 </div>
             }
@@ -90,6 +109,7 @@
     </div>
 </div>
 
+ 
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {
@@ -99,9 +119,14 @@
                 offText: 'No',
                 onColor: 'success',
                 offColor: 'danger',
-                radioAllOff:'false'
+                radioAllOff: 'false'
             });
         });
 
+        function OnSuccess(data) {
+            var salida = '@TempData["message"]';
+            $.notify("ui-loader-default", "Do not press this button" + salida, "success");
+            //alert("This is the OnSuccessCallback: " + "@TempData["message"]");
+        }
     </script>
 }

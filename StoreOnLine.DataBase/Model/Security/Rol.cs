@@ -1,12 +1,20 @@
-﻿namespace StoreOnLine.DataBase.Model.Security
+﻿using System;
+using StoreOnLine.DataBase.Entities;
+
+namespace StoreOnLine.DataBase.Model.Security
 {
-    public enum Role
+    public class Role : DataBaseId
+    {
+        public string RoleName { get; set; }
+    }
+
+    public enum RoleList
     {
         Admin,
         UserAdmin,
         UserAudit,
         UserSales,
-        Customer, 
+        Customer,
         Guest
     }
 }

@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace StoreOnLine.Areas.Management.Controllers
 {
-    [SessionState(SessionStateBehavior.Disabled)]
+   // [SessionState(SessionStateBehavior.Disabled)]
     public class AdminCategoryController : Controller
     {
         private readonly ICategoryRepository _repository;
