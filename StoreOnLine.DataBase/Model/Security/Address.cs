@@ -8,6 +8,7 @@ namespace StoreOnLine.DataBase.Model.Security
     {
         public string Line1 { get; set; }
         public string Line2 { get; set; }
+        public string Reference { get; set; }
         public Ubigeo Ubigeo { get; set; }
         public bool IsPrincipal { get; set; }
     }

@@ -8,7 +8,7 @@ using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.DataBase.Concrete
 {
-    public class PersonRepository : IPerson
+    public class PersonRepository : IPersonRepository
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 

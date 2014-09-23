@@ -10,7 +10,8 @@ namespace StoreOnLine.DataBase.Model.Security
 {
     public class ContactNumber : DataBaseId
     {
-        public string Number { get; set; }
+        public string NumberPhone { get; set; }
+        public string CellPhone { get; set; }
         public bool IsPrincipal { get; set; }
     }
 }

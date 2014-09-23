@@ -3,7 +3,7 @@ using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.DataBase.Abstract
 {
-    public interface IPerson
+    public interface IPersonRepository
     {
         IEnumerable<Person> Persons { get; }
         int SavePerson(Person person);

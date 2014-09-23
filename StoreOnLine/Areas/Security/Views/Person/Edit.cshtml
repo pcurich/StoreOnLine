@@ -26,12 +26,13 @@
 
 <div class="panel panel-default">
     <div class="panel-heading ">
-        <h3>Editar Uuario <b>@Model.User.UserName</b></h3>
+        @*<h3>Editar Uuario <b>@Model.User.UserName</b></h3>*@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#Datos" data-toggle="tab">Datos</a></li>
             <li><a href="#Direccion" data-toggle="tab">Direccion</a></li>
             <li><a href="#Contacto" data-toggle="tab">Contacto</a></li>
             <li><a href="#Credenciales" data-toggle="tab">Credenciales</a></li>
+            <li><a href="#Seguridad" data-toggle="tab">Seguridad</a></li>
         </ul>
     </div>
     @using (Ajax.BeginForm("Edit", "Person", ajaxOpts, new { @class = "form-horizontal" }))
@@ -40,50 +41,6 @@
         @Html.HiddenFor(m => m.Id)
         <div class="tab-content">
             <div class="tab-pane active" id="Datos">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.User.UserName, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.User.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
-                                    @Html.ValidationMessageFor(m => m.User.UserName)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.User.UserPassword, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.User.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
-                                    @Html.ValidationMessageFor(m => m.User.UserPassword)
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="bootstrap-switch bootstrap-switch-small">
-                                        @Html.CheckBoxFor(m => m.IsStatus)
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-pane" id="Direccion">
-                Secondo sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-                Aliquam in felis sit amet augue.
-            </div>
-            <div class="tab-pane" id="Contacto">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-4">
@@ -122,9 +79,190 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane" id="Direccion">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Line1, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.HomeAddress.Line1, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line1)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodDpto, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDpto,
+                                            (List<SelectListItem>)ViewBag.Dpto,
+                                            "------------------------------",
+                                            htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line2)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Line2, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.HomeAddress.Line2, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line2)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodProv, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodProv,
+                                        (List<SelectListItem>)ViewBag.Prov,
+                                        "------------------------------",
+                                        htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Reference, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.HomeAddress.Reference, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Reference)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodDist, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDist,
+                                            (List<SelectListItem>)ViewBag.Dist,
+                                            "------------------------------",
+                                            htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDist)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Contacto">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ContactNumbers.NumberPhone, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ContactNumbers.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumbers.NumberPhone)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ContactNumbers.CellPhone, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ContactNumbers.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumbers.CellPhone)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.BirthDate, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
+                                    @Html.ValidationMessageFor(m => m.BirthDate)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="tab-pane" id="Credenciales">
-                Thizzzsit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate. 
-                Quisque mauris augue, molestie tincidunt condimentum vitae.
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.User.UserName, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.User.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una contraseña" } })
+                                    @Html.ValidationMessageFor(m => m.User.UserName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.User.UserPassword, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.User.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.ValidationMessageFor(m => m.User.UserPassword)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="bootstrap-switch bootstrap-switch-small">
+                                        @Html.CheckBoxFor(m => m.IsStatus)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Seguridad">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.Role.Id, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.Role.Id,
+                                (List<SelectListItem>)ViewBag.Role,
+                                "------------------------------",
+                                htmlAttributes: new { @class = "form-control btn btn-primary" })
+                                    @Html.ValidationMessageFor(m => m.Role.Id)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="panel-footer">
@@ -132,12 +270,12 @@
             <div id="loading" class="ui-icon-loading" style="display: none">
                 <p>Loading Data</p>
             </div>
-            @Html.ActionLink("Cancelar", "Index", new { Area = "Management" }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Cancelar", "Index", new { Area = "Security" }, new { @class = "btn btn-default" })
         </div>
     }
 </div>
 
- 
+
 @section Scripts{
     <script type="text/javascript">
         $(document).ready(function () {

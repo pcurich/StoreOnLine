@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StoreOnLine.DataBase.Abstract
 {
-    public interface IUbigeo
+    public interface IUbigeoRepository
     {
         IEnumerable<Ubigeo> Ubigeos { get; }
         List<SelectListItem> GetDepart();

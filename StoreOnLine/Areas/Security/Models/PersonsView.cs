@@ -37,18 +37,18 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Nume")]
         public string PhoneNumber { get; set; }
 
-        public List<DocumentView> Documents { get; set; }
-        public List<ContactNumberView> ContactNumbers { get; set; }
-        public List<AddressView> HomeAddress { get; set; }
+        public DocumentView Documents { get; set; }
+        public ContactNumberView ContactNumbers { get; set; }
+        public AddressView HomeAddress { get; set; }
 
         public UserView User { get; set; }
         public RoleView Role { get; set; }
 
         public PersonView()
         {
-            Documents = new List<DocumentView>();
-            ContactNumbers = new List<ContactNumberView>();
-            HomeAddress = new List<AddressView>();
+            Documents = new DocumentView();
+            ContactNumbers = new ContactNumberView();
+            HomeAddress = new AddressView();
             User = new UserView();
             Role = new RoleView();
             IsStatus = true;
@@ -118,6 +118,11 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class RoleView
     {
+        [Required(ErrorMessage = "Seleccione un Rol")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Rol")]
+        public int Id { get; set; }
+
         [DataType(DataType.Text)]
         [Display(Name = "Rol")]
         public string RoleName { get; set; }
@@ -126,6 +131,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new Role
             {
+                Id=view.Id,
                 RoleName = view.RoleName
             };
         }
@@ -134,6 +140,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new RoleView
             {
+                Id = db.Id,
                 RoleName = db.RoleName
             };
         }
@@ -171,8 +178,12 @@ namespace StoreOnLine.Areas.Security.Models
     public class ContactNumberView
     {
         [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Celular")]
+        public string CellPhone { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
         [Display(Name = "Numero")]
-        public string Number { get; set; }
+        public string NumberPhone { get; set; }
 
         [Display(Name = "principal")]
         public bool IsPrincipal { get; set; }
@@ -181,7 +192,8 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new ContactNumber
             {
-                Number = view.Number,
+                NumberPhone = view.NumberPhone,
+                CellPhone=view.CellPhone,
                 IsPrincipal = view.IsPrincipal
             };
         }
@@ -190,8 +202,9 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new ContactNumberView
             {
-                IsPrincipal = db.IsPrincipal,
-                Number = db.Number
+                NumberPhone = db.NumberPhone,
+                CellPhone = db.CellPhone,
+                IsPrincipal = db.IsPrincipal
             };
         }
     }
@@ -206,6 +219,13 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Direccion2")]
         public string Line2 { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Referencia")]
+        public string Reference { get; set; }
+
+        [Display(Name = "Direccion Actual")]
+        public bool IsPrincipal { get; set; }
+
         public UbigeoView Ubigeo { get; set; }
 
         public Address ToBd(AddressView view)
@@ -214,7 +234,9 @@ namespace StoreOnLine.Areas.Security.Models
             {
                 Line1 = view.Line1,
                 Line2 = view.Line2,
-                Ubigeo = view.Ubigeo.ToBd(view.Ubigeo)
+                Ubigeo = view.Ubigeo.ToBd(view.Ubigeo),
+                Reference  =view.Reference,
+                IsPrincipal = view.IsPrincipal
             };
         }
 
@@ -224,7 +246,9 @@ namespace StoreOnLine.Areas.Security.Models
             {
                 Line1 = db.Line1,
                 Line2 = db.Line2,
-                Ubigeo = new UbigeoView().ToView(db.Ubigeo)
+                Ubigeo = new UbigeoView().ToView(db.Ubigeo),
+                IsPrincipal = db.IsPrincipal,
+                Reference = db.Reference
             };
         }
     }
@@ -244,6 +268,14 @@ namespace StoreOnLine.Areas.Security.Models
         public string CodDist { get; set; }
 
         public string NameUbiGeo { get; set; }
+
+        public UbigeoView()
+        {
+            CodDpto = "0";
+            CodProv = "0";
+            CodDist = "0";
+            NameUbiGeo = "";
+        }
 
         public Ubigeo ToBd(UbigeoView view)
         {

@@ -11,12 +11,12 @@ namespace StoreOnLine.DataBase.Model.Security
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        
+
         public string Email { get; set; }
 
-        public List<Document> Documents { get; set; }
-        public List<ContactNumber> ContactNumbers { get; set; }
-        public List<Address> HomeAddress { get; set; }
+        public Document Documents { get; set; }
+        public ContactNumber ContactNumbers { get; set; }
+        public Address HomeAddress { get; set; }
 
         public User User { get; set; }
         public Role Role { get; set; }

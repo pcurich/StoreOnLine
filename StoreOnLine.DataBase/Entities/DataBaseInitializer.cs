@@ -29,7 +29,7 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                var path = "pedro";//gmc
+                var path = "gmc";//gmc
                 String pathFile = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
                 String pathImg = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
@@ -37,8 +37,10 @@ namespace StoreOnLine.DataBase.Entities
                 LoadCampaign(context, pathFile + "Campaign.xml");
                 LoadUnit(context, pathFile + "Unit.xml");
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
-               LoadSupplier(context, pathFile + "Unit.xml");
-                 //Export(pathFile+"Ubigeo.xml");
+                LoadSupplier(context, pathFile + "Unit.xml");
+                Export(pathFile + "Role.xml");
+                LoadRoles(context, pathFile + "Role.xml");
+                
 
                 var pbs = new List<ProductBase>
                 {
@@ -129,16 +131,12 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadUbigeo(StoreOnLineContext context, String str)
         {
-
             var elemt = XmlSerialization<List<Ubigeo>>.Deserialize(str);
-           
             foreach (var pb in elemt)
             {
                 context.Ubigeos.Add(pb);
             }
             context.SaveChanges();
-
-            
         }
 
         private static void LoadSupplier(StoreOnLineContext context, String str)
@@ -159,14 +157,14 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
-        private static void Export(String str)
+        private static void LoadRoles(StoreOnLineContext context, string str)
         {
-            var pbs = new List<Ubigeo>
-                {
-                    new Ubigeo  { CodDist ="00", CodDpto = "00", CodProv = "00",NameUbiGeo="s", IsStatus = true},
-                    new Ubigeo  { CodDist ="00", CodDpto = "00", CodProv = "00",NameUbiGeo="s", IsStatus = true}
-                };
-            XmlSerialization<List<Ubigeo>>.Serialize(pbs, str);
+            var elemt = XmlSerialization<List<Role>>.Deserialize(str);
+            foreach (var pb in elemt)
+            {
+                context.Roles.Add(pb);
+            }
+            context.SaveChanges();
         }
 
         private static void LoadImagen(StoreOnLineContext context, String str)
@@ -194,6 +192,18 @@ namespace StoreOnLine.DataBase.Entities
                 context.Imagens.Add(imagen);
             }
             context.SaveChanges();
+        }
+
+       private static void Export(String str)
+        {
+            var pbs = new List<Role>
+                {
+                    new Role  { RoleName = "Administrador", IsStatus = true},
+                    new Role  { RoleName = "Supervisor", IsStatus = true},
+                    new Role  { RoleName = "Empleado", IsStatus = true},
+                    new Role  { RoleName = "Cliente", IsStatus = true},
+                };
+            XmlSerialization<List<Role>>.Serialize(pbs, str);
         }
 
         #endregion
