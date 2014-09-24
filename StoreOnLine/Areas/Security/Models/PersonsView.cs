@@ -72,6 +72,8 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate,
+                Documents = new DocumentView().ToView(db.Documents),
+                ContactNumbers = new ContactNumberView().ToView(db.ContactNumbers),
                 HomeAddress = new AddressView().ToView(db.HomeAddress),
                 User = new UserView().ToView(db.User),
                 Role = new RoleView().ToView(db.Role)
@@ -125,7 +127,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new Role
             {
-                Id=view.Id,
+                Id = view.Id,
                 RoleName = view.RoleName
             };
         }
@@ -191,7 +193,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new ContactNumber
             {
                 NumberPhone = view.NumberPhone,
-                CellPhone=view.CellPhone,
+                CellPhone = view.CellPhone,
                 Email = view.Email,
                 IsPrincipal = view.IsPrincipal
             };
@@ -240,7 +242,7 @@ namespace StoreOnLine.Areas.Security.Models
                 Line1 = view.Line1,
                 Line2 = view.Line2,
                 Ubigeo = view.Ubigeo.ToBd(view.Ubigeo),
-                Reference  =view.Reference,
+                Reference = view.Reference,
                 IsPrincipal = view.IsPrincipal
             };
         }
