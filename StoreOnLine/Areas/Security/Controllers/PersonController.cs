@@ -53,6 +53,10 @@ namespace StoreOnLine.Areas.Security.Controllers
                 TempData["message"] = string.Format("{0} ha sido guardado", model.User.UserName);
                 return RedirectToAction("Index");
             }
+            ViewBag.Dpto = GetDeparts();
+            ViewBag.Prov = GetProvinces("");
+            ViewBag.Dist = GetDistricts("", "");
+            ViewBag.Role = GetRoles();
             // there is something wrong with the data values
             return View(model);
         }
@@ -85,19 +89,20 @@ namespace StoreOnLine.Areas.Security.Controllers
 
         #region Custom
 
-        public List<SelectListItem> GetDeparts()
+        public SelectList GetDeparts()
         {
             return _repositoryUbigeo.GetDepart();
         }
 
-        public List<SelectListItem> GetProvinces(string codDpto)
+        public JsonResult GetProvinces(string codDpto)
         {
-            return _repositoryUbigeo.GetProvince(codDpto);
+
+            return Json(_repositoryUbigeo.GetProvince(codDpto));
         }
 
-        public List<SelectListItem> GetDistricts(string codDpto, string codProv)
+        public JsonResult GetDistricts(string codDpto, string codProv)
         {
-            return _repositoryUbigeo.GetDistrict(codDpto, codProv);
+            return Json(_repositoryUbigeo.GetDistrict(codDpto, codProv));
         }
 
         #endregion

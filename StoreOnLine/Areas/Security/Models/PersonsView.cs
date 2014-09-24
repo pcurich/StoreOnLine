@@ -29,13 +29,6 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Fecha de Nacimiento")]
         public DateTime BirthDate { get; set; }
 
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Correo Electronico")]
-        public string Eamil { get; set; }
-
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Nume")]
-        public string PhoneNumber { get; set; }
 
         public DocumentView Documents { get; set; }
         public ContactNumberView ContactNumbers { get; set; }
@@ -63,7 +56,7 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = view.BirthDate,
-                // HomeAddress = view.HomeAddress,
+                HomeAddress = view.HomeAddress.ToBd(view.HomeAddress),
                 User = view.User.ToBd(view.User),
                 Role = view.Role.ToBd(view.Role)
 
@@ -79,6 +72,7 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate,
+                HomeAddress = new AddressView().ToView(db.HomeAddress),
                 User = new UserView().ToView(db.User),
                 Role = new RoleView().ToView(db.Role)
             };
@@ -185,6 +179,10 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Numero")]
         public string NumberPhone { get; set; }
 
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Correo Electronico")]
+        public string Email { get; set; }
+
         [Display(Name = "principal")]
         public bool IsPrincipal { get; set; }
 
@@ -194,6 +192,7 @@ namespace StoreOnLine.Areas.Security.Models
             {
                 NumberPhone = view.NumberPhone,
                 CellPhone=view.CellPhone,
+                Email = view.Email,
                 IsPrincipal = view.IsPrincipal
             };
         }
@@ -204,6 +203,7 @@ namespace StoreOnLine.Areas.Security.Models
             {
                 NumberPhone = db.NumberPhone,
                 CellPhone = db.CellPhone,
+                Email = db.Email,
                 IsPrincipal = db.IsPrincipal
             };
         }
@@ -211,6 +211,11 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class AddressView
     {
+        public AddressView()
+        {
+            Ubigeo = new UbigeoView();
+        }
+
         [DataType(DataType.Text)]
         [Display(Name = "Direccion1")]
         public string Line1 { get; set; }
@@ -255,6 +260,7 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class UbigeoView
     {
+
         [Display(Name = "Departamento")]
         [Required(ErrorMessage = "Seleccione un Departamento")]
         public string CodDpto { get; set; }

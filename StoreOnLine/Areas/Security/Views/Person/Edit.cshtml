@@ -1,4 +1,5 @@
-﻿@model StoreOnLine.Areas.Security.Models.PersonView
+﻿@using Antlr.Runtime
+@model StoreOnLine.Areas.Security.Models.PersonView
 @{
     ViewBag.Title = "Security: Edit " + ViewBag.UserName;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -100,7 +101,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDpto,
-                                            (List<SelectListItem>)ViewBag.Dpto,
+                                            (SelectList)ViewBag.Dpto,
                                             "------------------------------",
                                             htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
@@ -128,7 +129,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodProv,
-                                        (List<SelectListItem>)ViewBag.Prov,
+                                        new SelectList(new List<SelectListItem>{}),
                                         "------------------------------",
                                         htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
@@ -155,7 +156,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDist,
-                                            (List<SelectListItem>)ViewBag.Dist,
+                                            new SelectList(new List<SelectListItem>{}),
                                             "------------------------------",
                                             htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDist)
@@ -193,11 +194,11 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.BirthDate, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.ContactNumbers.Email, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
-                                    @Html.ValidationMessageFor(m => m.BirthDate)
+                                    @Html.EditorFor(m => m.ContactNumbers.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumbers.Email)
                                 </div>
                             </div>
                         </div>
@@ -294,6 +295,41 @@
             $.notify("ui-loader-default", "Do not press this button" + salida, "success");
             //alert("This is the OnSuccessCallback: " + "@TempData["message"]");
         }
+
+        $("#HomeAddress_Ubigeo_CodDpto").change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetProvinces", "Person")',
+                data: { codDpto: $("#HomeAddress_Ubigeo_CodDpto > option:selected").attr("value") },
+                success: function (data) {
+                    var items = [];
+                    items.push("<option>-----------------------------</option>");
+                    $.each(data, function () {
+                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                    });
+                    $("#HomeAddress_Ubigeo_CodProv").html(items.join(' '));
+                }
+            });
+        });
+
+        $("#HomeAddress_Ubigeo_CodProv").change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDistricts", "Person")',
+                data: {
+                    codDpto: $("#HomeAddress_Ubigeo_CodDpto > option:selected").attr("value"),
+                    codProv: $("#HomeAddress_Ubigeo_CodProv > option:selected").attr("value")
+                },
+                success: function (data) {
+                    var items = [];
+                    items.push("<option>-----------------------------</option>");
+                    $.each(data, function () {
+                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                    });
+                    $("#HomeAddress_Ubigeo_CodDist").html(items.join(' '));
+                }
+            });
+        });
     </script>
 }
 

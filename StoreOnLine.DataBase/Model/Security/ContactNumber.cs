@@ -12,6 +12,7 @@ namespace StoreOnLine.DataBase.Model.Security
     {
         public string NumberPhone { get; set; }
         public string CellPhone { get; set; }
+        public string Email { get; set; }
         public bool IsPrincipal { get; set; }
     }
 }

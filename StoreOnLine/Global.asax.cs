@@ -13,7 +13,7 @@ namespace StoreOnLine
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
+            //Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

@@ -21,22 +21,23 @@ namespace StoreOnLine.DataBase.Concrete
             }
         }
 
-        public List<SelectListItem> GetDepart()
+        public SelectList GetDepart()
         {
             var repo = _context.Ubigeos.Where(o => !o.IsDeleted && o.CodDist == "0" && o.CodProv == "0");
-            return repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodDpto }).ToList();
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodDpto }).ToList(), "Value", "Text");
         }
 
-        public List<SelectListItem> GetProvince(string codDpto)
+        public SelectList GetProvince(string codDpto)
         {
-            var repo = _context.Ubigeos.Where(o => !o.IsDeleted && o.CodDpto == codDpto && o.CodDist == "0");
-            return repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodProv }).ToList();
+            var repo = _context.Ubigeos.Where(o => !o.IsDeleted && o.CodDpto == codDpto && o.CodDist == "0" && o.CodProv != "0");
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodProv }).ToList(), "Value", "Text");
+ 
         }
 
-        public List<SelectListItem> GetDistrict(string codDpto, string codProv)
+        public SelectList GetDistrict(string codDpto, string codProv)
         {
-            var repo = _context.Ubigeos.Where(o => !o.IsDeleted && o.CodDpto == codDpto && o.CodProv == codProv);
-            return repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodDist }).ToList();
+            var repo = _context.Ubigeos.Where(o => !o.IsDeleted && o.CodDpto == codDpto && o.CodProv == codProv && o.CodDist != "0");
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.NameUbiGeo, Value = r.CodProv }).ToList(), "Value", "Text");
         }
 
         public Ubigeo GetOneDistrict(string codDist)

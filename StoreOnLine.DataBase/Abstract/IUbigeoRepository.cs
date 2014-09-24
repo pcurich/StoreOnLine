@@ -7,9 +7,9 @@ namespace StoreOnLine.DataBase.Abstract
     public interface IUbigeoRepository
     {
         IEnumerable<Ubigeo> Ubigeos { get; }
-        List<SelectListItem> GetDepart();
-        List<SelectListItem> GetProvince(string codDpto);
-        List<SelectListItem> GetDistrict(string codDpto, string codProv);
+        SelectList GetDepart();
+        SelectList GetProvince(string codDpto);
+        SelectList GetDistrict(string codDpto, string codProv);
         Ubigeo GetOneDistrict(string codDist);
     }
 }

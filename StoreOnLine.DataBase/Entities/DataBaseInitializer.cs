@@ -38,7 +38,7 @@ namespace StoreOnLine.DataBase.Entities
                 LoadUnit(context, pathFile + "Unit.xml");
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
                 LoadSupplier(context, pathFile + "Unit.xml");
-                Export(pathFile + "Role.xml");
+                //Export(pathFile + "Role.xml");
                 LoadRoles(context, pathFile + "Role.xml");
                 
 
