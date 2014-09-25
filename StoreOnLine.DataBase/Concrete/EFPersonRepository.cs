@@ -18,8 +18,11 @@ namespace StoreOnLine.DataBase.Concrete
             {
                 return _context.Persons
                     .Include(o => o.HomeAddress)
+                    .Include(o => o.ContactNumbers)
+                    .Include(o => o.Documents)
                     .Include(o=>o.User)
                     .Include(o => o.Role)
+                    .Include(o => o.HomeAddress.Ubigeo)
                     .Where(o => !o.IsDeleted);
             }
         }

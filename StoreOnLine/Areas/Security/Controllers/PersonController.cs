@@ -51,11 +51,9 @@ namespace StoreOnLine.Areas.Security.Controllers
             {
                 _repositoryPerson.SavePerson(model.ToBd(model));
                 TempData["message"] = string.Format("{0} ha sido guardado", model.User.UserName);
-                return RedirectToAction("Index");
+                return Json(new { ok = true, newurl = "Index" });
             }
             ViewBag.Dpto = GetDeparts();
-            ViewBag.Prov = GetProvinces("");
-            ViewBag.Dist = GetDistricts("", "");
             ViewBag.Role = GetRoles();
             // there is something wrong with the data values
             return View(model);
@@ -65,15 +63,13 @@ namespace StoreOnLine.Areas.Security.Controllers
         {
             var x = GetDeparts();
             ViewBag.Dpto = GetDeparts();
-            ViewBag.Prov = GetProvinces("");
-            ViewBag.Dist = GetDistricts("", "");
             ViewBag.Role = GetRoles();
             return View("Edit", new PersonView());
         }
 
         private List<SelectListItem> GetRoles()
         {
-            var repo =_repositorySecurity.Roles.ToList();
+            var repo = _repositorySecurity.Roles.ToList();
             return repo.Select(r => new SelectListItem { Text = r.RoleName, Value = Convert.ToString(r.Id) }).ToList();
         }
 

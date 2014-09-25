@@ -12,8 +12,6 @@ namespace StoreOnLine.DataBase.Model.Security
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
 
-        public string Email { get; set; }
-
         public Document Documents { get; set; }
         public ContactNumber ContactNumbers { get; set; }
         public Address HomeAddress { get; set; }

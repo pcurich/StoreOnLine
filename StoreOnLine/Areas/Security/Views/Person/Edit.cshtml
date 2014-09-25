@@ -10,6 +10,7 @@
         LoadingElementDuration = 1000,
         LoadingElementId = "loading",
         HttpMethod = "Post",
+        OnSuccess = "OnSuccess"
 
     };
 }
@@ -27,7 +28,6 @@
 
 <div class="panel panel-default">
     <div class="panel-heading ">
-        @*<h3>Editar Uuario <b>@Model.User.UserName</b></h3>*@
         <ul class="nav nav-tabs">
             <li class="active"><a href="#Datos" data-toggle="tab">Datos</a></li>
             <li><a href="#Direccion" data-toggle="tab">Direccion</a></li>
@@ -129,7 +129,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodProv,
-                                        new SelectList(new List<SelectListItem>{}),
+                                        new SelectList(new List<SelectListItem> { }),
                                         "------------------------------",
                                         htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDist,
-                                            new SelectList(new List<SelectListItem>{}),
+                                            new SelectList(new List<SelectListItem> { }),
                                             "------------------------------",
                                             htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDist)
@@ -268,9 +268,9 @@
         </div>
         <div class="panel-footer">
             <input type="submit" value="Guardar" class="btn btn-primary" />
-            <div id="loading" class="ui-icon-loading" style="display: none">
-                <p>Loading Data</p>
-            </div>
+            <span id="loading" class="ui-icon-loading" style="display: none">
+               <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+            </span>
             @Html.ActionLink("Cancelar", "Index", new { Area = "Security" }, new { @class = "btn btn-default" })
         </div>
     }
@@ -291,14 +291,14 @@
         });
 
         function OnSuccess(data) {
-            var salida = '@TempData["message"]';
-            $.notify("ui-loader-default", "Do not press this button" + salida, "success");
-            //alert("This is the OnSuccessCallback: " + "@TempData["message"]");
+            alert(data)
+            window.location.href = data.newurl;
         }
 
         $("#HomeAddress_Ubigeo_CodDpto").change(function () {
             $.ajax({
                 type: "POST",
+                dataType: 'json',
                 url: '@Url.Action("GetProvinces", "Person")',
                 data: { codDpto: $("#HomeAddress_Ubigeo_CodDpto > option:selected").attr("value") },
                 success: function (data) {

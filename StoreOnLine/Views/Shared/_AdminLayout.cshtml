@@ -12,24 +12,24 @@
     <link href="~/Content/DataTables-1.10.2/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.2/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css" rel="stylesheet" />
-    
-</head>
-    <body>
-        @(Html.Loader(new {@style ="style='max-height: 100%; max-width: 100%;'"}))
 
-@*        <div id="loading" class="ui-loader-default " style="display: none">
+</head>
+<body>
+    @(Html.Loader(new { @style = "style='max-height: 100%; max-width: 100%;'" }))
+
+    @*        <div id="loading" class="ui-loader-default " style="display: none">
             <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
         </div>*@
 
-        <div class="container">
-            @*@if (TempData["message"] != null)
+    <div class="container">
+        @*@if (TempData["message"] != null)
         {
             <div class="alert alert-success">@TempData["message"]</div>
         }*@
-            @RenderBody()
-        </div>
+        @RenderBody()
+    </div>
 
-    </body>
+</body>
 
 
 <script src="~/Scripts/jquery-1.11.1.js"></script>
@@ -43,7 +43,14 @@
 <script src="~/Scripts/bootstrap-switch.js"></script>
 <script src="~/Scripts/notify.js"></script>
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        var salida = '@TempData["message"]';
+        if (salida.length > 0) {
+            $.notify("Do not press this button" + salida, "success", "success");
+        }
+    });
+</script>
 
 @*<script type="text/javascript">
     function OnBegin() {

@@ -56,7 +56,9 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = view.BirthDate,
+                ContactNumbers = view.ContactNumbers.ToBd(view.ContactNumbers),
                 HomeAddress = view.HomeAddress.ToBd(view.HomeAddress),
+                Documents = view.Documents.ToBd(view.Documents),
                 User = view.User.ToBd(view.User),
                 Role = view.Role.ToBd(view.Role)
 
