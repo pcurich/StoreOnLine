@@ -1,15 +1,19 @@
 <?xml version="1.0"?>
 <ArrayOfRole xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Role>
+    <CodRole>1</CodRole>
     <RoleName>Administrador</RoleName>
   </Role>
   <Role>
+    <CodRole>2</CodRole>
     <RoleName>Supervisor</RoleName>
   </Role>
   <Role>
+    <CodRole>3</CodRole>
     <RoleName>Empleado</RoleName>
   </Role>
   <Role>
+    <CodRole>4</CodRole>
     <RoleName>Cliente</RoleName>
   </Role>
 </ArrayOfRole> 

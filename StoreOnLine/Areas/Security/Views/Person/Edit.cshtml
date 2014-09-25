@@ -1,5 +1,4 @@
-﻿@using Antlr.Runtime
-@model StoreOnLine.Areas.Security.Models.PersonView
+﻿@model StoreOnLine.Areas.Security.Models.PersonView
 @{
     ViewBag.Title = "Security: Edit " + ViewBag.UserName;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -40,6 +39,11 @@
     {
         @Html.ValidationSummary()
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.ContactNumber.Id)
+        @Html.HiddenFor(m => m.Documents.Id)
+        @Html.HiddenFor(m => m.HomeAddress.Id)
+        @Html.HiddenFor(m => m.Role.Id)
+        @Html.HiddenFor(m => m.User.Id)
         <div class="tab-content">
             <div class="tab-pane active" id="Datos">
                 <div class="panel-body">
@@ -129,7 +133,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodProv,
-                                        new SelectList(new List<SelectListItem> { }),
+                                        (SelectList)ViewBag.Prov,
                                         "------------------------------",
                                         htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
@@ -156,7 +160,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDist,
-                                            new SelectList(new List<SelectListItem> { }),
+                                            (SelectList)ViewBag.Dist,
                                             "------------------------------",
                                             htmlAttributes: new { @class = "form-control btn btn-primary" })
                                     @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDist)
@@ -172,33 +176,33 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumbers.NumberPhone, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.ContactNumber.NumberPhone, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumbers.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumbers.NumberPhone)
+                                    @Html.EditorFor(m => m.ContactNumber.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumber.NumberPhone)
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumbers.CellPhone, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.ContactNumber.CellPhone, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumbers.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumbers.CellPhone)
+                                    @Html.EditorFor(m => m.ContactNumber.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumber.CellPhone)
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumbers.Email, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.ContactNumber.Email, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumbers.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumbers.Email)
+                                    @Html.EditorFor(m => m.ContactNumber.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.ContactNumber.Email)
                                 </div>
                             </div>
                         </div>
@@ -233,12 +237,11 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.User.CodUser, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    <div class="bootstrap-switch bootstrap-switch-small">
-                                        @Html.CheckBoxFor(m => m.IsStatus)
-                                    </div>
+                                    @Html.EditorFor(m => m.User.CodUser, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.ValidationMessageFor(m => m.User.CodUser)
                                 </div>
                             </div>
                         </div>
@@ -251,14 +254,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.Role.Id, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.Role.CodRole, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.Role.Id,
-                                (List<SelectListItem>)ViewBag.Role,
+                                    @Html.DropDownListFor(m => m.Role.CodRole,
+                                (SelectList)ViewBag.Role,
                                 "------------------------------",
                                 htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                    @Html.ValidationMessageFor(m => m.Role.Id)
+                                    @Html.ValidationMessageFor(m => m.Role.CodRole)
                                 </div>
                             </div>
                         </div>
@@ -269,7 +272,7 @@
         <div class="panel-footer">
             <input type="submit" value="Guardar" class="btn btn-primary" />
             <span id="loading" class="ui-icon-loading" style="display: none">
-               <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+                <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
             </span>
             @Html.ActionLink("Cancelar", "Index", new { Area = "Security" }, new { @class = "btn btn-default" })
         </div>
@@ -279,19 +282,20 @@
 
 @section Scripts{
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#IsStatus').bootstrapSwitch({
-                size: 'small',
-                onText: 'Si',
-                offText: 'No',
-                onColor: 'success',
-                offColor: 'danger',
-                radioAllOff: 'false'
+        $(function () {
+            $('#BirthDate').datepicker({
+                format: "dd/mm/yyyy",
+                autoclose: true,
+                language: 'es',
+                startDate: new Date(1900, 01, 01),
+                todayBtn: true,
+                clearBtn: true,
+                todayHighlight: true
             });
         });
 
         function OnSuccess(data) {
-            alert(data)
+            alert(data);
             window.location.href = data.newurl;
         }
 

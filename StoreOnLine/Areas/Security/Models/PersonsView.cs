@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StoreOnLine.DataBase.Model.Security;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Security.Models
 {
@@ -25,13 +24,12 @@ namespace StoreOnLine.Areas.Security.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Fecha de Nacimiento")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.Text)]
         [Display(Name = "Fecha de Nacimiento")]
         public DateTime BirthDate { get; set; }
 
-
-        public DocumentView Documents { get; set; }
-        public ContactNumberView ContactNumbers { get; set; }
+        public DocumentView Document { get; set; }
+        public ContactNumberView ContactNumber { get; set; }
         public AddressView HomeAddress { get; set; }
 
         public UserView User { get; set; }
@@ -39,8 +37,9 @@ namespace StoreOnLine.Areas.Security.Models
 
         public PersonView()
         {
-            Documents = new DocumentView();
-            ContactNumbers = new ContactNumberView();
+            BirthDate = new DateTime(1900, 1, 1);
+            Document = new DocumentView();
+            ContactNumber = new ContactNumberView();
             HomeAddress = new AddressView();
             User = new UserView();
             Role = new RoleView();
@@ -56,10 +55,11 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = view.BirthDate,
-                ContactNumbers = view.ContactNumbers.ToBd(view.ContactNumbers),
+                ContactNumber = view.ContactNumber.ToBd(view.ContactNumber),
                 HomeAddress = view.HomeAddress.ToBd(view.HomeAddress),
-                Documents = view.Documents.ToBd(view.Documents),
+                Document = view.Document.ToBd(view.Document),
                 User = view.User.ToBd(view.User),
+                UserId = view.User.ToBd(view.User).Id,
                 Role = view.Role.ToBd(view.Role)
 
             };
@@ -74,8 +74,8 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate,
-                Documents = new DocumentView().ToView(db.Documents),
-                ContactNumbers = new ContactNumberView().ToView(db.ContactNumbers),
+                Document = new DocumentView().ToView(db.Document),
+                ContactNumber = new ContactNumberView().ToView(db.ContactNumber),
                 HomeAddress = new AddressView().ToView(db.HomeAddress),
                 User = new UserView().ToView(db.User),
                 Role = new RoleView().ToView(db.Role)
@@ -85,6 +85,14 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class UserView
     {
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "Ingrese un codigo")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Codigo")]
+        public string CodUser { get; set; }
+
         [Required(ErrorMessage = "Ingrese un Usuario")]
         [DataType(DataType.Text)]
         [Display(Name = "Usuario")]
@@ -99,6 +107,8 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new User
             {
+                Id = view.Id,
+                CodUser = view.CodUser,
                 UserName = view.UserName,
                 UserPassword = view.UserPassword
             };
@@ -108,6 +118,8 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new UserView
             {
+                Id = db.Id,
+                CodUser = db.CodUser,
                 UserPassword = db.UserPassword,
                 UserName = db.UserName
             };
@@ -116,13 +128,15 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class RoleView
     {
-        [Required(ErrorMessage = "Seleccione un Rol")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Rol")]
+        [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
         [DataType(DataType.Text)]
-        [Display(Name = "Rol")]
+        [Display(Name = "Codigo")]
+        public string CodRole { get; set; }
+
+        [DataType(DataType.Text)]
+        [Display(Name = "Nombre")]
         public string RoleName { get; set; }
 
         public Role ToBd(RoleView view)
@@ -130,6 +144,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new Role
             {
                 Id = view.Id,
+                CodRole = view.CodRole,
                 RoleName = view.RoleName
             };
         }
@@ -139,6 +154,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new RoleView
             {
                 Id = db.Id,
+                CodRole = db.CodRole,
                 RoleName = db.RoleName
             };
         }
@@ -146,6 +162,9 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class DocumentView
     {
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
         [DataType(DataType.Text)]
         [Display(Name = "Tipo Doc")]
         public string DocumentTypeName { get; set; }
@@ -158,6 +177,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new Document
             {
+                Id = view.Id,
                 DocumentTypeName = view.DocumentTypeName,
                 DocumentValue = view.DocumentValue
             };
@@ -167,6 +187,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new DocumentView
             {
+                Id = db.Id,
                 DocumentTypeName = db.DocumentTypeName,
                 DocumentValue = db.DocumentValue
             };
@@ -175,6 +196,9 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class ContactNumberView
     {
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
+
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Celular")]
         public string CellPhone { get; set; }
@@ -194,6 +218,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new ContactNumber
             {
+                Id = view.Id,
                 NumberPhone = view.NumberPhone,
                 CellPhone = view.CellPhone,
                 Email = view.Email,
@@ -205,6 +230,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new ContactNumberView
             {
+                Id = db.Id,
                 NumberPhone = db.NumberPhone,
                 CellPhone = db.CellPhone,
                 Email = db.Email,
@@ -219,6 +245,9 @@ namespace StoreOnLine.Areas.Security.Models
         {
             Ubigeo = new UbigeoView();
         }
+
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
 
         [DataType(DataType.Text)]
         [Display(Name = "Direccion1")]
@@ -241,6 +270,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new Address
             {
+                Id = view.Id,
                 Line1 = view.Line1,
                 Line2 = view.Line2,
                 Ubigeo = view.Ubigeo.ToBd(view.Ubigeo),
@@ -253,6 +283,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new AddressView
             {
+                Id = db.Id,
                 Line1 = db.Line1,
                 Line2 = db.Line2,
                 Ubigeo = new UbigeoView().ToView(db.Ubigeo),
@@ -264,6 +295,8 @@ namespace StoreOnLine.Areas.Security.Models
 
     public class UbigeoView
     {
+        [HiddenInput(DisplayValue = false)]
+        public int Id { get; set; }
 
         [Display(Name = "Departamento")]
         [Required(ErrorMessage = "Seleccione un Departamento")]
@@ -291,6 +324,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new Ubigeo
             {
+                Id = view.Id,
                 CodDpto = view.CodDpto,
                 CodProv = view.CodProv,
                 CodDist = view.CodDist,
@@ -302,6 +336,7 @@ namespace StoreOnLine.Areas.Security.Models
         {
             return new UbigeoView
             {
+                Id = db.Id,
                 CodDpto = db.CodDpto,
                 CodProv = db.CodProv,
                 CodDist = db.CodDist,

@@ -1,0 +1,10 @@
+$(document).ready(function () {
+            $('#IsStatus').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff: 'false'
+            });
+        });

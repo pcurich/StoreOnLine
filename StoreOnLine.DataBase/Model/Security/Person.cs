@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
-using StoreOnLine.DataBase.Entities;
+﻿using StoreOnLine.DataBase.Entities;
 using System;
-using StoreOnLine.DataBase.Model.Providers;
 
 namespace StoreOnLine.DataBase.Model.Security
 {
@@ -12,11 +9,19 @@ namespace StoreOnLine.DataBase.Model.Security
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
 
-        public Document Documents { get; set; }
-        public ContactNumber ContactNumbers { get; set; }
+        public int DocumentsId { get; set; }
+        public Document Document { get; set; }
+
+        public int ContactNumberId { get; set; }
+        public ContactNumber ContactNumber { get; set; }
+
+        public int HomeAddresId { get; set; }
         public Address HomeAddress { get; set; }
 
+        public int UserId { get; set; }
         public User User { get; set; }
+
+        public int RoleId { get; set; }
         public Role Role { get; set; }
     }
 

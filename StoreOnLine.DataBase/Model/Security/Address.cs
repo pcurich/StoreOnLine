@@ -11,6 +11,9 @@ namespace StoreOnLine.DataBase.Model.Security
         public string Reference { get; set; }
         public Ubigeo Ubigeo { get; set; }
         public bool IsPrincipal { get; set; }
+
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
     }
 
 }

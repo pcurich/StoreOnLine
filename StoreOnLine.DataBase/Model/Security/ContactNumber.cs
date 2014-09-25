@@ -14,5 +14,8 @@ namespace StoreOnLine.DataBase.Model.Security
         public string CellPhone { get; set; }
         public string Email { get; set; }
         public bool IsPrincipal { get; set; }
+
+        public int PersonId { get; set; }
+        public Person Person { get; set; }
     }
 }
