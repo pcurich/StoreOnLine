@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+@using StoreOnLine.DataBase.Model.Security
 @using StoreOnLine.Infrastructure.Helper
 <html>
 <head>
@@ -12,7 +13,7 @@
     <link href="~/Content/DataTables-1.10.2/css/jquery.dataTables.css" rel="stylesheet" />
     <link href="~/Content/DataTables-1.10.2/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css" rel="stylesheet" />
-     <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
 </head>
 <body>
     @(Html.Loader(new { @style = "style='max-height: 100%; max-width: 100%;'" }))
@@ -20,6 +21,33 @@
     @*        <div id="loading" class="ui-loader-default " style="display: none">
             <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
         </div>*@
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <a class="navbar-brand" href="#">
+            <span class="hidden-xs">SPORTS STORE</span>
+            <div class="visible-xs">SPORTS</div>
+            <div class="visible-xs">STORE</div>
+        </a>
+        @*@Html.Action("Summary", "Cart", new { Area = "Shopping" })*@
+
+        @{
+            var user = (User)Session["UserOnLine"];
+            <div></div>
+            <div class="container-fluid pull-right" style="background-color: gold">
+                @{
+                    <h4>@(user != null ? user.UserName : "Anonimo")</h4>
+                }
+                @Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "btn btn-primary" })
+            </div>
+        }
+        }
+
+        <div class="visible-xs">
+            @Html.Action("MenuCategory", "Nav", new { Area = "Shopping", horizontalLayout = true })
+        </div>
+    </div>
+
+
 
     <div class="container">
         @*@if (TempData["message"] != null)

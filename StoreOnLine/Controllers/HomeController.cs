@@ -1,17 +1,32 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
+using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure;
+using StoreOnLine.Infrastructure.Security;
 
 namespace StoreOnLine.Controllers
 {
     //[Authorize(Roles = "trader")] // applies to all actions
+    [Authorize] // applies to all actions
     public class HomeController : Controller
     {
-
         //[ShowMessage] // applies to just this action
         //[OutputCache(Duration = 60)] // applies to just this action
+
+        private readonly ISecurityRepository _repositorySecurity;
+        private readonly IPersonRepository _repositoryPerson;
+
+        public HomeController(ISecurityRepository repositorySecurity, IPersonRepository repositoryPerson)
+        {
+            _repositorySecurity = repositorySecurity;
+            _repositoryPerson = repositoryPerson;
+        }
+
+
         [HttpPost]
         public ActionResult Index(int i)
         {
@@ -114,17 +129,42 @@ namespace StoreOnLine.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password, string returnUrl)
         {
-            bool result = FormsAuthentication.Authenticate(username, password);
+            //bool result = FormsAuthentication.Authenticate(username, password);
+            var userProvider = new StoreOnLIneMemberShipProvider(_repositorySecurity);
+            var result = userProvider.ValidateUser(username, password);
             if (result)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
-                return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
+
+                var rolProvider = new StoreOnLIneRoleProvider(_repositoryPerson);
+                // return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
+                if (rolProvider.IsUserInRole(username, RoleList.Admin.ToString()))
+                {
+                    return Redirect(Url.Action("Index", "Person", new { Area = "Security" }));
+                }
+
+                if (rolProvider.IsUserInRole(username, RoleList.Supervisor.ToString()))
+                {
+                    return Redirect(Url.Action("Index", "Admin", new { Area = "Merchant" }));
+                }
+
+                if (rolProvider.IsUserInRole(username, RoleList.Empleado.ToString()))
+                {
+                    return Redirect(Url.Action("Index", "Admin", new { Area = "Report" }));
+                }
             }
             else
             {
                 ModelState.AddModelError("", "Incorrect username or password");
                 return View();
             }
+            return View();
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("LogOn", "Account");
         }
     }
 

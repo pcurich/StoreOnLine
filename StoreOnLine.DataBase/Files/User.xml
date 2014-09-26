@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<ArrayOfPerson xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Person>
+    <FirstName>Pedro</FirstName>
+    <LastName>Curich Gonzales</LastName>
+    <BirthDate>1986-07-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>43617372</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>973905013</NumberPhone>
+      <CellPhone>973905013</CellPhone>
+      <Email>curichpedro@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Av arenales 239</Line1>
+      <Line2>dpto 904</Line2>
+      <Reference>Alt cuadra 2 av arequipa</Reference>
+      <UbigeoId>1410</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>43617372</UserCode>
+      <UserName>pcurich</UserName>
+      <UserPassword>pcurich</UserPassword>
+    </User>
+    <RoleId>1</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Luis</FirstName>
+    <LastName>Flores Lopez</LastName>
+    <BirthDate>1981-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>21212121</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>93206032</NumberPhone>
+      <CellPhone>93206032</CellPhone>
+      <Email>lflores@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Av La Mar 111</Line1>
+      <Line2>dpto 11</Line2>
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>12345678</UserCode>
+      <UserName>lflores</UserName>
+      <UserPassword>lflores</UserPassword>
+    </User>
+    <RoleId>2</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Empleado</FirstName>
+    <LastName>Empleado1 </LastName>
+    <BirthDate>1971-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>12324567</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>123454345</NumberPhone>
+      <CellPhone>123454345</CellPhone>
+      <Email>Empleado@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Su casa</Line1>
+      <Line2 />
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>24681012</UserCode>
+      <UserName>empleado1</UserName>
+      <UserPassword>empleado1</UserPassword>
+    </User>
+    <RoleId>3</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Empleado</FirstName>
+    <LastName>Empleado2 </LastName>
+    <BirthDate>1971-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>12324567</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>123454345</NumberPhone>
+      <CellPhone>123454345</CellPhone>
+      <Email>Empleado@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Su casa</Line1>
+      <Line2 />
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>24681012</UserCode>
+      <UserName>empleado2</UserName>
+      <UserPassword>empleado2</UserPassword>
+    </User>
+    <RoleId>3</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Empleado</FirstName>
+    <LastName>Empleado3 </LastName>
+    <BirthDate>1971-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>12324567</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>123454345</NumberPhone>
+      <CellPhone>123454345</CellPhone>
+      <Email>Empleado@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Su casa</Line1>
+      <Line2 />
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>24681012</UserCode>
+      <UserName>empleado3</UserName>
+      <UserPassword>empleado3</UserPassword>
+    </User>
+    <RoleId>3</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Empleado</FirstName>
+    <LastName>Empleado4 </LastName>
+    <BirthDate>1971-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>12324567</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>123454345</NumberPhone>
+      <CellPhone>123454345</CellPhone>
+      <Email>Empleado@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Su casa</Line1>
+      <Line2 />
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>24681012</UserCode>
+      <UserName>empleado4</UserName>
+      <UserPassword>empleado4</UserPassword>
+    </User>
+    <RoleId>3</RoleId>
+  </Person>
+  <Person>
+    <FirstName>Empleado</FirstName>
+    <LastName>Empleado5 </LastName>
+    <BirthDate>1971-10-07T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>1</DocumentTypeId>
+      <DocumentValue>12324567</DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>123454345</NumberPhone>
+      <CellPhone>123454345</CellPhone>
+      <Email>Empleado@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Su casa</Line1>
+      <Line2 />
+      <Reference>Alt cuadra 2 av sucre</Reference>
+      <UbigeoId>1399</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>24681012</UserCode>
+      <UserName>empleado5</UserName>
+      <UserPassword>empleado5</UserPassword>
+    </User>
+    <RoleId>3</RoleId>
+  </Person>
+</ArrayOfPerson>

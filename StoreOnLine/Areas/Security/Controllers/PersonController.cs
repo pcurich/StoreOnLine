@@ -98,7 +98,7 @@ namespace StoreOnLine.Areas.Security.Controllers
             var deletedPerson = _repositoryPerson.DeletePerson(personId);
             if (deletedPerson != null)
             {
-                TempData["message"] = string.Format("{0} fue eliminado", deletedPerson.User.UserName);
+                TempData["message"] = string.Format("{0} fue eliminado", deletedPerson.FirstName);
             }
             return RedirectToAction("Index");
         }

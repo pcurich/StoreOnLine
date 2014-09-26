@@ -1,4 +1,4 @@
-﻿using System.Data.Entity.Core.Metadata.Edm;
+﻿using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
@@ -39,8 +39,11 @@ namespace StoreOnLine.DataBase.Entities
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
                 LoadSupplier(context, pathFile + "Unit.xml");
                 LoadRoles(context, pathFile + "Role.xml");
-                //Export(pathFile + "DocumentType.xml");
+                //Export(pathFile + "ScheduleTurn.xml");
                 LoadDocumentType(context, pathFile + "DocumentType.xml");
+                LoadPersons(context, pathFile + "User.xml");
+
+                LoadScheduleTurn(context, pathFile + "ScheduleTurn.xml");
 
                 var pbs = new List<ProductBase>
                 {
@@ -156,13 +159,21 @@ namespace StoreOnLine.DataBase.Entities
             }
             context.SaveChanges();
         }
-
         private static void LoadRoles(StoreOnLineContext context, string str)
         {
             var elemt = XmlSerialization<List<Role>>.Deserialize(str);
             foreach (var pb in elemt)
             {
                 context.Roles.Add(pb);
+            }
+            context.SaveChanges();
+        }
+        private static void LoadPersons(StoreOnLineContext context, string str)
+        {
+            var elemt = XmlSerialization<List<Person>>.Deserialize(str);
+            foreach (var pb in elemt)
+            {
+                context.Persons.Add(pb);
             }
             context.SaveChanges();
         }
@@ -176,7 +187,16 @@ namespace StoreOnLine.DataBase.Entities
             }
             context.SaveChanges();
         }
-        
+
+        private static void LoadScheduleTurn(StoreOnLineContext context, string str)
+        {
+            var elemt = XmlSerialization<List<ScheduleTurn>>.Deserialize(str);
+            foreach (var pb in elemt)
+            {
+                context.ScheduleTurns.Add(pb);
+            }
+            context.SaveChanges();
+        }
 
         private static void LoadImagen(StoreOnLineContext context, String str)
         {
@@ -207,13 +227,12 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void Export(String str)
         {
-            var pbs = new List<DocumentType>
+            var pbs = new List<ScheduleTurn>
                 {
-                    new DocumentType  { DocumentTypeName = "DNI", IsStatus = true},
-                    new DocumentType  { DocumentTypeName = "Pasapoprte", IsStatus = true},
-                    new DocumentType  { DocumentTypeName = "Ruc", IsStatus = true}
+                    new ScheduleTurn  { ScheduleTurnName = "Mañana", ScheduleTurnCode = "1" ,IsStatus = true},
+                    new ScheduleTurn  { ScheduleTurnName = "Noche", ScheduleTurnCode = "2" ,IsStatus = true}
                 };
-            XmlSerialization<List<DocumentType>>.Serialize(pbs, str);
+            XmlSerialization<List<ScheduleTurn>>.Serialize(pbs, str);
         }
 
         #endregion

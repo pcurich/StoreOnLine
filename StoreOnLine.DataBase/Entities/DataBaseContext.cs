@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;
 using System;
 using System.Data.Entity;
@@ -45,6 +46,11 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ScheduleTurn> ScheduleTurns { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        
 
 
     }

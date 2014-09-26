@@ -78,6 +78,7 @@
     <Compile Include="Abstract\ICampaingRepository.cs" />
     <Compile Include="Abstract\ICartRepository.cs" />
     <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\ICompanyRepository.cs" />
     <Compile Include="Abstract\IImagenRepository.cs" />
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IPersonRepository.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Abstract\IUnitRepository.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
+    <Compile Include="Concrete\EFCompanyRepository.cs" />
     <Compile Include="Concrete\EFImagenRepository.cs" />
     <Compile Include="Concrete\EFPersonRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
@@ -105,6 +107,9 @@
     <Compile Include="Entities\DataBaseGeneric.cs" />
     <Compile Include="Entities\DataBaseId.cs" />
     <Compile Include="Entities\DataBaseInitializer.cs" />
+    <Compile Include="Model\Companies\Company.cs" />
+    <Compile Include="Model\Companies\Schedule.cs" />
+    <Compile Include="Model\Companies\ScheduleTurn.cs" />
     <Compile Include="Model\Configuration\EmailSettings.cs" />
     <Compile Include="Model\Resources\Feature.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />

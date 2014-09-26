@@ -561,6 +561,10 @@
     <Content Include="Content\bootstrap\bootstrap.less" />
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
+    <Content Include="Areas\Merchant\Views\web.config" />
+    <Content Include="Areas\Merchant\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Report\Views\web.config" />
+    <Content Include="Areas\Report\Views\Admin\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -623,6 +627,11 @@
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
+    <Compile Include="Areas\Merchant\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Merchant\MerchantAreaRegistration.cs" />
+    <Compile Include="Areas\Merchant\Models\CompanyView.cs" />
+    <Compile Include="Areas\Report\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />
     <Compile Include="Areas\Security\Controllers\PersonController.cs" />
     <Compile Include="Areas\Security\Models\PersonsView.cs" />
@@ -644,6 +653,7 @@
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="Infrastructure\Abstract\IAuthProvider.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
+    <Compile Include="Infrastructure\Binders\UserModelBinder.cs" />
     <Compile Include="Infrastructure\Concrete\FormsAuthProvider.cs" />
     <Compile Include="Infrastructure\Filters\CustomAuthAttribute.cs" />
     <Compile Include="Infrastructure\Filters\CustomAuthenticationAttribute.cs" />
@@ -657,6 +667,8 @@
     <Compile Include="Infrastructure\Helper\ImagenHelpers.cs" />
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Infrastructure\Filters\RangeExceptionAttribute.cs" />
+    <Compile Include="Infrastructure\Security\StoreOnLIneMemberShipProvider.cs" />
+    <Compile Include="Infrastructure\Security\StoreOnLIneRoleProvider.cs" />
     <Compile Include="Infrastructure\UserAgentConstraint.cs" />
     <Compile Include="Models\IProgressBar.cs" />
     <Compile Include="Models\ProgressBarView.cs" />
@@ -675,9 +687,9 @@
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Info\Index.cshtml" />
-    <Content Include="Views\Shared\Login.cshtml" />
     <Content Include="Content\RangeErrorPage.html" />
     <Content Include="Views\Shared\ProgressBars.cshtml" />
+    <Content Include="Views\Shared\_LogInLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -688,6 +700,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
+    <Folder Include="Areas\Merchant\Views\Shared\" />
+    <Folder Include="Areas\Report\Models\" />
+    <Folder Include="Areas\Report\Views\Shared\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Areas\Security\Views\User\" />
   </ItemGroup>

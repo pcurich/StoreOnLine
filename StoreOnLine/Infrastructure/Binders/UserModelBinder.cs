@@ -1,29 +1,29 @@
-﻿using System.Web.Mvc;
-using StoreOnLine.DataBase.Model.Shopping;
+﻿using StoreOnLine.DataBase.Model.Security;
+using System.Web.Mvc;
 
 namespace StoreOnLine.Infrastructure.Binders
 {
-    public class CartModelBinder : IModelBinder
+    public class UserModelBinder : IModelBinder
     {
-        private const string SessionKey = "Cart";
+        private const string SessionKey = "UserOnLine";
 
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             // get the Cart from the session
-            Cart cart = null;
+            User user = null;
             if (controllerContext.HttpContext.Session != null)
             {
-                cart = (Cart)controllerContext.HttpContext.Session[SessionKey];
+                user = (User)controllerContext.HttpContext.Session[SessionKey];
             }
             // create the Cart if there wasn't one in the session data
-            if (cart != null) return cart;
-            cart = new Cart();
+            if (user != null) return user;
+            user = new User();
             if (controllerContext.HttpContext.Session != null)
             {
-                controllerContext.HttpContext.Session[SessionKey] = cart;
+                controllerContext.HttpContext.Session[SessionKey] = user;
             }
             // return the cart
-            return cart;
+            return user;
         }
     }
 }

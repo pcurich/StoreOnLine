@@ -17,6 +17,10 @@ namespace StoreOnLine.DataBase.Model.Security
 
     public enum RoleList
     {
+        Administrador,
+        Supervisor,
+        Empleado,
+        Cliente,
         Admin,
         UserAdmin,
         UserAudit,

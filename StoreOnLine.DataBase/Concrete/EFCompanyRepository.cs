@@ -1,58 +1,62 @@
 ﻿using System.Linq;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Companies;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
 
 namespace StoreOnLine.DataBase.Concrete
 {
-    public class CategoryRepository:ICategoryRepository
+    public class CompanyRepository : ICompanyRepository
     {
         private readonly StoreOnLineContext _context = new StoreOnLineContext();
 
-        public IEnumerable<Category> Categories
+        public IEnumerable<Company> Companies
         {
             get
             {
-                return _context.Categories
-                    .Include(o=>o.CategoryPhoto)
-                    .Where(o=>!o.IsDeleted);
+                return _context.Companies
+                    .Include(o => o.Address)
+                    .Include(o => o.ContactNumber)
+                    .Include(o => o.CompanyPerson)
+                    .Include(o=>o.Schedules)
+                    .Where(o => !o.IsDeleted);
             }
         }
 
-        public int SaveCategory(Category category)
+        public int SaveCompany(Company company)
         {
-            if (category.Id == 0)
+            if (company.Id == 0)
             {
-                _context.Categories.Add(category);
+                _context.Companies.Add(company);
             }
             else
             {
-                var dbEntry = _context.Categories.Find((category.Id));
-                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(category))
+                var dbEntry = _context.Companies.Find((company.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(company))
                 {
-                    if (!property.Name.Equals("Id") && property.GetValue(category) != null)
+                    if (!property.Name.Equals("Id") && property.GetValue(company) != null)
                     {
-                        var value = property.GetValue(category);
+                        var value = property.GetValue(company);
                         if (value != null) property.SetValue(dbEntry, value);
                     }
                 }
 
             }
             _context.SaveChanges();
-            return category.Id;
+            return company.Id;
         }
 
-        public Category DeleteCategory(int categoryId, bool physical=false)
+        public Company DeleteCompany(int company, bool physical = false)
         {
-            var dbEntry = _context.Categories.Find(categoryId);
+            var dbEntry = _context.Companies.Find(company);
             if (dbEntry != null)
             {
                 if (physical)
                 {
-                    _context.Categories.Remove(dbEntry);
+                    _context.Companies.Remove(dbEntry);
                 }
                 else
                 {
