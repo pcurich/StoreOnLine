@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Security.Models;
 using StoreOnLine.DataBase.Abstract;
-using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Security.Controllers
 {
@@ -46,10 +43,11 @@ namespace StoreOnLine.Areas.Security.Controllers
 
             if (person != null)
             {
-                ViewBag.Dpto = GetDeparts(person.HomeAddress.Ubigeo.CodDpto);
-                ViewBag.Prov = GetProvincesList(person.HomeAddress.Ubigeo.CodDpto, person.HomeAddress.Ubigeo.CodProv);
-                ViewBag.Dist = GetDistrictsList(person.HomeAddress.Ubigeo.CodDpto, person.HomeAddress.Ubigeo.CodProv, person.HomeAddress.Ubigeo.CodDist);
-                ViewBag.Role = GetRolesList(person.Role.Id.ToString(CultureInfo.InvariantCulture));
+                ViewBag.Dpto = GetDeparts(person.Address.Ubigeo.CodDpto);
+                ViewBag.Prov = GetProvincesList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv);
+                ViewBag.Dist = GetDistrictsList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv, person.Address.Ubigeo.CodDist);
+                ViewBag.Role = GetRolesList(person.Role.RoleCode);
+                ViewBag.DocumentType = GetDocumentTypeList(person.Document.DocumentType.Id.ToString(CultureInfo.InvariantCulture));
             }
             return View(new PersonView().ToView(person));
         }
@@ -60,25 +58,27 @@ namespace StoreOnLine.Areas.Security.Controllers
             ViewBag.Action = "Edit";
             if (ModelState.IsValid)
             {
-                var exist = _repositoryPerson.Persons.FirstOrDefault(o => o.Id == model.Id);
-                if (exist != null && exist.Id != 0)
-                {
-                    model.HomeAddress.Id = model.HomeAddress.Id == 0 ? exist.HomeAddress.Id : model.HomeAddress.Id;
-                    model.User.Id = model.User.Id == 0 ? exist.User.Id : model.User.Id;
-                    model.Role.Id = model.Role.Id == 0 ? exist.Role.Id : model.Role.Id;
-                    model.ContactNumber.Id = model.ContactNumber.Id == 0 ? exist.ContactNumber.Id : model.ContactNumber.Id;
-                    model.Document.Id = model.Document.Id == 0 ? exist.Document.Id : model.Document.Id;
-                }
-                _repositoryPerson.SavePerson(model.ToBd(model));
-                TempData["message"] = string.Format("{0} ha sido guardado", model.User.UserName);
+                var ubigeo = _repositoryUbigeo.Ubigeos.FirstOrDefault(o => o.CodDpto == model.CodDpto && o.CodProv == model.CodProv && o.CodDist == model.CodDist);
+                if (ubigeo != null)
+                    model.UbigeoId = ubigeo.Id.ToString(CultureInfo.InvariantCulture);
+
+                var role = _repositorySecurity.Roles.FirstOrDefault(p=>p.RoleCode==model.RoleCode);
+                if (role != null)
+                    model.RoleId= role.Id.ToString(CultureInfo.InvariantCulture);
+
+                var m = model.ToBd(model);
+                
+                _repositoryPerson.SavePerson(m);
+                TempData["message"] = string.Format("{0} ha sido guardado", model.UserName);
                 return Json(new { ok = true, newurl = "Index" });
             }
-            ViewBag.Dpto = GetDeparts(model.HomeAddress.Ubigeo.CodDpto);
-            ViewBag.Prov = ViewBag.Prov = GetProvincesList(model.HomeAddress.Ubigeo.CodDpto, model.HomeAddress.Ubigeo.CodProv);
-            ViewBag.Dist = GetDistrictsList(model.HomeAddress.Ubigeo.CodDpto, model.HomeAddress.Ubigeo.CodProv, model.HomeAddress.Ubigeo.CodDist);
-            ViewBag.Role = GetRolesList(model.Role.CodRole);
-            // there is something wrong with the data values
-            return View(model);
+            ViewBag.Dpto = GetDeparts(model.CodDpto);
+            ViewBag.Prov = ViewBag.Prov = GetProvincesList(model.CodDpto, model.CodProv);
+            ViewBag.Dist = GetDistrictsList(model.CodDpto, model.CodProv, model.CodDist);
+            ViewBag.Role = GetRolesList(model.RoleCode);
+            ViewBag.DocumentType = GetDocumentTypeList(model.DocumentTypeId);
+            return Json(new { ok = false, model });
+
         }
 
         public ActionResult Create()
@@ -86,6 +86,7 @@ namespace StoreOnLine.Areas.Security.Controllers
             ViewBag.Action = "Create";
             ViewBag.Dpto = GetDeparts(null);
             ViewBag.Role = GetRolesList(null);
+            ViewBag.DocumentType = GetDocumentTypeList(null);
             ViewBag.Prov = new SelectList(new List<SelectListItem>());
             ViewBag.Dist = new SelectList(new List<SelectListItem>());
             return View("Edit", new PersonView());
@@ -117,6 +118,11 @@ namespace StoreOnLine.Areas.Security.Controllers
         public SelectList GetDistrictsList(string codDpto, string codProv, string selected)
         {
             return _repositoryUbigeo.GetDistrict(codDpto, codProv, selected);
+        }
+
+        public SelectList GetDocumentTypeList(string selected)
+        {
+            return _repositoryPerson.GetDocumentTypeList(selected);
         }
 
         public JsonResult GetProvinces(string codDpto, string selected)

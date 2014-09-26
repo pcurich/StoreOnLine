@@ -27,7 +27,7 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.User.UserName)
+                                @Html.DisplayNameFor(model => model.UserName)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.FirstName)
@@ -49,7 +49,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(item.User.UserName, "Edit", new { personId = item.Id })
+                                    @Html.ActionLink(item.UserName, "Edit", new { personId = item.Id })
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.FirstName)

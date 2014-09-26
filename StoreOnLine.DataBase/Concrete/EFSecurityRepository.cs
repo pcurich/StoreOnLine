@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
@@ -38,14 +35,14 @@ namespace StoreOnLine.DataBase.Concrete
         {
             var id = Convert.ToInt16(selected ?? "0");
             var repo = _context.Roles.Where(o => !o.IsDeleted);
-            return new SelectList(repo.Select(r => new SelectListItem { Text = r.RoleName, Value = r.CodRole, Selected = (r.Id == id) }).ToList(), "Value", "Text",repo);
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.RoleName, Value = r.RoleCode, Selected = (r.Id == id) }).ToList(), "Value", "Text");
         }
 
         public SelectList GetUser(string selected = null)
         {
             var id = Convert.ToInt16(selected ?? "0");
             var repo = _context.Users.Where(o => !o.IsDeleted);
-            return new SelectList(repo.Select(r => new SelectListItem { Text = r.UserName, Value = r.CodUser, Selected = (r.Id == id) }).ToList(), "Value", "Text");
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.UserName, Value = r.UserCode, Selected = (r.Id == id) }).ToList(), "Value", "Text");
         }
     }
 }

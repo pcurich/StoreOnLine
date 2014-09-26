@@ -32,6 +32,7 @@
             <li><a href="#Direccion" data-toggle="tab">Direccion</a></li>
             <li><a href="#Contacto" data-toggle="tab">Contacto</a></li>
             <li><a href="#Credenciales" data-toggle="tab">Credenciales</a></li>
+            <li><a href="#Documentos" data-toggle="tab">Documentos</a></li>
             <li><a href="#Seguridad" data-toggle="tab">Seguridad</a></li>
         </ul>
     </div>
@@ -39,12 +40,12 @@
     {
         @Html.ValidationSummary()
         @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.ContactNumber.Id)
-        @Html.HiddenFor(m => m.Documents.Id)
-        @Html.HiddenFor(m => m.HomeAddress.Id)
-        @Html.HiddenFor(m => m.Role.Id)
-        @Html.HiddenFor(m => m.User.Id)
-        <div class="tab-content">
+        @Html.HiddenFor(m => m.ContactNumberId)
+        @Html.HiddenFor(m => m.DocumentId)
+        @Html.HiddenFor(m => m.AddressId)
+        @Html.HiddenFor(m => m.RoleId)
+        @Html.HiddenFor(m => m.UserId)
+        <div class="tab-content"  style="height: 200px">
             <div class="tab-pane active" id="Datos">
                 <div class="panel-body">
                     <div class="row">
@@ -55,7 +56,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el el nombre" } })
-                                    @Html.ValidationMessageFor(m => m.FirstName)
+                                    @*@Html.ValidationMessageFor(m => m.FirstName)*@
                                 </div>
                             </div>
                         </div>
@@ -66,7 +67,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese los apellidos" } })
-                                    @Html.ValidationMessageFor(m => m.LastName)
+                                    @*@Html.ValidationMessageFor(m => m.LastName)*@
                                 </div>
                             </div>
                         </div>
@@ -77,7 +78,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
-                                    @Html.ValidationMessageFor(m => m.BirthDate)
+                                    @*@Html.ValidationMessageFor(m => m.BirthDate)*@
                                 </div>
                             </div>
                         </div>
@@ -90,26 +91,25 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Line1, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.Line1, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.HomeAddress.Line1, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line1)
+                                    @Html.EditorFor(m => m.Line1, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @*@Html.ValidationMessageFor(m => m.Line1)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodDpto, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.CodDpto, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDpto,
+                                    @Html.DropDownListFor(m => m.CodDpto,
                                             (SelectList)ViewBag.Dpto,
                                             "------------------------------",
-                                            htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line2)
+                                            new { @class = "form-control btn btn-primary" })
+                                    @*@Html.ValidationMessageFor(m => m.CodDpto)*@
                                 </div>
                             </div>
                         </div>
@@ -118,25 +118,25 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Line2, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.Line2, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.HomeAddress.Line2, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Line2)
+                                    @Html.EditorFor(m => m.Line2, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @*@Html.ValidationMessageFor(m => m.Line2)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodProv, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.CodProv, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodProv,
+                                    @Html.DropDownListFor(m => m.CodProv,
                                         (SelectList)ViewBag.Prov,
                                         "------------------------------",
-                                        htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDpto)
+                                        new { @class = "form-control btn btn-primary" })
+                                    @*@Html.ValidationMessageFor(m => m.CodProv)*@
                                 </div>
                             </div>
                         </div>
@@ -145,25 +145,25 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Reference, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.Reference, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.HomeAddress.Reference, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Reference)
+                                    @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @*@Html.ValidationMessageFor(m => m.Reference)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.HomeAddress.Ubigeo.CodDist, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.CodDist, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.HomeAddress.Ubigeo.CodDist,
+                                    @Html.DropDownListFor(m => m.CodDist,
                                             (SelectList)ViewBag.Dist,
                                             "------------------------------",
-                                            htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                    @Html.ValidationMessageFor(m => m.HomeAddress.Ubigeo.CodDist)
+                                            new { @class = "form-control btn btn-primary" })
+                                    @*@Html.ValidationMessageFor(m => m.CodDist)*@
                                 </div>
                             </div>
                         </div>
@@ -176,33 +176,33 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumber.NumberPhone, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.NumberPhone, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumber.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumber.NumberPhone)
+                                    @Html.EditorFor(m => m.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
+                                    @*@Html.ValidationMessageFor(m => m.NumberPhone)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumber.CellPhone, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.CellPhone, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumber.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumber.CellPhone)
+                                    @Html.EditorFor(m => m.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @*@Html.ValidationMessageFor(m => m.CellPhone)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.ContactNumber.Email, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ContactNumber.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
-                                    @Html.ValidationMessageFor(m => m.ContactNumber.Email)
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @*@Html.ValidationMessageFor(m => m.Email)*@
                                 </div>
                             </div>
                         </div>
@@ -215,33 +215,64 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.User.UserName, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
+                                    @Html.LabelFor(m => m.UserName, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.User.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una contraseña" } })
-                                    @Html.ValidationMessageFor(m => m.User.UserName)
+                                    @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una contraseña" } })
+                                    @*@Html.ValidationMessageFor(m => m.UserName)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.User.UserPassword, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.UserPassword, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.User.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
-                                    @Html.ValidationMessageFor(m => m.User.UserPassword)
+                                    @Html.EditorFor(m => m.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @*@Html.ValidationMessageFor(m => m.UserPassword)*@
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.User.CodUser, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.UserCode, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.User.CodUser, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
-                                    @Html.ValidationMessageFor(m => m.User.CodUser)
+                                    @Html.EditorFor(m => m.UserCode, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @*@Html.ValidationMessageFor(m => m.UserCode)*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Documentos">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.DocumentTypeId, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.DocumentTypeId,
+                                            (SelectList)ViewBag.DocumentType,
+                                            "------------------------------",
+                                            new { @class = "form-control btn btn-primary" })
+                                    @*@Html.ValidationMessageFor(m => m.DocumentTypeId)*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.DocumentValue, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.DocumentValue, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @*@Html.ValidationMessageFor(m => m.DocumentValue)*@
                                 </div>
                             </div>
                         </div>
@@ -254,14 +285,14 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.Role.CodRole, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.RoleCode, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.Role.CodRole,
+                                    @Html.DropDownListFor(m => m.RoleCode,
                                 (SelectList)ViewBag.Role,
                                 "------------------------------",
-                                htmlAttributes: new { @class = "form-control btn btn-primary" })
-                                    @Html.ValidationMessageFor(m => m.Role.CodRole)
+                                new { @class = "form-control btn btn-primary" })
+                                    @*@Html.ValidationMessageFor(m => m.RoleCode)*@
                                 </div>
                             </div>
                         </div>
@@ -284,14 +315,13 @@
     <script type="text/javascript">
         $(function () {
             $('#BirthDate').datepicker({
-                format: "dd/mm/yyyy",
-                autoclose: true,
+                format: 'dd/mm/yyyy',
                 language: 'es',
                 startDate: new Date(1900, 01, 01),
                 todayBtn: true,
                 clearBtn: true,
                 todayHighlight: true
-            });
+            }).val('@Model.BirthDate');
         });
 
         function OnSuccess(data) {
@@ -299,30 +329,30 @@
             window.location.href = data.newurl;
         }
 
-        $("#HomeAddress_Ubigeo_CodDpto").change(function () {
+        $("#CodDpto").change(function () {
             $.ajax({
                 type: "POST",
                 dataType: 'json',
                 url: '@Url.Action("GetProvinces", "Person")',
-                data: { codDpto: $("#HomeAddress_Ubigeo_CodDpto > option:selected").attr("value") },
+                data: { codDpto: $("#CodDpto > option:selected").attr("value") },
                 success: function (data) {
                     var items = [];
                     items.push("<option>-----------------------------</option>");
                     $.each(data, function () {
                         items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
                     });
-                    $("#HomeAddress_Ubigeo_CodProv").html(items.join(' '));
+                    $("#CodProv").html(items.join(' '));
                 }
             });
         });
 
-        $("#HomeAddress_Ubigeo_CodProv").change(function () {
+        $("#CodProv").change(function () {
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("GetDistricts", "Person")',
                 data: {
-                    codDpto: $("#HomeAddress_Ubigeo_CodDpto > option:selected").attr("value"),
-                    codProv: $("#HomeAddress_Ubigeo_CodProv > option:selected").attr("value")
+                    codDpto: $("#CodDpto > option:selected").attr("value"),
+                    codProv: $("#CodProv > option:selected").attr("value")
                 },
                 success: function (data) {
                     var items = [];
@@ -330,7 +360,7 @@
                     $.each(data, function () {
                         items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
                     });
-                    $("#HomeAddress_Ubigeo_CodDist").html(items.join(' '));
+                    $("#CodDist").html(items.join(' '));
                 }
             });
         });

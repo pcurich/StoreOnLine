@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ArrayOfDocumentType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DocumentType>
+    <DocumentTypeName>DNI</DocumentTypeName>
+  </DocumentType>
+  <DocumentType>
+    <DocumentTypeName>Pasapoprte</DocumentTypeName>
+  </DocumentType>
+  <DocumentType>
+    <DocumentTypeName>Ruc</DocumentTypeName>
+  </DocumentType>
+</ArrayOfDocumentType>

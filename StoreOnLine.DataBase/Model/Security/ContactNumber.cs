@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Entities;
+﻿using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.Security
 {
@@ -15,7 +9,17 @@ namespace StoreOnLine.DataBase.Model.Security
         public string Email { get; set; }
         public bool IsPrincipal { get; set; }
 
-        public int PersonId { get; set; }
-        public Person Person { get; set; }
+        public ContactNumber()
+        {
+        }
+
+        public ContactNumber(int id, string numberPhone, string cellPhone,string email)
+        {
+            Id = id;
+            NumberPhone = numberPhone;
+            CellPhone = cellPhone;
+            Email = email;
+            IsPrincipal = true;
+        }
     }
 }

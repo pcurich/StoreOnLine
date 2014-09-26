@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Mvc;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Security;
@@ -17,15 +18,23 @@ namespace StoreOnLine.DataBase.Concrete
             get
             {
                 return _context.Persons
-                    .Include(o => o.HomeAddress)
+                    .Include(o => o.Address)
                     .Include(o => o.ContactNumber)
                     .Include(o => o.Document)
+                    .Include(o => o.Document.DocumentType)
                     .Include(o=>o.User)
                     .Include(o => o.Role)
-                    .Include(o => o.HomeAddress.Ubigeo)
+                    .Include(o => o.Address.Ubigeo)
                     .Where(o => !o.IsDeleted);
             }
         }
+
+        public SelectList GetDocumentTypeList(string selected)
+        {
+            var repo = _context.DocumentTypes.Where(o => !o.IsDeleted);
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.DocumentTypeName, Value = r.Id.ToString(), Selected = (r.Id.ToString() == selected) }).ToList(), "Value", "Text");
+        }
+
         public int SavePerson(Person person)
         {
             if (person.Id == 0)

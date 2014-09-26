@@ -119,8 +119,9 @@
     <Compile Include="Model\Resources\Measure.cs" />
     <Compile Include="Model\Security\Address.cs" />
     <Compile Include="Model\Security\ContactNumber.cs" />
-    <Compile Include="Model\Security\Ubigeo.cs" />
     <Compile Include="Model\Security\DocumentType.cs" />
+    <Compile Include="Model\Security\Ubigeo.cs" />
+    <Compile Include="Model\Security\Document.cs" />
     <Compile Include="Model\Security\Person.cs" />
     <Compile Include="Model\Security\Rol.cs" />
     <Compile Include="Model\Security\User.cs" />

@@ -9,11 +9,18 @@ namespace StoreOnLine.DataBase.Model.Security
         public string CodDist { get; set; }
         public string NameUbiGeo { get; set; }
 
-        //CodDpto CodProv CodDist
-        //15		0			0	Lima  --Departamento
-        //15		1			0	Lima  --Provincia
-        //15		1			1	Lima  --distrito
+        public Ubigeo()
+        {
+        }
 
+        public Ubigeo(int id, string codDpto, string codProv, string codDist, string nameUbiGeo)
+        {
+            Id = id;
+            CodDpto = codDpto;
+            CodDist = codDist;
+            CodProv = codProv;
+            NameUbiGeo = nameUbiGeo;
+        }
     }
 
 }

@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <ArrayOfRole xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Role>
-    <CodRole>1</CodRole>
+    <RoleCode>1</RoleCode>
     <RoleName>Administrador</RoleName>
   </Role>
   <Role>
-    <CodRole>2</CodRole>
+    <RoleCode>2</RoleCode>
     <RoleName>Supervisor</RoleName>
   </Role>
   <Role>
-    <CodRole>3</CodRole>
+    <RoleCode>3</RoleCode>
     <RoleName>Empleado</RoleName>
   </Role>
   <Role>
-    <CodRole>4</CodRole>
+    <RoleCode>4</RoleCode>
     <RoleName>Cliente</RoleName>
   </Role>
 </ArrayOfRole> 

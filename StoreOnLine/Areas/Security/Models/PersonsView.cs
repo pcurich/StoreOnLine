@@ -1,7 +1,8 @@
-﻿using StoreOnLine.DataBase.Model.Security;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Web.Mvc;
+using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Security.Models
 {
@@ -23,45 +24,121 @@ namespace StoreOnLine.Areas.Security.Models
         [Display(Name = "Apellidos")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Fecha de Nacimiento")]
+        [Required(ErrorMessage = "Ingrese una fecha de nacimiento")]
         [DataType(DataType.Text)]
         [Display(Name = "Fecha de Nacimiento")]
-        public DateTime BirthDate { get; set; }
+        public string BirthDate { get; set; }
 
-        public DocumentView Document { get; set; }
-        public ContactNumberView ContactNumber { get; set; }
-        public AddressView HomeAddress { get; set; }
+        public string DocumentId { get; set; }
 
-        public UserView User { get; set; }
-        public RoleView Role { get; set; }
+        [DataType(DataType.Text)]
+        public string DocumentValue { get; set; }
 
-        public PersonView()
-        {
-            BirthDate = new DateTime(1900, 1, 1);
-            Document = new DocumentView();
-            ContactNumber = new ContactNumberView();
-            HomeAddress = new AddressView();
-            User = new UserView();
-            Role = new RoleView();
-            IsStatus = true;
-        }
+        [Required(ErrorMessage = "Seleccione el tipo de documento")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Tipo Doc")]
+        public string DocumentTypeId { get; set; }
+
+        public string ContactNumberId { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Telf Fijo")]
+        public string NumberPhone { get; set; }
+
+        [Required(ErrorMessage = "Ingrese un numero de celular")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Num Celular")]
+        public string CellPhone { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "E-mail")]
+        public string Email { get; set; }
+
+        public string AddressId { get; set; }
+
+        [Required(ErrorMessage = "Ingrese al menos una direccion")]
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Direccion 1")]
+        public string Line1 { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Direccion 2")]
+        public string Line2 { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Display(Name = "Referencia")]
+        public string Reference { get; set; }
+
+        public string UbigeoId { get; set; }
+
+        [Required(ErrorMessage = "Seleccione un departamento")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Provincia")]
+        public string CodDpto { get; set; }
+
+        [Required(ErrorMessage = "Seleccione una provincia")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Provincia")]
+        public string CodProv { get; set; }
+
+        [Required(ErrorMessage = "Seleccione un distrito")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Distrito")]
+        public string CodDist { get; set; }
+
+        public string UserId { get; set; }
+
+        [Required(ErrorMessage = "Ingrese un codigo de usuario")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Codigo Usuario")]
+        public string UserCode { get; set; }
+
+        [Required(ErrorMessage = "Ingrese un nombre de usuario")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Usuario")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Ingrese una contraseña de usuario")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Usuario")]
+        public string UserPassword { get; set; }
+
+        public string RoleId { get; set; }
+
+        [Required(ErrorMessage = "Seleccione un rol")]
+        [DataType(DataType.Text)]
+        [Display(Name = "Rol")]
+        public string RoleCode { get; set; }
+        public string RoleName { get; set; }
+
+
 
         public Person ToBd(PersonView view)
         {
+            var dateStr = view.BirthDate.Split('/');
+            var date = new DateTime(Convert.ToInt16(dateStr[2]), Convert.ToInt16(dateStr[1]), Convert.ToInt16(dateStr[0]));
+            var documentType = new DocumentType(Convert.ToInt16(view.DocumentTypeId));
+            var document = new Document(Convert.ToInt16(view.DocumentId), view.DocumentValue, documentType.Id);
+            var contactNumber = new ContactNumber(Convert.ToInt16(view.ContactNumberId), view.NumberPhone, view.CellPhone, view.Email);
+            var address = new Address(Convert.ToInt16(view.AddressId), view.Line1, view.Line2, view.Reference, Convert.ToInt16(view.UbigeoId));
+            var user = new User(Convert.ToInt16(view.UserId), view.UserCode, view.UserName, view.UserPassword);
+
             return new Person
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                IsStatus=view.IsStatus,
                 FirstName = view.FirstName,
                 LastName = view.LastName,
-                BirthDate = view.BirthDate,
-                ContactNumber = view.ContactNumber.ToBd(view.ContactNumber),
-                HomeAddress = view.HomeAddress.ToBd(view.HomeAddress),
-                Document = view.Document.ToBd(view.Document),
-                User = view.User.ToBd(view.User),
-                UserId = view.User.ToBd(view.User).Id,
-                Role = view.Role.ToBd(view.Role)
-
+                BirthDate = date,
+                DocumentId = Convert.ToInt16(view.DocumentTypeId),
+                Document = document,
+                ContactNumberId = Convert.ToInt16(view.ContactNumberId),
+                ContactNumber = contactNumber,
+                UserId = Convert.ToInt16(view.UserId),
+                User = user,
+                RoleId = Convert.ToInt16(view.RoleId),
+                AddressId = Convert.ToInt16(view.AddressId),
+                Address = address,
             };
         }
 
@@ -73,274 +150,29 @@ namespace StoreOnLine.Areas.Security.Models
                 IsStatus = db.IsStatus,
                 FirstName = db.FirstName,
                 LastName = db.LastName,
-                BirthDate = db.BirthDate,
-                Document = new DocumentView().ToView(db.Document),
-                ContactNumber = new ContactNumberView().ToView(db.ContactNumber),
-                HomeAddress = new AddressView().ToView(db.HomeAddress),
-                User = new UserView().ToView(db.User),
-                Role = new RoleView().ToView(db.Role)
-            };
-        }
-    }
-
-    public class UserView
-    {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un codigo")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Codigo")]
-        public string CodUser { get; set; }
-
-        [Required(ErrorMessage = "Ingrese un Usuario")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Usuario")]
-        public string UserName { get; set; }
-
-        [Required(ErrorMessage = "Ingrese una contraseña")]
-        [DataType(DataType.Password)]
-        [Display(Name = "Contraseña")]
-        public string UserPassword { get; set; }
-
-        public User ToBd(UserView view)
-        {
-            return new User
-            {
-                Id = view.Id,
-                CodUser = view.CodUser,
-                UserName = view.UserName,
-                UserPassword = view.UserPassword
-            };
-        }
-
-        public UserView ToView(User db)
-        {
-            return new UserView
-            {
-                Id = db.Id,
-                CodUser = db.CodUser,
-                UserPassword = db.UserPassword,
-                UserName = db.UserName
-            };
-        }
-    }
-
-    public class RoleView
-    {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Codigo")]
-        public string CodRole { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Nombre")]
-        public string RoleName { get; set; }
-
-        public Role ToBd(RoleView view)
-        {
-            return new Role
-            {
-                Id = view.Id,
-                CodRole = view.CodRole,
-                RoleName = view.RoleName
-            };
-        }
-
-        public RoleView ToView(Role db)
-        {
-            return new RoleView
-            {
-                Id = db.Id,
-                CodRole = db.CodRole,
-                RoleName = db.RoleName
-            };
-        }
-    }
-
-    public class DocumentView
-    {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Tipo Doc")]
-        public string DocumentTypeName { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Numero")]
-        public string DocumentValue { get; set; }
-
-        public Document ToBd(DocumentView view)
-        {
-            return new Document
-            {
-                Id = view.Id,
-                DocumentTypeName = view.DocumentTypeName,
-                DocumentValue = view.DocumentValue
-            };
-        }
-
-        public DocumentView ToView(Document db)
-        {
-            return new DocumentView
-            {
-                Id = db.Id,
-                DocumentTypeName = db.DocumentTypeName,
-                DocumentValue = db.DocumentValue
-            };
-        }
-    }
-
-    public class ContactNumberView
-    {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Celular")]
-        public string CellPhone { get; set; }
-
-        [DataType(DataType.PhoneNumber)]
-        [Display(Name = "Numero")]
-        public string NumberPhone { get; set; }
-
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Correo Electronico")]
-        public string Email { get; set; }
-
-        [Display(Name = "principal")]
-        public bool IsPrincipal { get; set; }
-
-        public ContactNumber ToBd(ContactNumberView view)
-        {
-            return new ContactNumber
-            {
-                Id = view.Id,
-                NumberPhone = view.NumberPhone,
-                CellPhone = view.CellPhone,
-                Email = view.Email,
-                IsPrincipal = view.IsPrincipal
-            };
-        }
-
-        public ContactNumberView ToView(ContactNumber db)
-        {
-            return new ContactNumberView
-            {
-                Id = db.Id,
-                NumberPhone = db.NumberPhone,
-                CellPhone = db.CellPhone,
-                Email = db.Email,
-                IsPrincipal = db.IsPrincipal
-            };
-        }
-    }
-
-    public class AddressView
-    {
-        public AddressView()
-        {
-            Ubigeo = new UbigeoView();
-        }
-
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Direccion1")]
-        public string Line1 { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Direccion2")]
-        public string Line2 { get; set; }
-
-        [DataType(DataType.Text)]
-        [Display(Name = "Referencia")]
-        public string Reference { get; set; }
-
-        [Display(Name = "Direccion Actual")]
-        public bool IsPrincipal { get; set; }
-
-        public UbigeoView Ubigeo { get; set; }
-
-        public Address ToBd(AddressView view)
-        {
-            return new Address
-            {
-                Id = view.Id,
-                Line1 = view.Line1,
-                Line2 = view.Line2,
-                Ubigeo = view.Ubigeo.ToBd(view.Ubigeo),
-                Reference = view.Reference,
-                IsPrincipal = view.IsPrincipal
-            };
-        }
-
-        public AddressView ToView(Address db)
-        {
-            return new AddressView
-            {
-                Id = db.Id,
-                Line1 = db.Line1,
-                Line2 = db.Line2,
-                Ubigeo = new UbigeoView().ToView(db.Ubigeo),
-                IsPrincipal = db.IsPrincipal,
-                Reference = db.Reference
-            };
-        }
-    }
-
-    public class UbigeoView
-    {
-        [HiddenInput(DisplayValue = false)]
-        public int Id { get; set; }
-
-        [Display(Name = "Departamento")]
-        [Required(ErrorMessage = "Seleccione un Departamento")]
-        public string CodDpto { get; set; }
-
-        [Display(Name = "Provincia")]
-        [Required(ErrorMessage = "Seleccione una Provincia")]
-        public string CodProv { get; set; }
-
-        [Display(Name = "Distrito")]
-        [Required(ErrorMessage = "Seleccione un Distrito")]
-        public string CodDist { get; set; }
-
-        public string NameUbiGeo { get; set; }
-
-        public UbigeoView()
-        {
-            CodDpto = "0";
-            CodProv = "0";
-            CodDist = "0";
-            NameUbiGeo = "";
-        }
-
-        public Ubigeo ToBd(UbigeoView view)
-        {
-            return new Ubigeo
-            {
-                Id = view.Id,
-                CodDpto = view.CodDpto,
-                CodProv = view.CodProv,
-                CodDist = view.CodDist,
-                NameUbiGeo = view.NameUbiGeo,
-            };
-        }
-
-        public UbigeoView ToView(Ubigeo db)
-        {
-            return new UbigeoView
-            {
-                Id = db.Id,
-                CodDpto = db.CodDpto,
-                CodProv = db.CodProv,
-                CodDist = db.CodDist,
-                NameUbiGeo = db.NameUbiGeo,
+                BirthDate = db.BirthDate.ToShortDateString(),
+                DocumentTypeId = db.Document.DocumentTypeId.ToString(CultureInfo.InvariantCulture),
+                DocumentId = db.DocumentId.ToString(CultureInfo.InvariantCulture),
+                DocumentValue = db.Document.DocumentValue,
+                ContactNumberId = db.ContactNumberId.ToString(CultureInfo.InvariantCulture),
+                NumberPhone = db.ContactNumber.NumberPhone,
+                CellPhone = db.ContactNumber.CellPhone,
+                Email = db.ContactNumber.Email,
+                AddressId = db.AddressId.ToString(CultureInfo.InvariantCulture),
+                Line1 = db.Address.Line1,
+                Line2 = db.Address.Line2,
+                Reference = db.Address.Reference,
+                UbigeoId = db.Address.UbigeoId.ToString(CultureInfo.InvariantCulture),
+                CodDpto = db.Address.Ubigeo.CodDpto,
+                CodProv = db.Address.Ubigeo.CodProv,
+                CodDist = db.Address.Ubigeo.CodDist,
+                UserId = db.UserId.ToString(CultureInfo.InvariantCulture),
+                UserCode = db.User.UserCode,
+                UserName = db.User.UserName,
+                UserPassword = db.User.UserPassword,
+                RoleId = db.RoleId.ToString(CultureInfo.InvariantCulture),
+                RoleCode = db.Role.RoleCode,
+                RoleName = db.Role.RoleName
             };
         }
     }

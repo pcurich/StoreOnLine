@@ -38,9 +38,9 @@ namespace StoreOnLine.DataBase.Entities
                 LoadUnit(context, pathFile + "Unit.xml");
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
                 LoadSupplier(context, pathFile + "Unit.xml");
-                //Export(pathFile + "Role.xml");
                 LoadRoles(context, pathFile + "Role.xml");
-                
+                //Export(pathFile + "DocumentType.xml");
+                LoadDocumentType(context, pathFile + "DocumentType.xml");
 
                 var pbs = new List<ProductBase>
                 {
@@ -167,6 +167,17 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
+        private static void LoadDocumentType(StoreOnLineContext context, string str)
+        {
+            var elemt = XmlSerialization<List<DocumentType>>.Deserialize(str);
+            foreach (var pb in elemt)
+            {
+                context.DocumentTypes.Add(pb);
+            }
+            context.SaveChanges();
+        }
+        
+
         private static void LoadImagen(StoreOnLineContext context, String str)
         {
             var directory = new DirectoryInfo(str);
@@ -194,16 +205,15 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
-       private static void Export(String str)
+        private static void Export(String str)
         {
-            var pbs = new List<Role>
+            var pbs = new List<DocumentType>
                 {
-                    new Role  { RoleName = "Administrador", IsStatus = true},
-                    new Role  { RoleName = "Supervisor", IsStatus = true},
-                    new Role  { RoleName = "Empleado", IsStatus = true},
-                    new Role  { RoleName = "Cliente", IsStatus = true},
+                    new DocumentType  { DocumentTypeName = "DNI", IsStatus = true},
+                    new DocumentType  { DocumentTypeName = "Pasapoprte", IsStatus = true},
+                    new DocumentType  { DocumentTypeName = "Ruc", IsStatus = true}
                 };
-            XmlSerialization<List<Role>>.Serialize(pbs, str);
+            XmlSerialization<List<DocumentType>>.Serialize(pbs, str);
         }
 
         #endregion
