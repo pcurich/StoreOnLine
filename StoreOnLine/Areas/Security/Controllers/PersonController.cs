@@ -29,6 +29,7 @@ namespace StoreOnLine.Areas.Security.Controllers
         // GET: /Security/User/
         public ActionResult Index()
         {
+            ViewBag.Action = "Index";
             var db = _repositoryPerson.Persons;
             var view = db.Select(person => new PersonView().ToView(person)).ToList();
             return View(view);
@@ -39,10 +40,9 @@ namespace StoreOnLine.Areas.Security.Controllers
             ViewBag.Action = "Edit";
 
             var person = _repositoryPerson.Persons.FirstOrDefault(p => p.Id == personId);
-            if (person != null) ViewBag.UserName = person.User.UserName;
-
             if (person != null)
             {
+                ViewBag.UserName = person.User.UserName;
                 ViewBag.Dpto = GetDeparts(person.Address.Ubigeo.CodDpto);
                 ViewBag.Prov = GetProvincesList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv);
                 ViewBag.Dist = GetDistrictsList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv, person.Address.Ubigeo.CodDist);
@@ -65,10 +65,8 @@ namespace StoreOnLine.Areas.Security.Controllers
                 var role = _repositorySecurity.Roles.FirstOrDefault(p=>p.RoleCode==model.RoleCode);
                 if (role != null)
                     model.RoleId= role.Id.ToString(CultureInfo.InvariantCulture);
-
-                var m = model.ToBd(model);
-                
-                _repositoryPerson.SavePerson(m);
+               
+                _repositoryPerson.SavePerson(model.ToBd(model));
                 TempData["message"] = string.Format("{0} ha sido guardado", model.UserName);
                 return Json(new { ok = true, newurl = "Index" });
             }

@@ -429,7 +429,9 @@
     <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Areas\Management\Views\web.config" />
+    <Content Include="Areas\Management\Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Management\Views\ProductBase\List.cshtml" />
     <Content Include="Areas\Management\Views\Shared\ProductSumary.cshtml" />
     <Content Include="Areas\Management\Views\Nav\MenuCategory.cshtml" />
@@ -562,9 +564,11 @@
     <Content Include="Content\bootstrap\badges.less" />
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Areas\Merchant\Views\web.config" />
-    <Content Include="Areas\Merchant\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Merchant\Views\Company\Index.cshtml" />
     <Content Include="Areas\Report\Views\web.config" />
     <Content Include="Areas\Report\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Merchant\Views\Company\Edit.cshtml" />
+    <Content Include="Areas\Merchant\Views\Schedule\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -627,9 +631,11 @@
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
-    <Compile Include="Areas\Merchant\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Merchant\Controllers\CompanyController.cs" />
+    <Compile Include="Areas\Merchant\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Merchant\MerchantAreaRegistration.cs" />
     <Compile Include="Areas\Merchant\Models\CompanyView.cs" />
+    <Compile Include="Areas\Merchant\Models\ScheduleView.cs" />
     <Compile Include="Areas\Report\Controllers\AdminController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />
@@ -675,7 +681,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.11.1.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />

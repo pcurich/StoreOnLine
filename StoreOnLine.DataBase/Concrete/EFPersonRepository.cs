@@ -35,6 +35,12 @@ namespace StoreOnLine.DataBase.Concrete
             return new SelectList(repo.Select(r => new SelectListItem { Text = r.DocumentTypeName, Value = r.Id.ToString(), Selected = (r.Id.ToString() == selected) }).ToList(), "Value", "Text");
         }
 
+        public SelectList GetPersons(string selected, int roleId)
+        {
+            var repo = _context.Persons.Where(o => !o.IsDeleted && o.RoleId==roleId);
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.FirstName + " " + r.LastName , Value = r.Id.ToString(), Selected = (r.Id.ToString() == selected) }).ToList(), "Value", "Text");
+        }
+
         public int SavePerson(Person person)
         {
             if (person.Id == 0)
@@ -56,6 +62,75 @@ namespace StoreOnLine.DataBase.Concrete
             }
             _context.SaveChanges();
             return person.Id;
+        }
+
+        public int SaveAddress(Address address)
+        {
+            if (address.Id == 0)
+            {
+                _context.Addresses.Add(address);
+            }
+            else
+            {
+                var dbEntry = _context.Addresses.Find((address.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(address))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(address) != null)
+                    {
+                        var value = property.GetValue(address);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return address.Id;
+        }
+
+        public int SaveContactNumber(ContactNumber contactarNumber)
+        {
+            if (contactarNumber.Id == 0)
+            {
+                _context.ContactNumbers.Add(contactarNumber);
+            }
+            else
+            {
+                var dbEntry = _context.ContactNumbers.Find((contactarNumber.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(contactarNumber))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(contactarNumber) != null)
+                    {
+                        var value = property.GetValue(contactarNumber);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return contactarNumber.Id;
+        }
+
+        public int SaveDocument(Document document)
+        {
+            if (document.Id == 0)
+            {
+                _context.Documents.Add(document);
+            }
+            else
+            {
+                var dbEntry = _context.Addresses.Find((document.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(document))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(document) != null)
+                    {
+                        var value = property.GetValue(document);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return document.Id;
         }
 
         public Person DeletePerson(int personId, bool physical = false)

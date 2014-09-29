@@ -295,7 +295,7 @@
             <span id="loading" class="ui-icon-loading" style="display: none">
                 <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
             </span>
-            @Html.ActionLink("Cancelar", "Index", new { Area = "Security" }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Cancelar", "Index", new { Area = "Merchant" }, new { @class = "btn btn-default pull-right" })
         </div>
     }
 </div>
@@ -328,7 +328,6 @@
         });
 
         function OnSuccess(data) {
-            alert(data);
             window.location.href = data.newurl;
         }
 

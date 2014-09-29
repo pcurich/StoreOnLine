@@ -1,0 +1,305 @@
+﻿@model StoreOnLine.Areas.Merchant.Models.CompanyView
+@{
+    ViewBag.Title = "Compañia: Edit " + ViewBag.CompanyName;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody",
+        Url = Url.Action("Edit", "Company"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+        OnSuccess = "OnSuccess"
+
+    };
+}
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading ">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#Datos" data-toggle="tab">Datos</a></li>
+            <li><a href="#Direccion" data-toggle="tab">Direccion</a></li>
+            <li><a href="#Contacto" data-toggle="tab">Contacto</a></li>
+            <li><a href="#Representante" data-toggle="tab">Representante</a></li>
+        </ul>
+    </div>
+    @using (Ajax.BeginForm("Edit", "Person", ajaxOpts, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary()
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.CompanyAddressId)
+        @Html.HiddenFor(m => m.CompanyContactNumberId)
+        <div class="tab-content" style="height: 300px">
+            <div class="tab-pane active" id="Datos">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyName, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el el nombre de la compañia" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyCif, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyCif, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el C.I.F." } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyActivity, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyActivity, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Actividad Economica" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanySecurityNumber, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanySecurityNumber, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese eL numero de seguro" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyDocumentRuc, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyDocumentRuc, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el RUC" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.IsStatus, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="bootstrap-switch bootstrap-switch-small">
+                                        @Html.CheckBoxFor(m => m.IsStatus)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Direccion">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressLine1, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyAddressLine1, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressUbigeoCodDpto, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.CompanyAddressUbigeoCodDpto,
+                                        (SelectList)ViewBag.Dpto,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressLine2, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyAddressLine2, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressUbigeoCodProv, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.CompanyAddressUbigeoCodProv,
+                                        (SelectList)ViewBag.Prov,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressReference, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyAddressReference, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Referencia" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyAddressUbigeoCodDist, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.CompanyAddressUbigeoCodDist,
+                                        (SelectList)ViewBag.Dist,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Contacto">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyContactNumberNumberPhone, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyContactNumberNumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyContactNumberCellPhone, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyContactNumberCellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyContactNumberEmail, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.CompanyContactNumberEmail, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese un e Mail" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="Representante">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.CompanyPersonId, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.CompanyPersonId,
+                                        (SelectList)ViewBag.Person,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <span id="loading" class="ui-icon-loading" style="display: none">
+                <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+            </span>
+            @Html.ActionLink("Cancelar", "Index", new { Area = "Security" }, new { @class = "btn btn-default pull-right" })
+        </div>
+    }
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#IsStatus').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff: 'false'
+            });
+        });
+
+        function OnSuccess(data) {
+            window.location.href = data.newurl;
+        }
+
+        $("#CompanyAddressUbigeoCodDpto").change(function () {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: '@Url.Action("GetProvinces", "Company")',
+                data: { codDpto: $("#CompanyAddressUbigeoCodDpto > option:selected").attr("value") },
+                success: function (data) {
+                    var items = [];
+                    items.push("<option>-----------------------------</option>");
+                    $.each(data, function () {
+                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                    });
+                    $("#CompanyAddressUbigeoCodProv").html(items.join(' '));
+                }
+            });
+        });
+
+        $("#CompanyAddressUbigeoCodProv").change(function () {
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetDistricts", "Company")',
+                data: {
+                    codDpto: $("#CompanyAddressUbigeoCodDpto > option:selected").attr("value"),
+                    codProv: $("#CompanyAddressUbigeoCodProv > option:selected").attr("value")
+                },
+                success: function (data) {
+                    var items = [];
+                    items.push("<option>-----------------------------</option>");
+                    $.each(data, function () {
+                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                    });
+                    $("#CompanyAddressUbigeoCodDist").html(items.join(' '));
+                }
+            });
+        });
+    </script>
+}
+

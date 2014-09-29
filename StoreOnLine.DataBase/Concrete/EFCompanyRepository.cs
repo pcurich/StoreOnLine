@@ -19,8 +19,9 @@ namespace StoreOnLine.DataBase.Concrete
             {
                 return _context.Companies
                     .Include(o => o.Address)
+                    .Include(o => o.Address.Ubigeo)
                     .Include(o => o.ContactNumber)
-                    .Include(o => o.CompanyPerson)
+                    .Include(o => o.Person)
                     .Include(o=>o.Schedules)
                     .Where(o => !o.IsDeleted);
             }

@@ -43,14 +43,15 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<Person> Persons { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Ubigeo> Ubigeos { get; set; }
+        public DbSet<ContactNumber> ContactNumbers { get; set; }
+        public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
         public DbSet<Company> Companies { get; set; }
-        public DbSet<ScheduleTurn> ScheduleTurns { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
-        
+
 
 
     }

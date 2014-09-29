@@ -14,6 +14,6 @@
   </Role>
   <Role>
     <RoleCode>4</RoleCode>
-    <RoleName>Cliente</RoleName>
+    <RoleName>Representante</RoleName>
   </Role>
 </ArrayOfRole> 

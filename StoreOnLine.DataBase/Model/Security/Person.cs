@@ -6,6 +6,42 @@ namespace StoreOnLine.DataBase.Model.Security
 {
     public class Person : DataBaseId
     {
+        public Person ()
+        {
+            IsStatus = true;
+        }
+        public Person(int id,bool isStatus, string firstName, string lastName, DateTime birthDate,
+            int documentId, int contactNumberId, int addressId, 
+            int userId, int roleId)
+        {
+            Id = id;
+            IsStatus = isStatus;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDate;
+            DocumentId = documentId;
+            ContactNumberId = contactNumberId;
+            AddressId = addressId;
+            UserId = userId;
+            RoleId = roleId;
+        }
+
+        public Person(int id, bool isStatus, string firstName, string lastName, DateTime birthDate,
+            Document document, ContactNumber contactNumber, Address address,
+            User user, int roleId)
+        {
+            Id = id;
+            IsStatus = isStatus;
+            FirstName = firstName;
+            LastName = lastName;
+            BirthDate = birthDate;
+            Document = document;
+            ContactNumber = contactNumber;
+            Address = address;
+            User = user;
+            RoleId = roleId;
+        }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }

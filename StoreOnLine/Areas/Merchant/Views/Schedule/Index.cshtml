@@ -1,0 +1,120 @@
+﻿@model IEnumerable<StoreOnLine.Areas.Merchant.Models.ScheduleView >
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                @Html.ActionLink("Crear Nuevo", "Create", "Company", null, new { @class = " btn btn-primary pull-righ" })
+            </div>
+            <div class="panel-body">
+                <table id="DataTablePerson" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ScheduleFrom )
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ScheduleTo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ScheduleHuors)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ScheduleTurn)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ScheduleDaysWorkPerWeek)
+                            </th>
+                         
+                            <th class="text-center">
+                                @Html.DisplayNameFor(model => model.IsStatus)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ScheduleFrom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ScheduleTo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ScheduleHuors)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ScheduleTurn)
+                                </td>
+                                <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.ScheduleDaysWorkPerWeek)
+                                </td>
+                                <td class="text-center">
+                                    @if (item.IsStatus)
+                                    {
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    }
+
+                                </td>
+                                <td class="text-center">
+                                    @using (Html.BeginForm("Delete", "Company"))
+                                    {
+                                        @Html.Hidden("companyId", item.Id)
+                                        <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DataTablePerson').dataTable({
+                "order": [[0, "asc"]],
+                "paging": false,
+                //"pagingType": "full_numbers",
+                "scrollY": "300px",
+                "scrollCollapse": true,
+                "jQueryUI": true,
+                "oLanguage": {
+                    "sSearch": "<b> Buscar :</b>  ",
+                    "sInfo": "Mostrando _START_ de _END_  registros",
+                    "sLoadingRecords": "Cargando...",
+                    "sProcessing": "Procesando...",
+                    "sEmptyTable": "No hay informacion para mostrar"
+                }
+            });
+        });
+
+    </script>
+
+}

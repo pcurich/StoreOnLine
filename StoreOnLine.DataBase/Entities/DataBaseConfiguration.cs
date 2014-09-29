@@ -1,12 +1,13 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.DataBase.Entities
 {
     public partial class StoreOnLineContext
     {
-        private class PersonConfiguration : EntityTypeConfiguration<Person>
+        class PersonConfiguration : EntityTypeConfiguration<Person>
         {
             public PersonConfiguration()
             {
@@ -20,7 +21,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("People");
             }
         }
-        private class AddressConfiguration : EntityTypeConfiguration<Address>
+        class AddressConfiguration : EntityTypeConfiguration<Address>
         {
             public AddressConfiguration()
             {
@@ -30,7 +31,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Address");
             }
         }
-        private class UbigeoConfiguration : EntityTypeConfiguration<Ubigeo>
+        class UbigeoConfiguration : EntityTypeConfiguration<Ubigeo>
         {
             public UbigeoConfiguration()
             {
@@ -39,7 +40,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Ubigeo");
             }
         }
-        private class DocumentConfiguration : EntityTypeConfiguration<Document>
+        class DocumentConfiguration : EntityTypeConfiguration<Document>
         {
             public DocumentConfiguration()
             {
@@ -49,7 +50,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Document");
             }
         }
-        private class DocumentTypeConfiguration : EntityTypeConfiguration<DocumentType>
+        class DocumentTypeConfiguration : EntityTypeConfiguration<DocumentType>
         {
             public DocumentTypeConfiguration()
             {
@@ -58,7 +59,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("DocumentType");
             }
         }
-        private class ContactNumberConfiguration : EntityTypeConfiguration<ContactNumber>
+        class ContactNumberConfiguration : EntityTypeConfiguration<ContactNumber>
         {
             public ContactNumberConfiguration()
             {
@@ -67,7 +68,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("ContactNumber");
             }
         }
-        private class UserConfiguration : EntityTypeConfiguration<User>
+        class UserConfiguration : EntityTypeConfiguration<User>
         {
             public UserConfiguration()
             {
@@ -76,7 +77,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("User");
             }
         }
-        private class RoleConfiguration : EntityTypeConfiguration<Role>
+        class RoleConfiguration : EntityTypeConfiguration<Role>
         {
             public RoleConfiguration()
             {
@@ -85,7 +86,29 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Role");
             }
         }
-        
+        class CompanyConfiguration : EntityTypeConfiguration<Company>
+        {
+            public CompanyConfiguration()
+            {
+                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                HasRequired(p=>p.ContactNumber).WithRequiredDependent().WillCascadeOnDelete(false);
+                HasRequired(p => p.Address).WithRequiredDependent().WillCascadeOnDelete(false);
+                ToTable("Companies");
+            }
+        }
+        class ScheduleDetailConfiguration : EntityTypeConfiguration<ScheduleDetail >
+        {
+            public ScheduleDetailConfiguration()
+            {
+                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                HasRequired(p => p.Person ).WithRequiredDependent().WillCascadeOnDelete(false);
+                ToTable("ScheduleDetail");
+            }
+        }
+
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -97,6 +120,8 @@ namespace StoreOnLine.DataBase.Entities
             modelBuilder.Configurations.Add(new RoleConfiguration());
             modelBuilder.Configurations.Add(new DocumentTypeConfiguration());
             modelBuilder.Configurations.Add(new UbigeoConfiguration());
+            modelBuilder.Configurations.Add(new CompanyConfiguration());
+            modelBuilder.Configurations.Add(new ScheduleDetailConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

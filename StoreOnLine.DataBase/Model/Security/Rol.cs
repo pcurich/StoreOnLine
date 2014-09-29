@@ -20,7 +20,7 @@ namespace StoreOnLine.DataBase.Model.Security
         Administrador,
         Supervisor,
         Empleado,
-        Cliente,
+        Representante,
         Admin,
         UserAdmin,
         UserAudit,

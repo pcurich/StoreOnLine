@@ -35,9 +35,10 @@
             <div></div>
             <div class="container-fluid pull-right" style="background-color: gold">
                 @{
-                    <h4>@(user != null ? user.UserName : "Anonimo")</h4>
+                    <h5>@(user != null ? user.UserName : "Anonimo") 
+                        @Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "btn btn-success" })
+                    </h5>
                 }
-                @Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "btn btn-primary" })
             </div>
         }
         }

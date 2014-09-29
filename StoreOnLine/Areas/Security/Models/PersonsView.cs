@@ -11,7 +11,7 @@ namespace StoreOnLine.Areas.Security.Models
         [HiddenInput(DisplayValue = false)]
         public int Id { get; set; }
 
-        [Display(Name = "Esta Activo?")]
+        [Display(Name = "Activo")]
         public bool IsStatus { get; set; }
 
         [Required(ErrorMessage = "Ingrese el Nombre")]
@@ -41,10 +41,12 @@ namespace StoreOnLine.Areas.Security.Models
 
         public string ContactNumberId { get; set; }
 
+        [StringLength(7, ErrorMessage = "El Numero de telefono debe ser de 7 digitos ")]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Telf Fijo")]
         public string NumberPhone { get; set; }
 
+        [StringLength(9, ErrorMessage = "El Numero de celular debe ser de 9 digitos ")]
         [Required(ErrorMessage = "Ingrese un numero de celular")]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Num Celular")]
@@ -90,7 +92,7 @@ namespace StoreOnLine.Areas.Security.Models
 
         [Required(ErrorMessage = "Ingrese un codigo de usuario")]
         [DataType(DataType.Text)]
-        [Display(Name = "Codigo Usuario")]
+        [Display(Name = "Numero interno")]
         public string UserCode { get; set; }
 
         [Required(ErrorMessage = "Ingrese un nombre de usuario")]
@@ -111,8 +113,6 @@ namespace StoreOnLine.Areas.Security.Models
         public string RoleCode { get; set; }
         public string RoleName { get; set; }
 
-
-
         public Person ToBd(PersonView view)
         {
             var dateStr = view.BirthDate.Split('/');
@@ -126,7 +126,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new Person
             {
                 Id = view.Id,
-                IsStatus=view.IsStatus,
+                IsStatus = view.IsStatus,
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = date,

@@ -23,3 +23,11 @@ namespace StoreOnLine.DataBase.Model.Security
         }
     }
 }
+
+
+//public enum DocumentType
+//{
+//    Dni,
+//    Passaporte,
+//    Ruc
+//}

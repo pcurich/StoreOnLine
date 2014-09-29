@@ -231,4 +231,37 @@
     </User>
     <RoleId>3</RoleId>
   </Person>
+  <Person>
+    <FirstName>No hay representante</FirstName>
+    <LastName></LastName>
+    <BirthDate>1900-01-01T00:00:00</BirthDate>
+    <DocumentId>0</DocumentId>
+    <Document>
+      <DocumentTypeId>4</DocumentTypeId>
+      <DocumentValue></DocumentValue>
+      <IsPrincipal>true</IsPrincipal>
+    </Document>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>0000000</NumberPhone>
+      <CellPhone>000000000</CellPhone>
+      <Email>anonimo@anonimo.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>No tiene</Line1>
+      <Line2 />
+      <Reference></Reference>
+      <UbigeoId>2055</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <UserId>0</UserId>
+    <User>
+      <UserCode>000000000</UserCode>
+      <UserName>anomino</UserName>
+      <UserPassword>anomino</UserPassword>
+    </User>
+    <RoleId>4</RoleId>
+  </Person>
 </ArrayOfPerson>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.Companies
@@ -8,15 +9,23 @@ namespace StoreOnLine.DataBase.Model.Companies
         public DateTime ScheduleFrom { get; set; }
         public DateTime ScheduleTo { get; set; }
 
-        public int ScheduleDaysWork { get; set; }
-        public int ScheduleDaysOff { get; set; }
+        public int ScheduleDaysWorkPerWeek { get; set; } //Dias que se trabajan durante la semana 
+        public int ScheduleDaysOff { get; set; } // complemento con 7
 
-        public int ScheduleTurnId { get; set; }
-        public ScheduleTurn ScheduleTurn { get; set; }
+        public string ScheduleTurn { get; set; }
 
-        public int ScheduleHuors { get; set; }
+        public int ScheduleHuors { get; set; } //Jornada de cuantas horas?
 
         public int CompanyId { get; set; }
         public Company Company { get; set; }
+
+        public List<ScheduleDetail> ScheduleDetails { get; set; }
     }
 }
+
+public enum ScheduleTurn
+{
+    Mañana = 1,
+    Noche = 2
+}
+

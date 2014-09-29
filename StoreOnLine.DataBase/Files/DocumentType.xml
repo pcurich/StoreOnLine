@@ -4,9 +4,12 @@
     <DocumentTypeName>DNI</DocumentTypeName>
   </DocumentType>
   <DocumentType>
-    <DocumentTypeName>Pasapoprte</DocumentTypeName>
+    <DocumentTypeName>Número Interno</DocumentTypeName>
   </DocumentType>
   <DocumentType>
     <DocumentTypeName>Ruc</DocumentTypeName>
+  </DocumentType>
+  <DocumentType>
+    <DocumentTypeName>Sin Documento</DocumentTypeName>
   </DocumentType>
 </ArrayOfDocumentType>

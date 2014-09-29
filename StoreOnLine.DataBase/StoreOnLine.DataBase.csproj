@@ -109,7 +109,7 @@
     <Compile Include="Entities\DataBaseInitializer.cs" />
     <Compile Include="Model\Companies\Company.cs" />
     <Compile Include="Model\Companies\Schedule.cs" />
-    <Compile Include="Model\Companies\ScheduleTurn.cs" />
+    <Compile Include="Model\Companies\ScheduleDetail.cs" />
     <Compile Include="Model\Configuration\EmailSettings.cs" />
     <Compile Include="Model\Resources\Feature.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />

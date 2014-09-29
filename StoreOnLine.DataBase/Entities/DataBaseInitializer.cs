@@ -29,7 +29,7 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                var path = "gmc";//gmc
+                var path = "pedro";//gmc
                 String pathFile = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
                 String pathImg = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
@@ -39,11 +39,10 @@ namespace StoreOnLine.DataBase.Entities
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
                 LoadSupplier(context, pathFile + "Unit.xml");
                 LoadRoles(context, pathFile + "Role.xml");
-                //Export(pathFile + "ScheduleTurn.xml");
                 LoadDocumentType(context, pathFile + "DocumentType.xml");
                 LoadPersons(context, pathFile + "User.xml");
-
-                LoadScheduleTurn(context, pathFile + "ScheduleTurn.xml");
+                Export(pathFile + "Company.xml");
+                LoadCompany(context, pathFile + "Company.xml");
 
                 var pbs = new List<ProductBase>
                 {
@@ -188,12 +187,12 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
-        private static void LoadScheduleTurn(StoreOnLineContext context, string str)
+        private static void LoadCompany(StoreOnLineContext context, string str)
         {
-            var elemt = XmlSerialization<List<ScheduleTurn>>.Deserialize(str);
+            var elemt = XmlSerialization<List<Company>>.Deserialize(str);
             foreach (var pb in elemt)
             {
-                context.ScheduleTurns.Add(pb);
+                context.Companies.Add(pb);
             }
             context.SaveChanges();
         }
@@ -227,12 +226,23 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void Export(String str)
         {
-            var pbs = new List<ScheduleTurn>
+            var pbs = new List<Company>
                 {
-                    new ScheduleTurn  { ScheduleTurnName = "Mañana", ScheduleTurnCode = "1" ,IsStatus = true},
-                    new ScheduleTurn  { ScheduleTurnName = "Noche", ScheduleTurnCode = "2" ,IsStatus = true}
+                    new Company { 
+                        CompanyName = "BBVA", 
+                        CompanyActivity= "Financiero", 
+                        CompanyCif="0001",
+                        CompanySecurityNumber="Ab123456789",
+                        CompanyDocumentRuc="45645645645", 
+                        Address = new Address(0,"Av Republica de panama 256","","javier prado con via expresa",1425),
+                        ContactNumber=new ContactNumber(0,"12457896","154785","curichpedro@gmail.com"),
+                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785",1),
+                            new ContactNumber(0,"541165265","5161561","hjfdchjufchuf@jhfbuhfbuf.com"),     
+                            new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4), 
+                            IsStatus = true}
+                    
                 };
-            XmlSerialization<List<ScheduleTurn>>.Serialize(pbs, str);
+            XmlSerialization<List<Company>>.Serialize(pbs, str);
         }
 
         #endregion
