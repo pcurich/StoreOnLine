@@ -43,10 +43,9 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public int ScheduleHuors { get; set; }
 
-        [Range(0, 23, ErrorMessage = "La hora de entrada debe estar entre las 00:00  hasta las 23:00 horas")]
         [Display(Name = "Hora de inicio")]
         [DataType(DataType.Text)]
-        public int ScheduleTimeStart { get; set; }
+        public string ScheduleTimeStart { get; set; }
 
         [Display(Name = "Empresa")]
         [DataType(DataType.Text)]

@@ -29,7 +29,10 @@ namespace StoreOnLine.DataBase.Entities
         {
             protected override void Seed(StoreOnLineContext context)
             {
-                var path = "pedro";//gmc
+                var path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Contains("gmc")
+                    ? "gmc"
+                    : "pedro";
+
                 String pathFile = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Files\";
                 String pathImg = @"C:\Users\" + path + @"\Documents\GitHub\StoreOnLine\StoreOnLine.DataBase\Img\";
                 LoadImagen(context, pathImg);
@@ -93,7 +96,7 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadCategory(StoreOnLineContext context, String str)
         {
-            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+          //  string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
 
             var elemt = XmlSerialization<List<Category>>.Deserialize(str);
             foreach (var e in elemt)
@@ -106,8 +109,6 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadCampaign(StoreOnLineContext context, String str)
         {
-            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
-
             var elemt = XmlSerialization<List<Campaign>>.Deserialize(str);
             foreach (var e in elemt)
             {
@@ -119,8 +120,6 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadUnit(StoreOnLineContext context, String str)
         {
-            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
-
             var elemt = XmlSerialization<List<Unit>>.Deserialize(str);
 
             foreach (var e in elemt)
@@ -143,8 +142,6 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadSupplier(StoreOnLineContext context, String str)
         {
-            string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
-
             var elemt = XmlSerialization<List<Unit>>.Deserialize(str);
 
             var pbs = new List<Supplier>

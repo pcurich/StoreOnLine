@@ -14,6 +14,8 @@
     <link href="~/Content/DataTables-1.10.2/css/dataTables.bootstrap.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/clockpicker/bootstrap-clockpicker.css" rel="stylesheet" />
+    <link href="~/Content/clockpicker/jquery-clockpicker.css" rel="stylesheet" />
 </head>
 <body>
     @(Html.Loader(new { @style = "style='max-height: 100%; max-width: 100%;'" }))
@@ -35,7 +37,7 @@
             <div></div>
             <div class="container-fluid pull-right" style="background-color: gold">
                 @{
-                    <h5>@(user != null ? user.UserName : "Anonimo") 
+                    <h5>@(user != null ? user.UserName : "Anonimo")
                         @Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "btn btn-success" })
                     </h5>
                 }
@@ -73,6 +75,9 @@
 <script src="~/Scripts/notify.js"></script>
 <script src="~/Scripts/moment.js"></script>
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/clockpicker/bootstrap-clockpicker.js"></script>
+<script src="~/Scripts/clockpicker/jquery-clockpicker.js"></script>
+
 
 
 <script type="text/javascript">

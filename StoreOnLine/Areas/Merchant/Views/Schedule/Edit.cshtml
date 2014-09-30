@@ -45,7 +45,7 @@
                                 <div class="col-lg-3">
                                     @Html.LabelFor(m => m.ScheduleFrom, new { @class = "control-label" })
                                 </div>
-                                <div class="col-lg-9" id="ScheduleFrom">
+                                <div class="col-lg-9" >
                                     @Html.EditorFor(m => m.ScheduleFrom, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Seleccione una fecha de Inicio de Contrato" } })
                                 </div>
                             </div>
@@ -84,11 +84,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     @Html.LabelFor(m => m.ScheduleTimeStart, new { @class = "control-label" })
                                 </div>
-                                <div class="col-lg-8">
-                                    @Html.EditorFor(m => m.ScheduleTimeStart)
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ScheduleTimeStart, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Horario de entrada" } })
                                 </div>
                             </div>
                         </div>
@@ -115,30 +115,29 @@
         }
 
         $(function() {
-            $('#ScheduleFrom').datetimepicker({
-                pickDate: true,
-                pickTime: false,
-                showToday: true,
+            $('#ScheduleFrom').datepicker({
+                format: 'dd/mm/yyyy',
                 language: 'es',
-                minDate: new Date(1900, 01, 01),
+                startDate: new Date(1900, 01, 01),
+                todayBtn: true,
+                clearBtn: true,
+                todayHighlight: true
             }).val('@Model.ScheduleFrom');
         });
 
         $(function() {
-            $('#ScheduleTo').datetimepicker({
-                pickDate: true,
-                pickTime: false,
-                showToday: true,
-                language: 'ru',
-                minDate: '@Model.ScheduleFrom',
+            $('#ScheduleTo').datepicker({
+                format: 'dd/mm/yyyy',
+                language: 'es',
+                startDate: '@Model.ScheduleFrom',
+                todayBtn: true,
+                clearBtn: true,
+                todayHighlight: true
             }).val('@Model.ScheduleTo');
         });
 
         $(function() {
-            $('#ScheduleTimeStart').datetimepicker({
-                pickDate: false,
-                pickTime: true
-            });
+            $('#ScheduleTimeStart').clockpicker({   autoclose:true });
         });
 
     </script>
