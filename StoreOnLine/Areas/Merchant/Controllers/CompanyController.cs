@@ -36,8 +36,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         {
             ViewBag.Action = "Index";
             var db = _repositoryCompany.Companies;
-            object view = db.Select(company => new CompanyView().ToView(company)).ToList();
-            return View(view);
+            return db != null ? View(db.Select(company => new CompanyView().ToView(company)).ToList()) : View(new CompanyView());
         }
 
         public ActionResult Create()
@@ -57,7 +56,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             var company = _repositoryCompany.Companies.FirstOrDefault(p => p.Id == companyId);
             if (company != null)
             {
-                ViewBag.UserName = company.CompanyName;
+                ViewBag.CompanyName = company.CompanyName;
                 ViewBag.Dpto = GetDeparts(company.Address.Ubigeo.CodDpto);
                 ViewBag.Prov = GetProvincesList(company.Address.Ubigeo.CodDpto, company.Address.Ubigeo.CodProv);
                 ViewBag.Dist = GetDistrictsList(company.Address.Ubigeo.CodDpto, company.Address.Ubigeo.CodProv, company.Address.Ubigeo.CodDist);
@@ -85,7 +84,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
                 var db = model.ToBd(model);
                 //db.Person = person;
-                db.AddressId =_repositoryPerson.SaveAddress(db.Address);
+                db.AddressId = _repositoryPerson.SaveAddress(db.Address);
                 db.Address = null;
                 db.ContactNumberId = _repositoryPerson.SaveContactNumber(db.ContactNumber);
                 db.ContactNumber = null;

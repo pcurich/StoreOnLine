@@ -90,9 +90,10 @@ namespace StoreOnLine.Areas.Security.Models
 
         public string UserId { get; set; }
 
+        [StringLength(5,ErrorMessage = "El numero Interno debe tener 5 digitos",MinimumLength = 5)]
         [Required(ErrorMessage = "Ingrese un codigo de usuario")]
         [DataType(DataType.Text)]
-        [Display(Name = "Numero interno")]
+        [Display(Name = "NI")]
         public string UserCode { get; set; }
 
         [Required(ErrorMessage = "Ingrese un nombre de usuario")]

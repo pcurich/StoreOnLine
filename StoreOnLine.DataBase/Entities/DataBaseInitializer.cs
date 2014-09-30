@@ -41,7 +41,7 @@ namespace StoreOnLine.DataBase.Entities
                 LoadRoles(context, pathFile + "Role.xml");
                 LoadDocumentType(context, pathFile + "DocumentType.xml");
                 LoadPersons(context, pathFile + "User.xml");
-                Export(pathFile + "Company.xml");
+               // Export(pathFile + "Company.xml");
                 LoadCompany(context, pathFile + "Company.xml");
 
                 var pbs = new List<ProductBase>

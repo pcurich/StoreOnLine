@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Model.Companies;
+using WebGrease;
 
 namespace StoreOnLine.Areas.Merchant.Models
 {
@@ -26,6 +27,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public string ScheduleTo { get; set; }
 
+        [Range(1, 7,ErrorMessage = "El valor debe estar entre 1 y 7")]
         [Display(Name = "Dias laborales (Semana)")]
         [DataType(DataType.Text)]
         public string ScheduleDaysWorkPerWeek { get; set; }
@@ -36,9 +38,15 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public string ScheduleTurn { get; set; }
 
+        [Range(1, 12, ErrorMessage = "Un turno puede durar entre 1 a 12 horas")]
         [Display(Name = "Jornada de Trabajo")]
         [DataType(DataType.Text)]
         public int ScheduleHuors { get; set; }
+
+        [Range(0, 23, ErrorMessage = "La hora de entrada debe estar entre las 00:00  hasta las 23:00 horas")]
+        [Display(Name = "Hora de inicio")]
+        [DataType(DataType.Text)]
+        public int ScheduleTimeStart { get; set; }
 
         [Display(Name = "Empresa")]
         [DataType(DataType.Text)]

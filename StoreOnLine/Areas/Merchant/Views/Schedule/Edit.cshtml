@@ -1,0 +1,146 @@
+﻿@model StoreOnLine.Areas.Merchant.Models.ScheduleView
+@{
+    ViewBag.Title = "Horario: Edit " + ViewBag.CompanyName;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tableBody",
+        Url = Url.Action("Edit", "Company"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+        OnSuccess = "OnSuccess"
+
+    };
+}
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading ">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#Datos" data-toggle="tab">Requisito de la compañia</a></li>
+        </ul>
+    </div>
+    @using (Ajax.BeginForm("Edit", "Schedule", ajaxOpts, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary()
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.CompanyId)
+        <div class="tab-content" style="height: 300px">
+            <div class="tab-pane active" id="Datos">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ScheduleFrom, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9" id="ScheduleFrom">
+                                    @Html.EditorFor(m => m.ScheduleFrom, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Seleccione una fecha de Inicio de Contrato" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ScheduleTo, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ScheduleTo, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Seleccione una fecha de Fin de Contrato " } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ScheduleDaysWorkPerWeek, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ScheduleDaysWorkPerWeek, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese la cantidad de dias a laborar (1-7)" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ScheduleTurn, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ScheduleTurn, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese eL numero de seguro" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.ScheduleHuors, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.EditorFor(m => m.ScheduleHuors, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Horas que dura un turno" } })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-4">
+                                    @Html.LabelFor(m => m.ScheduleTimeStart, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-8">
+                                    @Html.EditorFor(m => m.ScheduleTimeStart)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <span id="loading" class="ui-icon-loading" style="display: none">
+                <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+            </span>
+            @Html.ActionLink("Cancelar", "Index", new { Area = "Merchant", companyId = Model.CompanyId }, new { @class = "btn btn-default pull-right" })
+        </div>
+    }
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function OnSuccess(data) {
+            window.location.href = data.newurl;
+        }
+
+        $(function() {
+            $('#ScheduleFrom').datetimepicker({
+                pickDate: true,
+                pickTime: false,
+                showToday: true,
+                language: 'es',
+                minDate: new Date(1900, 01, 01),
+            }).val('@Model.ScheduleFrom');
+        });
+
+        $(function() {
+            $('#ScheduleTo').datetimepicker({
+                pickDate: true,
+                pickTime: false,
+                showToday: true,
+                language: 'ru',
+                minDate: '@Model.ScheduleFrom',
+            }).val('@Model.ScheduleTo');
+        });
+
+        $(function() {
+            $('#ScheduleTimeStart').datetimepicker({
+                pickDate: false,
+                pickTime: true
+            });
+        });
+
+    </script>
+}
+
