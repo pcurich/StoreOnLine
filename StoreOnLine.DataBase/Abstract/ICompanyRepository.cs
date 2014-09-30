@@ -7,6 +7,7 @@ namespace StoreOnLine.DataBase.Abstract
     {
         IEnumerable<Company> Companies { get; }
         int SaveCompany(Company company);
+        int SaveSchedule(Schedule schedule);
         Company DeleteCompany(int company, bool physical = false);
     }
 }

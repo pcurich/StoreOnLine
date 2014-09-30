@@ -5,7 +5,7 @@
     var ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "tableBody",
-        Url = Url.Action("Edit", "Company"),
+        Url = Url.Action("Edit", "Schedule"),
         LoadingElementDuration = 1000,
         LoadingElementId = "loading",
         HttpMethod = "Post",
@@ -61,7 +61,7 @@
                                 <div class="col-lg-3">
                                     @Html.LabelFor(m => m.ScheduleDaysWorkPerWeek, new { @class = "control-label" })
                                 </div>
-                                <div class="col-lg-9">
+                                <div class="col-lg-8">
                                     @Html.EditorFor(m => m.ScheduleDaysWorkPerWeek, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese la cantidad de dias a laborar (1-7)" } })
                                 </div>
                             </div>
@@ -72,7 +72,10 @@
                                     @Html.LabelFor(m => m.ScheduleTurn, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ScheduleTurn, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese eL numero de seguro" } })
+                                    @Html.DropDownListFor(m => m.ScheduleTurn,
+                                            (SelectList)ViewBag.GetScheduleTurn,
+                                            "------------------------------",
+                                            new { @class = "form-control btn btn-primary" })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -80,7 +83,7 @@
                                     @Html.LabelFor(m => m.ScheduleHuors, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.ScheduleHuors, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Horas que dura un turno" } })
+                                    @Html.EditorFor(m => m.ScheduleHuors, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Cantidad de horas que dura un turno" } })
                                 </div>
                             </div>
                             <div class="form-group">
@@ -116,6 +119,7 @@
 
         $(function() {
             $('#ScheduleFrom').datepicker({
+                autoclose:true,
                 format: 'dd/mm/yyyy',
                 language: 'es',
                 startDate: new Date(1900, 01, 01),
@@ -127,6 +131,7 @@
 
         $(function() {
             $('#ScheduleTo').datepicker({
+                autoclose: true,
                 format: 'dd/mm/yyyy',
                 language: 'es',
                 startDate: '@Model.ScheduleFrom',

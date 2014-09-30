@@ -27,7 +27,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public string ScheduleTo { get; set; }
 
-        [Range(1, 7,ErrorMessage = "El valor debe estar entre 1 y 7")]
+        [Range(1, 7, ErrorMessage = "El valor debe estar entre 1 y 7")]
         [Display(Name = "Dias laborales (Semana)")]
         [DataType(DataType.Text)]
         public string ScheduleDaysWorkPerWeek { get; set; }
@@ -41,7 +41,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         [Range(1, 12, ErrorMessage = "Un turno puede durar entre 1 a 12 horas")]
         [Display(Name = "Jornada de Trabajo")]
         [DataType(DataType.Text)]
-        public int ScheduleHuors { get; set; }
+        public string ScheduleHuors { get; set; }
 
         [Display(Name = "Hora de inicio")]
         [DataType(DataType.Text)]
@@ -67,7 +67,7 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ScheduleDaysWorkPerWeek = Convert.ToInt16(view.ScheduleDaysWorkPerWeek),
                 ScheduleDaysOff = 7 - Convert.ToInt16(view.ScheduleDaysWorkPerWeek),
                 ScheduleTurn = view.ScheduleTurn,
-                ScheduleHuors = view.ScheduleHuors,
+                ScheduleHuors = Convert.ToInt16(view.ScheduleHuors),
                 CompanyId = view.CompanyId
             };
         }
@@ -83,7 +83,7 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ScheduleDaysWorkPerWeek = Convert.ToString(db.ScheduleDaysWorkPerWeek),
                 ScheduleDaysOff = Convert.ToString(db.ScheduleDaysOff),
                 ScheduleTurn = db.ScheduleTurn,
-                ScheduleHuors = db.ScheduleHuors,
+                ScheduleHuors = Convert.ToString(db.ScheduleHuors),
                 CompanyId = db.CompanyId
             };
         }

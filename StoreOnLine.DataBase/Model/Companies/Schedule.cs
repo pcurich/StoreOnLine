@@ -28,4 +28,4 @@ public enum ScheduleTurn
     Mañana = 1,
     Noche = 2
 }
-
+ 

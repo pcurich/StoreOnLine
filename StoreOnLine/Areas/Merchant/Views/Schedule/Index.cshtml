@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StoreOnLine.Areas.Merchant.Models.ScheduleView >
+﻿@model IEnumerable<StoreOnLine.Areas.Merchant.Models.ScheduleView>
 @{
     ViewBag.Title = "Clientes";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -20,14 +20,14 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
-                @Html.ActionLink("Crear Nuevo", "Create", "Schedule", new {companyId=ViewBag.companyId }, new { @class = " btn btn-primary pull-righ" })
+                @Html.ActionLink("Crear Nuevo", "Create", "Schedule", new { companyId = ViewBag.companyId }, new { @class = " btn btn-primary pull-righ" })
             </div>
             <div class="panel-body">
                 <table id="DataTablePerson" class="table table-striped">
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.ScheduleFrom )
+                                @Html.DisplayNameFor(model => model.ScheduleFrom)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.ScheduleTo)
@@ -41,10 +41,11 @@
                             <th>
                                 @Html.DisplayNameFor(model => model.ScheduleDaysWorkPerWeek)
                             </th>
-                         
+
                             <th class="text-center">
                                 @Html.DisplayNameFor(model => model.IsStatus)
                             </th>
+                            <th></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -65,7 +66,7 @@
                                     @Html.DisplayFor(modelItem => item.ScheduleTurn)
                                 </td>
                                 <td class="text-center">
-                                @Html.DisplayFor(modelItem => item.ScheduleDaysWorkPerWeek)
+                                    @Html.DisplayFor(modelItem => item.ScheduleDaysWorkPerWeek)
                                 </td>
                                 <td class="text-center">
                                     @if (item.IsStatus)
@@ -79,10 +80,19 @@
 
                                 </td>
                                 <td class="text-center">
-                                    @using (Html.BeginForm("Delete", "Company"))
+                                    @using (Html.BeginForm("Delete", "Schedule"))
                                     {
-                                        @Html.Hidden("companyId", item.Id)
+                                        @Html.Hidden("companyId", item.CompanyId)
+                                        @Html.Hidden("scheduleId", item.Id)
                                         <input type="submit" class="btn btn-danger btn-xs" value="Delete" />
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @using (Html.BeginForm("Edit", "Schedule", FormMethod.Get))
+                                    {
+                                        @Html.Hidden("companyId", item.CompanyId)
+                                        @Html.Hidden("scheduleId", item.Id)
+                                        <input type="submit" class="btn btn-primary btn-xs" value="Editar" />
                                     }
                                 </td>
                             </tr>

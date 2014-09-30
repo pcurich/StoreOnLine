@@ -37,7 +37,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult Create(int companyId)
         {
             ViewBag.Action = "Create";
-            return View("Edit", new ScheduleView {CompanyId = companyId});
+            ViewBag.GetScheduleTurn = GetScheduleTurn(null);
+            return View("Edit", new ScheduleView { CompanyId = companyId });
         }
 
         public ActionResult Edit(int companyId, int scheduleId)
@@ -48,15 +49,31 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             if (company != null)
             {
                 ViewBag.CompanyName = company.CompanyName;
-                schedule=company.Schedules.FirstOrDefault(p => p.Id == scheduleId);
+                schedule = company.Schedules.FirstOrDefault(p => p.Id == scheduleId);
+                ViewBag.GetScheduleTurn = GetScheduleTurn(schedule != null ? schedule.ScheduleTurn : null);
             }
             return View(new ScheduleView().ToView(schedule));
         }
 
         [HttpPost]
-        public ActionResult Edit(CompanyView model)
+        public ActionResult Edit(ScheduleView model)
         {
-            return View(new ScheduleView());
+            ViewBag.Action = "Edit";
+            if (ModelState.IsValid)
+            {
+                _repositoryCompany.SaveSchedule(model.ToBd(model));
+                TempData["message"] = string.Format("ha sido guardado");
+                return Json(new { ok = true, newurl = "Index?companyId=" + model.CompanyId });
+            }
+
+            return Json(new { ok = false, model });
         }
+
+        #region Custom
+        public SelectList GetScheduleTurn(string selected)
+        {
+            return new SelectList(Enum.GetNames(typeof(ScheduleTurn)).Select(r => new SelectListItem { Text = r.ToString(), Value = r.ToString(), Selected = (r.ToString() == selected) }), "Value", "Text");
+        }
+        #endregion
     }
 }
