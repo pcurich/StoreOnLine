@@ -12,7 +12,7 @@ namespace StoreOnLine.DataBase.Model.Security
         }
         public Person(int id,bool isStatus, string firstName, string lastName, DateTime birthDate,
             int documentId, int contactNumberId, int addressId, 
-            int userId, int roleId)
+            int userId, int roleId, string baseCode)
         {
             Id = id;
             IsStatus = isStatus;
@@ -24,11 +24,12 @@ namespace StoreOnLine.DataBase.Model.Security
             AddressId = addressId;
             UserId = userId;
             RoleId = roleId;
+            BaseCode = baseCode;
         }
 
         public Person(int id, bool isStatus, string firstName, string lastName, DateTime birthDate,
             Document document, ContactNumber contactNumber, Address address,
-            User user, int roleId)
+            User user, int roleId, string baseCode)
         {
             Id = id;
             IsStatus = isStatus;
@@ -40,6 +41,7 @@ namespace StoreOnLine.DataBase.Model.Security
             Address = address;
             User = user;
             RoleId = roleId;
+            BaseCode = baseCode;
         }
 
         public string FirstName { get; set; }
@@ -60,6 +62,8 @@ namespace StoreOnLine.DataBase.Model.Security
 
         public int RoleId { get; set; }
         public Role Role { get; set; }
+
+        public string BaseCode { get; set; }
     }
 
 }

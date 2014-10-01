@@ -23,7 +23,14 @@ namespace StoreOnLine.DataBase.Model.Companies
         public int PersonId { get; set; }
         public Person Person { get; set; }
 
+        public string CompanyType { get; set; }
+
         public List<Schedule> Schedules { get; set; }
 
     }
+}
+
+public enum CompanyType
+{
+    Internal, External
 }

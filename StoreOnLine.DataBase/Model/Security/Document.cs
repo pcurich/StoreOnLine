@@ -4,22 +4,21 @@ namespace StoreOnLine.DataBase.Model.Security
 {
     public class Document : DataBaseId
     {
-        public int DocumentTypeId { get; set; }
-        public DocumentType DocumentType { get; set; }
+        public string DocumentDni { get; set; }
+        public string DocumentRuc { get; set; }
 
-        public string DocumentValue { get; set; }
         public bool IsPrincipal { get; set; }
 
         public Document()
         {
         }
 
-        public Document(int id, string documentValue, int documentTypeId)
+        public Document(int id, string documentDni, string documentRuc)
         {
             Id = id;
-            DocumentValue = documentValue;
+            DocumentDni = documentDni;
             IsPrincipal = true;
-            DocumentTypeId = documentTypeId;
+            DocumentRuc = documentRuc;
         }
     }
 }

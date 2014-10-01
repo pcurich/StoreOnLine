@@ -45,7 +45,6 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<Ubigeo> Ubigeos { get; set; }
         public DbSet<ContactNumber> ContactNumbers { get; set; }
         public DbSet<Document> Documents { get; set; }
-        public DbSet<DocumentType> DocumentTypes { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 

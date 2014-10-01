@@ -40,16 +40,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Ubigeo");
             }
         }
-        class DocumentConfiguration : EntityTypeConfiguration<Document>
-        {
-            public DocumentConfiguration()
-            {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
-                HasRequired(p => p.DocumentType);
-                ToTable("Document");
-            }
-        }
+        
         class DocumentTypeConfiguration : EntityTypeConfiguration<DocumentType>
         {
             public DocumentTypeConfiguration()
@@ -113,7 +104,6 @@ namespace StoreOnLine.DataBase.Entities
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new PersonConfiguration());
-            modelBuilder.Configurations.Add(new DocumentConfiguration());
             modelBuilder.Configurations.Add(new AddressConfiguration());
             modelBuilder.Configurations.Add(new ContactNumberConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());

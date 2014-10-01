@@ -42,7 +42,6 @@ namespace StoreOnLine.DataBase.Entities
                 LoadUbigeo(context, pathFile + "Ubigeo.xml");
                 LoadSupplier(context, pathFile + "Unit.xml");
                 LoadRoles(context, pathFile + "Role.xml");
-                LoadDocumentType(context, pathFile + "DocumentType.xml");
                 LoadPersons(context, pathFile + "User.xml");
                // Export(pathFile + "Company.xml");
                 LoadCompany(context, pathFile + "Company.xml");
@@ -174,15 +173,6 @@ namespace StoreOnLine.DataBase.Entities
             context.SaveChanges();
         }
 
-        private static void LoadDocumentType(StoreOnLineContext context, string str)
-        {
-            var elemt = XmlSerialization<List<DocumentType>>.Deserialize(str);
-            foreach (var pb in elemt)
-            {
-                context.DocumentTypes.Add(pb);
-            }
-            context.SaveChanges();
-        }
 
         private static void LoadCompany(StoreOnLineContext context, string str)
         {
@@ -233,7 +223,7 @@ namespace StoreOnLine.DataBase.Entities
                         CompanyDocumentRuc="45645645645", 
                         Address = new Address(0,"Av Republica de panama 256","","javier prado con via expresa",1425),
                         ContactNumber=new ContactNumber(0,"12457896","154785","curichpedro@gmail.com"),
-                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785",1),
+                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785",""),
                             new ContactNumber(0,"541165265","5161561","hjfdchjufchuf@jhfbuhfbuf.com"),     
                             new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4), 
                             IsStatus = true}

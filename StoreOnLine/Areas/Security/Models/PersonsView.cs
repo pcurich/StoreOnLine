@@ -31,13 +31,16 @@ namespace StoreOnLine.Areas.Security.Models
 
         public string DocumentId { get; set; }
 
+        [StringLength(8,ErrorMessage = "El dni posee 8 digitos",MinimumLength = 8)]
+        [Required(ErrorMessage = "Ingrese el numero de dni")]
         [DataType(DataType.Text)]
-        public string DocumentValue { get; set; }
+        [Display(Name = "DNI")]
+        public string DocumentDni { get; set; }
 
-        [Required(ErrorMessage = "Seleccione el tipo de documento")]
+        [StringLength(11, ErrorMessage = "El ruc posee 11 digitos", MinimumLength = 11)]
         [DataType(DataType.Text)]
-        [Display(Name = "Tipo Doc")]
-        public string DocumentTypeId { get; set; }
+        [Display(Name = "RUC")]
+        public string DocumentRuc { get; set; }
 
         public string ContactNumberId { get; set; }
 
@@ -114,12 +117,15 @@ namespace StoreOnLine.Areas.Security.Models
         public string RoleCode { get; set; }
         public string RoleName { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Base")]
+        public string BaseCode { get; set; }
+
         public Person ToBd(PersonView view)
         {
             var dateStr = view.BirthDate.Split('/');
             var date = new DateTime(Convert.ToInt16(dateStr[2]), Convert.ToInt16(dateStr[1]), Convert.ToInt16(dateStr[0]));
-            var documentType = new DocumentType(Convert.ToInt16(view.DocumentTypeId));
-            var document = new Document(Convert.ToInt16(view.DocumentId), view.DocumentValue, documentType.Id);
+            var document = new Document(Convert.ToInt16(view.DocumentId), view.DocumentDni,  view.DocumentRuc);
             var contactNumber = new ContactNumber(Convert.ToInt16(view.ContactNumberId), view.NumberPhone, view.CellPhone, view.Email);
             var address = new Address(Convert.ToInt16(view.AddressId), view.Line1, view.Line2, view.Reference, Convert.ToInt16(view.UbigeoId));
             var user = new User(Convert.ToInt16(view.UserId), view.UserCode, view.UserName, view.UserPassword);
@@ -131,7 +137,7 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = date,
-                DocumentId = Convert.ToInt16(view.DocumentTypeId),
+                DocumentId = Convert.ToInt16(view.DocumentId),
                 Document = document,
                 ContactNumberId = Convert.ToInt16(view.ContactNumberId),
                 ContactNumber = contactNumber,
@@ -140,6 +146,7 @@ namespace StoreOnLine.Areas.Security.Models
                 RoleId = Convert.ToInt16(view.RoleId),
                 AddressId = Convert.ToInt16(view.AddressId),
                 Address = address,
+                BaseCode = view.BaseCode,
             };
         }
 
@@ -152,9 +159,9 @@ namespace StoreOnLine.Areas.Security.Models
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate.ToShortDateString(),
-                DocumentTypeId = db.Document.DocumentTypeId.ToString(CultureInfo.InvariantCulture),
                 DocumentId = db.DocumentId.ToString(CultureInfo.InvariantCulture),
-                DocumentValue = db.Document.DocumentValue,
+                DocumentRuc = db.Document.DocumentRuc,
+                DocumentDni = db.Document.DocumentDni,
                 ContactNumberId = db.ContactNumberId.ToString(CultureInfo.InvariantCulture),
                 NumberPhone = db.ContactNumber.NumberPhone,
                 CellPhone = db.ContactNumber.CellPhone,
@@ -173,7 +180,8 @@ namespace StoreOnLine.Areas.Security.Models
                 UserPassword = db.User.UserPassword,
                 RoleId = db.RoleId.ToString(CultureInfo.InvariantCulture),
                 RoleCode = db.Role.RoleCode,
-                RoleName = db.Role.RoleName
+                RoleName = db.Role.RoleName,
+                BaseCode = db.BaseCode,
             };
         }
     }

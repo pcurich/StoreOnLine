@@ -1,4 +1,5 @@
-﻿@model StoreOnLine.Areas.Security.Models.PersonView
+﻿@using StoreOnLine.Infrastructure.Helper
+@model StoreOnLine.Areas.Security.Models.PersonView
 @{
     ViewBag.Title = "Security: Edit " + ViewBag.UserName;
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -56,6 +57,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el el nombre" } })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
                                 </div>
                             </div>
                             <div class="form-group">
@@ -64,6 +66,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese los apellidos" } })
+                                    @Html.ValidationMessageFor(m => m.LastName)
                                 </div>
                             </div>
                         </div>
@@ -74,6 +77,7 @@
                                 </div>
                                 <div class="col-lg-8">
                                     @Html.EditorFor(m => m.BirthDate, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su fecha de Nacimiento" } })
+                                    @Html.ValidationMessageFor(m => m.BirthDate)
                                 </div>
                             </div>
                             <div class="form-group">
@@ -100,6 +104,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.Line1, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.Line1)
                                 </div>
                             </div>
                         </div>
@@ -125,6 +130,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.Line2, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.Line2)
                                 </div>
                             </div>
                         </div>
@@ -150,6 +156,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.Reference, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Direccion" } })
+                                    @Html.ValidationMessageFor(m => m.Reference)
                                 </div>
                             </div>
                         </div>
@@ -179,6 +186,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.NumberPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero fijo" } })
+                                    @Html.ValidationMessageFor(m => m.NumberPhone)
                                 </div>
                             </div>
                         </div>
@@ -189,6 +197,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.CellPhone, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.CellPhone)
                                 </div>
                             </div>
                         </div>
@@ -199,6 +208,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese Numero de Celular" } })
+                                    @Html.ValidationMessageFor(m => m.Email)
                                 </div>
                             </div>
                         </div>
@@ -215,6 +225,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.UserName, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese una contraseña" } })
+                                    @Html.ValidationMessageFor(m => m.UserName)
                                 </div>
                             </div>
                         </div>
@@ -225,6 +236,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.UserPassword, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.ValidationMessageFor(m => m.UserPassword)
                                 </div>
                             </div>
                         </div>
@@ -235,6 +247,7 @@
                                 </div>
                                 <div class="col-lg-9">
                                     @Html.EditorFor(m => m.UserCode, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Numero Interno" } })
+                                    @Html.ValidationMessageFor(m => m.UserCode)
                                 </div>
                             </div>
                         </div>
@@ -247,23 +260,22 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.DocumentTypeId, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
+                                    @Html.LabelFor(m => m.DocumentDni, new { @class = "control-label", PlaceHolder = "Ingrese un usuario" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.DropDownListFor(m => m.DocumentTypeId,
-                                            (SelectList)ViewBag.DocumentType,
-                                            "------------------------------",
-                                            new { @class = "form-control btn btn-primary" })
+                                    @Html.EditorFor(m => m.DocumentDni, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su dni" } })
+                                    @Html.ValidationMessageFor(m => m.DocumentDni)
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <div class="col-lg-3">
-                                    @Html.LabelFor(m => m.DocumentValue, new { @class = "control-label" })
+                                    @Html.LabelFor(m => m.DocumentRuc, new { @class = "control-label" })
                                 </div>
                                 <div class="col-lg-9">
-                                    @Html.EditorFor(m => m.DocumentValue, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese el nombre del usuario" } })
+                                    @Html.EditorFor(m => m.DocumentRuc, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Ingrese su numero de ruc" } })
+                                    @Html.ValidationMessageFor(m => m.DocumentRuc)
                                 </div>
                             </div>
                         </div>
@@ -281,6 +293,19 @@
                                 <div class="col-lg-9">
                                     @Html.DropDownListFor(m => m.RoleCode,
                                 (SelectList)ViewBag.Role,
+                                "------------------------------",
+                                new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="col-lg-3">
+                                    @Html.LabelFor(m => m.BaseCode, new { @class = "control-label" })
+                                </div>
+                                <div class="col-lg-9">
+                                    @Html.DropDownListFor(m => m.BaseCode,
+                                (SelectList)ViewBag.BaseCode,
                                 "------------------------------",
                                 new { @class = "form-control btn btn-primary" })
                                 </div>

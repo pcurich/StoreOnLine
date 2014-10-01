@@ -21,18 +21,11 @@ namespace StoreOnLine.DataBase.Concrete
                     .Include(o => o.Address)
                     .Include(o => o.ContactNumber)
                     .Include(o => o.Document)
-                    .Include(o => o.Document.DocumentType)
                     .Include(o=>o.User)
                     .Include(o => o.Role)
                     .Include(o => o.Address.Ubigeo)
                     .Where(o => !o.IsDeleted);
             }
-        }
-
-        public SelectList GetDocumentTypeList(string selected)
-        {
-            var repo = _context.DocumentTypes.Where(o => !o.IsDeleted);
-            return new SelectList(repo.Select(r => new SelectListItem { Text = r.DocumentTypeName, Value = r.Id.ToString(), Selected = (r.Id.ToString() == selected) }).ToList(), "Value", "Text");
         }
 
         public SelectList GetPersons(string selected, int roleId)

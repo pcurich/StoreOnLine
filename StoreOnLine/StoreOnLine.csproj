@@ -640,6 +640,7 @@
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
+    <Compile Include="Areas\Merchant\Controllers\BaseController.cs" />
     <Compile Include="Areas\Merchant\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Merchant\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Merchant\MerchantAreaRegistration.cs" />
@@ -717,6 +718,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
+    <Folder Include="Areas\Merchant\Views\Base\" />
     <Folder Include="Areas\Merchant\Views\Shared\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Report\Views\Shared\" />

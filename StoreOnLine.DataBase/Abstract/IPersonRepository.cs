@@ -7,7 +7,6 @@ namespace StoreOnLine.DataBase.Abstract
     public interface IPersonRepository
     {
         IEnumerable<Person> Persons { get; }
-        SelectList GetDocumentTypeList(string selected);
         SelectList GetPersons(string selected, int roleId);
         int SavePerson(Person person);
         int SaveAddress(Address address);

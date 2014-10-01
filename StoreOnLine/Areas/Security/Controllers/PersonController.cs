@@ -47,7 +47,6 @@ namespace StoreOnLine.Areas.Security.Controllers
                 ViewBag.Prov = GetProvincesList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv);
                 ViewBag.Dist = GetDistrictsList(person.Address.Ubigeo.CodDpto, person.Address.Ubigeo.CodProv, person.Address.Ubigeo.CodDist);
                 ViewBag.Role = GetRolesList(person.Role.RoleCode);
-                ViewBag.DocumentType = GetDocumentTypeList(person.Document.DocumentType.Id.ToString(CultureInfo.InvariantCulture));
             }
             return View(new PersonView().ToView(person));
         }
@@ -74,7 +73,6 @@ namespace StoreOnLine.Areas.Security.Controllers
             ViewBag.Prov = ViewBag.Prov = GetProvincesList(model.CodDpto, model.CodProv);
             ViewBag.Dist = GetDistrictsList(model.CodDpto, model.CodProv, model.CodDist);
             ViewBag.Role = GetRolesList(model.RoleCode);
-            ViewBag.DocumentType = GetDocumentTypeList(model.DocumentTypeId);
             return Json(new { ok = false, model });
 
         }
@@ -84,7 +82,6 @@ namespace StoreOnLine.Areas.Security.Controllers
             ViewBag.Action = "Create";
             ViewBag.Dpto = GetDeparts(null);
             ViewBag.Role = GetRolesList(null);
-            ViewBag.DocumentType = GetDocumentTypeList(null);
             ViewBag.Prov = new SelectList(new List<SelectListItem>());
             ViewBag.Dist = new SelectList(new List<SelectListItem>());
             return View("Edit", new PersonView());
@@ -116,11 +113,6 @@ namespace StoreOnLine.Areas.Security.Controllers
         public SelectList GetDistrictsList(string codDpto, string codProv, string selected)
         {
             return _repositoryUbigeo.GetDistrict(codDpto, codProv, selected);
-        }
-
-        public SelectList GetDocumentTypeList(string selected)
-        {
-            return _repositoryPerson.GetDocumentTypeList(selected);
         }
 
         public JsonResult GetProvinces(string codDpto, string selected)
