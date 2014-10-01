@@ -113,6 +113,10 @@
     <Compile Include="Model\Companies\Schedule.cs" />
     <Compile Include="Model\Companies\ScheduleDetail.cs" />
     <Compile Include="Model\Configuration\EmailSettings.cs" />
+    <Compile Include="Model\Data\LocalizeProperties.cs" />
+    <Compile Include="Model\Data\LocalizeResources.cs" />
+    <Compile Include="Model\Data\PageModules.cs" />
+    <Compile Include="Model\Data\Pages.cs" />
     <Compile Include="Model\Resources\Feature.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />
     <Compile Include="Model\Products\Campaign .cs" />

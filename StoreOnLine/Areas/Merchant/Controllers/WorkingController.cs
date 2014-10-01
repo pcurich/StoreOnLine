@@ -6,6 +6,8 @@ using System.Web.DynamicData;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Model.Companies;
+using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Merchant.Controllers
 {
@@ -57,19 +59,74 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         public ActionResult OnTime(int companyId, int scheduleId)
         {
-            
-
             var db = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
             if (db != null)
             {
                 var details =
                     db.ScheduleDetails.Where(o => o.TimeStart.Day == DateTime.Now.Day)
-                        .Select(schedule => new ScheduleDetailView().ToView(schedule)).FirstOrDefault();
+                        .Select(schedule => new ScheduleDetailView().ToView(schedule)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
+
+                if (details != null)
+                {
+                    ViewBag.Person = GetPersonList(details.PersonId.ToString());
+
+                }
+                else
+                {
+                    ViewBag.Person = GetPersonList(null);
+
+                }
                 return View(details);
             }
             return View(new ScheduleDetailView());
         }
 
-        
+        [HttpPost]
+        public ActionResult OnTime(ScheduleDetailView model)
+        {
+            ViewBag.Action = "OnTime";
+
+            if (ModelState.IsValid)
+            {
+                var schedule = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == model.ScheduleId);
+                var timeEnd = DateTime.Now;
+
+                if (schedule != null)
+                {
+                    var scheduleDetails = schedule.ScheduleDetails.OrderByDescending(o=>o.Id).Take(1).FirstOrDefault();
+                    
+                    if (scheduleDetails != null)
+                    {
+                        timeEnd = scheduleDetails.TimeEnd;
+                        //terminar su tarea y crearle una nueva
+                        scheduleDetails.TimeEnd = DateTime.Now;
+                        //scheduleDetails.Person = null;
+                        //scheduleDetails.Schedule = null;
+                        var elapsedTicks = scheduleDetails.TimeEnd.Ticks - scheduleDetails.TimeStart.Ticks;
+                        var elapsedSpan = new TimeSpan(elapsedTicks);
+                        scheduleDetails.TotalTime = Convert.ToInt16(elapsedSpan.TotalSeconds);
+                        _repositorySchedule.SaveScheduleDetail(scheduleDetails);
+                    }
+                }
+                var m = model.ToBd(model);
+                m.Person = null;
+                m.Schedule = null;
+                m.TimeStart = DateTime.Now;
+                m.TimeEnd = timeEnd;
+                m.Id = 0;
+                _repositorySchedule.SaveScheduleDetail(m);
+                TempData["message"] = string.Format("ha sido guardado");
+                return Json(new { ok = true, newurl = "OnTime?companyId=" + schedule.CompanyId + "&scheduleId=" + schedule.Id });
+            }
+
+            return Json(new { ok = false, model });
+        }
+
+        public SelectList GetPersonList(string selected)
+        {
+            return _repositoryPerson.GetPersons(selected, 3);
+        }
+
+
     }
 }
