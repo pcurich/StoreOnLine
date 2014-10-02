@@ -28,8 +28,8 @@
       <BirthDate>1986-04-17T00:00:00</BirthDate>
       <DocumentId>0</DocumentId>
       <Document>
-        <DocumentTypeId>1</DocumentTypeId>
-        <DocumentValue>12458785</DocumentValue>
+        <DocumentDni>12458785</DocumentDni>
+        <DocumentRuc>12458785</DocumentRuc>
         <IsPrincipal>true</IsPrincipal>
       </Document>
       <ContactNumberId>0</ContactNumberId>
@@ -54,6 +54,127 @@
         <UserPassword>emp</UserPassword>
       </User>
       <RoleId>4</RoleId>
+      <BaseCode>111</BaseCode>
     </Person>
+    <CompanyType>External</CompanyType>
+    <CompanyCode>111</CompanyCode>
+  </Company>
+  <Company>
+    <CompanyName>BCP</CompanyName>
+    <CompanyActivity>Financiero</CompanyActivity>
+    <CompanyCif>0001</CompanyCif>
+    <CompanySecurityNumber>Ab123456789</CompanySecurityNumber>
+    <CompanyDocumentRuc>45645645645</CompanyDocumentRuc>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Av Republica de panama 256</Line1>
+      <Line2 />
+      <Reference>javier prado con via expresa</Reference>
+      <UbigeoId>1425</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>12457896</NumberPhone>
+      <CellPhone>154785</CellPhone>
+      <Email>curichpedro@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <PersonId>0</PersonId>
+    <Person>
+      <FirstName>Luis  Manuel</FirstName>
+      <LastName>Gonzales</LastName>
+      <BirthDate>1986-04-17T00:00:00</BirthDate>
+      <DocumentId>0</DocumentId>
+      <Document>
+        <DocumentDni>12458785</DocumentDni>
+        <DocumentRuc>12458785</DocumentRuc>
+        <IsPrincipal>true</IsPrincipal>
+      </Document>
+      <ContactNumberId>0</ContactNumberId>
+      <ContactNumber>
+        <NumberPhone>541165265</NumberPhone>
+        <CellPhone>5161561</CellPhone>
+        <Email>hjfdchjufchuf@jhfbuhfbuf.com</Email>
+        <IsPrincipal>true</IsPrincipal>
+      </ContactNumber>
+      <AddressId>0</AddressId>
+      <Address>
+        <Line1>su casa</Line1>
+        <Line2>al ladito</Line2>
+        <Reference />
+        <UbigeoId>1405</UbigeoId>
+        <IsPrincipal>true</IsPrincipal>
+      </Address>
+      <UserId>0</UserId>
+      <User>
+        <UserCode>emp</UserCode>
+        <UserName>emp</UserName>
+        <UserPassword>emp</UserPassword>
+      </User>
+      <RoleId>4</RoleId>
+      <BaseCode>122</BaseCode>
+    </Person>
+    <CompanyType>External</CompanyType>
+    <CompanyCode>122</CompanyCode>
+  </Company>
+  <Company>
+    <CompanyName>Procegur</CompanyName>
+    <CompanyActivity>Seguridad</CompanyActivity>
+    <CompanyCif>0001</CompanyCif>
+    <CompanySecurityNumber>Ab123456789</CompanySecurityNumber>
+    <CompanyDocumentRuc>45645645645</CompanyDocumentRuc>
+    <AddressId>0</AddressId>
+    <Address>
+      <Line1>Av Republica de panama 256</Line1>
+      <Line2 />
+      <Reference>javier prado con via expresa</Reference>
+      <UbigeoId>1425</UbigeoId>
+      <IsPrincipal>true</IsPrincipal>
+    </Address>
+    <ContactNumberId>0</ContactNumberId>
+    <ContactNumber>
+      <NumberPhone>12457896</NumberPhone>
+      <CellPhone>154785</CellPhone>
+      <Email>curichpedro@gmail.com</Email>
+      <IsPrincipal>true</IsPrincipal>
+    </ContactNumber>
+    <PersonId>0</PersonId>
+    <Person>
+      <FirstName>Luis  Manuel</FirstName>
+      <LastName>Gonzales</LastName>
+      <BirthDate>1986-04-17T00:00:00</BirthDate>
+      <DocumentId>0</DocumentId>
+      <Document>
+        <DocumentDni>12458785</DocumentDni>
+        <DocumentRuc>12458785</DocumentRuc>
+        <IsPrincipal>true</IsPrincipal>
+      </Document>
+      <ContactNumberId>0</ContactNumberId>
+      <ContactNumber>
+        <NumberPhone>541165265</NumberPhone>
+        <CellPhone>5161561</CellPhone>
+        <Email>hjfdchjufchuf@jhfbuhfbuf.com</Email>
+        <IsPrincipal>true</IsPrincipal>
+      </ContactNumber>
+      <AddressId>0</AddressId>
+      <Address>
+        <Line1>su casa</Line1>
+        <Line2>al ladito</Line2>
+        <Reference />
+        <UbigeoId>1405</UbigeoId>
+        <IsPrincipal>true</IsPrincipal>
+      </Address>
+      <UserId>0</UserId>
+      <User>
+        <UserCode>emp</UserCode>
+        <UserName>emp</UserName>
+        <UserPassword>emp</UserPassword>
+      </User>
+      <RoleId>4</RoleId>
+      <BaseCode>123</BaseCode>
+    </Person>
+    <CompanyType>Internal</CompanyType>
+    <CompanyCode>123</CompanyCode>
   </Company>
 </ArrayOfCompany>

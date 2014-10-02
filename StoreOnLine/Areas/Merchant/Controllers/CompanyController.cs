@@ -35,8 +35,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult Index()
         {
             ViewBag.Action = "Index";
-            var db = _repositoryCompany.Companies;
-            return db != null ? View(db.Select(company => new CompanyView().ToView(company)).ToList()) : View(new CompanyView());
+            var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString());
+            return View(db.Select(company => new CompanyView().ToView(company)).ToList());
         }
 
         public ActionResult Create()
@@ -53,7 +53,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult Edit(int companyId)
         {
             ViewBag.Action = "Edit";
-            var company = _repositoryCompany.Companies.FirstOrDefault(p => p.Id == companyId);
+            var company = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString()).FirstOrDefault(p => p.Id == companyId);
             if (company != null)
             {
                 ViewBag.CompanyName = company.CompanyName;

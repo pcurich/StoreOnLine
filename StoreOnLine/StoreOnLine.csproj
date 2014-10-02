@@ -578,6 +578,8 @@
     <Content Include="Areas\Merchant\Views\Company\Edit.cshtml" />
     <Content Include="Areas\Merchant\Views\Schedule\Index.cshtml" />
     <Content Include="Areas\Merchant\Views\Schedule\Edit.cshtml" />
+    <Content Include="Areas\Merchant\Views\Base\Edit.cshtml" />
+    <Content Include="Areas\Merchant\Views\Base\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -718,7 +720,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
-    <Folder Include="Areas\Merchant\Views\Base\" />
     <Folder Include="Areas\Merchant\Views\Shared\" />
     <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Report\Views\Shared\" />

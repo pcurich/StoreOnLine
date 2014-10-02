@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Model.Companies;
@@ -109,7 +110,8 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ContactNumberId = view.CompanyContactNumberId,
                 ContactNumber = number,
                 PersonId = view.CompanyPersonId,
-                CompanyDocumentRuc = CompanyDocumentRuc
+                CompanyDocumentRuc = CompanyDocumentRuc,
+                CompanyCode=DateTime.Now.Millisecond.ToString(CultureInfo.InvariantCulture)
             };
         }
 

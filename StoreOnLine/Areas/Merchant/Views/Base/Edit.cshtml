@@ -5,7 +5,7 @@
     var ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "tableBody",
-        Url = Url.Action("Edit", "Company"),
+        Url = Url.Action("Edit", "Merchant"),
         LoadingElementDuration = 1000,
         LoadingElementId = "loading",
         HttpMethod = "Post",
@@ -34,7 +34,7 @@
             <li><a href="#Representante" data-toggle="tab">Representante</a></li>
         </ul>
     </div>
-    @using (Ajax.BeginForm("Edit", "Company", ajaxOpts, new { @class = "form-horizontal" }))
+    @using (Ajax.BeginForm("Edit", "Merchant", ajaxOpts, new { @class = "form-horizontal" }))
     {
         @Html.ValidationSummary()
         @Html.HiddenFor(m => m.Id)

@@ -24,6 +24,7 @@ namespace StoreOnLine.DataBase.Model.Companies
         public Person Person { get; set; }
 
         public string CompanyType { get; set; }
+        public string CompanyCode { get; set; }
 
         public List<Schedule> Schedules { get; set; }
 

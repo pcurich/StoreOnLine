@@ -43,7 +43,7 @@ namespace StoreOnLine.DataBase.Entities
                 LoadSupplier(context, pathFile + "Unit.xml");
                 LoadRoles(context, pathFile + "Role.xml");
                 LoadPersons(context, pathFile + "User.xml");
-               // Export(pathFile + "Company.xml");
+                //Export(pathFile + "Company.xml");
                 LoadCompany(context, pathFile + "Company.xml");
 
                 var pbs = new List<ProductBase>
@@ -95,7 +95,7 @@ namespace StoreOnLine.DataBase.Entities
 
         private static void LoadCategory(StoreOnLineContext context, String str)
         {
-          //  string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
+            //  string[] rootx1 = Directory.GetDirectories(AppDomain.CurrentDomain.BaseDirectory);
 
             var elemt = XmlSerialization<List<Category>>.Deserialize(str);
             foreach (var e in elemt)
@@ -216,6 +216,8 @@ namespace StoreOnLine.DataBase.Entities
             var pbs = new List<Company>
                 {
                     new Company { 
+                        CompanyCode = "111",
+                        CompanyType = CompanyType.External.ToString(),
                         CompanyName = "BBVA", 
                         CompanyActivity= "Financiero", 
                         CompanyCif="0001",
@@ -223,11 +225,38 @@ namespace StoreOnLine.DataBase.Entities
                         CompanyDocumentRuc="45645645645", 
                         Address = new Address(0,"Av Republica de panama 256","","javier prado con via expresa",1425),
                         ContactNumber=new ContactNumber(0,"12457896","154785","curichpedro@gmail.com"),
-                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785",""),
+                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785","12458785"),
                             new ContactNumber(0,"541165265","5161561","hjfdchjufchuf@jhfbuhfbuf.com"),     
-                            new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4), 
+                            new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4,"111"), 
+                            IsStatus = true},
+                    new Company { 
+                        CompanyCode = "122",
+                        CompanyType = CompanyType.External.ToString(),
+                        CompanyName = "BCP", 
+                        CompanyActivity= "Financiero", 
+                        CompanyCif="0001",
+                        CompanySecurityNumber="Ab123456789",
+                        CompanyDocumentRuc="45645645645", 
+                        Address = new Address(0,"Av Republica de panama 256","","javier prado con via expresa",1425),
+                        ContactNumber=new ContactNumber(0,"12457896","154785","curichpedro@gmail.com"),
+                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785","12458785"),
+                            new ContactNumber(0,"541165265","5161561","hjfdchjufchuf@jhfbuhfbuf.com"),     
+                            new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4,"122"), 
+                            IsStatus = true},
+                   new Company { 
+                       CompanyCode = "123",
+                       CompanyType = CompanyType.Internal.ToString(),
+                        CompanyName = "Procegur", 
+                        CompanyActivity= "Seguridad", 
+                        CompanyCif="0001",
+                        CompanySecurityNumber="Ab123456789",
+                        CompanyDocumentRuc="45645645645", 
+                        Address = new Address(0,"Av Republica de panama 256","","javier prado con via expresa",1425),
+                        ContactNumber=new ContactNumber(0,"12457896","154785","curichpedro@gmail.com"),
+                        Person = new Person(0,true,"Luis  Manuel","Gonzales",new DateTime(1986,04,17),new Document(0,"12458785","12458785"),
+                            new ContactNumber(0,"541165265","5161561","hjfdchjufchuf@jhfbuhfbuf.com"),     
+                            new Address(0,"su casa","al ladito","",1405),new User(0,"emp","emp","emp"),4,"123"), 
                             IsStatus = true}
-                    
                 };
             XmlSerialization<List<Company>>.Serialize(pbs, str);
         }
