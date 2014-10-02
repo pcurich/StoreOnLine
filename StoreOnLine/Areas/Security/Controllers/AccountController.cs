@@ -60,7 +60,7 @@ namespace StoreOnLine.Areas.Security.Controllers
 
                 if (rolProvider.IsUserInRole(username, RoleList.Supervisor.ToString()))
                 {
-                    return Redirect(Url.Action("Index", "Admin", new { Area = "Merchant" }));
+                    return Redirect(Url.Action("Index", "Business", new { Area = "Merchant" }));
                 }
 
                 if (rolProvider.IsUserInRole(username, RoleList.Empleado.ToString()))

@@ -580,6 +580,8 @@
     <Content Include="Areas\Merchant\Views\Schedule\Edit.cshtml" />
     <Content Include="Areas\Merchant\Views\Base\Edit.cshtml" />
     <Content Include="Areas\Merchant\Views\Base\Index.cshtml" />
+    <Content Include="Areas\Merchant\Views\Business\Index.cshtml" />
+    <Content Include="Areas\Merchant\Views\Assign\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -642,7 +644,9 @@
     <Compile Include="Areas\Management\Models\ProductsListViewModel.cs" />
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
+    <Compile Include="Areas\Merchant\Controllers\AssignController.cs" />
     <Compile Include="Areas\Merchant\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Merchant\Controllers\BusinessController.cs" />
     <Compile Include="Areas\Merchant\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Merchant\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Merchant\MerchantAreaRegistration.cs" />
