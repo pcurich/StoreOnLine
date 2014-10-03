@@ -651,7 +651,9 @@
     <Compile Include="Areas\Merchant\Controllers\CompanyController.cs" />
     <Compile Include="Areas\Merchant\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Merchant\MerchantAreaRegistration.cs" />
+    <Compile Include="Areas\Merchant\Models\CalendarView.cs" />
     <Compile Include="Areas\Merchant\Models\CompanyView.cs" />
+    <Compile Include="Areas\Merchant\Models\ScheduleDetailView.cs" />
     <Compile Include="Areas\Merchant\Models\ScheduleView.cs" />
     <Compile Include="Areas\Report\Controllers\AdminController.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />

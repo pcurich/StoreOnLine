@@ -19,10 +19,11 @@ namespace StoreOnLine.DataBase.Model.Companies
 
 public enum TypeOfTask
 {
-    Entrada=1,
-    Salida=2,
-    InicioRefrigerio=3,
-    FinRefrigerio=4,
-    Descanso=5,
-    NoDefinido=6
+    Asignacion=1,
+    Entrada=2,
+    Salida=3,
+    InicioRefrigerio=4,
+    FinRefrigerio=5,
+    Descanso=6,
+    NoDefinido=7
 }

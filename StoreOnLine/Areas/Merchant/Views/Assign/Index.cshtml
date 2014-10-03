@@ -81,7 +81,7 @@
                                     @Html.DisplayFor(modelItem => item.ScheduleTimeStart)
                                 </td>
                                 <td class="text-center">
-                                    @Html.ActionLink("Asignar", "AddPersonal", "Assign", new { scheduleId = item.Id }, null)
+                                    @Html.ActionLink("Asignar", "AddPersonal", "Assign", new { companyId = item.CompanyId,scheduleId = item.Id }, null)
                                 </td>
                                 <td class="text-center">
                                     @if (item.IsStatus)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -40,10 +41,42 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             return View(new List<ScheduleView>());
         }
 
-        public ActionResult AddPersonal(int scheduleId)
+        public ActionResult AddPersonal(int companyId, int scheduleId)
         {
-            return View();
+            ViewBag.Person = GetPerson(companyId);
+
+            var calendar = new Dictionary<int, List<CalendarView>>();
+
+            var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
+            if (company == null) return View(calendar);
+
+            var schedule = company.Schedules.FirstOrDefault(o => o.Id == scheduleId);
+            if (schedule == null) return View(calendar);
+
+            var days = (schedule.ScheduleTo - schedule.ScheduleFrom).TotalDays + 1;
+            int week = Convert.ToInt16(Math.Ceiling(days / 6));
+
+            var scheduleFrom = schedule.ScheduleFrom;
+            for (var i = 1; i <= week; i++)
+            {
+                calendar.Add(i, CalendarView.GetWeek(scheduleFrom.Day,scheduleFrom.DayOfWeek.ToString(), schedule.ScheduleTo.Day, scheduleFrom.Month));
+                scheduleFrom = scheduleFrom.AddDays(6);
+            }
+            return View(calendar);
         }
+
+        #region Custom
+
+        public SelectList GetPerson(int companyId)
+        {
+            var company =_repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
+            var repo = _repositoryPerson.Persons.Where(o => company != null && o.BaseCode == company.CompanyCode);
+            return new SelectList(
+                repo.Select(r => 
+                    new SelectListItem { Text = r.User.UserName, Value = r.Id.ToString(CultureInfo.InvariantCulture)}
+                    ).ToList(), "Value", "Text");
+        }
+        #endregion
 
     }
 }

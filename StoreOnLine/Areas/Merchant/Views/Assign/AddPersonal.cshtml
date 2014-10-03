@@ -1,18 +1,58 @@
-﻿
+﻿@model IDictionary<int, List<StoreOnLine.Areas.Merchant.Models.CalendarView>>
 @{
-    Layout = null;
+    ViewBag.Title = "Asignacion";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>AddPersonal</title>
-</head>
-<body>
-    <div>
-        add persnal 
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
     </div>
-</body>
-</html>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading ">
+                @Html.ActionLink("Crear Nuevo", "Create", "Company", null, new { @class = " btn btn-primary pull-righ" })
+            </div>
+            <div class="panel-body">
+                @{foreach (var model in Model)
+                  {
+                    <div class="col-lg-8">
+                        @{foreach (var week in model.Value)
+                          {
+                            <div class="col-lg-2">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center info" style="font-size: 10px">@week.WeekName  (@week.DayNumber)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>@Html.DropDownList("PersonId",
+                                        (SelectList)ViewBag.Person,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary btn-xs" })</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                          }
+                        }
+                    </div>
+
+                
+                  }
+                }
+            </div>
+        </div>
+    </div>
+</div>
