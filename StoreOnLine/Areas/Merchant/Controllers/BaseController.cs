@@ -10,7 +10,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 {
     public class BaseController : Controller
     {
-       private readonly ICompanyRepository _repositoryCompany;
+        private readonly ICompanyRepository _repositoryCompany;
         private readonly IUbigeoRepository _repositoryUbigeo;
         private readonly IPersonRepository _repositoryPerson;
         private readonly ISecurityRepository _repositorySecurity;
@@ -135,5 +135,5 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         }
 
         #endregion
-	}
+    }
 }
