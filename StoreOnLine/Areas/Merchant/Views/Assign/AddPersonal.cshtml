@@ -1,4 +1,5 @@
-﻿@model IDictionary<int, List<StoreOnLine.Areas.Merchant.Models.CalendarView>>
+﻿@using StoreOnLine.Domain.HtmlModel
+@model IDictionary<int, List<StoreOnLine.Areas.Merchant.Models.CalendarView>>
 @{
     ViewBag.Title = "Asignacion";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -23,36 +24,74 @@
                 @Html.ActionLink("Crear Nuevo", "Create", "Company", null, new { @class = " btn btn-primary pull-righ" })
             </div>
             <div class="panel-body">
-                @{foreach (var model in Model)
-                  {
-                    <div class="col-lg-8">
-                        @{foreach (var week in model.Value)
-                          {
-                            <div class="col-lg-2">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-center info" style="font-size: 10px">@week.WeekName  (@week.DayNumber)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>@Html.DropDownList("PersonId",
-                                        (SelectList)ViewBag.Person,
-                                        "------------------------------",
-                                        new { @class = "form-control btn btn-primary btn-xs" })</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                          }
-                        }
-                    </div>
-
-                
-                  }
-                }
+                <div class="col-lg-8">
+                    @{foreach (var model in Model)
+                      {
+                        <div class="row">
+                            @{foreach (var week in model.Value)
+                              {
+                                <div class="col-lg-2">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center info" style="font-size: 10px">@week.WeekName  (@week.DayNumber)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td id="@week.MonthName @week.DayNumber" >@Html.DropDownList("PersonId",
+                                                            (SelectList)ViewBag.Person,
+                                                            "------------------------------",
+                                                            new
+                                                            {
+                                                                @class = "form-control btn btn-primary btn-xs",
+                                                                onchange = "UpdatePerson(this)"
+                                                            })</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              }
+                            }
+                        </div>
+                      }
+                    }
+                </div>
+                <div class="col-lg-4" id="tablePersons">
+                    @{ Html.RenderPartial("_Accordion", new List<Accordion>());};                    
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        function UpdatePerson(data) {
+            console.log($(data).val());
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdatePerson", "Assign")',
+                data: {
+                    companyId: '@ViewBag.CompanyId',
+                    personId: $(data).val(),
+                    scheduleId: '@ViewBag.scheduleId'
+                },
+                success: function (data) {
+                    var items = [];
+                    items.push("<option>-----------------------------</option>");
+                    $.each(data, function () {
+                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
+                    });
+                    $("#CompanyAddressUbigeoCodDist").html(items.join(' '));
+                }
+             });
+        }
+
+
+    </script>
+
+}
+
+

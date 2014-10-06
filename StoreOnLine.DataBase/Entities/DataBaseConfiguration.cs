@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Security;
 
@@ -40,7 +41,7 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Ubigeo");
             }
         }
-        
+
         class DocumentTypeConfiguration : EntityTypeConfiguration<DocumentType>
         {
             public DocumentTypeConfiguration()
@@ -83,18 +84,23 @@ namespace StoreOnLine.DataBase.Entities
             {
                 Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
                 Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
-                HasRequired(p=>p.ContactNumber).WithRequiredDependent().WillCascadeOnDelete(false);
-                HasRequired(p => p.Address).WithRequiredDependent().WillCascadeOnDelete(false);
+                HasRequired(p => p.Address);
+                HasRequired(p => p.ContactNumber);
+                HasRequired(p => p.Person);
+                //HasRequired(p => p.ContactNumber).WithRequiredDependent().WillCascadeOnDelete(false);
+                //HasRequired(p => p.Address).WithRequiredDependent().WillCascadeOnDelete(false);
                 ToTable("Companies");
             }
         }
-        class ScheduleDetailConfiguration : EntityTypeConfiguration<ScheduleDetail >
+        class ScheduleDetailConfiguration : EntityTypeConfiguration<ScheduleDetail>
         {
             public ScheduleDetailConfiguration()
             {
                 Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
                 Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
-                HasRequired(p => p.Person ).WithRequiredDependent().WillCascadeOnDelete(false);
+                Property(p => p.TimeStart).IsRequired().HasColumnType("datetime2");
+                Property(p => p.TimeEnd).IsRequired().HasColumnType("datetime2");
+                HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);
                 ToTable("ScheduleDetail");
             }
         }
@@ -103,6 +109,7 @@ namespace StoreOnLine.DataBase.Entities
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Configurations.Add(new PersonConfiguration());
             modelBuilder.Configurations.Add(new AddressConfiguration());
             modelBuilder.Configurations.Add(new ContactNumberConfiguration());

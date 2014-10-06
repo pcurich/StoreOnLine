@@ -26,6 +26,7 @@ namespace StoreOnLine.DataBase.Model.Security
         UserAudit,
         UserSales,
         Customer,
-        Guest
+        Guest,
+        User
     }
 }

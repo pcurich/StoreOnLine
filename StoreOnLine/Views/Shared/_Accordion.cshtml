@@ -1,0 +1,74 @@
+﻿<style type="text/css">
+    
+
+    .panel-scroll
+    {
+        max-height: 320px;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    .panel a:hover
+    {
+        text-decoration: none;
+        color: #222;
+    }
+
+    .panel .table td
+    {
+        border-color: #f3f3f3;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-group" id="main">
+                <div class="panel-body">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#main" href="#accordion"><span class="glyphicon glyphicon-folder-close"></span>Resumen</a>
+                        </h4>
+                    </div>
+                    <div class="panel-collapse collapse panel-scroll" id="accordion">
+                        @{
+                            foreach (var panel in Model)
+                            {
+                                string parent = "accordion" + panel.Id;
+                                string href = "#accordion" + panel.Id;
+                            
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="@href"><span class="glyphicon glyphicon-folder-close"></span>@panel.Title</a>
+                                </h4>
+                            </div>
+                         
+                            <div id="@parent" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+                                            @{
+                                foreach (var subpanel in panel.SubPanels)
+                                {
+                                                <tr>
+                                                    <td>
+                                                        <a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span>@subpanel.Title</a> <span class="badge">@subpanel.Message</span>
+                                                    </td>
+                                                </tr>  
+                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            }
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="push"></div>

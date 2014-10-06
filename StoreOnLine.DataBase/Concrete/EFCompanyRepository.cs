@@ -73,6 +73,29 @@ namespace StoreOnLine.DataBase.Concrete
             return schedule.Id;
         }
 
+        public int SaveScheduleDetail(ScheduleDetail scheduleDetail)
+        {
+            if (scheduleDetail.Id == 0)
+            {
+                _context.ScheduleDetails.Add(scheduleDetail);
+            }
+            else
+            {
+                var dbEntry = _context.ScheduleDetails.Find((scheduleDetail.Id));
+                foreach (PropertyDescriptor property in TypeDescriptor.GetProperties(scheduleDetail))
+                {
+                    if (!property.Name.Equals("Id") && property.GetValue(scheduleDetail) != null)
+                    {
+                        var value = property.GetValue(scheduleDetail);
+                        if (value != null) property.SetValue(dbEntry, value);
+                    }
+                }
+
+            }
+            _context.SaveChanges();
+            return scheduleDetail.Id;
+        }
+
         public Company DeleteCompany(int company, bool physical = false)
         {
             var dbEntry = _context.Companies.Find(company);

@@ -8,3 +8,6 @@ $(document).ready(function () {
                 radioAllOff: 'false'
             });
         });
+
+enums
+http://stackoverflow.com/questions/424366/c-sharp-string-enums

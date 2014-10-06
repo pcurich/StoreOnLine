@@ -50,6 +50,7 @@ namespace StoreOnLine.DataBase.Entities
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<ScheduleDetail> ScheduleDetails { get; set; }
 
 
 

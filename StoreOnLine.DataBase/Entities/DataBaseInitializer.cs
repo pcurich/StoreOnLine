@@ -179,6 +179,10 @@ namespace StoreOnLine.DataBase.Entities
             var elemt = XmlSerialization<List<Company>>.Deserialize(str);
             foreach (var pb in elemt)
             {
+                //context.Addresses.Add(pb.Address);
+                //context.ContactNumbers.Add(pb.ContactNumber);
+                //context.Persons.Add(pb.Person);
+                //pb.AddressId = pb.Address.Id;
                 context.Companies.Add(pb);
             }
             context.SaveChanges();
