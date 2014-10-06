@@ -101,7 +101,9 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                      
                     var detail = new ScheduleDetail();
                     detail.PersonId = personId;
+                    detail.Person = person;
                     detail.ScheduleId = scheduleId;
+                    detail.Schedule = schedule;
                     detail.TypeOfTask = TypeOfTask.Asignacion.ToString();
                    
                     _repositoryCompany.SaveScheduleDetail(detail);

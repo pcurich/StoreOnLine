@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
@@ -61,6 +62,12 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             ViewBag.Action = "Edit";
             if (ModelState.IsValid)
             {
+                var company=_repositoryCompany.Companies.FirstOrDefault(o => o.Id == model.CompanyId);
+                if (company != null)
+                {
+                    company.HasSchedule = true;
+                    _repositoryCompany.SaveCompany(company);
+                }
                 _repositoryCompany.SaveSchedule(model.ToBd(model));
                 TempData["message"] = string.Format("ha sido guardado");
                 return Json(new { ok = true, newurl = "Index?companyId=" + model.CompanyId });

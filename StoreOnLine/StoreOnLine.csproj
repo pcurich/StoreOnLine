@@ -61,7 +61,8 @@
     <Reference Include="Glimpse.EF6">
       <HintPath>..\packages\Glimpse.EF6.1.6.4\lib\net45\Glimpse.EF6.dll</HintPath>
     </Reference>
-    <Reference Include="Glimpse.Mvc5">
+    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -735,6 +736,7 @@
     <Content Include="Views\Shared\ProgressBars.cshtml" />
     <Content Include="Views\Shared\_LogInLayout.cshtml" />
     <Content Include="Views\Shared\_Accordion.cshtml" />
+    <Content Include="Views\Shared\_SupervisorLayout.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

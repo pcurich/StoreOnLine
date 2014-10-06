@@ -9,6 +9,8 @@ namespace StoreOnLine.DataBase.Model.Companies
         public DateTime ScheduleFrom { get; set; }
         public DateTime ScheduleTo { get; set; }
 
+        public bool IsDone { get; set; }
+
         public int ScheduleDaysWorkPerWeek { get; set; } //Dias que se trabajan durante la semana 
         public int ScheduleDaysOff { get; set; } // complemento con 7
 

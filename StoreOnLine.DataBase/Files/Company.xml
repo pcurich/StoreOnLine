@@ -58,6 +58,8 @@
     </Person>
     <CompanyType>External</CompanyType>
     <CompanyCode>111</CompanyCode>
+    <HasSchedule>false</HasSchedule>
+    <StatusOfSchedule>NoTarea</StatusOfSchedule>
   </Company>
   <Company>
     <CompanyName>BCP</CompanyName>
@@ -117,6 +119,8 @@
     </Person>
     <CompanyType>External</CompanyType>
     <CompanyCode>122</CompanyCode>
+    <HasSchedule>false</HasSchedule>
+    <StatusOfSchedule>NoTarea</StatusOfSchedule>
   </Company>
   <Company>
     <CompanyName>Procegur</CompanyName>
@@ -176,5 +180,7 @@
     </Person>
     <CompanyType>Internal</CompanyType>
     <CompanyCode>123</CompanyCode>
+    <HasSchedule>false</HasSchedule>
+    <StatusOfSchedule>NoTarea</StatusOfSchedule>
   </Company>
 </ArrayOfCompany>

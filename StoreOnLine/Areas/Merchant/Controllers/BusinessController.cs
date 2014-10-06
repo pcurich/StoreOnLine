@@ -30,7 +30,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult Index()
         {
             ViewBag.Action = "Index";
-            var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString());
+            var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString()&& p.HasSchedule);
             return View(db.Select(company => new CompanyView().ToView(company)).ToList());
         }
 

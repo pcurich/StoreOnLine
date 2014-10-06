@@ -26,6 +26,8 @@ namespace StoreOnLine.DataBase.Model.Companies
         public string CompanyType { get; set; }
         public string CompanyCode { get; set; }
 
+        public bool HasSchedule { get; set; }
+        public string StatusOfSchedule { get; set; }
         public List<Schedule> Schedules { get; set; }
 
     }
@@ -34,4 +36,14 @@ namespace StoreOnLine.DataBase.Model.Companies
 public enum CompanyType
 {
     Internal, External
+}
+
+public enum StatusOfSchedule
+{
+    NoTarea,//Valor por defecto
+    Registrado,//El administrador registra una tarea
+    Inicializado, //El supervisor esta asignando los recursos a la tarea
+    EnProgreso, //El supervisor supervisa que se este ejecutando adecuadamente el progreso
+    Terminado, //Ya se cumplio la demanda
+    
 }

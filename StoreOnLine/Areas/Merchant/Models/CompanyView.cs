@@ -92,6 +92,9 @@ namespace StoreOnLine.Areas.Merchant.Models
         [Display(Name = "Nombre")]
         public int CompanyPersonId { get; set; }
 
+        [DataType(DataType.Text)]
+        [Display(Name = "Estado")]
+        public string EstadoTarea { get; set; }
 
         public Company ToBd(CompanyView view)
         {
@@ -100,6 +103,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new Company
             {
                 Id = view.Id,
+                StatusOfSchedule= view.EstadoTarea,
                 IsStatus = view.IsStatus,
                 CompanyName = view.CompanyName,
                 CompanyActivity = view.CompanyActivity,
@@ -120,6 +124,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new CompanyView
             {
                 Id = db.Id,
+                EstadoTarea=db.StatusOfSchedule,
                 IsStatus = db.IsStatus,
                 CompanyName = db.CompanyName,
                 CompanyActivity = db.CompanyActivity,
