@@ -83,6 +83,7 @@
     <Compile Include="Abstract\IOrderProcessor.cs" />
     <Compile Include="Abstract\IPersonRepository.cs" />
     <Compile Include="Abstract\IProductsRepository.cs" />
+    <Compile Include="Abstract\IScheduleRepository.cs" />
     <Compile Include="Abstract\ISecurityRepository.cs" />
     <Compile Include="Abstract\ISupplierRepository.cs" />
     <Compile Include="Abstract\IUbigeoRepository.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Concrete\EFPersonRepository.cs" />
     <Compile Include="Concrete\EFProductRepository.cs" />
     <Compile Include="Concrete\EFCampaingRepository.cs" />
+    <Compile Include="Concrete\EFScheduleRepository.cs" />
     <Compile Include="Concrete\EFSecurityRepository.cs" />
     <Compile Include="Concrete\EFSupplierRepository.cs" />
     <Compile Include="Concrete\EFUbigeoRepository.cs" />

@@ -42,6 +42,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         [Display(Name = "Ruc")]
         public string CompanyDocumentRuc { get; set; }
 
+        public string CompanyCode { get; set; }
         public int CompanyAddressId { get; set; }
 
         [Required(ErrorMessage = "Ingrese su direccion")]
@@ -96,15 +97,16 @@ namespace StoreOnLine.Areas.Merchant.Models
         [Display(Name = "Estado")]
         public string EstadoTarea { get; set; }
 
-        public Company ToBd(CompanyView view)
+        public Company ToBd(CompanyView view, string companyType)
         {
             var address = new Address(CompanyAddressId, CompanyAddressLine1, CompanyAddressLine2, CompanyAddressReference, CompanyAddressUbigeoId);
             var number = new ContactNumber(CompanyContactNumberId, CompanyContactNumberNumberPhone, CompanyContactNumberCellPhone, CompanyContactNumberEmail);
             return new Company
             {
                 Id = view.Id,
-                StatusOfSchedule= view.EstadoTarea,
+                StatusOfSchedule = view.EstadoTarea,
                 IsStatus = view.IsStatus,
+                CompanyType = companyType,
                 CompanyName = view.CompanyName,
                 CompanyActivity = view.CompanyActivity,
                 CompanyCif = view.CompanyCif,
@@ -115,7 +117,7 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ContactNumber = number,
                 PersonId = view.CompanyPersonId,
                 CompanyDocumentRuc = CompanyDocumentRuc,
-                CompanyCode=DateTime.Now.Millisecond.ToString(CultureInfo.InvariantCulture)
+                CompanyCode = view.CompanyCode ?? DateTime.Now.Millisecond.ToString(CultureInfo.InvariantCulture)
             };
         }
 
@@ -124,7 +126,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new CompanyView
             {
                 Id = db.Id,
-                EstadoTarea=db.StatusOfSchedule,
+                EstadoTarea = db.StatusOfSchedule,
                 IsStatus = db.IsStatus,
                 CompanyName = db.CompanyName,
                 CompanyActivity = db.CompanyActivity,
@@ -136,7 +138,7 @@ namespace StoreOnLine.Areas.Merchant.Models
                 CompanyAddressLine2 = db.Address.Line2,
                 CompanyAddressReference = db.Address.Reference,
                 CompanyAddressUbigeoId = db.Address.UbigeoId,
-                
+
                 CompanyAddressUbigeoCodDpto = db.Address.Ubigeo.CodDpto,
                 CompanyAddressUbigeoCodProv = db.Address.Ubigeo.CodProv,
                 CompanyAddressUbigeoCodDist = db.Address.Ubigeo.CodDist,
@@ -146,8 +148,8 @@ namespace StoreOnLine.Areas.Merchant.Models
                 CompanyContactNumberCellPhone = db.ContactNumber.CellPhone,
                 CompanyContactNumberEmail = db.ContactNumber.Email,
                 CompanyContactNumberIsPrincipal = db.ContactNumber.IsPrincipal,
-                CompanyPersonId = db.PersonId
-
+                CompanyPersonId = db.PersonId,
+                CompanyCode=db.CompanyCode
 
 
             };

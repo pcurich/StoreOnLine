@@ -56,8 +56,8 @@
                     @{
                         var user = (User)Session["UserOnLine"];
                     }
-                    <li ><a href="#">@(user != null ? user.UserName : "Anonimo")</a></li>
-                    <li >@Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "" })</li>
+                    <li style="background-color: gold"><a href="#">@(user != null ? user.UserName : "Anonimo")</a></li>
+                    <li style="background-color: green;">@Html.ActionLink("Salir", "Logout", "Account", new { Area = "Security" }, new { @class = "", @Style="color: white" })</li>
                     
                 </ul>
             </div>

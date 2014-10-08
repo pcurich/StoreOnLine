@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
+using Glimpse.Core.Extensions;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Security;
@@ -56,7 +58,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 ViewBag.Dpto = GetDeparts(company.Address.Ubigeo.CodDpto);
                 ViewBag.Prov = GetProvincesList(company.Address.Ubigeo.CodDpto, company.Address.Ubigeo.CodProv);
                 ViewBag.Dist = GetDistrictsList(company.Address.Ubigeo.CodDpto, company.Address.Ubigeo.CodProv, company.Address.Ubigeo.CodDist);
-                var role = _repositorySecurity.Roles.FirstOrDefault(o => o.RoleName == RoleList.Representante.ToString());
+                var role = _repositorySecurity.Roles.FirstOrDefault(o => o.RoleName == RoleList.Supervisor.ToString());
                 var person = _repositoryPerson.Persons.FirstOrDefault(o => o.Id == company.PersonId);
                 ViewBag.Person = GetPerson(person != null ? person.Id.ToString(CultureInfo.InvariantCulture) : null, role != null ? role.Id : 0);
             }
@@ -76,10 +78,12 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (ubigeo != null)
                     model.CompanyAddressUbigeoId = ubigeo.Id;
 
-                var person = _repositoryPerson.Persons.FirstOrDefault(o => o.Id == model.CompanyPersonId);
+                model.EstadoTarea = StatusOfSchedule.NoTarea.ToString();
 
-                var db = model.ToBd(model);
-                //db.Person = person;
+                var db = model.ToBd(model, CompanyType.Internal.ToString());
+                db.CompanyType = CompanyType.Internal.ToString();
+
+
                 db.AddressId = _repositoryPerson.SaveAddress(db.Address);
                 db.Address = null;
                 db.ContactNumberId = _repositoryPerson.SaveContactNumber(db.ContactNumber);

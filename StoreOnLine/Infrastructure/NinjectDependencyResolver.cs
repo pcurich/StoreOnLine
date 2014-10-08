@@ -44,6 +44,7 @@ namespace StoreOnLine.Infrastructure
             _kernel.Bind<IUbigeoRepository>().To<UbigeoRepository>().InSingletonScope();
             _kernel.Bind<ISecurityRepository>().To<SecurityRepository>().InSingletonScope();
             _kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+            _kernel.Bind<IScheduleRepository>().To<ScheduleRepository>();
 
 
             _kernel.Bind<IProgressBar>().To<ProgressBarView>().InSingletonScope();

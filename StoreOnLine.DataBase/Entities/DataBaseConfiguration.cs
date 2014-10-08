@@ -92,6 +92,17 @@ namespace StoreOnLine.DataBase.Entities
                 ToTable("Companies");
             }
         }
+
+        class ScheduleConfiguration : EntityTypeConfiguration<Schedule>
+        {
+            public ScheduleConfiguration()
+            {
+                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                //HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);
+                ToTable("Schedule");
+            }
+        }
         class ScheduleDetailConfiguration : EntityTypeConfiguration<ScheduleDetail>
         {
             public ScheduleDetailConfiguration()
@@ -100,7 +111,7 @@ namespace StoreOnLine.DataBase.Entities
                 Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
                 Property(p => p.TimeStart).IsRequired().HasColumnType("datetime2");
                 Property(p => p.TimeEnd).IsRequired().HasColumnType("datetime2");
-                HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);
+                //HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);
                 ToTable("ScheduleDetail");
             }
         }
@@ -118,6 +129,7 @@ namespace StoreOnLine.DataBase.Entities
             modelBuilder.Configurations.Add(new DocumentTypeConfiguration());
             modelBuilder.Configurations.Add(new UbigeoConfiguration());
             modelBuilder.Configurations.Add(new CompanyConfiguration());
+            modelBuilder.Configurations.Add(new ScheduleConfiguration());
             modelBuilder.Configurations.Add(new ScheduleDetailConfiguration());
             base.OnModelCreating(modelBuilder);
         }

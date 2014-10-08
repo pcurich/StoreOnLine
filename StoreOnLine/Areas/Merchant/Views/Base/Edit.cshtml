@@ -5,7 +5,7 @@
     var ajaxOpts = new AjaxOptions
     {
         UpdateTargetId = "tableBody",
-        Url = Url.Action("Edit", "Merchant"),
+        Url = Url.Action("Edit", "Base"),
         LoadingElementDuration = 1000,
         LoadingElementId = "loading",
         HttpMethod = "Post",
@@ -31,15 +31,16 @@
             <li class="active"><a href="#Datos" data-toggle="tab">Datos</a></li>
             <li><a href="#Direccion" data-toggle="tab">Direccion</a></li>
             <li><a href="#Contacto" data-toggle="tab">Contacto</a></li>
-            <li><a href="#Representante" data-toggle="tab">Representante</a></li>
+            <li><a href="#Supervisor" data-toggle="tab">Supervisor</a></li>
         </ul>
     </div>
-    @using (Ajax.BeginForm("Edit", "Merchant", ajaxOpts, new { @class = "form-horizontal" }))
+    @using (Ajax.BeginForm("Edit", "Base", ajaxOpts, new { @class = "form-horizontal" }))
     {
         @Html.ValidationSummary()
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.CompanyAddressId)
         @Html.HiddenFor(m => m.CompanyContactNumberId)
+        @Html.HiddenFor(m => m.CompanyCode)
         <div class="tab-content" style="height: 300px">
             <div class="tab-pane active" id="Datos">
                 <div class="panel-body">
@@ -216,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="Representante">
+            <div class="tab-pane" id="Supervisor">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">

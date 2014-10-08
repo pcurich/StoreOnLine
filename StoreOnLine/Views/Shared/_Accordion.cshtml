@@ -34,12 +34,12 @@
                         @{
                             foreach (var panel in Model)
                             {
-                                string parent = "accordion" + panel.Id;
-                                string href = "#accordion" + panel.Id;
+                                string parent = "accordion" + panel.GetPanel().Id;
+                                string href = "#accordion" + panel.GetPanel().Id;
                             
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="@href"><span class="glyphicon glyphicon-folder-close"></span>@panel.Title</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="@href"><span class="glyphicon glyphicon-folder-close"></span>@panel.GetPanel().Title</a>
                                 </h4>
                             </div>
                          
@@ -48,7 +48,7 @@
                                     <table class="table">
                                         <tbody>
                                             @{
-                                foreach (var subpanel in panel.SubPanels)
+                                foreach (var subpanel in panel.GetSubPanels())
                                 {
                                                 <tr>
                                                     <td>

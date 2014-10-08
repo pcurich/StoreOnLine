@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net.Configuration;
 using System.Web.Mvc;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
@@ -80,13 +81,20 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (ubigeo != null)
                     model.CompanyAddressUbigeoId = ubigeo.Id;
 
-                var person = _repositoryPerson.Persons.FirstOrDefault(o => o.Id == model.CompanyPersonId);
+                var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == model.Id);
+                if (company != null)
+                {
+                    if (company.Schedules.Count == 0)
+                    {
+                        model.EstadoTarea = StatusOfSchedule.NoTarea.ToString();
+                    }
+                }
 
-                var db = model.ToBd(model);
-                //db.Person = person;
+                var db = model.ToBd(model, CompanyType.External.ToString());
+
                 db.AddressId = _repositoryPerson.SaveAddress(db.Address);
-                db.Address = null;
                 db.ContactNumberId = _repositoryPerson.SaveContactNumber(db.ContactNumber);
+                db.Address = null;
                 db.ContactNumber = null;
                 _repositoryCompany.SaveCompany(db);
 

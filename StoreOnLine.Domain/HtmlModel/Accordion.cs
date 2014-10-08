@@ -7,43 +7,35 @@ namespace StoreOnLine.Domain.HtmlModel
     {
         public Panel Panel { get; set; }
 
-        private static volatile Accordion _instance;
-        private static readonly object SyncRoot = new Object();
-
         public Accordion()
         {
             Panel = new Panel();
         }
 
-        public static Accordion Instance
+        public Panel GetPanel()
         {
-            get
-            {
-                if (_instance != null) return _instance;
-                lock (SyncRoot)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new Accordion();
-                    }
-                }
-                return _instance;
-            }
+            return Panel;
         }
+
+        public List<SubPanel> GetSubPanels()
+        {
+            return Panel.SubPanels;
+        } 
+        
 
         public void AddPanel(int id, string title)
         {
-            Instance.Panel.Id = id;
-            Instance.Panel.Title = title;
+            Panel.Id = id;
+            Panel.Title = title;
         }
 
         public void AddSubPanel(int parentId, int id, string title, string message)
         {
-            if (Instance.Panel.SubPanels == null)
+            if (Panel.SubPanels == null)
             {
-                Instance.Panel.SubPanels = new List<SubPanel>();
+                Panel.SubPanels = new List<SubPanel>();
             }
-            Instance.Panel.SubPanels.Add(new SubPanel(parentId, id, title, message));
+            Panel.SubPanels.Add(new SubPanel(parentId, id, title, message));
         }
 
     }

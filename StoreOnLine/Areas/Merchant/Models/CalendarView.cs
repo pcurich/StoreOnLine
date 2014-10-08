@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Web;
+using Microsoft.Ajax.Utilities;
 using Microsoft.SqlServer.Server;
 
 namespace StoreOnLine.Areas.Merchant.Models
@@ -11,20 +12,23 @@ namespace StoreOnLine.Areas.Merchant.Models
     {
         public string WeekName { get; set; }
         public string DayNumber { get; set; }
+        public int MonthNumber { get; set; }
+        public string TypeOfTask { get; set; }
+        public int Year { get; set; }
         public string MonthName { get; set; }
         public string PersonId { get; set; }
 
-        public static List<CalendarView> GetWeek(int from, string dayOfWeek, int to, int month)
+        public static List<CalendarView> GetWeek(int baseDays,int from, string dayOfWeek, int to, int month, int year)
         {
             var start = from;
             var days = 0;
             var list = new List<CalendarView>();
-            while (start <= to && days < 6)
+            while (start <= to && days < baseDays)
             {
                 var result = GetDateName(dayOfWeek).Split('|');
                 var dayName = result[0];
                 dayOfWeek = result[1];
-                list.Add(new CalendarView { WeekName = dayName, DayNumber = (start).ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'), MonthName = GetNameMonth(month) });
+                list.Add(new CalendarView {TypeOfTask="0",PersonId = "0",WeekName = dayName, DayNumber = (start).ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'), MonthName = GetNameMonth(month), MonthNumber=month,Year = year});
                 start++;
                 days++;
             }

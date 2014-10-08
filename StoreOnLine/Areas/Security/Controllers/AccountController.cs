@@ -66,6 +66,13 @@ namespace StoreOnLine.Areas.Security.Controllers
                 if (rolProvider.IsUserInRole(username, RoleList.Empleado.ToString()))
                 {
                     return Redirect(Url.Action("Index", "Admin", new { Area = "Report" }));
+
+                }
+
+                if (rolProvider.IsUserInRole(username, RoleList.Representante.ToString()))
+                {
+                    ModelState.AddModelError("", "No tiene permisos de acceso al sistema");
+                    return View();
                 }
             }
             else

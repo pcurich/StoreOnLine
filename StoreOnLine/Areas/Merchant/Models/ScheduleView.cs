@@ -55,9 +55,22 @@ namespace StoreOnLine.Areas.Merchant.Models
         public Schedule ToBd(ScheduleView view)
         {
             var dateStr = view.ScheduleFrom.Split('/');
-            var dateFrom = new DateTime(Convert.ToInt16(dateStr[2]), Convert.ToInt16(dateStr[1]), Convert.ToInt16(dateStr[0]));
+            var timeStr = view.ScheduleTimeStart.Split(':');
+            
+            var dateFrom = new DateTime(
+                Convert.ToInt16(dateStr[2]), 
+                Convert.ToInt16(dateStr[1]), 
+                Convert.ToInt16(dateStr[0]), 
+                Convert.ToInt16(timeStr[0]), 
+                Convert.ToInt16(timeStr[1].Substring(0,2)),0);
+
             dateStr = view.ScheduleTo.Split('/');
-            var dateTo = new DateTime(Convert.ToInt16(dateStr[2]), Convert.ToInt16(dateStr[1]), Convert.ToInt16(dateStr[0]));
+            var dateTo = new DateTime(
+                Convert.ToInt16(dateStr[2]), 
+                Convert.ToInt16(dateStr[1]), 
+                Convert.ToInt16(dateStr[0]),
+                Convert.ToInt16(timeStr[0]),
+                Convert.ToInt16(timeStr[1].Substring(0, 2)), 0);
             return new Schedule
             {
                 Id = view.Id,
@@ -83,6 +96,7 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ScheduleDaysWorkPerWeek = Convert.ToString(db.ScheduleDaysWorkPerWeek),
                 ScheduleDaysOff = Convert.ToString(db.ScheduleDaysOff),
                 ScheduleTurn = db.ScheduleTurn,
+                ScheduleTimeStart=db.ScheduleFrom.ToShortTimeString(),
                 ScheduleHuors = Convert.ToString(db.ScheduleHuors),
                 CompanyId = db.CompanyId
             };

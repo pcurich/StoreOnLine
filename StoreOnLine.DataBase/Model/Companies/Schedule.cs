@@ -14,7 +14,7 @@ namespace StoreOnLine.DataBase.Model.Companies
         public int ScheduleDaysWorkPerWeek { get; set; } //Dias que se trabajan durante la semana 
         public int ScheduleDaysOff { get; set; } // complemento con 7
 
-        public string ScheduleTurn { get; set; }
+        public string ScheduleTurn { get; set; } //Mañana o Noche
 
         public int ScheduleHuors { get; set; } //Jornada de cuantas horas?
 

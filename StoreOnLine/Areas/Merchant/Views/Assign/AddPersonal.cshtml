@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Asignacion";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
 }
 
 <div class="row">
@@ -28,8 +29,10 @@
                     @{foreach (var model in Model)
                       {
                         <div class="row">
-                            @{foreach (var week in model.Value)
-                              {
+                            @for (int index = 0; index < model.Value.Count; index++)
+                            {
+
+                                var week = model.Value[index];
                                 <div class="col-lg-2">
                                     <table class="table table-bordered">
                                         <thead>
@@ -39,26 +42,29 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td id="@week.MonthName @week.DayNumber" >@Html.DropDownList("PersonId",
-                                                            (SelectList)ViewBag.Person,
-                                                            "------------------------------",
-                                                            new
-                                                            {
-                                                                @class = "form-control btn btn-primary btn-xs",
-                                                                onchange = "UpdatePerson(this)"
-                                                            })</td>
+                                                @{
+                                var id = @week.Year + "|" + @week.MonthNumber + "|" + @week.DayNumber;
+                                                }
+                                                <td id="@id">@Html.DropDownList(week.PersonId,
+                                                (SelectList)ViewBag.Person, "------------------------------",
+                                                new
+                                                {
+                                                    @class = "form-control btn btn-primary btn-xs",
+                                                    onchange = "UpdatePerson(this)"
+                                                })
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                              }
                             }
+
                         </div>
                       }
                     }
                 </div>
                 <div class="col-lg-4" id="tablePersons">
-                    @{ Html.RenderPartial("_Accordion", new List<Accordion>());};                    
+                    @{ Html.RenderPartial("_Accordion", (List<Accordion>)ViewBag.Accordion);}
                 </div>
             </div>
         </div>
@@ -68,15 +74,16 @@
 @section Scripts {
 
     <script type="text/javascript">
+        
         function UpdatePerson(data) {
-            console.log($(data));
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("UpdatePerson", "Assign")',
                 data: {
                     companyId: '@ViewBag.CompanyId',
                     personId: $(data).val(),
-                    scheduleId: '@ViewBag.scheduleId'
+                    scheduleId: '@ViewBag.scheduleId',
+                    time: $(data).parent().attr('id')
                 },
                 success: function (data) {
                     var items = [];
@@ -86,10 +93,8 @@
                     });
                     $("#CompanyAddressUbigeoCodDist").html(items.join(' '));
                 }
-             });
+            });
         }
-
-
     </script>
 
 }

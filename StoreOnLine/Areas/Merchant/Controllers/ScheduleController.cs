@@ -15,7 +15,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
     public class ScheduleController : Controller
     {
         private readonly ICompanyRepository _repositoryCompany;
-        public ScheduleController(ICompanyRepository repositoryCompany)
+        private readonly IScheduleRepository _repositorySchedule;
+        public ScheduleController(ICompanyRepository repositoryCompany, IScheduleRepository repositorySchedule)
         {
             ViewBag.Big = "Requerimientos";
             ViewBag.Small = "Horarios establecidos por la compañia";
@@ -23,6 +24,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             ViewBag.Controller = "Schedule";
             ViewBag.Action = "Index";
             _repositoryCompany = repositoryCompany;
+            _repositorySchedule = repositorySchedule;
         }
 
         //
@@ -68,7 +70,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     company.HasSchedule = true;
                     _repositoryCompany.SaveCompany(company);
                 }
-                _repositoryCompany.SaveSchedule(model.ToBd(model));
+                _repositorySchedule.SaveSchedule(model.ToBd(model));
                 TempData["message"] = string.Format("ha sido guardado");
                 return Json(new { ok = true, newurl = "Index?companyId=" + model.CompanyId });
             }
