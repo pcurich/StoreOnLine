@@ -30,8 +30,19 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult Index()
         {
             ViewBag.Action = "Index";
-            var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString()&& p.HasSchedule);
-            return View(db.Select(company => new CompanyView().ToView(company)).ToList());
+            var lista = new List<CompanyView>();
+            var person = _repositoryPerson.Persons.FirstOrDefault(o => o.User.UserName == User.Identity.Name);
+            if (person != null)
+            {
+                var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString() && p.HasSchedule).ToList();
+                lista.AddRange(from element 
+                                   in db from source 
+                                   in element.Schedules.Where(o => o.BaseCode == person.BaseCode) 
+                               select new CompanyView().ToView(element));
+            }
+
+            return View(lista);
+
         }
 
         //

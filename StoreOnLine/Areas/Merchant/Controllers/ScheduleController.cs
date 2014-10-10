@@ -41,6 +41,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         {
             ViewBag.Action = "Create";
             ViewBag.GetScheduleTurn = GetScheduleTurn(null);
+            ViewBag.GetCompanyInternal = GetCompanyInternal(null);
             return View("Edit", new ScheduleView { CompanyId = companyId });
         }
 
@@ -54,6 +55,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 ViewBag.CompanyName = company.CompanyName;
                 schedule = company.Schedules.FirstOrDefault(p => p.Id == scheduleId);
                 ViewBag.GetScheduleTurn = GetScheduleTurn(schedule != null ? schedule.ScheduleTurn : null);
+                ViewBag.GetCompanyInternal = GetCompanyInternal(schedule != null ? schedule.BaseCode : null);
             }
             return View(new ScheduleView().ToView(schedule));
         }
@@ -82,6 +84,10 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public SelectList GetScheduleTurn(string selected)
         {
             return new SelectList(Enum.GetNames(typeof(ScheduleTurn)).Select(r => new SelectListItem { Text = r.ToString(), Value = r.ToString(), Selected = (r.ToString() == selected) }), "Value", "Text");
+        }
+        public SelectList GetCompanyInternal(string selected)
+        {
+            return new SelectList(_repositoryCompany.Companies.Where(o => o.CompanyType == CompanyType.Internal.ToString()).Select(r => new SelectListItem { Text = r.CompanyName, Value = r.CompanyCode, Selected = (r.ToString() == selected) }), "Value", "Text");
         }
         #endregion
     }

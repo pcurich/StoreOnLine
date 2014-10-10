@@ -50,7 +50,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         public ActionResult AddPersonal(int companyId, int scheduleId)
         {
-            ViewBag.Person = GetPerson(companyId);
+            var person = _repositoryPerson.Persons.FirstOrDefault(o => o.User.UserName == User.Identity.Name);
+            ViewBag.Person = GetPerson(person.BaseCode);
             
             ViewBag.CompanyId = companyId;
             ViewBag.scheduleId = scheduleId;
@@ -83,9 +84,9 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         #region Custom
 
-        public SelectList GetPerson(int companyId)
+        public SelectList GetPerson(string baseCompany)
         {
-            var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
+            var company = _repositoryCompany.Companies.FirstOrDefault(o => o.CompanyCode == baseCompany);
             var repo = _repositoryPerson.Persons.Where(o => o.BaseCode == company.CompanyCode && o.Role.RoleName==RoleList.Empleado.ToString());
             return new SelectList(
                 repo.Select(r =>

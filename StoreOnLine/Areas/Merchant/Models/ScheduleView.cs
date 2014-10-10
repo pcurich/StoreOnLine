@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Model.Companies;
-using WebGrease;
 
 namespace StoreOnLine.Areas.Merchant.Models
 {
@@ -51,6 +50,9 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public int CompanyId { get; set; }
 
+        [Display(Name = "Base asignada")]
+        [DataType(DataType.Text)]
+        public string BaseCode { get; set; }
 
         public Schedule ToBd(ScheduleView view)
         {
@@ -81,7 +83,8 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ScheduleDaysOff = 7 - Convert.ToInt16(view.ScheduleDaysWorkPerWeek),
                 ScheduleTurn = view.ScheduleTurn,
                 ScheduleHuors = Convert.ToInt16(view.ScheduleHuors),
-                CompanyId = view.CompanyId
+                CompanyId = view.CompanyId,
+                BaseCode = view.BaseCode
             };
         }
 
@@ -98,18 +101,9 @@ namespace StoreOnLine.Areas.Merchant.Models
                 ScheduleTurn = db.ScheduleTurn,
                 ScheduleTimeStart=db.ScheduleFrom.ToShortTimeString(),
                 ScheduleHuors = Convert.ToString(db.ScheduleHuors),
-                CompanyId = db.CompanyId
+                CompanyId = db.CompanyId,
+                BaseCode = db.BaseCode
             };
         }
     }
-}
-public enum DayPerWeek
-{
-    Uno = 1,
-    Dos = 2,
-    Tres = 3,
-    Cuatro = 4,
-    Cinco = 5,
-    Seis = 6,
-    Siete = 7
 }

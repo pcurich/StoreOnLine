@@ -21,6 +21,8 @@ namespace StoreOnLine.DataBase.Model.Companies
         public int CompanyId { get; set; }
         public Company Company { get; set; }
 
+        public string BaseCode { get; set; }
+
         public List<ScheduleDetail> ScheduleDetails { get; set; }
     }
 }
