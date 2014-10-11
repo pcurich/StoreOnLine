@@ -3,7 +3,6 @@ using System.Data.Entity.Core.Common.CommandTrees;
 using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
-using Glimpse.Core.Extensions;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Security;
