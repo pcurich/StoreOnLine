@@ -29,7 +29,7 @@ namespace StoreOnLine.Domain.HtmlModel
             Panel.Title = title;
         }
 
-        public void AddSubPanel(int parentId, int id, string title, string message)
+        public void AddSubPanel(int parentId, int id, string title, List<string> message)
         {
             if (Panel.SubPanels == null)
             {
@@ -51,14 +51,14 @@ namespace StoreOnLine.Domain.HtmlModel
         public int IdParent { get; set; }
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Message { get; set; }
+        public List<string> Message { get; set; }
 
-        public SubPanel(int parentId, int id, string title, string message)
+        public SubPanel(int parentId, int id, string title, List<string> messages)
         {
             IdParent = parentId;
             Id = id;
             Title = title;
-            Message = message;
+            Message = messages;
         }
 
 

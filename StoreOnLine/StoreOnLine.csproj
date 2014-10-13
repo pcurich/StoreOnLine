@@ -583,6 +583,7 @@
     <Content Include="Areas\Merchant\Views\Business\Index.cshtml" />
     <Content Include="Areas\Merchant\Views\Assign\Index.cshtml" />
     <Content Include="Areas\Merchant\Views\Assign\AddPersonal.cshtml" />
+    <Content Include="Areas\Merchant\Views\Assist\Index.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -646,6 +647,7 @@
     <Compile Include="Areas\Management\Models\SupplierView.cs" />
     <Compile Include="Areas\Management\Models\UnitView.cs" />
     <Compile Include="Areas\Merchant\Controllers\AssignController.cs" />
+    <Compile Include="Areas\Merchant\Controllers\AssistController.cs" />
     <Compile Include="Areas\Merchant\Controllers\BaseController.cs" />
     <Compile Include="Areas\Merchant\Controllers\BusinessController.cs" />
     <Compile Include="Areas\Merchant\Controllers\CompanyController.cs" />

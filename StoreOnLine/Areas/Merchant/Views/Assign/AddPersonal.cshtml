@@ -2,7 +2,7 @@
 @model IDictionary<int, List<StoreOnLine.Areas.Merchant.Models.CalendarView>>
 @{
     ViewBag.Title = "Asignacion";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_SupervisorLayout.cshtml";
     
 }
 
@@ -22,7 +22,7 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading ">
-                @Html.ActionLink("Crear Nuevo", "Create", "Company", null, new { @class = " btn btn-primary pull-righ" })
+                
             </div>
             <div class="panel-body">
                 <div class="col-lg-8">
@@ -86,14 +86,7 @@
                     scheduleId: '@ViewBag.scheduleId',
                     time: $(data).parent().attr('id')
                 },
-                success: function (data) {
-                    var items = [];
-                    items.push("<option>-----------------------------</option>");
-                    $.each(data, function () {
-                        items.push("<option value=" + this.Value + ">" + this.Text + "</option>");
-                    });
-                    $("#CompanyAddressUbigeoCodDist").html(items.join(' '));
-                }
+                success: location.reload()
             });
         }
     </script>

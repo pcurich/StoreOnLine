@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<StoreOnLine.Areas.Merchant.Models.ScheduleView>
 @{
     ViewBag.Title = "Requerimientos";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_SupervisorLayout.cshtml";
 }
 
 <div class="row">
@@ -60,7 +60,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.ActionLink(item.ScheduleFrom, "Edit", new { assignId = item.Id })
+                                    @Html.DisplayFor(modelItem => item.ScheduleFrom)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.ScheduleTo)

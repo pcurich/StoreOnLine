@@ -98,7 +98,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         list.Add(new CalendarView
                         {
                             TypeOfTask = "0",
-                            PersonId = " ",
+                            PersonId = " - ",
                             WeekName = dayName,
                             DayNumber = (start).ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'),
                             MonthName = CalendarView.GetNameMonth(schedule.ScheduleFrom.Month),
@@ -162,8 +162,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (schedule != null)
                 {
                     var scheduleDetail = schedule.ScheduleDetails.FirstOrDefault(
-                       o => o.PersonId == personId &&
-                            o.TypeOfTask == TypeOfTask.Asignacion.ToString());
+                       o =>o.TypeOfTask == TypeOfTask.Asignacion.ToString() &&
+                        o.TimeStart.ToShortDateString() == timeStart.ToShortDateString());
 
 
 
@@ -171,6 +171,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     {
                         scheduleDetail.TypeOfTask = TypeOfTask.DesAsignado.ToString();
                         scheduleDetail.IsStatus = false;
+                        scheduleDetail.Schedule = null;
                         _repositorySchedule.SaveScheduleDetail(scheduleDetail);
                     }
 
@@ -223,12 +224,22 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         var division = Convert.ToInt16(numberOfAssin / schedule.ScheduleDaysWorkPerWeek) + 1;
                         var residue = Convert.ToInt16(numberOfAssin % schedule.ScheduleDaysWorkPerWeek);
                         string message = "";
-
+                        var messages=new List<string>();
                         for (var i = 0; i < division; i++)
                         {
-                            message = residue + "x" + (7 - residue) + "x" + schedule.ScheduleHuors;
-                            panel.AddSubPanel(worker.Id, scheduleNoDone.Id, company.CompanyName, message);
+                            if (i + 1 < division)
+                            {
+                                 messages.Add(6 + "x" + (1) + "x" + schedule.ScheduleHuors);
+                            }
+                            else
+                            {
+                                if (residue > 0)
+                                {
+                                    messages.Add(residue + "x" + (6 - residue) + "x" + schedule.ScheduleHuors);
+                                }
+                            }
                         }
+                        panel.AddSubPanel(worker.Id, scheduleNoDone.Id, company.CompanyName, messages);
                     }
                 }
                 if (numberOfAssin > 0)
