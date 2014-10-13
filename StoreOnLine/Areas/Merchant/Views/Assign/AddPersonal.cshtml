@@ -45,13 +45,14 @@
                                                 @{
                                 var id = @week.Year + "|" + @week.MonthNumber + "|" + @week.DayNumber;
                                                 }
-                                                <td id="@id">@Html.DropDownList(week.PersonId,
-                                                (SelectList)ViewBag.Person, "------------------------------",
-                                                new
-                                                {
-                                                    @class = "form-control btn btn-primary btn-xs",
-                                                    onchange = "UpdatePerson(this)"
-                                                })
+                                                <td id="@id">@week.PersonId
+                                                    @Html.DropDownList(week.PersonId,
+                                                              (SelectList)ViewBag.Person, "------------------------------",
+                                                              new
+                                                              {
+                                                                  @class = "form-control btn btn-primary btn-xs",
+                                                                  onchange = "UpdatePerson(this)"
+                                                              })
                                                 </td>
                                             </tr>
                                         </tbody>

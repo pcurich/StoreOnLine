@@ -27,6 +27,17 @@ namespace StoreOnLine.DataBase.Concrete
             }
         }
 
+        public IEnumerable<Schedule> Schedules
+        {
+            get
+            {
+                return _context.Schedules
+                    .Include(o => o.Company)
+                    .Include(o => o.ScheduleDetails)
+                    .Where(o => !o.IsDeleted);
+            }
+        }
+
         public int SaveCompany(Company company)
         {
             if (company.Id == 0)

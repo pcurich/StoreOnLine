@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Microsoft.Ajax.Utilities;
 using Microsoft.SqlServer.Server;
+using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Merchant.Models
 {
@@ -18,7 +19,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         public string MonthName { get; set; }
         public string PersonId { get; set; }
 
-        public static List<CalendarView> GetWeek(int baseDays,int from, string dayOfWeek, int to, int month, int year)
+        public static List<CalendarView> GetWeek(int baseDays,int from, string dayOfWeek, int to, int month, int year, IEnumerable<Person> people )
         {
             var start = from;
             var days = 0;
@@ -35,7 +36,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return list;
         }
 
-        private static string GetDateName(string dayOfWeek)
+        public static string GetDateName(string dayOfWeek)
         {
             if (String.Compare(DayOfWeek.Monday.ToString(), dayOfWeek, StringComparison.Ordinal) == 0)
             {
@@ -68,7 +69,7 @@ namespace StoreOnLine.Areas.Merchant.Models
 
             return "";
         }
-        private static string GetNameMonth(int month)
+        public static string GetNameMonth(int month)
         {
             var monthName = "";
             switch (month)

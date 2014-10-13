@@ -21,7 +21,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         private readonly IPersonRepository _repositoryPerson;
         private readonly IScheduleRepository _repositorySchedule;
 
-        public AssignController(ICompanyRepository repositoryCompany,  
+        public AssignController(ICompanyRepository repositoryCompany,
             IPersonRepository repositoryPerson, IScheduleRepository repositorySecurity)
         {
             ViewBag.Big = "Contratos: Contratos con la compañia";
@@ -52,7 +52,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         {
             var person = _repositoryPerson.Persons.FirstOrDefault(o => o.User.UserName == User.Identity.Name);
             ViewBag.Person = GetPerson(person.BaseCode);
-            
+
             ViewBag.CompanyId = companyId;
             ViewBag.scheduleId = scheduleId;
 
@@ -62,22 +62,74 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
             if (company == null) return View(calendar);
 
-            var schedule = company.Schedules.FirstOrDefault(o => o.Id == scheduleId);
+            var schedule = _repositoryCompany.Schedules.FirstOrDefault(o => o.Id == scheduleId);
             if (schedule == null) return View(calendar);
- 
-            var days = (schedule.ScheduleTo - schedule.ScheduleFrom).TotalDays + 1;
-            int week = Convert.ToInt16(Math.Ceiling(days / baseDays));
 
-            var scheduleFrom = schedule.ScheduleFrom;
+            var totalDays = (schedule.ScheduleTo - schedule.ScheduleFrom).TotalDays + 1;
+            int week = Convert.ToInt16(Math.Ceiling(totalDays / baseDays));
+
+            //var scheduleFrom = schedule.ScheduleFrom;
+            //var people = _repositoryPerson.Persons.Where(o => o.BaseCode == company.CompanyCode && o.Role.RoleName == RoleList.Empleado.ToString()).ToList();
+
+            //this is for each week
             for (var i = 1; i <= week; i++)
             {
-                calendar.Add(i,
-                    CalendarView.GetWeek(baseDays,scheduleFrom.Day, scheduleFrom.DayOfWeek.ToString(),
-                                        schedule.ScheduleTo.Day, scheduleFrom.Month, scheduleFrom.Year));
-                scheduleFrom = scheduleFrom.AddDays(baseDays);
+                var start = schedule.ScheduleFrom.Day;
+                var to = schedule.ScheduleTo.Day;
+                var days = 0;
+                var list = new List<CalendarView>();
+
+
+                while (start <= to && days < baseDays)
+                {
+                    //var newDate = new DateTime(schedule.ScheduleFrom.Year, schedule.ScheduleFrom.Month, start);
+                    //
+                    var scheduleDetail = schedule.ScheduleDetails.FirstOrDefault(
+                        o => o.TimeStart.Year == schedule.ScheduleFrom.Year &&
+                            o.TimeStart.Month == schedule.ScheduleFrom.Month &&
+                            o.TimeStart.Day == schedule.ScheduleFrom.Day &&
+                             o.TypeOfTask == TypeOfTask.Asignacion.ToString());
+                    var result = CalendarView.GetDateName(schedule.ScheduleFrom.DayOfWeek.ToString()).Split('|');
+                    var dayName = result[0];
+                    //  var dayOfWeek = result[1];
+
+                    if (scheduleDetail == null)
+                    {
+                        list.Add(new CalendarView
+                        {
+                            TypeOfTask = "0",
+                            PersonId = " ",
+                            WeekName = dayName,
+                            DayNumber = (start).ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'),
+                            MonthName = CalendarView.GetNameMonth(schedule.ScheduleFrom.Month),
+                            MonthNumber = schedule.ScheduleFrom.Month,
+                            Year = schedule.ScheduleFrom.Year
+                        });
+                    }
+                    else
+                    {
+                        list.Add(new CalendarView
+                        {
+                            TypeOfTask = "0",
+                            PersonId = _repositoryPerson.Persons.FirstOrDefault(o => o.Id == scheduleDetail.PersonId).User.UserName,
+                            WeekName = dayName,
+                            DayNumber = (start).ToString(CultureInfo.InvariantCulture).PadLeft(2, '0'),
+                            MonthName = CalendarView.GetNameMonth(schedule.ScheduleFrom.Month),
+                            MonthNumber = schedule.ScheduleFrom.Month,
+                            Year = schedule.ScheduleFrom.Year
+                        });
+                    }
+
+
+                    start++;
+                    days++;
+                    schedule.ScheduleFrom = schedule.ScheduleFrom.AddDays(1);
+                }
+                calendar.Add(i, list);
+                //schedule.ScheduleFrom = schedule.ScheduleFrom.AddDays(baseDays);
             }
 
-            var accordeonList = GetAccordion(company, schedule);
+            var accordeonList = GetAccordion(schedule);
             ViewBag.Accordion = accordeonList;
             return View(calendar);
         }
@@ -87,7 +139,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public SelectList GetPerson(string baseCompany)
         {
             var company = _repositoryCompany.Companies.FirstOrDefault(o => o.CompanyCode == baseCompany);
-            var repo = _repositoryPerson.Persons.Where(o => o.BaseCode == company.CompanyCode && o.Role.RoleName==RoleList.Empleado.ToString());
+            var repo = _repositoryPerson.Persons.Where(o => o.BaseCode == company.CompanyCode && o.Role.RoleName == RoleList.Empleado.ToString());
             return new SelectList(
                 repo.Select(r =>
                     new SelectListItem { Text = r.User.UserName, Value = r.Id.ToString(CultureInfo.InvariantCulture) }
@@ -106,9 +158,21 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
             if (person != null && company != null)
             {
-                var schedule = company.Schedules.FirstOrDefault(o => o.Id == scheduleId);
+                var schedule = _repositoryCompany.Schedules.FirstOrDefault(o => o.Id == scheduleId);
                 if (schedule != null)
                 {
+                    var scheduleDetail = schedule.ScheduleDetails.FirstOrDefault(
+                       o => o.PersonId == personId &&
+                            o.TypeOfTask == TypeOfTask.Asignacion.ToString());
+
+
+
+                    if (scheduleDetail != null)
+                    {
+                        scheduleDetail.TypeOfTask = TypeOfTask.DesAsignado.ToString();
+                        scheduleDetail.IsStatus = false;
+                        _repositorySchedule.SaveScheduleDetail(scheduleDetail);
+                    }
 
                     var detail = new ScheduleDetail();
                     detail.PersonId = personId;
@@ -120,7 +184,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
                     _repositorySchedule.SaveScheduleDetail(detail);
 
-                    var accordeonList = GetAccordion(company, schedule);
+                    var accordeonList = GetAccordion(schedule);
                     ViewBag.Accordion = accordeonList;
                     return Json(accordeonList);
 
@@ -129,36 +193,41 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             return Json(new { ok = false });
         }
 
-        private List<Accordion> GetAccordion(Company company, Schedule schedule)
+        private List<Accordion> GetAccordion(Schedule schedule)
         {
             int daysInWeek = 7;
             var accordeonList = new List<Accordion>();
-            var peopleInCompany = _repositoryPerson.Persons.Where(o => o.BaseCode == company.CompanyCode && o.Role.RoleName==RoleList.Empleado.ToString());
+            var supervisor = _repositoryPerson.Persons.FirstOrDefault(o => o.User.UserName == User.Identity.Name);
+            //var  companyInternal = supervisor.BaseCode; companyInternal
+
+            var peopleInCompany = _repositoryPerson.Persons.Where(o => o.BaseCode == supervisor.BaseCode && o.Role.RoleName == RoleList.Empleado.ToString());
+            var companiesWithSchedule = _repositoryCompany.Companies.Where(o => o.HasSchedule);
 
             foreach (var worker in peopleInCompany)
             {
                 var panel = new Accordion();
                 panel.AddPanel(worker.Id, worker.User.UserName);
-                var companiesWithSchedule = _repositoryCompany.Companies.Where(o => o.HasSchedule);
                 var numberOfAssin = 0;
-                foreach (var companyWithSchedule in companiesWithSchedule)
-                {
-                    // var schedulesNoDone =_repositoryCompany.Schedules.Where(o => o.CompanyId == companyWithSchedule.Id && !o.IsDone);
-                    var schedulesNoDone = _repositorySchedule.Schedules.Where(o => !o.IsDone).ToArray();
-                    //var dateFrom = schedulesNoDone.Min(o => o.ScheduleFrom);
-                    //var dateTo = dateFrom.AddDays(daysInWeek);
 
+                foreach (var company in companiesWithSchedule)
+                {
+                    var schedulesNoDone = _repositorySchedule.Schedules.Where(o => !o.IsDone && o.CompanyId == company.Id);
                     foreach (var scheduleNoDone in schedulesNoDone)
                     {
-                        numberOfAssin = scheduleNoDone.ScheduleDetails.Count(o => o.PersonId == worker.Id);
-                        if (numberOfAssin==0) break;
-                        var division = Convert.ToInt16(numberOfAssin / schedule.ScheduleDaysWorkPerWeek)+1;
+                        numberOfAssin = scheduleNoDone.ScheduleDetails.Count(o => o.PersonId == worker.Id
+                            && o.TypeOfTask == TypeOfTask.Asignacion.ToString()
+                            && o.ScheduleId == scheduleNoDone.Id);
+
+                        if (numberOfAssin == 0) break;
+
+                        var division = Convert.ToInt16(numberOfAssin / schedule.ScheduleDaysWorkPerWeek) + 1;
                         var residue = Convert.ToInt16(numberOfAssin % schedule.ScheduleDaysWorkPerWeek);
                         string message = "";
+
                         for (var i = 0; i < division; i++)
                         {
                             message = residue + "x" + (7 - residue) + "x" + schedule.ScheduleHuors;
-                            panel.AddSubPanel(worker.Id, scheduleNoDone.Id, companyWithSchedule.CompanyName, message);
+                            panel.AddSubPanel(worker.Id, scheduleNoDone.Id, company.CompanyName, message);
                         }
                     }
                 }
