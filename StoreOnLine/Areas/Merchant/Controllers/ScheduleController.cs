@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Companies;
-using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.Areas.Merchant.Controllers
 {

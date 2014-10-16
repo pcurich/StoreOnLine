@@ -8,10 +8,6 @@ using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Domain.HtmlModel;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Entity;
-using System.Linq;
 
 namespace StoreOnLine.Areas.Merchant.Controllers
 {

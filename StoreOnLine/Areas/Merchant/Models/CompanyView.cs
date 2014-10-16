@@ -26,7 +26,7 @@ namespace StoreOnLine.Areas.Merchant.Models
 
         [Required(ErrorMessage = "Ingrese una actividad economica")]
         [DataType(DataType.Text)]
-        [Display(Name = "Act Econóico")]
+        [Display(Name = "Rubro de la Empresa")]
         public string CompanyActivity { get; set; }
 
         [Required(ErrorMessage = "Ingrese codigo de C.I.F.")]

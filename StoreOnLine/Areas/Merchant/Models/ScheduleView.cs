@@ -27,10 +27,12 @@ namespace StoreOnLine.Areas.Merchant.Models
         public string ScheduleTo { get; set; }
 
         [Range(1, 7, ErrorMessage = "El valor debe estar entre 1 y 7")]
-        [Display(Name = "Dias laborales (Semana)")]
+        [Display(Name = "Dias laborales (Por Semana)")]
         [DataType(DataType.Text)]
         public string ScheduleDaysWorkPerWeek { get; set; }
 
+        [Display(Name = "Dias de Franco (Por Semana)")]
+        [DataType(DataType.Text)]
         public string ScheduleDaysOff { get; set; }
 
         [Display(Name = "Turno de Trabajo")]
