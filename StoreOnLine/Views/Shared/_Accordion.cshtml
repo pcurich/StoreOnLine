@@ -1,21 +1,16 @@
 ﻿<style type="text/css">
-    
-
-    .panel-scroll
-    {
+    .panel-scroll {
         max-height: 320px;
         overflow: hidden;
         overflow-y: auto;
     }
 
-    .panel a:hover
-    {
+    .panel a:hover {
         text-decoration: none;
         color: #222;
     }
 
-    .panel .table td
-    {
+    .panel .table td {
         border-color: #f3f3f3;
     }
 </style>
@@ -48,14 +43,21 @@
                                     <table class="table">
                                         <tbody>
                                             @{
-                                foreach (var subpanel in panel.GetSubPanels())
-                                {
+                                                foreach (var subpanel in panel.GetSubPanels())
+                                                {
                                                 <tr>
                                                     <td>
-                                                        <a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span>@subpanel.Title</a> <span class="badge">@subpanel.Message</span>
+                                                        <a href="#"><span class="glyphicon glyphicon-pencil text-primary"></span>@subpanel.Title</a>
+                                                        @{
+                                                            foreach (var message in subpanel.Message)
+                                                            {
+                                                            <span class="badge">@message</span> <br/>
+                                                            }
+                                            
+                                                        }
                                                     </td>
                                                 </tr>  
-                                }
+                                                }
                                             }
                                         </tbody>
                                     </table>
