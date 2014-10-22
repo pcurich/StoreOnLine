@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StoreOnLine.Areas.Merchant.Models.ScheduleDetailView>
+﻿@model StoreOnLine.Areas.Merchant.Models.ScheduleDetailView
 @{
     ViewBag.Title = "Asistencia";
     Layout = "~/Views/Shared/_SupervisorLayout.cshtml";
@@ -15,85 +15,40 @@
     </div>
 </div>
 
-
-@*<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading ">
-            </div>
-            <div class="panel-body">
-                <table id="DataTablePerson" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ScheduleFrom)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ScheduleTo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ScheduleHuors)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ScheduleTurn)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ScheduleDaysWorkPerWeek)
-                            </th>
-
-                            <th class="text-center">
-                                @Html.DisplayNameFor(model => model.IsStatus)
-                            </th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ScheduleFrom)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ScheduleTo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ScheduleHuors)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ScheduleTurn)
-                                </td>
-                                <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.ScheduleDaysWorkPerWeek)
-                                </td>
-                                <td class="text-center">
-                                    @if (item.IsStatus)
-                                    {
-                                        <i class="glyphicon glyphicon-ok"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="glyphicon glyphicon-remove"></i>
-                                    }
-
-                                </td>
-                                <td class="text-center">
-                                    @using (Html.BeginForm("OnTime", "Schedule", FormMethod.Get))
-                                    {
-                                        @Html.Hidden("companyId", item.CompanyId)
-                                        @Html.Hidden("scheduleId", item.Id)
-                                        <input type="submit" class="btn btn-primary btn-xs" value="Asitencia" />
-                                    }
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+@{
+    if (Model != null)
+    {
+        using (Html.BeginForm())
+        {
+    @Html.ValidationSummary()
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Hora Entrada</label>
+        <div class="col-lg-10">
+            <label class="form-control">@Model.TimeStart.ToShortTimeString()</label>
         </div>
     </div>
-</div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Hora Salida</label>
+        <div class="col-lg-10">
+            <label class="form-control">@Model.TimeEnd.ToShortTimeString()</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Asistencia</label>
+        <div class="col-lg-10">
+            @Html.DropDownListFor(m => m.TypeOfTask,
+                                            new SelectList(Enum.GetNames(typeof(TypeOfTask))),
+                                            "------------------------------",
+                                            new { @class = "form-control btn btn-primary" })
+        </div>
+    </div>
+
+    <input type="submit" value="Log in" class="btn btn-primary pull-right" />
+        }
+    }
+
+}
+
 
 @section Scripts {
 
@@ -118,4 +73,4 @@
 
     </script>
 
-}*@
+}

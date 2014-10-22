@@ -57,8 +57,19 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         public ActionResult OnTime(int companyId, int scheduleId)
         {
+            
+
             var db = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
-            return db != null ? View(db.ScheduleDetails.Select(schedule => new ScheduleDetailView().ToView(schedule))) : View(new ScheduleDetailView());
+            if (db != null)
+            {
+                var details =
+                    db.ScheduleDetails.Where(o => o.TimeStart.Day == DateTime.Now.Day)
+                        .Select(schedule => new ScheduleDetailView().ToView(schedule)).FirstOrDefault();
+                return View(details);
+            }
+            return View(new ScheduleDetailView());
         }
+
+        
     }
 }

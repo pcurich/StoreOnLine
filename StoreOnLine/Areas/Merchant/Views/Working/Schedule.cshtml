@@ -45,7 +45,6 @@
                                 @Html.DisplayNameFor(model => model.IsStatus)
                             </th>
                             <th></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -79,7 +78,7 @@
 
                                 </td>
                                 <td class="text-center">
-                                    @using (Html.BeginForm("OnTime", "Schedule", FormMethod.Get))
+                                    @using (Html.BeginForm("OnTime", "Working", FormMethod.Get))
                                     {
                                         @Html.Hidden("companyId", item.CompanyId)
                                         @Html.Hidden("scheduleId", item.Id)
