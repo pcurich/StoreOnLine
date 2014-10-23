@@ -59,6 +59,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         public ActionResult OnTime(int companyId, int scheduleId)
         {
+            ViewBag.Resumen = GetResumen(scheduleId);
+
             var db = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
             if (db != null)
             {
@@ -93,8 +95,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
                 if (schedule != null)
                 {
-                    var scheduleDetails = schedule.ScheduleDetails.OrderByDescending(o=>o.Id).Take(1).FirstOrDefault();
-                    
+                    var scheduleDetails = schedule.ScheduleDetails.OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
+
                     if (scheduleDetails != null)
                     {
                         timeEnd = scheduleDetails.TimeEnd;
@@ -104,7 +106,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         //scheduleDetails.Schedule = null;
                         var elapsedTicks = scheduleDetails.TimeEnd.Ticks - scheduleDetails.TimeStart.Ticks;
                         var elapsedSpan = new TimeSpan(elapsedTicks);
-                        scheduleDetails.TotalTime = Convert.ToInt16(elapsedSpan.TotalSeconds);
+                        scheduleDetails.TotalTime = Convert.ToInt16(elapsedSpan.TotalMinutes);
                         _repositorySchedule.SaveScheduleDetail(scheduleDetails);
                     }
                 }
@@ -115,11 +117,37 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 m.TimeEnd = timeEnd;
                 m.Id = 0;
                 _repositorySchedule.SaveScheduleDetail(m);
+
+                ViewBag.Resumen = GetResumen(m.ScheduleId);
+
                 TempData["message"] = string.Format("ha sido guardado");
                 return Json(new { ok = true, newurl = "OnTime?companyId=" + schedule.CompanyId + "&scheduleId=" + schedule.Id });
             }
 
             return Json(new { ok = false, model });
+        }
+
+        private object GetResumen(int scheduleId)
+        {
+            var schedule = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
+
+            if (schedule != null)
+            {
+                var listActivities =
+                    (from scheduleDetail in schedule.ScheduleDetails.Where(o => o.TimeStart.ToShortDateString() == DateTime.Now.ToShortDateString()).OrderByDescending(o => o.Id)
+
+                     let element = scheduleDetail.TimeStart.ToShortTimeString() + " - " +
+                                   scheduleDetail.TimeEnd.ToShortTimeString() + " >> "
+
+                     let person = (_repositoryPerson.Persons.FirstOrDefault(o => o.Id == scheduleDetail.PersonId)
+                                   ?? new Person { User = new User { UserName = " " } })
+                     select element + person.User.UserName + " ( " + scheduleDetail.TypeOfTask + " )"
+
+                    ).ToList();
+
+                return listActivities;
+            }
+            return new List<ScheduleDetailView>();
         }
 
         public SelectList GetPersonList(string selected)

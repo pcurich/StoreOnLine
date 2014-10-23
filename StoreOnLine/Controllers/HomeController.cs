@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using Antlr.Runtime.Misc;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure;
@@ -26,6 +27,10 @@ namespace StoreOnLine.Controllers
             _repositoryPerson = repositoryPerson;
         }
 
+        public ActionResult Index()
+        {
+            return RedirectToAction("LogIn", "Account", new { Area = "Security" });
+        }
 
         [HttpPost]
         public ActionResult Index(int i)
@@ -34,11 +39,11 @@ namespace StoreOnLine.Controllers
             return View("Index", (object)remote.GetRemoteData());
         }
 
-        public async Task<ActionResult> Index()
-        {
-            var data = await Task<string>.Factory.StartNew(() => new RemoteService().GetRemoteData());
-            return View("Index", (object)data);
-        }
+        //public async Task<ActionResult> Index()
+        //{
+        //    var data = await Task<string>.Factory.StartNew(() => new RemoteService().GetRemoteData());
+        //    return View("Index", (object)data);
+        //}
 
         public async Task<ActionResult> ConsumeAsyncMethod()
         {

@@ -4,12 +4,12 @@
     Layout = "~/Views/Shared/_SupervisorLayout.cshtml";
     var ajaxOpts = new AjaxOptions
     {
-        UpdateTargetId = "tableBody",
+        //UpdateTargetId = "tableBody",
         Url = Url.Action("OnTime", "Working"),
         LoadingElementDuration = 1000,
-        LoadingElementId = "loading",
+        //LoadingElementId = "loading",
         HttpMethod = "Post",
-        OnSuccess = "OnSuccess"
+        OnSuccess = "location.reload()"
 
     };
 }
@@ -28,72 +28,75 @@
 @{
     if (Model != null)
     {
-        using (Ajax.BeginForm("OnTime", "Working", ajaxOpts, new { @class = "form-horizontal" }))
-        {
-    @Html.ValidationSummary()
-    @Html.HiddenFor(m=>m.Id)
-    @Html.HiddenFor(m=>m.PersonId)
-    @Html.HiddenFor(m=>m.ScheduleId)
-    <div class="form-group">
-        <label class="col-lg-2 control-label">Hora Entrada</label>
-        <div class="col-lg-10">
-            <label class="form-control">@Model.TimeStart.ToShortTimeString()</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-lg-2 control-label">Hora Salida</label>
-        <div class="col-lg-10">
-            <label class="form-control">@Model.TimeEnd.ToShortTimeString()</label>
-        </div>
-    </div>
-            <div class="form-group">
-                <label class="col-lg-2 control-label">Asistencia</label>
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.TypeOfTask,
-                        new SelectList(Enum.GetNames(typeof(TypeOfTask))),
-                        "------------------------------",
-                        new { @class = "form-control btn btn-primary" })
-                </div>
-            </div>
-    <div class="form-group">
-                <label class="col-lg-2 control-label">Asistencia</label>
-                <div class="col-lg-10">
-                    @Html.DropDownListFor(m => m.PersonId,
-                        (SelectList)ViewBag.Person,
-                        "------------------------------",
-                        new { @class = "form-control btn btn-primary" })
-                </div>
-            </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading ">
+                        Formulario de Asistencia
+                    </div>
+                    <div class="panel-body">
+                        @using (Ajax.BeginForm("OnTime", "Working", ajaxOpts, new { @class = "form-horizontal" }))
+                        {
+                            @Html.ValidationSummary()
+                            @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.ScheduleId)
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Hora Entrada</label>
+                                <div class="col-lg-10">
+                                    <label class="form-control">@Model.TimeStart.ToShortTimeString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Hora Salida</label>
+                                <div class="col-lg-10">
+                                    <label class="form-control">@Model.TimeEnd.ToShortTimeString()</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Asistencia</label>
+                                <div class="col-lg-10">
+                                    @Html.DropDownListFor(m => m.TypeOfTask,
+                                        new SelectList(Enum.GetNames(typeof(TypeOfTask))),
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Asistencia</label>
+                                <div class="col-lg-10">
+                                    @Html.DropDownListFor(m => m.PersonId,
+                                        (SelectList)ViewBag.Person,
+                                        "------------------------------",
+                                        new { @class = "form-control btn btn-primary" })
+                                </div>
+                            </div>
     
 
-    <input type="submit" value="Guardar" class="btn btn-primary pull-right" />
-        }
+                            <input type="submit" value="Guardar" class="btn btn-primary pull-right" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading ">
+                        Resumen de Actividades
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var element in (List<String>)ViewBag.Resumen)
+                        {
+                            <div class="well-sm">
+                                @element
+                            </div>    
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     }
-
-}
-
-
-@section Scripts {
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#DataTablePerson').dataTable({
-                "order": [[0, "asc"]],
-                "paging": false,
-                //"pagingType": "full_numbers",
-                "scrollY": "300px",
-                "scrollCollapse": true,
-                "jQueryUI": true,
-                "oLanguage": {
-                    "sSearch": "<b> Buscar :</b>  ",
-                    "sInfo": "Mostrando _START_ de _END_  registros",
-                    "sLoadingRecords": "Cargando...",
-                    "sProcessing": "Procesando...",
-                    "sEmptyTable": "No hay informacion para mostrar"
-                }
-            });
-        });
-
-    </script>
-
 }

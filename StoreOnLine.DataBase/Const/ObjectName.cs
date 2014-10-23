@@ -13,6 +13,7 @@ namespace StoreOnLine.DataBase.Const
         public const string ProductBaseName = "ProductBase";
         public const string ProductCompositeName = "ProductComposite";
         public const string Default = "Default";
-        
+
+        public const string Logo = "Logo";
     }
 }

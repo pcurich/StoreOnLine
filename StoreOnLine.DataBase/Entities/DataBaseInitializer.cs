@@ -206,6 +206,7 @@ namespace StoreOnLine.DataBase.Entities
                     dir.Name.Contains("Feature") ? Const.ObjectName.FeatureName :
                     dir.Name.Contains("ProductBase") ? Const.ObjectName.ProductBaseName :
                     dir.Name.Contains("Supplier") ? Const.ObjectName.SupplierName :
+                    dir.Name.Contains("Logo") ? Const.ObjectName.Logo :
                     dir.Name.Contains("ProductConcrete") ? Const.ObjectName.ProductCompositeName : Const.ObjectName.Default;
 
                 imagen.IsPrincipal = true;
