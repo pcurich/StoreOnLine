@@ -65,6 +65,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (company != null)
                 {
                     company.HasSchedule = true;
+                    company.StatusOfSchedule = StatusOfSchedule.Requerimientos.ToString();
                     _repositoryCompany.SaveCompany(company);
                 }
                 _repositorySchedule.SaveSchedule(model.ToBd(model));
