@@ -51,7 +51,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000000</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>BBVA Banco Continental</CompanyName>
@@ -103,7 +103,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000001</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Central de Reserva del Perú</CompanyName>
@@ -155,7 +155,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000002</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Cencosud</CompanyName>
@@ -207,7 +207,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000003</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Citibank del Perú S.A.</CompanyName>
@@ -258,7 +258,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000004</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Banco de Comercio</CompanyName>
@@ -310,7 +310,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000005</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Banco de Crédito del Perú</CompanyName>
@@ -361,7 +361,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000006</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>De la Nación</CompanyName>
@@ -413,7 +413,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000007</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Financiero del Perú</CompanyName>
@@ -465,7 +465,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000008</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Interamericano de Finanzas</CompanyName>
@@ -516,7 +516,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000009</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Internacional del Perú-INTERBANK</CompanyName>
@@ -568,7 +568,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000010</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Mibanco Banco de la Microempresa -MIBANCO-</CompanyName>
@@ -619,7 +619,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000011</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Scotiabank Perú</CompanyName>
@@ -671,7 +671,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000012</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Banco GNB Perú S.A. – Banco GNB </CompanyName>
@@ -723,7 +723,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000013</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Falabella</CompanyName>
@@ -775,7 +775,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000014</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Santander Perú S.A.</CompanyName>
@@ -827,7 +827,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000015</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Banco Ripley Perú S.A.</CompanyName>
@@ -879,7 +879,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000016</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Banco Azteca del Perú S.A.</CompanyName>
@@ -930,7 +930,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000017</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Deutsche Bank (Perú) S.A.</CompanyName>
@@ -982,7 +982,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000018</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>ICBC PERU BANK</CompanyName>
@@ -1034,7 +1034,7 @@
 		<CompanyType>External</CompanyType>
 		<CompanyCode>000000019</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Lima</CompanyName>
@@ -1086,7 +1086,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000020</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Ancon</CompanyName>
@@ -1137,7 +1137,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000021</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Chorrillos</CompanyName>
@@ -1189,7 +1189,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000022</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Jesus Maria</CompanyName>
@@ -1241,7 +1241,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000023</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Magdalena del Mar</CompanyName>
@@ -1292,7 +1292,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000024</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Pucusana</CompanyName>
@@ -1344,7 +1344,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000025</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Punta Hermosa</CompanyName>
@@ -1396,7 +1396,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000026</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Rimac</CompanyName>
@@ -1447,7 +1447,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000027</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -San Borja</CompanyName>
@@ -1499,7 +1499,7 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000028</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 	<Company>
 		<CompanyName>Prosegur S.A -Santa Anita</CompanyName>
@@ -1551,6 +1551,6 @@
 		<CompanyType>Internal</CompanyType>
 		<CompanyCode>000000029</CompanyCode>
 		<HasSchedule>false</HasSchedule>
-		<StatusOfSchedule>NoTarea</StatusOfSchedule>
+		<StatusOfSchedule>NoIniciada</StatusOfSchedule>
 	</Company>
 </ArrayOfCompany>

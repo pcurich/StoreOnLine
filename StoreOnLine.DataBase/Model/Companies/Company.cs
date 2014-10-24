@@ -40,9 +40,9 @@ public enum CompanyType
 
 public enum StatusOfSchedule
 {
-    NoTarea,//Valor por defecto
-    Registrado,//El administrador registra una tarea
-    Inicializado, //El supervisor esta asignando los recursos a la tarea
+    NoIniciada,//Valor por defecto
+    ConRequerimientos,//El administrador registra un contrato
+    SinRequerimientos,//El Supervisor termino el contrato
     EnProgreso, //El supervisor supervisa que se este ejecutando adecuadamente el progreso
     Terminado, //Ya se cumplio la demanda
     

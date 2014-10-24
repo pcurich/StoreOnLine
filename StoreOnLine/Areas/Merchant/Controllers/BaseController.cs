@@ -76,7 +76,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (ubigeo != null)
                     model.CompanyAddressUbigeoId = ubigeo.Id;
 
-                model.EstadoTarea = StatusOfSchedule.NoTarea.ToString();
+                model.EstadoTarea = StatusOfSchedule.NoIniciada.ToString();
 
                 var db = model.ToBd(model, CompanyType.Internal.ToString());
                 db.CompanyType = CompanyType.Internal.ToString();

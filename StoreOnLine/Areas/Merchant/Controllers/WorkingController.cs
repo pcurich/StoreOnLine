@@ -60,26 +60,49 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult OnTime(int companyId, int scheduleId)
         {
             ViewBag.Resumen = GetResumen(scheduleId);
+            var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
+            var schedule = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
 
-            var db = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
-            if (db != null)
+            if (company != null && schedule != null && company.HasSchedule)
             {
-                var details =
-                    db.ScheduleDetails.Where(o => o.TimeStart.Day == DateTime.Now.Day)
-                        .Select(schedule => new ScheduleDetailView().ToView(schedule)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
-
-                if (details != null)
+                if (schedule.ScheduleTo.DayOfYear > DateTime.Now.DayOfYear)
                 {
-                    ViewBag.Person = GetPersonList(details.PersonId.ToString());
+                    schedule.IsDone = true;
+                    schedule.Company = null;
+                    schedule.ScheduleDetails = null;
+                    _repositorySchedule.SaveSchedule(schedule);
 
+                    var newCompany = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
+                    if (newCompany != null)
+                    {
+                        var restantes = newCompany.Schedules.Count(o => o.IsDone == false);
+                        if (restantes == 0)
+                        {
+                            company.StatusOfSchedule = StatusOfSchedule.SinRequerimientos.ToString();
+                            company.Schedules = null;
+                            company.Address = null;
+                            company.ContactNumber = null;
+                            company.Person = null;
+                            _repositoryCompany.SaveCompany(company);
+                        }
+                    }
                 }
-                else
-                {
-                    ViewBag.Person = GetPersonList(null);
-
-                }
-                return View(details);
             }
+
+
+            if (schedule != null)
+            {
+                if (schedule.ScheduleDetails != null)
+                {
+                    var details =
+                        schedule.ScheduleDetails.Where(o => o.TimeStart.Day == DateTime.Now.Day)
+                            .Select(o => new ScheduleDetailView().ToView(o)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
+
+                    ViewBag.Person = GetPersonList(details != null ? details.PersonId.ToString() : null);
+                    return View(details);
+                }
+            }
+
             return View(new ScheduleDetailView());
         }
 

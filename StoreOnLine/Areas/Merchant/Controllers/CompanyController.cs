@@ -86,7 +86,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 {
                     if (company.Schedules.Count == 0)
                     {
-                        model.EstadoTarea = StatusOfSchedule.NoTarea.ToString();
+                        model.EstadoTarea = StatusOfSchedule.NoIniciada.ToString();
                     }
                 }
 
