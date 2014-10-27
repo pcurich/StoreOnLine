@@ -104,10 +104,6 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         if (restantes == 0)
                         {
                             company.StatusOfSchedule = StatusOfSchedule.SinRequerimientos.ToString();
-                            //company.Schedules = null;
-                            //company.Address = null;
-                            //company.ContactNumber = null;
-                            //company.Person = null;
                             _repositoryCompany.SaveCompany(company);
                         }
                     }
@@ -122,9 +118,16 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     var details =
                         schedule.ScheduleDetails.Where(o => o.TimeStart.DayOfYear == DateTime.Now.DayOfYear)
                             .Select(o => new ScheduleDetailView().ToView(o)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
-
+                    //if (details != null)
+                    //{
+                    //    details.BaseCodeFrom = company.CompanyCode;
+                    //    details.BaseCodeTo = company.CompanyCode;
+                    //}
+                    
                     ViewBag.Person = GetPersonList(details != null ? details.PersonId.ToString() : null);
                     var salida = new ScheduleDetailView();
+                    salida.BaseCodeFrom = company.CompanyCode;
+                    salida.BaseCodeTo = company.CompanyCode;
                     salida.TimeStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
                     salida.TimeEnd = DateTime.Now;
                     return View(details ?? salida);

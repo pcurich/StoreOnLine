@@ -8,6 +8,7 @@ using Microsoft.Ajax.Utilities;
 using StoreOnLine.Areas.Report.Models;
 using System.Globalization;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Model.Companies;
 
 namespace StoreOnLine.Areas.Report.Controllers
 {
@@ -15,8 +16,11 @@ namespace StoreOnLine.Areas.Report.Controllers
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IScheduleRepository _scheduleRepository;
+        private readonly IPersonRepository _personRepository;
+        private readonly ISecurityRepository _securityRepository;
 
-        public AdminController(ICompanyRepository companyRepository, IScheduleRepository scheduleRepository)
+        public AdminController(ICompanyRepository companyRepository, IScheduleRepository scheduleRepository,
+            IPersonRepository personRepository,ISecurityRepository securityRepository)
         {
             ViewBag.Big = "Reportes";
             ViewBag.Small = "Resumen de actividades mensuales";
@@ -25,7 +29,8 @@ namespace StoreOnLine.Areas.Report.Controllers
             ViewBag.Action = "Index";
             _companyRepository = companyRepository;
             _scheduleRepository = scheduleRepository;
-
+            _personRepository = personRepository;
+            _securityRepository = securityRepository;
         }
 
         //
@@ -61,23 +66,61 @@ namespace StoreOnLine.Areas.Report.Controllers
             return View(model);
         }
 
-        private List<ReportDetailView> GetReportDetail(List<ReportDetailView> headers, string BaseCode, int month, int year)
+        private List<ReportDetailView> GetReportDetail(ReportDetailView headers, string BaseCode, int month, int year)
         {
+            var salida = new List<ReportDetailView>();
+
             var startTime = new DateTime(year, month, 1);
             var endTime = new DateTime(year, month + 1, 1).AddDays(-1);
 
-            var schedules = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode &&
+            //  PEOPLE ASSIGNED
+            var people = _personRepository.Persons.Where(o => o.BaseCode == BaseCode).ToList();
+
+            //INTERNAL
+            var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode &&
                                                       o.ScheduleFrom.DayOfYear >= startTime.DayOfYear &&
                                                       o.ScheduleTo.DayOfYear <= endTime.DayOfYear).ToList();
 
-            foreach (var schedule in schedules)
-            {
 
+            foreach (var schedule in schedulesInternal)
+            {
+                foreach (var person in people)
+                {
+                    var repoScheduleDetails = new ReportDetailView();
+
+                    for (var day = 1; day <= headers.Days.Count; day++)
+                    {
+                        var scheduleDetails = schedule.ScheduleDetails
+                            .Take(1)
+                            .OrderBy(o => o.ModificationDate)
+                            .FirstOrDefault(o => o.PersonId == person.Id && o.BaseCodeFrom == BaseCode)??new ScheduleDetail();
+
+                        repoScheduleDetails.CompanyBaseCode = scheduleDetails.BaseCodeTo;
+                        repoScheduleDetails.CompanyName = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId).CompanyName;
+                        repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
+                                                      "x" + schedule.ScheduleHuors;
+                        repoScheduleDetails.Rol = person.Role.RoleName;
+                        repoScheduleDetails.UserCode = person.User.UserCode;
+                        repoScheduleDetails.UserName = person.User.UserName;
+                        repoScheduleDetails.Days[day].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+
+                        repoScheduleDetails.Days[day].Number = day;
+                        repoScheduleDetails.Days[day].AbbNameDay =
+                            new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
+                                CultureInfo.CurrentUICulture)
+                                .Replace(".", "");
+                    }
+                    
+                    salida.Add(repoScheduleDetails);
+                }
             }
 
+            
+
+            return salida;
         }
 
-        private static List<ReportDetailView> GetHeader(DateTime from, DateTime to)
+        private static ReportDetailView GetHeader(DateTime from, DateTime to)
         {
             var days = new List<Day>();
             for (var i = from.Day; i < to.Day; i++)
@@ -89,8 +132,7 @@ namespace StoreOnLine.Areas.Report.Controllers
                 };
                 days.Add(newDay);
             }
-            var salida = new List<ReportDetailView>
-            {
+            return
                 new ReportDetailView
                 {
                     CompanyName = "Empresa",
@@ -100,9 +142,7 @@ namespace StoreOnLine.Areas.Report.Controllers
                     UserName = "Apellidos y Nombre",
                     Rol = "Cargo",
                     Days = days
-                }
-            };
-            return salida;
+                };
         }
 
         public static SelectList GetListMonth()
@@ -110,7 +150,7 @@ namespace StoreOnLine.Areas.Report.Controllers
             var salida = new List<SelectListItem>();
             for (var i = 0; i < 12; i++)
             {
-                salida.Add(new SelectListItem { Text = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i], Value = i.ToString() });
+                salida.Add(new SelectListItem { Text = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i], Value = i.ToString(CultureInfo.InvariantCulture) });
 
             }
             return new SelectList(salida, "Value", "Text");
@@ -131,23 +171,22 @@ namespace StoreOnLine.Areas.Report.Controllers
 
             if (salida != null)
             {
-                var name = "Reporte_" + salida.Headers[0].CompanyName + "_" +
+                var name = "Reporte_" + salida.Headers.CompanyName + "_" +
                            CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[salida.MonthName] + ".csv";
 
-                foreach (var reportDetailView in salida.Headers)
+
+                w.Write(salida.Headers.CompanyName); w.Write(",");
+                w.Write(salida.Headers.CompanyBaseCode); w.Write(",");
+                w.Write(salida.Headers.Regimen); w.Write(",");
+                w.Write(salida.Headers.UserCode); w.Write(",");
+                w.Write(salida.Headers.UserName); w.Write(",");
+                w.Write(salida.Headers.Rol); w.Write(",");
+                foreach (var day in salida.Headers.Days)
                 {
-                    w.Write(reportDetailView.CompanyName); w.Write(",");
-                    w.Write(reportDetailView.CompanyBaseCode); w.Write(",");
-                    w.Write(reportDetailView.Regimen); w.Write(",");
-                    w.Write(reportDetailView.UserCode); w.Write(",");
-                    w.Write(reportDetailView.UserName); w.Write(",");
-                    w.Write(reportDetailView.Rol); w.Write(",");
-                    foreach (var day in reportDetailView.Days)
-                    {
-                        w.Write(day.Number + "(" + day.AbbNameDay + ")"); w.Write(",");
-                    }
-                    w.WriteLine("");
+                    w.Write(day.Number + "(" + day.AbbNameDay + ")"); w.Write(",");
                 }
+                w.WriteLine("");
+
                 foreach (var reportDetailView in salida.ReportDetails)
                 {
                     w.Write(reportDetailView.CompanyName); w.Write(",");

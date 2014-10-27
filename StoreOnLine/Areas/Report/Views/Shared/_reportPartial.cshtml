@@ -1,65 +1,71 @@
 ﻿@model StoreOnLine.Areas.Report.Models.ReportView
 
-<table class="table table-striped" style="overflow:auto">
-    <thead>
-        <tr>
-            @foreach (var item in Model.Headers)
+@{
+    if (Model.Headers != null)
+    {
+
+    <table id="DataTablePerson" class="table table-striped">
+        <thead>
+            <tr>
+
+                <th>
+                    @Html.DisplayName(Model.Headers.CompanyName)
+                </th>
+                <th>
+                    @Html.DisplayName(Model.Headers.CompanyBaseCode)
+                </th>
+                <th>
+                    @Html.DisplayName(Model.Headers.Regimen)
+                </th>
+                <th>
+                    @Html.DisplayName(Model.Headers.UserCode)
+                </th>
+                <th>
+                    @Html.DisplayName(Model.Headers.UserName)
+                </th>
+                <th>
+                    @Html.DisplayName(Model.Headers.Rol)
+                </th>
+                @foreach (var dia in Model.Headers.Days)
+                {
+                    <th>
+                        @Html.DisplayName(dia.Number + "(" + dia.AbbNameDay + ")")
+                    </th>
+                }
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ReportDetails)
             {
-                <th>
+                <tr>
                     @Html.DisplayName(item.CompanyName)
-                </th>
-                <th>
+                </tr>
+                <tr>
                     @Html.DisplayName(item.CompanyBaseCode)
-                </th>
-                <th>
+                </tr>
+                <tr>
                     @Html.DisplayName(item.Regimen)
-                </th>
-                <th>
+                </tr>
+                <tr>
                     @Html.DisplayName(item.UserCode)
-                </th>
-                <th>
+                </tr>
+                <tr>
                     @Html.DisplayName(item.UserName)
-                </th>    
-                <th>
+                </tr>
+                <tr>
                     @Html.DisplayName(item.Rol)
-                </th> 
+                </tr>
                 foreach (var dia in item.Days)
                 {
-                <th>
-                    @Html.DisplayName(dia.Number + "(" + dia.AbbNameDay + ")")
-                </th> 
+                <tr>
+                    @Html.DisplayName(dia.Activity)
+                </tr>
                 }
             }
+        </tbody>
+    </table>
+    }
+}
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ReportDetails)
-        {
-            <tr>
-                @Html.DisplayName(item.CompanyName)
-            </tr>
-            <tr>
-                @Html.DisplayName(item.CompanyBaseCode)
-            </tr>
-            <tr>
-                @Html.DisplayName(item.Regimen)
-            </tr>
-            <tr>
-                @Html.DisplayName(item.UserCode)
-            </tr>
-            <tr>
-                @Html.DisplayName(item.UserName)
-            </tr>    
-            <tr>
-                @Html.DisplayName(item.Rol)
-            </tr> 
-            foreach (var dia in item.Days)
-            {
-            <tr>
-                @Html.DisplayName(dia.Activity)
-            </tr> 
-            }
-        }
-    </tbody>
-</table>

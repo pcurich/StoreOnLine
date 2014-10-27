@@ -174,6 +174,8 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     var detail = new ScheduleDetail();
                     detail.PersonId = personId;
                     detail.ScheduleId = scheduleId;
+                    detail.BaseCodeFrom = person.BaseCode;
+                    detail.BaseCodeTo= company.CompanyCode;
                     detail.TypeOfTask = TypeOfTask.Asignacion.ToString();
                     detail.TimeStart = timeStart.AddHours(schedule.ScheduleFrom.Hour);
                     detail.TimeEnd = timeEnd.AddHours(schedule.ScheduleFrom.Hour).AddHours(schedule.ScheduleHuors);

@@ -1,0 +1,8 @@
+
+
+
+CMS MVC part 2: Build Core.Service to work with database
+http://www.billtechblog.com/2013/07/cms-mvc-part-2-build-coreservice-to.html
+
+CMS MVC part 3: Create custom form authentication - CustomPrincipal
+http://www.billtechblog.com/2014/01/cms-mvc-part-3-create-custom-form.html

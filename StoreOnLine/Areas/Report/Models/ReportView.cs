@@ -14,24 +14,24 @@ namespace StoreOnLine.Areas.Report.Models
         public int MonthName { get; set; }
 
         [Display(Name = "Base")]
-        public String Internal { get; set; }
+        public string Internal { get; set; }
 
         [Display(Name = "Año")]
         public int Year { get; set; }
 
-        public List<ReportDetailView> Headers { get; set; }
+        public ReportDetailView Headers { get; set; }
         public List<ReportDetailView> ReportDetails { get; set; }
 
         public ReportView()
         {
             Year = 2014;
-            Headers = new List<ReportDetailView>();
+            MonthName = -1;
             ReportDetails = new List<ReportDetailView>();
         }
-        
-        
-        
+
+
+
     }
 
-    
+
 }

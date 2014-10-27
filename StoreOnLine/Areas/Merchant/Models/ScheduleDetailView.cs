@@ -41,6 +41,9 @@ namespace StoreOnLine.Areas.Merchant.Models
         [DataType(DataType.Text)]
         public string TypeOfTask { get; set; }
 
+        public string BaseCodeFrom { get; set; }
+        public string BaseCodeTo { get; set; }
+
         public ScheduleDetail ToBd(ScheduleDetailView view)
         {
             return new ScheduleDetail
@@ -52,7 +55,9 @@ namespace StoreOnLine.Areas.Merchant.Models
                 TimeStart = view.TimeStart,
                 TimeEnd = view.TimeEnd,
                 TotalTime = view.TotalTime,
-                TypeOfTask = view.TypeOfTask
+                TypeOfTask = view.TypeOfTask,
+                BaseCodeFrom = view.BaseCodeFrom,
+                BaseCodeTo = view.BaseCodeTo
             };
         }
 
@@ -67,7 +72,9 @@ namespace StoreOnLine.Areas.Merchant.Models
                 TimeStart = db.TimeStart,
                 TimeEnd = db.TimeEnd,
                 TotalTime = db.TotalTime,
-                TypeOfTask = db.TypeOfTask
+                TypeOfTask = db.TypeOfTask,
+                BaseCodeFrom = db.BaseCodeFrom,
+                BaseCodeTo = db.BaseCodeTo
             };
         }
     }

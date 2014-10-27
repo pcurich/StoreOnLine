@@ -10,6 +10,8 @@ namespace StoreOnLine.DataBase.Model.Companies
         public int ScheduleId { get; set; }
         public Person Person { get; set; }
         public int PersonId { get; set; }
+        public string BaseCodeFrom { get; set; }
+        public string BaseCodeTo  { get; set; }
         public DateTime TimeStart { get; set; }
         public DateTime TimeEnd { get; set; }
         public int TotalTime { get; set; }

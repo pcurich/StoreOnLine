@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using StoreOnLine.DataBase.CMS;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;
 using System;
@@ -7,7 +6,7 @@ using System.Data.Entity;
 using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.DataBase.Model.Security;
-using StoreOnLine.Util.Xml;
+
 
 namespace StoreOnLine.DataBase.Entities
 {
@@ -53,6 +52,24 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<ScheduleDetail> ScheduleDetails { get; set; }
 
 
+
+
+        //public DbSet<Pages> Pages { get; set; }
+        //public DbSet<PageModules> PageModules { get; set; }
+        //public DbSet<ModuleDefinitions> ModuleDefinitions { get; set; }
+        public DbSet<LocalizeResources> LocalizeResources { get; set; }
+        public DbSet<LocalizeProperties> LocalizeProperties { get; set; }
+        //public DbSet<SiteSettings> SiteSettings { get; set; }
+        //public DbSet<Languages> Languages { get; set; }
+        //public DbSet<Users> Users { get; set; }
+        //public DbSet<Helps> Helps { get; set; }
+        //public DbSet<Roles> Roles { get; set; }
+        //public DbSet<UserInRoles> UserInRoles { get; set; }
+        //public DbSet<Log> Logs { get; set; }
+        //public DbSet<ModuleSetting> ModuleSettings { get; set; }
+        ////Modules
+        //public DbSet<HtmlContents> HtmlContents { get; set; }
+        //public DbSet<ContactForm> ContactForms { get; set; }
 
     }
 }

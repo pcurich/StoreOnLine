@@ -13,6 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreOnLine.Util", "StoreOn
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61237E9B-19B2-4E35-AECC-9F066E9A3796}"
 	ProjectSection(SolutionItems) = preProject
+		CMS.txt = CMS.txt
 		Notas.txt = Notas.txt
 	EndProjectSection
 EndProject

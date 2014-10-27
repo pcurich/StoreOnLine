@@ -70,12 +70,12 @@
                     </div>
                 </div>
             </div>
-            <div id="tableBody" class="row">
+            <div id="tableBody" class="row" style="overflow: auto">
                 @{
-        if (Model.Headers.Count > 0)
-        {
-                    @Html.Partial("_reportPartial", Model)
-        }
+                    if (Model.Headers!=null)
+                    {
+                        @Html.Partial("_reportPartial", Model)
+                    }
                 }
             </div>
         </div>
@@ -89,3 +89,4 @@
     }
 
 </div>
+

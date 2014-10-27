@@ -88,6 +88,20 @@
     <Compile Include="Abstract\ISupplierRepository.cs" />
     <Compile Include="Abstract\IUbigeoRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
+    <Compile Include="CMS\Account.cs" />
+    <Compile Include="CMS\Helps.cs" />
+    <Compile Include="CMS\Languages.cs" />
+    <Compile Include="CMS\LocalizeProperties.cs" />
+    <Compile Include="CMS\LocalizeResources.cs" />
+    <Compile Include="CMS\Log.cs" />
+    <Compile Include="CMS\ModuleDefinitions.cs" />
+    <Compile Include="CMS\ModuleSetting.cs" />
+    <Compile Include="CMS\PageModules.cs" />
+    <Compile Include="CMS\Pages.cs" />
+    <Compile Include="CMS\Roles.cs" />
+    <Compile Include="CMS\SiteSettings.cs" />
+    <Compile Include="CMS\UserInRoles.cs" />
+    <Compile Include="CMS\Users.cs" />
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
     <Compile Include="Concrete\EFCompanyRepository.cs" />
@@ -140,6 +154,8 @@
     <Compile Include="Model\Shopping\CartLine.cs" />
     <Compile Include="Model\Shopping\Shipping.cs" />
     <Compile Include="Model\Shopping\ShippingDetails.cs" />
+    <Compile Include="Modules\ContactForm.cs" />
+    <Compile Include="Modules\HtmlContents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
