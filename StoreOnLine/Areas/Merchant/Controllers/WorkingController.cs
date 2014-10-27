@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.Mvc;
+using System.Web.Routing;
 using StoreOnLine.Areas.Merchant.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Model.Companies;
@@ -39,6 +41,12 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             if (person != null)
             {
                 var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString() && p.HasSchedule).ToList();
+                var internalCompany =
+                    _repositoryCompany.Companies.FirstOrDefault(
+                        o => o.CompanyType == CompanyType.Internal.ToString() && o.CompanyCode == person.BaseCode);
+
+                lista.Add(new CompanyView().ToView(internalCompany));
+
                 lista.AddRange(from element
                                    in db
                                from source
@@ -54,18 +62,34 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         {
             ViewBag.companyId = companyId;
             var db = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
-            return db != null ? View(db.Schedules.Select(schedule => new ScheduleView().ToView(schedule))) : View(new ScheduleView());
+            if (db != null)
+            {
+                if (db.CompanyType == CompanyType.External.ToString())
+                {
+                    return
+                        View(db.Schedules.Select(schedule => new ScheduleView().ToView(schedule)));
+                }
+                else
+                {
+                    int idSchedule = db.Schedules.Take(1).FirstOrDefault().Id;
+
+                    return RedirectToAction("OnTime", new { companyId = db.Id, scheduleId = idSchedule });
+                }
+
+            }
+            return View(new ScheduleView());
         }
 
         public ActionResult OnTime(int companyId, int scheduleId)
         {
+            ViewBag.Asistencia = GetTypeOfWork();
             ViewBag.Resumen = GetResumen(scheduleId);
             var company = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
             var schedule = _repositorySchedule.Schedules.FirstOrDefault(o => o.Id == scheduleId);
 
-            if (company != null && schedule != null && company.HasSchedule)
+            if (company != null && schedule != null && company.HasSchedule && company.CompanyType == CompanyType.External.ToString())
             {
-                if (schedule.ScheduleFrom.DayOfYear < DateTime.Now.DayOfYear && 
+                if (schedule.ScheduleFrom.DayOfYear < DateTime.Now.DayOfYear &&
                     schedule.ScheduleTo.DayOfYear < DateTime.Now.DayOfYear)
                 {
                     schedule.IsDone = true;
@@ -100,11 +124,43 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                             .Select(o => new ScheduleDetailView().ToView(o)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
 
                     ViewBag.Person = GetPersonList(details != null ? details.PersonId.ToString() : null);
-                    return View(details);
+                    var salida = new ScheduleDetailView();
+                    salida.TimeStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
+                    salida.TimeEnd = DateTime.Now;
+                    return View(details ?? salida);
                 }
             }
 
             return View(new ScheduleDetailView());
+        }
+
+        public SelectList GetTypeOfWork()
+        {
+            var lista = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "FERIADO LABORADO DIA", Value = "FL_D"},
+                new SelectListItem {Text = "FERIADO LABORADO NOCHE", Value = "FL_N"},
+                new SelectListItem {Text = "DESCANSO PROGRAMADO", Value = "DES"},
+                new SelectListItem {Text = "DESCANSO TRABAJADO DIA", Value = "DT_D"},
+                new SelectListItem {Text = "DESCANSO TRABAJADO NOCHE", Value = "DT_N"},
+                new SelectListItem {Text = "ROTACION", Value = "ROT"},
+                new SelectListItem {Text = "FALTO", Value = "F"},
+                new SelectListItem {Text = "PERMISO", Value = "P"},
+                new SelectListItem {Text = "SUSPENCION", Value = "S"},
+                new SelectListItem {Text = "DESCANSO MÉDICO", Value = "DM"},
+                new SelectListItem {Text = "VACACIONES", Value = "VAC"},
+                new SelectListItem {Text = "RENUNCIA", Value = "RN"},
+                new SelectListItem {Text = "DIA", Value = "D"},
+                new SelectListItem {Text = "NOCHE", Value = "N"},
+                new SelectListItem {Text = "ADELANTO DE TURNO", Value = "AT"},
+                new SelectListItem {Text = "SERVICIO DE PEGADA DIA", Value = "PEG_D"},
+                new SelectListItem {Text = "SERVICIO DE PEGADA NOCHE", Value = "PEG_N"},
+                new SelectListItem {Text = "LICENCIA", Value = "L"}
+            };
+
+            var salida = new SelectList(lista, "Value", "Text");
+
+            return salida;
         }
 
         [HttpPost]

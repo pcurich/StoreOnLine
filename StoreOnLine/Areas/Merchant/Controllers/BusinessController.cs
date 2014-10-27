@@ -35,11 +35,13 @@ namespace StoreOnLine.Areas.Merchant.Controllers
             if (person != null)
             {
                 var db = _repositoryCompany.Companies.Where(p => p.CompanyType == CompanyType.External.ToString() && p.HasSchedule).ToList();
+                
                 lista.AddRange(from element 
                                    in db from source 
                                    in element.Schedules.Where(o => o.BaseCode == person.BaseCode) 
                                select new CompanyView().ToView(element));
-            }
+
+                            }
 
             return View(lista);
 

@@ -29,7 +29,8 @@ namespace StoreOnLine.Controllers
 
         public ActionResult Index()
         {
-            return RedirectToAction("LogIn", "Account", new { Area = "Security" });
+            return View();
+           // return RedirectToAction("LogIn", "Account", new { Area = "Security" });
         }
 
         [HttpPost]

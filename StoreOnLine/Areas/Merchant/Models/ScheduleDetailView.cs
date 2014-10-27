@@ -10,6 +10,7 @@ namespace StoreOnLine.Areas.Merchant.Models
         public ScheduleDetailView()
         {
             IsStatus = true;
+            TimeEnd=DateTime.Now;
         }
 
         [HiddenInput(DisplayValue = false)]

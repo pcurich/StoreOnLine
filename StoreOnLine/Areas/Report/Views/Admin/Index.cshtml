@@ -1,18 +1,91 @@
-﻿
+﻿@model StoreOnLine.Areas.Report.Models.ReportView
 @{
-    Layout = null;
+    ViewBag.Title = "Reportes";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var ajaxOpts = new AjaxOptions
+    {
+
+        Url = Url.Action("Index", "Admin"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+
+        OnSuccess = "location.reload()"
+
+    };
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
-        Index report 
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_Title", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
     </div>
-</body>
-</html>
+</div>
+
+<div id="" class="panel panel-default">
+    <div class="panel-heading "></div>
+
+    @using (Ajax.BeginForm("Index", "Admin", ajaxOpts, new { @class = "form-horizontal" }))
+    {
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            @Html.LabelFor(m => m.Year, new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-9">
+                            @Html.EditorFor(m => m.Year, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Seleccione una fecha de Inicio de Contrato" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            @Html.LabelFor(m => m.MonthName, new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-9">
+                            @Html.DropDownListFor(m => m.MonthName,
+                                (SelectList)ViewBag.Month,
+                                "------------------------------",
+                                new { @class = "form-control btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="form-group">
+                        <div class="col-lg-3">
+                            @Html.LabelFor(m => m.Internal, new { @class = "control-label" })
+                        </div>
+                        <div class="col-lg-9">
+                            @Html.DropDownListFor(m => m.MonthName,
+                                (SelectList)ViewBag.Internal,
+                                "------------------------------",
+                                new { @class = "form-control btn btn-primary" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="tableBody" class="row">
+                @{
+        if (Model.Headers.Count > 0)
+        {
+                    @Html.Partial("_reportPartial", Model)
+        }
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <input type="submit" value="Consultar" class="btn btn-primary" />
+            <span id="loading" class="ui-icon-loading" style="display: none">
+                <img src="~/Content/images/ajax-loader.gif" style="max-height: 100%; max-width: 100%;" />
+            </span>
+            @Html.ActionLink("Exportar", "ExportFile",null,htmlAttributes: new { @class = "btn btn-default pull-right" })
+        </div>
+    }
+
+</div>

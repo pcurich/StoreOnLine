@@ -183,6 +183,18 @@ namespace StoreOnLine.DataBase.Entities
                 //context.ContactNumbers.Add(pb.ContactNumber);
                 //context.Persons.Add(pb.Person);
                 //pb.AddressId = pb.Address.Id;
+                if (pb.CompanyType == CompanyType.Internal.ToString())
+                {
+                    pb.HasSchedule = true;
+                    pb.Schedules = new List<Schedule> { new Schedule
+                    {
+                        ScheduleFrom = new DateTime(1990, 1, 1), ScheduleTo = new DateTime(2100, 1, 1), 
+                        IsDone = false, ScheduleDaysWorkPerWeek = 6, ScheduleDaysOff = 1,
+                        ScheduleTurn=ScheduleTurn.Mañana.ToString(), ScheduleHuors = 9,
+                        BaseCode= pb.CompanyCode, IsStatus = true, IsDeleted = false,
+                        AddedDate = DateTime.Now, ModificationDate = DateTime.Now
+                    } };
+                }
                 context.Companies.Add(pb);
             }
             context.SaveChanges();

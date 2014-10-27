@@ -1,104 +1,172 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Net;
-using System.Web;
+using System.Text;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
+using StoreOnLine.Areas.Report.Models;
+using System.Globalization;
+using StoreOnLine.DataBase.Abstract;
 
 namespace StoreOnLine.Areas.Report.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly ICompanyRepository _companyRepository;
+        private readonly IScheduleRepository _scheduleRepository;
+
+        public AdminController(ICompanyRepository companyRepository, IScheduleRepository scheduleRepository)
+        {
+            ViewBag.Big = "Reportes";
+            ViewBag.Small = "Resumen de actividades mensuales";
+            ViewBag.Area = "Report";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "Index";
+            _companyRepository = companyRepository;
+            _scheduleRepository = scheduleRepository;
+
+        }
+
         //
         // GET: /Report/Admin/
         public ActionResult Index()
         {
-            return View();
+            ViewBag.Action = "Index";
+            ReportView report;
+            if (Session["report"] == null)
+            {
+                report = new ReportView();
+            }
+            else
+            {
+                report = (ReportView)Session["report"];
+            }
+            ViewBag.Month = GetListMonth();
+            ViewBag.Internal = GetCompanyInternarl();
+            return View(report);
         }
 
         [HttpPost]
-        public ActionResult Index()
+        public ActionResult Index(ReportView model)
         {
-            return View();
+            ViewBag.Action = "Index";
+            model.DateFrom = new DateTime(model.Year, model.MonthName, 1);
+            model.DateTo = (new DateTime(model.Year, model.MonthName + 1, 1)).AddDays(-1);
+            model.Headers = GetHeader(model.DateFrom, model.DateTo);
+            model.ReportDetails = GetReportDetail(model.Headers, model.Internal, model.MonthName, model.Year);
+            ViewBag.Month = GetListMonth();
+            ViewBag.Internal = GetCompanyInternarl();
+            Session["report"] = model;
+            return View(model);
         }
 
-        //
-        // GET: /Report/Admin/Details/5
-        public ActionResult Details(int id)
+        private List<ReportDetailView> GetReportDetail(List<ReportDetailView> headers, string BaseCode, int month, int year)
         {
-            return View();
-        }
+            var startTime = new DateTime(year, month, 1);
+            var endTime = new DateTime(year, month + 1, 1).AddDays(-1);
 
-        //
-        // GET: /Report/Admin/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+            var schedules = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode &&
+                                                      o.ScheduleFrom.DayOfYear >= startTime.DayOfYear &&
+                                                      o.ScheduleTo.DayOfYear <= endTime.DayOfYear).ToList();
 
-        //
-        // POST: /Report/Admin/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            foreach (var schedule in schedules)
             {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
         }
 
-        //
-        // GET: /Report/Admin/Edit/5
-        public ActionResult Edit(int id)
+        private static List<ReportDetailView> GetHeader(DateTime from, DateTime to)
         {
-            return View();
+            var days = new List<Day>();
+            for (var i = from.Day; i < to.Day; i++)
+            {
+                var newDay = new Day
+                {
+                    Number = i,
+                    AbbNameDay = new DateTime(from.Year, from.Month, i).ToString("ddd", CultureInfo.CurrentUICulture).Replace(".", "")
+                };
+                days.Add(newDay);
+            }
+            var salida = new List<ReportDetailView>
+            {
+                new ReportDetailView
+                {
+                    CompanyName = "Empresa",
+                    CompanyBaseCode = "Codvig",
+                    Regimen = "Regimen",
+                    UserCode = "NI-COD",
+                    UserName = "Apellidos y Nombre",
+                    Rol = "Cargo",
+                    Days = days
+                }
+            };
+            return salida;
         }
 
-        //
-        // POST: /Report/Admin/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public static SelectList GetListMonth()
         {
-            try
+            var salida = new List<SelectListItem>();
+            for (var i = 0; i < 12; i++)
             {
-                // TODO: Add update logic here
+                salida.Add(new SelectListItem { Text = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i], Value = i.ToString() });
 
-                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return new SelectList(salida, "Value", "Text");
         }
 
-        //
-        // GET: /Report/Admin/Delete/5
-        public ActionResult Delete(int id)
+        public SelectList GetCompanyInternarl()
         {
-            return View();
+            var repo = _companyRepository.Companies.Where(o => o.CompanyType == CompanyType.Internal.ToString()).ToList();
+            return new SelectList(repo.Select(r => new SelectListItem { Text = r.CompanyName, Value = r.CompanyCode }).ToList(), "Value", "Text");
+
         }
 
-        //
-        // POST: /Report/Admin/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult ExportFile()
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var salida = (ReportView)Session["report"];
+            var output = new MemoryStream();
+            var w = new StreamWriter(output, Encoding.UTF8);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (salida != null)
             {
-                return View();
+                var name = "Reporte_" + salida.Headers[0].CompanyName + "_" +
+                           CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[salida.MonthName] + ".csv";
+
+                foreach (var reportDetailView in salida.Headers)
+                {
+                    w.Write(reportDetailView.CompanyName); w.Write(",");
+                    w.Write(reportDetailView.CompanyBaseCode); w.Write(",");
+                    w.Write(reportDetailView.Regimen); w.Write(",");
+                    w.Write(reportDetailView.UserCode); w.Write(",");
+                    w.Write(reportDetailView.UserName); w.Write(",");
+                    w.Write(reportDetailView.Rol); w.Write(",");
+                    foreach (var day in reportDetailView.Days)
+                    {
+                        w.Write(day.Number + "(" + day.AbbNameDay + ")"); w.Write(",");
+                    }
+                    w.WriteLine("");
+                }
+                foreach (var reportDetailView in salida.ReportDetails)
+                {
+                    w.Write(reportDetailView.CompanyName); w.Write(",");
+                    w.Write(reportDetailView.CompanyBaseCode); w.Write(",");
+                    w.Write(reportDetailView.Regimen); w.Write(",");
+                    w.Write(reportDetailView.UserCode); w.Write(",");
+                    w.Write(reportDetailView.UserName); w.Write(",");
+                    w.Write(reportDetailView.Rol); w.Write(",");
+                    foreach (var day in reportDetailView.Days)
+                    {
+                        w.Write(day.Activity); w.Write(",");
+                    }
+                    w.WriteLine("");
+                }
+                w.Flush();
+                output.Position = 0;
+                return File(output, "text/comma-separated-values", name);
             }
+            return Redirect("Index");
         }
     }
 }

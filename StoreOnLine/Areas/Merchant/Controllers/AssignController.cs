@@ -76,7 +76,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 var list = new List<CalendarView>();
 
 
-                while (start <= to && days < baseDays)
+                while (schedule.ScheduleFrom.DayOfYear <= schedule.ScheduleTo.DayOfYear && days < baseDays)
                 {
                     //var newDate = new DateTime(schedule.ScheduleFrom.Year, schedule.ScheduleFrom.Month, start);
                     //
