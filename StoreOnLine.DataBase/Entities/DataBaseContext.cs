@@ -45,7 +45,7 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<ContactNumber> ContactNumbers { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        //public DbSet<Role> Roles { get; set; }
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
@@ -56,17 +56,17 @@ namespace StoreOnLine.DataBase.Entities
 
         public DbSet<Pages> Pages { get; set; }
         public DbSet<PageModules> PageModules { get; set; }
-        //public DbSet<ModuleDefinitions> ModuleDefinitions { get; set; }
+        public DbSet<ModuleDefinitions> ModuleDefinitions { get; set; }
         public DbSet<LocalizeResources> LocalizeResources { get; set; }
         public DbSet<LocalizeProperties> LocalizeProperties { get; set; }
-        //public DbSet<SiteSettings> SiteSettings { get; set; }
-        //public DbSet<Languages> Languages { get; set; }
+        public DbSet<SiteSettings> SiteSettings { get; set; }
+        public DbSet<Languages> Languages { get; set; }
         //public DbSet<Users> Users { get; set; }
-        //public DbSet<Helps> Helps { get; set; }
-        //public DbSet<Roles> Roles { get; set; }
+        public DbSet<Helps> Helps { get; set; }
+        public DbSet<Roles> Roles { get; set; }
         public DbSet<UserInRoles> UserInRoles { get; set; }
-        //public DbSet<Log> Logs { get; set; }
-        //public DbSet<ModuleSetting> ModuleSettings { get; set; }
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<ModuleSetting> ModuleSettings { get; set; }
         ////Modules
         //public DbSet<HtmlContents> HtmlContents { get; set; }
         //public DbSet<ContactForm> ContactForms { get; set; }

@@ -1,7 +1,6 @@
-﻿
-using StoreOnLine.DataBase.Entities;
+﻿using StoreOnLine.DataBase.Entities;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public class BaseService
     {

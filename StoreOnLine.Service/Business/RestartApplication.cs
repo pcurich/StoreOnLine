@@ -2,7 +2,7 @@
 using System.IO;
 using System.Web.Hosting;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public class RestartApplication
     {

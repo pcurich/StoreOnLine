@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -7,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     //Esta es usada para hacer la url mas amigable es un mapping entre el nombre de la pagina y el id de la paguina
     //la paguina es cargada dinamicamente de la base de datos por su Id, esta clase encontrara el nombre de la paguina 
@@ -25,7 +24,7 @@ namespace StoreOnLine.Service
 
         public static string GetSeoUrl(int pageId)
         {
-            string resourceValue = string.Empty;
+            var resourceValue = string.Empty;
             Dictionary<int, string> resCacheByCulture = null;
             
             //primero se revisa el cache 
@@ -89,7 +88,7 @@ namespace StoreOnLine.Service
             {
                 _mConnection.Open();
                 // get resources from the database
-                using (SqlDataReader reader = _mCmdGetPropertyByTypeAndKey.ExecuteReader())
+                using (var reader = _mCmdGetPropertyByTypeAndKey.ExecuteReader())
                 {
                     while (reader.Read())
                     {

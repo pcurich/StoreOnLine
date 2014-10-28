@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public interface ICacheService
     {

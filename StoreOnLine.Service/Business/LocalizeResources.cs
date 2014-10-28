@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public class ResourceString
     {
@@ -64,16 +64,18 @@ namespace StoreOnLine.Service
             //command to retrieve the resource the matches
             //a specific type, culture and key
 
-            _mCmdGetResourceByTypeAndKey = new SqlCommand("SELECT resourceType, CultureId, resourceKey, resourceValue FROM LocalizeResources WHERE (resourceType=@resourceType) AND (CultureId=@CultureId) AND (resourceKey=@resourceKey)");
-            _mCmdGetResourceByTypeAndKey.Connection = _mConnection;
+            _mCmdGetResourceByTypeAndKey = new SqlCommand("SELECT resourceType, CultureId, resourceKey, resourceValue FROM LocalizeResources WHERE (resourceType=@resourceType) AND (CultureId=@CultureId) AND (resourceKey=@resourceKey)")
+            {
+                Connection = _mConnection
+            };
             _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("resourceType", resourceType);
             _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("CultureId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("resourceKey", resourceKey);
 
             // we should only get one back, but just in case, we'll iterate reader results
-            StringCollection resources = new StringCollection();
+            var resources = new StringCollection();
 
-            string resourceValue = null;
+            string resourceValue;
             //var _resource = db.resources.Where(r => r.ResourceType == resourceType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.ResourceKey == resourceKey);
 
             try
@@ -129,12 +131,11 @@ namespace StoreOnLine.Service
 
         public static void RemoveKey(string resourceType, string resourceKey)
         {
-            string resourceKeys = resourceType + "." + resourceKey;
-            Dictionary<string, string> resCacheByCulture = null;
-
+            var resourceKeys = resourceType + "." + resourceKey;
+ 
             if (MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
             {
-                resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
+                Dictionary<string, string>  resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
 
                 if (resCacheByCulture.ContainsKey(resourceKeys))
                 {
@@ -143,22 +144,19 @@ namespace StoreOnLine.Service
             }
         }
 
-        public static void UpdateKey(string resourceType, string resourceKey, string NewValue)
+        public static void UpdateKey(string resourceType, string resourceKey, string newValue)
         {
             string resourceKeys = resourceType + "." + resourceKey;
-            Dictionary<string, string> resCacheByCulture = null;
 
             if (MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
             {
-                resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
+                var resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
 
                 if (resCacheByCulture.ContainsKey(resourceKeys))
                 {
-                    resCacheByCulture[resourceKeys] = NewValue;
+                    resCacheByCulture[resourceKeys] = newValue;
                 }
-
             }
-
         }
 
         public static void Clear()

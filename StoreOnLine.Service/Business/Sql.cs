@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
 
     /// <summary>
@@ -28,11 +28,13 @@ namespace StoreOnLine.Service
             var con = new SqlConnection(Conn());
             con.Open();
             var com = new SqlCommand(sql, con) {CommandType = commandType};
+            
             for (var i = 0; i < pars.Length; i += 2)
             {
                 var par = new SqlParameter(pars[i].ToString(), pars[i + 1].ToString());
                 com.Parameters.Add(par);
             }
+            
             try
             {
                 com.ExecuteNonQuery();
@@ -44,18 +46,22 @@ namespace StoreOnLine.Service
                 throw new ArgumentException(ex.Message);
             }
         }
+        
         public static string ExecuteNonQueryAndReturn(string sql, CommandType commandType, params object[] pars)
         {
             var con = new SqlConnection(Conn());
             con.Open();
             var com = new SqlCommand(sql, con) {CommandType = commandType};
+            
             for (var i = 0; i < pars.Length - 1; i += 2)
             {
                 var par = new SqlParameter(pars[i].ToString(), pars[i + 1].ToString());
                 com.Parameters.Add(par);
             }
+            
             com.Parameters.Add(pars[pars.Length - 1].ToString(), SqlDbType.NVarChar, 100);
             com.Parameters[pars[pars.Length - 1].ToString()].Direction = ParameterDirection.Output;
+            
             try
             {
                 com.ExecuteNonQuery();
@@ -91,6 +97,47 @@ namespace StoreOnLine.Service
             dt.Clear();
             sqlAd.Fill(dt);
             return dt;
+        }
+
+        public static void ExecuteNonQuery(string commandText, string connectionString)
+        {
+            var con = new SqlConnection();
+            var sqlCmd = new SqlCommand();
+            con.ConnectionString = Conn(connectionString);
+            con.Open();
+            sqlCmd.CommandText = commandText;
+            sqlCmd.CommandType = CommandType.Text;
+            sqlCmd.Connection = con;
+            sqlCmd.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public static void ExecuteNonQuery(string commandText, string connectionString, params object[] pars)
+        {
+            var con = new SqlConnection();
+            var sqlCmd = new SqlCommand();
+            con.ConnectionString = Conn(connectionString);
+            con.Open();
+            sqlCmd.CommandText = commandText;
+            sqlCmd.CommandType = CommandType.Text;
+            sqlCmd.Connection = con;
+           
+            for (var i = 0; i < pars.Length; i++)
+            {
+                var par = new SqlParameter(pars[i].ToString(), pars[i + 1].ToString());
+                sqlCmd.Parameters.Add(par);
+            }
+            
+            try
+            {
+                sqlCmd.ExecuteNonQuery();
+                con.Close();
+            }
+            catch (SqlException ex)
+            {
+                con.Close();
+                throw new ArgumentException(ex.Message);
+            }
         }
     }
 }

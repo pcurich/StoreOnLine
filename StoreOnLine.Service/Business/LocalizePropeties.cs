@@ -6,7 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public class PropertyString
     {

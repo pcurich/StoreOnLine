@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 
-namespace StoreOnLine.Service
+namespace StoreOnLine.Service.Business
 {
     public class CacheMemory : ICacheService
     {
@@ -31,27 +31,24 @@ namespace StoreOnLine.Service
                 cacheItems.Add(enumerator.Key.ToString(), enumerator.Value);
             }
 
-            foreach (string key in cacheItems.Keys)
+            foreach (var key in cacheItems.Keys)
             {
-
                 HttpRuntime.Cache.Remove(key);
             }
 
-            System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            ////modify web.config to remove cache
+            var config=System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            var setting=config.AppSettings.Settings["RefreshCache"];
 
-            config.AppSettings.Settings["RefreshCache"];
+            config.AppSettings.Settings["RefreshCache"].Value = setting.Value == "1" ? "0" : "1";
+            config.Save();
 
             RestartApplication.Restart();// se utiliza para reiniciar el CMS y borrar las caches
             ResourceString.Clear();
-
             PropertyString.Clear();
-
             SiteSettingString.Clear();
-
             ModuleSettingString.Clear();
-
             PageRoute.Clear();
-
             SeoUrl.Clear();
 
         }
