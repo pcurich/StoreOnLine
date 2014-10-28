@@ -54,8 +54,8 @@ namespace StoreOnLine.DataBase.Entities
 
 
 
-        //public DbSet<Pages> Pages { get; set; }
-        //public DbSet<PageModules> PageModules { get; set; }
+        public DbSet<Pages> Pages { get; set; }
+        public DbSet<PageModules> PageModules { get; set; }
         //public DbSet<ModuleDefinitions> ModuleDefinitions { get; set; }
         public DbSet<LocalizeResources> LocalizeResources { get; set; }
         public DbSet<LocalizeProperties> LocalizeProperties { get; set; }
@@ -64,7 +64,7 @@ namespace StoreOnLine.DataBase.Entities
         //public DbSet<Users> Users { get; set; }
         //public DbSet<Helps> Helps { get; set; }
         //public DbSet<Roles> Roles { get; set; }
-        //public DbSet<UserInRoles> UserInRoles { get; set; }
+        public DbSet<UserInRoles> UserInRoles { get; set; }
         //public DbSet<Log> Logs { get; set; }
         //public DbSet<ModuleSetting> ModuleSettings { get; set; }
         ////Modules

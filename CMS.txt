@@ -6,3 +6,78 @@ http://www.billtechblog.com/2013/07/cms-mvc-part-2-build-coreservice-to.html
 
 CMS MVC part 3: Create custom form authentication - CustomPrincipal
 http://www.billtechblog.com/2014/01/cms-mvc-part-3-create-custom-form.html
+
+CMS MVC part 4: Create Role Class
+http://www.billtechblog.com/2014/03/part-4-create-role-class.html
+
+CMS MVC part 5: SEO Url class
+http://www.billtechblog.com/2014/03/cms-mvc-part-5-seo-url-class.html
+
+CMS MVC part 6: Page Route class
+http://www.billtechblog.com/2014/03/cms-mvc-part-6-pageroute-class.html
+
+CMS MVC part 7: SQL class - easy to call sql precedures with or without parameters
+http://www.billtechblog.com/2014/03/cms-mvc-part-7-sql-class.html
+
+CMS MVC part 8: Html Helpers Class(*)
+http://www.billtechblog.com/2014/03/cms-mvc-part-8-html-helpers-class.html
+
+CMS MVC part 9: Create simple Mvc pager helper class
+http://www.billtechblog.com/2014/03/cms-mvc-part-9-pager-helpers-class.html
+
+CMS MVC part 10: Script Helpers
+http://www.billtechblog.com/2014/03/cms-mvc-part-10-script-helpers.html
+
+CMS MVC part 11: String Helpers
+http://www.billtechblog.com/2014/03/cms-mvc-part-11-string-helpers_16.html
+
+CMS MVC part 12: Url Helpers Class
+http://www.billtechblog.com/2014/03/cms-mvc-part-12-url-helpers-class.html
+
+CMS MVC part 13: User, User In Role, Role services
+http://www.billtechblog.com/2014/03/cms-mvc-part-12-create-all-service.html
+
+CMS MVC part 14: Site setting, Page, Page Module services
+http://www.billtechblog.com/2014/03/cms-mvc-part-13-create-all-service.html
+
+CMS MVC part 15: Module Setting, Module Definition, Log services
+http://www.billtechblog.com/2014/03/cms-mvc-part-15-module-setting-module.html
+
+CMS MVC part 16: Localize Resource, Localize Property Services
+http://www.billtechblog.com/2014/03/cms-mvc-part-17-localize-resource.html
+
+CMS MVC part 17: Localize Language, Contact Form Services
+http://www.billtechblog.com/2014/03/cms-mvc-part-17-language-contact-form.html
+
+CMS MVC part 18: Review your job and Download Source Code to compare with
+http://www.billtechblog.com/2014/03/cms-mvc-part-18-review-your-job-and.html
+
+CMS MVC part 19: CMS dynamic page layout theory
+http://www.billtechblog.com/2014/03/cms-mvc-part-19-create-layout-master.html
+
+CMS MVC part 20: Create master page (_layout)
+http://www.billtechblog.com/2014/03/cms-mvc-part-20-create-master-page.html
+
+CMS MVC part 21: Create page controller to load dynamic Page, Module in CMS
+http://www.billtechblog.com/2014/03/cms-mvc-part-21-create-page-controller.html
+
+CMS MVC part 22: Loading dynamic modules into Cms page areas - BaseController
+http://www.billtechblog.com/2014/03/cms-mvc-part-22-loading-dynamic-modules.html
+
+CMS MVC part 23: Loading dynamic modules into Cms page areas - SEO Url
+http://www.billtechblog.com/2014/03/cms-mvc-part-23-loading-dynamic-modules.html
+
+CMS MVC part 24: Loading dynamic modules into Cms page areas - Page Controller
+http://www.billtechblog.com/2014/03/cms-mvc-part-24-loading-dynamic-modules.html
+
+CMS MVC part 25: Create Page View for loading cms modules belong to current page
+http://www.billtechblog.com/2014/03/cms-mvc-part-25-create-page-view-for.html
+
+CMS MVC part 26: Using Linq joining tables to list out all modules of cms page
+http://www.billtechblog.com/2014/03/cms-mvc-part-26-using-linq-joining.html
+
+CMS MVC part 27: Cms Virtual Page With 3 Column Html Layout
+http://www.billtechblog.com/2014/03/cms-mvc-part-27-cms-virtual-page-with-3.html
+
+source
+https://drive.google.com/file/d/0B5Ph9JVFgDozYlo4OUtPOGxCV1U/edit

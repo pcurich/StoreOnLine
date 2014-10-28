@@ -51,7 +51,6 @@ namespace StoreOnLine.Service
                         resCacheByCulture = new Dictionary<string, string>();
                         MResourceCache.Add(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, resCacheByCulture);
                     }
-
                     resCacheByCulture.Add(resourceKeys, resourceValue);
                 }
             }

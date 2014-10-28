@@ -24,7 +24,7 @@ namespace StoreOnLine.Service
         public void Clear()
         {
             var enumerator = HttpRuntime.Cache.GetEnumerator();
-            Dictionary<string, object> cacheItems = new Dictionary<string, object>();
+            var cacheItems = new Dictionary<string, object>();
 
             while (enumerator.MoveNext())
             {

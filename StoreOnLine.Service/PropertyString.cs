@@ -74,15 +74,17 @@ namespace StoreOnLine.Service
             //command to retrieve the resource the matches
             //a specific type, culture and key
 
-            _mCmdGetPropertyByTypeAndKey = new SqlCommand("SELECT propertyType, CultureId, propertyKey, propertyValue FROM LocalizeProperties WHERE (propertyType=@propertyType) AND (CultureId=@CultureId) AND (propertyKey=@propertyKey)");
-            _mCmdGetPropertyByTypeAndKey.Connection = _mConnection;
+            _mCmdGetPropertyByTypeAndKey = new SqlCommand("SELECT propertyType, CultureId, propertyKey, propertyValue FROM LocalizeProperties WHERE (propertyType=@propertyType) AND (CultureId=@CultureId) AND (propertyKey=@propertyKey)")
+            {
+                Connection = _mConnection
+            };
             _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("propertyType", propertyType);
             _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("CultureId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("propertyKey", propertyKey);
 
             // we should only get one back, but just in case, we'll iterate reader results
-            StringCollection resources = new StringCollection();
-            string resourceValue = null;
+            var resources = new StringCollection();
+            string resourceValue;
            
             //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
             try
@@ -110,8 +112,8 @@ namespace StoreOnLine.Service
                 resourceValue = propertyType + "-" + propertyKey;
 
                 //update new key to database
-                DataBase.Entities.StoreOnLineContext db = new DataBase.Entities.StoreOnLineContext();
-                DataBase.CMS.LocalizeProperties lp = new DataBase.CMS.LocalizeProperties { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
+                var db = new DataBase.Entities.StoreOnLineContext();
+                var lp = new DataBase.CMS.LocalizeProperties { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
                 
                 db.LocalizeProperties.Add(lp);
                 db.SaveChanges();
@@ -135,35 +137,34 @@ namespace StoreOnLine.Service
         public static void RemoveKey(string propertyType, string propertyKey)
         {
             string propertyKeys = propertyType + "." + propertyKey;
-            Dictionary<string, string> resCacheByCulture = null;
 
             // check the cache first
             // find the dictionary for this culture
             // check for the inner dictionary entry for this key
 
-            if (MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
-            {
-                resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
-                if (resCacheByCulture.ContainsKey(propertyKeys))
-                {
-                    resCacheByCulture.Remove(propertyKeys);
-                }
-            }
+            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) 
+                return;
 
+            var resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
+            
+            if (resCacheByCulture.ContainsKey(propertyKeys))
+            {
+                resCacheByCulture.Remove(propertyKeys);
+            }
         }
 
-        public static void UpdateKey(string propertyType, string propertyKey, string NewValue)
+        public static void UpdateKey(string propertyType, string propertyKey, string newValue)
         {
-            string propertyKeys = propertyType + "." + propertyKey;
-            Dictionary<string, string> resCacheByCulture = null;
+            var propertyKeys = propertyType + "." + propertyKey;
 
-            if (MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
+            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) 
+                return;
+
+            var resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
+
+            if (resCacheByCulture.ContainsKey(propertyKeys))
             {
-                resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
-                if (resCacheByCulture.ContainsKey(propertyKeys))
-                {
-                    resCacheByCulture[propertyKeys] = NewValue;
-                }
+                resCacheByCulture[propertyKeys] = newValue;
             }
         }
 
