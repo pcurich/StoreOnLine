@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		CMS.txt = CMS.txt
 		Notas.txt = Notas.txt
+		Procedimientos.txt = Procedimientos.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreOnLine.Service", "StoreOnLine.Service\StoreOnLine.Service.csproj", "{AF343CE3-3CAC-4AB4-90BF-1F5FF73BF2D7}"

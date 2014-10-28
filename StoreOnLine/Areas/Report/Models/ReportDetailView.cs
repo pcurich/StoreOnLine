@@ -25,10 +25,18 @@ namespace StoreOnLine.Areas.Report.Models
 
         public List<Day> Days { get; set; }
 
-        public ReportDetailView()
+        public ReportDetailView(int dias)
         {
-            Days=new List<Day>();
+            Days = new List<Day>();
+            for (var i = 1; i < dias; i++)
+            {
+                Days.Add(new Day { Number = i });
+            }
         }
 
+        public ReportDetailView()
+        {
+            Days = new List<Day>();
+        }
     }
 }

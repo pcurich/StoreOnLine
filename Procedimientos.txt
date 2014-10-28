@@ -1,0 +1,80 @@
+
+1 Ingresar al sistema
+http://localhost:16444/
+
+2 Logearse con un usuario con rol Adminitrados
+user	pcurich 
+pass	pcurich
+
+3 Nos direcciona a la administracion de usuarios 
+Aca se puedde editar los atributos de un usuario entre ellos 
+tenamos a:
+Datos			Nombre, Apellidos, Fecha de nacimiento, estado (Activo  NoActivo)
+Direccion		Domicilio, ....
+Contacots		Telefonos , correo, ...
+Credenciales de acceso al sistema 
+Documentos que son Dni y Ruc
+Seguridad que es a que base pertenece y el rol que posee
+
+Los roles disponibles son :
+Administrador		Tiene las funciones de crear usuarios, crear empresas internas o externas , Reportes asi como la opcion de 
+					Crear contratos de trabajos para empresas externas
+
+Supervisor			Permite acceder a su base y revisar los contratos que las empresas tienen y que fueron registrados por
+					los administradores y asignarles personal que satisfaga la necesidad, ademas permite tomar asistencia a 
+					la hora de trabajar y actividades a los demas empleados que esten a su cargo
+
+Empleados			Es un recurso al que se le asigna un lugar de trabajo y una actividad a realizar
+
+Representante		Es el usuario de una empresa a la que se da el servicio (Externa) algo asi como el representante legal
+
+4	Seleccionamos una empresa externa  a la que se le registrara un contrato 
+	seleccionamos a la empresa "Banco de Comercio" (click en ver Horarios)
+
+5	Creamos nuevo contrato o requerimiento con las siguientes necesidades
+Fecha de Inicio :	01/11/2014
+Fecha de Fin :		08/11/2014
+Dias Laborales:		5 (L a V)
+Base Asignada:		Prosegur S.A -Jesus Maria (podria ser cualquiera)
+Turno de Trabajo	Mañana
+Jornada de trabajo	12 horas
+Hora de Inicio		09:00
+
+6 Guardamos y salimos del sistema (click en salir)
+
+7	Nos logeamos con el usuario (supervisor)
+User		lflores
+pass		lflores
+
+8	Nos nuestra el requerimiento que se nos fue asignado a nuestra base (Banco de comercio)
+
+9	Le damos click en Agregar 
+	El usuario Supervisor tiene accesos a:
+Base:		En la cual le permite tomar asistencia de su personal que no es asignado para satisfacer un contrato 
+Asistencia	Es la toma de asistencia al usuario que es asignado a un puesto de trabajo
+
+10	Vemos los contratos que debemos satisfacer para la empresa
+	En este caso se presenta el tiempo de duracion del contrato los dias laborales y los dias de franco, el turno de trabajo, las 
+	hroras de la jornada laboral y La hora de inicio de su trabajo
+
+11	Se da click en asignar para proceder a asignarles recursos (empleados) a dicho rwquerimiento 
+
+12	Se muestra un calendario con los dias a los cuales se le debe realizar la asignacion de un empleado 
+	Asignamos al usuario preaño para los primeros 5 dias
+	lluego al usuario jcarrasco para los 3 dias restantes
+
+13	finalizada la asignacion se procede a hacer click en la Asistencia
+
+14	En la Asistencia se muestra 2 registros, la base (Interno) y la empresa que tiene un contrato con la empresa
+
+	Se selecciona la base (hoy es 28 de 10) y se procedera a asignarles un estado a los trabajadores para el dia de hooy
+	
+	Para todos los empleados se registra la actividad de Dia 
+
+
+
+
+
+
+
+

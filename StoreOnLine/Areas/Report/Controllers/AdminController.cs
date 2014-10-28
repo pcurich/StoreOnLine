@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.Ajax.Utilities;
@@ -55,6 +56,8 @@ namespace StoreOnLine.Areas.Report.Controllers
         [HttpPost]
         public ActionResult Index(ReportView model)
         {
+            model.MonthName += 1;
+
             ViewBag.Action = "Index";
             model.DateFrom = new DateTime(model.Year, model.MonthName, 1);
             model.DateTo = (new DateTime(model.Year, model.MonthName + 1, 1)).AddDays(-1);
@@ -62,6 +65,7 @@ namespace StoreOnLine.Areas.Report.Controllers
             model.ReportDetails = GetReportDetail(model.Headers, model.Internal, model.MonthName, model.Year);
             ViewBag.Month = GetListMonth();
             ViewBag.Internal = GetCompanyInternarl();
+            model.MonthName -= 1;
             Session["report"] = model;
             return View(model);
         }
@@ -77,45 +81,52 @@ namespace StoreOnLine.Areas.Report.Controllers
             var people = _personRepository.Persons.Where(o => o.BaseCode == BaseCode).ToList();
 
             //INTERNAL
-            var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode &&
-                                                      o.ScheduleFrom.DayOfYear >= startTime.DayOfYear &&
-                                                      o.ScheduleTo.DayOfYear <= endTime.DayOfYear).ToList();
-
-
-            foreach (var schedule in schedulesInternal)
-            {
-                foreach (var person in people)
+            var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode).ToList();
+           
+                foreach (var schedule in schedulesInternal)
                 {
-                    var repoScheduleDetails = new ReportDetailView();
-
-                    for (var day = 1; day <= headers.Days.Count; day++)
+                    foreach (var person in people)
                     {
-                        var scheduleDetails = schedule.ScheduleDetails
-                            .Take(1)
-                            .OrderBy(o => o.ModificationDate)
-                            .FirstOrDefault(o => o.PersonId == person.Id && o.BaseCodeFrom == BaseCode)??new ScheduleDetail();
+                        var repoScheduleDetails = new ReportDetailView(endTime.Day);
 
-                        repoScheduleDetails.CompanyBaseCode = scheduleDetails.BaseCodeTo;
-                        repoScheduleDetails.CompanyName = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId).CompanyName;
-                        repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
-                                                      "x" + schedule.ScheduleHuors;
-                        repoScheduleDetails.Rol = person.Role.RoleName;
-                        repoScheduleDetails.UserCode = person.User.UserCode;
-                        repoScheduleDetails.UserName = person.User.UserName;
-                        repoScheduleDetails.Days[day].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+                        bool resultado = false;
+                        for (var day = 1; day <= headers.Days.Count; day++)
+                        {
+                            var dateTime = new DateTime(year, month, day);
+                            var scheduleDetails = schedule.ScheduleDetails.FirstOrDefault(o=>o.TimeStart.DayOfYear==dateTime.DayOfYear
+                                && o.PersonId == person.Id && o.BaseCodeFrom == BaseCode);
 
-                        repoScheduleDetails.Days[day].Number = day;
-                        repoScheduleDetails.Days[day].AbbNameDay =
-                            new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
-                                CultureInfo.CurrentUICulture)
-                                .Replace(".", "");
+                            if (scheduleDetails == null)
+                            {
+                                resultado = false;
+                                continue;
+                            }
+                            resultado = true;
+
+                            repoScheduleDetails.CompanyBaseCode = scheduleDetails.BaseCodeTo;
+                            repoScheduleDetails.CompanyName = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId).CompanyName;
+                            repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
+                                                          "x" + schedule.ScheduleHuors;
+                            repoScheduleDetails.Rol = person.Role.RoleName;
+                            repoScheduleDetails.UserCode = person.User.UserCode;
+                            repoScheduleDetails.UserName = person.User.UserName;
+                            repoScheduleDetails.Days[day].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+
+                            repoScheduleDetails.Days[day].Number = day;
+                            repoScheduleDetails.Days[day].AbbNameDay =
+                                new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
+                                    CultureInfo.CurrentUICulture)
+                                    .Replace(".", "");
+
+                             salida.Add(repoScheduleDetails);
+                        }
+                        
+                        
+                       
                     }
-                    
-                    salida.Add(repoScheduleDetails);
                 }
-            }
-
             
+
 
             return salida;
         }

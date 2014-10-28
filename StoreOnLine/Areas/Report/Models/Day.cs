@@ -8,6 +8,13 @@ namespace StoreOnLine.Areas.Report.Models
         public int Number { get; set; }
         public string AbbNameDay { get; set; }
         public string Activity { get; set; }
+
+        public Day()
+        {
+            Number = 0;
+            AbbNameDay = "";
+            Activity = "";
+        }
     }
 
 }

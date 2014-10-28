@@ -12,12 +12,12 @@ namespace StoreOnLine.Service.Services
 
         public IEnumerable<Roles> GetRolesBySiteId()
         {
-            return Db.Roles.ToList();
+            return null;// Db.Roles.ToList();
         }
 
         public void Add(Roles e)
         {
-            Db.Roles.Add(e);
+            //Db.Roles.Add(e);
             Db.SaveChanges();
         }
 

@@ -207,6 +207,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 var panel = new Accordion();
                 panel.AddPanel(worker.Id, worker.User.UserName);
                 var numberOfAssin = 0;
+                var cargar = false;
 
                 foreach (var company in companiesWithSchedule)
                 {
@@ -217,7 +218,12 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                             && o.TypeOfTask == TypeOfTask.Asignacion.ToString()
                             && o.ScheduleId == scheduleNoDone.Id);
 
-                        if (numberOfAssin == 0) break;
+                        if (numberOfAssin == 0)
+                        {
+                            break;
+                        }
+
+                        cargar = true;
 
                         var division = Convert.ToInt16(numberOfAssin / schedule.ScheduleDaysWorkPerWeek) + 1;
                         var residue = Convert.ToInt16(numberOfAssin % schedule.ScheduleDaysWorkPerWeek);
@@ -240,7 +246,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         panel.AddSubPanel(worker.Id, scheduleNoDone.Id, company.CompanyName, messages);
                     }
                 }
-                if (numberOfAssin > 0)
+                if (cargar)
                 {
                     accordeonList.Add(panel);
                 }

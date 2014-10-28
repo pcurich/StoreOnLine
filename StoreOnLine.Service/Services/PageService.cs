@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace StoreOnLine.Service.Services
 {
-    public class PageService: BaseService
+    public class PageService : BaseService
     {
-        private const string cacheid = "page-{0}";
+        private const string Cacheid = "page-{0}";
 
-        LocalizePropertyService propertyservice = new LocalizePropertyService();
-        LogService _log = new LogService();
+        readonly LocalizePropertyService _propertyservice = new LocalizePropertyService();
+        readonly LogService _log = new LogService();
 
         public IEnumerable<Pages> GetPageBySiteId()
         {
@@ -21,13 +21,13 @@ namespace StoreOnLine.Service.Services
 
         public IEnumerable<Pages> GetChildPageByPageId(int parentId)
         {
-            Key = string.Format(cacheid, "child" + parentId);
+            Key = string.Format(Cacheid, "child" + parentId);
             return Cache.Get(Key, CacheInMinute, () => Db.Pages.Where(c => c.ParentId == parentId).ToList());
         }
 
         public Pages GetPageById(int id)
         {
-            Key = string.Format(cacheid, id);
+            Key = string.Format(Cacheid, id);
             return Cache.Get(Key, CacheInMinute, () => Db.Pages.SingleOrDefault(c => c.Id == id));
         }
 
@@ -35,21 +35,21 @@ namespace StoreOnLine.Service.Services
         //Head Menu
         public IOrderedQueryable<Pages> GetPageSiteListParent(int parentId)
         {
-            Key = cacheid;
-            return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages 
-                                                       where p.ParentId == parentId && p.IncludeInMenu 
-                                                       orderby p.PageOrder 
-                                                       ascending 
+            Key = Cacheid;
+            return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages
+                                                       where p.ParentId == parentId && p.IncludeInMenu
+                                                       orderby p.PageOrder
+                                                       ascending
                                                        select p);
         }
         //Sub Head Menu
         public IOrderedQueryable<Pages> GetPageSiteListChild(int parentId)
         {
-            Key = string.Format(cacheid, "submenu-site" + parentId);
-            return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages 
+            Key = string.Format(Cacheid, "submenu-site" + parentId);
+            return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages
                                                        where p.ParentId == parentId && p.IncludeInMenu
-                                                       orderby p.PageOrder 
-                                                       ascending 
+                                                       orderby p.PageOrder
+                                                       ascending
                                                        select p);
         }
         //End Menu
@@ -59,7 +59,7 @@ namespace StoreOnLine.Service.Services
             {
                 Db.Pages.Add(page);
                 Db.SaveChanges();
-                propertyservice.pageName_Proerties_Add(page.Id, page.PageName, seoValue);
+                _propertyservice.pageName_Proerties_Add(page.Id, page.PageName, seoValue);
                 return true;
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace StoreOnLine.Service.Services
             {
                 Db.Entry(page).State = EntityState.Modified;
                 Db.SaveChanges();
-                propertyservice.pageName_Proerties_Update(page.Id, page.PageName, seoValue);
+                _propertyservice.pageName_Proerties_Update(page.Id, page.PageName, seoValue);
                 return true;
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace StoreOnLine.Service.Services
                 var p = Db.Pages.Find(id);
                 Db.Pages.Remove(p);
                 Db.SaveChanges();
-                propertyservice.pageName_Proerties_Delete(p.PageId);
+                _propertyservice.pageName_Proerties_Delete(p.Id);
                 return true;
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace StoreOnLine.Service.Services
                 var e = Db.Pages.SingleOrDefault(c => c.Id == page.Id);
                 Db.Pages.Remove(e);
                 Db.SaveChanges();
-                propertyservice.pageName_Proerties_Delete(page.Id);
+                _propertyservice.pageName_Proerties_Delete(page.Id);
                 return true;
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@ namespace StoreOnLine.Service.Services
     public class UserService : BaseService
     {
         private const string Cacheid = "Users-{0}";
-        
+
         public IEnumerable<User> GetUsersBySiteId()
         {
             return Db.Users.ToList();

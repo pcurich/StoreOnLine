@@ -41,10 +41,10 @@ namespace StoreOnLine.Service.Services
                 e.CreatedDate = DateTime.UtcNow;
                 Db.PageModules.Add(e);
                 Db.SaveChanges();
-                _propertyservice.moduleTitle_Proerties_Add(e.ModuleId, e.ModuleTitle);
+                _propertyservice.moduleTitle_Proerties_Add(e.Id, e.ModuleTitle);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _log.InsertLog("pagemodule-insert", ex.ToString());
                 return false;
@@ -57,7 +57,7 @@ namespace StoreOnLine.Service.Services
             {
                 Db.Entry(e).State = EntityState.Modified;
                 Db.SaveChanges();
-                _propertyservice.moduleTitle_Proerties_Update(e.ModuleId, e.ModuleTitle);
+                _propertyservice.moduleTitle_Proerties_Update(e.Id, e.ModuleTitle);
                 return true;
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace StoreOnLine.Service.Services
                 var p = Db.PageModules.Find(id);
                 Db.PageModules.Remove(p);
                 Db.SaveChanges();
-                _propertyservice.moduleTitle_Proerties_Delete(p.ModuleId);
+                _propertyservice.moduleTitle_Proerties_Delete(p.Id);
                 return true;
             }
             catch (Exception ex)
@@ -91,7 +91,10 @@ namespace StoreOnLine.Service.Services
                 var p = Db.PageModules.SingleOrDefault(c => c.Id == e.Id);
                 Db.PageModules.Remove(p);
                 Db.SaveChanges();
-                _propertyservice.moduleTitle_Proerties_Delete(p.ModuleId);
+
+                if (p != null) 
+                    _propertyservice.moduleTitle_Proerties_Delete(p.Id);
+
                 return true;
             }
             catch (Exception ex)
@@ -101,5 +104,5 @@ namespace StoreOnLine.Service.Services
             }
         }
     }
-    }
 }
+
