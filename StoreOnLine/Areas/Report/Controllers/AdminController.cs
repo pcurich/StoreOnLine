@@ -21,7 +21,7 @@ namespace StoreOnLine.Areas.Report.Controllers
         private readonly ISecurityRepository _securityRepository;
 
         public AdminController(ICompanyRepository companyRepository, IScheduleRepository scheduleRepository,
-            IPersonRepository personRepository,ISecurityRepository securityRepository)
+            IPersonRepository personRepository, ISecurityRepository securityRepository)
         {
             ViewBag.Big = "Reportes";
             ViewBag.Small = "Resumen de actividades mensuales";
@@ -82,52 +82,64 @@ namespace StoreOnLine.Areas.Report.Controllers
 
             //INTERNAL
             var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode).ToList();
-           
-                foreach (var schedule in schedulesInternal)
+            Company company = null;
+            bool lleno = true;
+
+            foreach (var schedule in schedulesInternal)
+            {
+                if (lleno)
                 {
+                    lleno = false;
+
                     foreach (var person in people)
                     {
                         var repoScheduleDetails = new ReportDetailView(endTime.Day);
 
-                        bool resultado = false;
-                        for (var day = 1; day <= headers.Days.Count; day++)
-                        {
-                            var dateTime = new DateTime(year, month, day);
-                            var scheduleDetails = schedule.ScheduleDetails.FirstOrDefault(o=>o.TimeStart.DayOfYear==dateTime.DayOfYear
-                                && o.PersonId == person.Id && o.BaseCodeFrom == BaseCode);
+                        company = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId);
 
-                            if (scheduleDetails == null)
-                            {
-                                resultado = false;
-                                continue;
-                            }
-                            resultado = true;
+                        repoScheduleDetails.CompanyName = company.CompanyName;
+                        repoScheduleDetails.CompanyBaseCode = company.CompanyCode;
 
-                            repoScheduleDetails.CompanyBaseCode = scheduleDetails.BaseCodeTo;
-                            repoScheduleDetails.CompanyName = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId).CompanyName;
-                            repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
-                                                          "x" + schedule.ScheduleHuors;
-                            repoScheduleDetails.Rol = person.Role.RoleName;
-                            repoScheduleDetails.UserCode = person.User.UserCode;
-                            repoScheduleDetails.UserName = person.User.UserName;
-                            repoScheduleDetails.Days[day].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+                        repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
+                                                      "x" + schedule.ScheduleHuors;
+                        repoScheduleDetails.Rol = person.Role.RoleName;
+                        repoScheduleDetails.UserCode = person.User.UserCode;
+                        repoScheduleDetails.UserName = person.User.UserName;
 
-                            repoScheduleDetails.Days[day].Number = day;
-                            repoScheduleDetails.Days[day].AbbNameDay =
-                                new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
-                                    CultureInfo.CurrentUICulture)
-                                    .Replace(".", "");
-
-                             salida.Add(repoScheduleDetails);
-                        }
-                        
-                        
-                       
+                        salida.Add(repoScheduleDetails);
                     }
                 }
-            
+                for (var day = 1; day <= headers.Days.Count; day++)
+                {
+                    foreach (var person in people)
+                    {
+                        var dateTime = new DateTime(year, month, day);
+                        var scheduleDetails =
+                            schedule.ScheduleDetails.FirstOrDefault(o => o.TimeStart.DayOfYear == dateTime.DayOfYear
+                                                                         && o.PersonId == person.Id &&
+                                                                         o.BaseCodeFrom == BaseCode);
 
+                        if (scheduleDetails == null)
+                        {
+                            continue;
+                        }
+                        if (scheduleDetails.BaseCodeTo != null)
+                        {
+                            salida.FirstOrDefault(o => o.UserName == person.User.UserName).CompanyBaseCode =
+                                scheduleDetails.BaseCodeTo;
+                        }
 
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName).Days[day - 1].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName).Days[day - 1].Number = day;
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName).Days[day - 1].AbbNameDay =
+                            new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
+                                CultureInfo.CurrentUICulture)
+                                .Replace(".", "");
+
+                    }
+                }
+            }
             return salida;
         }
 
