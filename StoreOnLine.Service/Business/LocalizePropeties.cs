@@ -5,13 +5,17 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
+using StoreOnLine.Service.Constants;
 
 namespace StoreOnLine.Service.Business
 {
     public class PropertyString
     {
         //private static CoreDbContext db = new CoreDbContext();
-        private static readonly Dictionary<string, Dictionary<string, string>> MResourceCache = new Dictionary<string, Dictionary<string, string>>();
+        private static readonly 
+            Dictionary<string, Dictionary<string, string>> 
+            MResourceCache = new Dictionary<string, Dictionary<string, string>>();
+
         private static SqlConnection _mConnection;
         private static SqlCommand _mCmdGetPropertyByTypeAndKey;
 
@@ -23,7 +27,7 @@ namespace StoreOnLine.Service.Business
             }
 
             string resourceValue = null;
-            string propertyKeys = propertyType + "." + propertyKey;
+            var propertyKeys = propertyType + "." + propertyKey;
 
             Dictionary<string, string> resCacheByCulture = null;
 
@@ -38,43 +42,43 @@ namespace StoreOnLine.Service.Business
                 if (resCacheByCulture.ContainsKey(propertyKeys))
                 {
                     resourceValue = resCacheByCulture[propertyKeys];
+                    return resourceValue;
                 }
             }
 
             // Si no esta en la cache ir a la base de datos
 
-            if (resourceValue == null)
+            resourceValue = GetPropertyByTypeAndKey(propertyType, propertyKey);
+
+            // add this result to the cache
+            // find the dictionary for this culture
+            // add this key/value pair to the inner dictionary
+
+            lock (typeof(ResourceString))
             {
-                resourceValue = GetPropertyByTypeAndKey(propertyType, propertyKey);
-
-                // add this result to the cache
-                // find the dictionary for this culture
-                // add this key/value pair to the inner dictionary
-
-                lock (typeof(ResourceString))
+                if (resCacheByCulture == null)
                 {
-                    if (resCacheByCulture == null)
-                    {
-                        resCacheByCulture = new Dictionary<string, string>();
-                        MResourceCache.Add(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, resCacheByCulture);
-                    }
-                    resCacheByCulture.Add(propertyKeys, resourceValue);
+                    resCacheByCulture = new Dictionary<string, string>();
+                    MResourceCache.Add(CultureInfo.CurrentCulture.TwoLetterISOLanguageName, resCacheByCulture);
                 }
+                resCacheByCulture.Add(propertyKeys, resourceValue);
             }
 
             return resourceValue;
-
         }
 
 
         private static string GetPropertyByTypeAndKey(string propertyType, string propertyKey)
         {
-            _mConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["CoreDBContext"].ConnectionString);
+            _mConnection = new SqlConnection(ConfigurationManager.ConnectionStrings[Enums.ConnectionStrings].ConnectionString);
 
             //command to retrieve the resource the matches
             //a specific type, culture and key
 
-            _mCmdGetPropertyByTypeAndKey = new SqlCommand("SELECT propertyType, CultureId, propertyKey, propertyValue FROM LocalizeProperties WHERE (propertyType=@propertyType) AND (CultureId=@CultureId) AND (propertyKey=@propertyKey)")
+            _mCmdGetPropertyByTypeAndKey = new SqlCommand(
+                "SELECT propertyType, CultureId, propertyKey, propertyValue " +
+                "FROM " + Enums.TableLocalizeProperty + 
+                " WHERE (propertyType=@propertyType) AND (CultureId=@CultureId) AND (propertyKey=@propertyKey)")
             {
                 Connection = _mConnection
             };
@@ -85,7 +89,7 @@ namespace StoreOnLine.Service.Business
             // we should only get one back, but just in case, we'll iterate reader results
             var resources = new StringCollection();
             string resourceValue;
-           
+
             //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
             try
             {
@@ -113,8 +117,8 @@ namespace StoreOnLine.Service.Business
 
                 //update new key to database
                 var db = new DataBase.Entities.StoreOnLineContext();
-                var lp = new DataBase.CMS.LocalizeProperties { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
-                
+                var lp = new DataBase.CMS.LocalizeProperty { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
+
                 db.LocalizeProperties.Add(lp);
                 db.SaveChanges();
             }
@@ -142,11 +146,11 @@ namespace StoreOnLine.Service.Business
             // find the dictionary for this culture
             // check for the inner dictionary entry for this key
 
-            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) 
+            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
                 return;
 
             var resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];
-            
+
             if (resCacheByCulture.ContainsKey(propertyKeys))
             {
                 resCacheByCulture.Remove(propertyKeys);
@@ -157,7 +161,7 @@ namespace StoreOnLine.Service.Business
         {
             var propertyKeys = propertyType + "." + propertyKey;
 
-            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName)) 
+            if (!MResourceCache.ContainsKey(CultureInfo.CurrentCulture.TwoLetterISOLanguageName))
                 return;
 
             var resCacheByCulture = MResourceCache[CultureInfo.CurrentCulture.TwoLetterISOLanguageName];

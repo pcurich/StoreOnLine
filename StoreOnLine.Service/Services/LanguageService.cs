@@ -10,11 +10,11 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "language-{0}";
 
-        public IEnumerable<Languages> GetLanguageBySiteId()
+        public IEnumerable<Language> GetLanguageBySiteId()
         {
             return Db.Languages.ToList();
         }
-        public IOrderedQueryable<Languages> GetLanguagePublic()
+        public IOrderedQueryable<Language> GetLanguagePublic()
         {
             Key = Cacheid;
             return Cache.Get(Key, CacheInMinute, () => from p in Db.Languages
@@ -23,12 +23,12 @@ namespace StoreOnLine.Service.Services
                                                        ascending
                                                        select p);
         }
-        public void AddLanguage(Languages e)
+        public void AddLanguage(Language e)
         {
             Db.Languages.Add(e);
             Db.SaveChanges();
         }
-        public void UpdateLanguage(Languages e)
+        public void UpdateLanguage(Language e)
         {
             Db.Entry(e).State = EntityState.Modified;
             Db.SaveChanges();
@@ -41,7 +41,7 @@ namespace StoreOnLine.Service.Services
             Db.SaveChanges();
         }
 
-        public void Delete(Languages e)
+        public void Delete(Language e)
         {
             var l = Db.Languages.SingleOrDefault(p => p.Id == e.Id);
             Db.Languages.Remove(l);

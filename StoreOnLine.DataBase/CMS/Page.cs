@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace StoreOnLine.DataBase.CMS
 {
-    public class Pages : DataBaseId
+    public class Page : DataBaseId
     {
         public int ParentId { get; set; }
         [DataType("Integer")]
@@ -21,7 +21,7 @@ namespace StoreOnLine.DataBase.CMS
         public bool EnableBreakCumb { get; set; }
         public bool ShowChildLinks { get; set; }
 
-        public Pages()
+        public Page()
         {
             PageOrder = 1;
             EnableBreakCumb = true;

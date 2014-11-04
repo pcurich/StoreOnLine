@@ -14,18 +14,18 @@ namespace StoreOnLine.Service.Services
         readonly LocalizePropertyService _propertyservice = new LocalizePropertyService();
         readonly LogService _log = new LogService();
 
-        public IEnumerable<Pages> GetPageBySiteId()
+        public IEnumerable<Page> GetPageBySiteId()
         {
             return Db.Pages.ToList();
         }
 
-        public IEnumerable<Pages> GetChildPageByPageId(int parentId)
+        public IEnumerable<Page> GetChildPageByPageId(int parentId)
         {
             Key = string.Format(Cacheid, "child" + parentId);
             return Cache.Get(Key, CacheInMinute, () => Db.Pages.Where(c => c.ParentId == parentId).ToList());
         }
 
-        public Pages GetPageById(int id)
+        public Page GetPageById(int id)
         {
             Key = string.Format(Cacheid, id);
             return Cache.Get(Key, CacheInMinute, () => Db.Pages.SingleOrDefault(c => c.Id == id));
@@ -33,7 +33,7 @@ namespace StoreOnLine.Service.Services
 
         //Menu
         //Head Menu
-        public IOrderedQueryable<Pages> GetPageSiteListParent(int parentId)
+        public IOrderedQueryable<Page> GetPageSiteListParent(int parentId)
         {
             Key = Cacheid;
             return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages
@@ -43,7 +43,7 @@ namespace StoreOnLine.Service.Services
                                                        select p);
         }
         //Sub Head Menu
-        public IOrderedQueryable<Pages> GetPageSiteListChild(int parentId)
+        public IOrderedQueryable<Page> GetPageSiteListChild(int parentId)
         {
             Key = string.Format(Cacheid, "submenu-site" + parentId);
             return Cache.Get(Key, CacheInMinute, () => from p in Db.Pages
@@ -53,7 +53,7 @@ namespace StoreOnLine.Service.Services
                                                        select p);
         }
         //End Menu
-        public bool InsertPage(Pages page, string seoValue)
+        public bool InsertPage(Page page, string seoValue)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace StoreOnLine.Service.Services
                 return false;
             }
         }
-        public bool UpdatePage(Pages page, string seoValue)
+        public bool UpdatePage(Page page, string seoValue)
         {
             try
             {
@@ -101,7 +101,7 @@ namespace StoreOnLine.Service.Services
             }
         }
 
-        public bool DeletePage(Pages page)
+        public bool DeletePage(Page page)
         {
             try
             {

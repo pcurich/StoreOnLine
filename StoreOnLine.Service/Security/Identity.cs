@@ -2,10 +2,8 @@
 
 namespace StoreOnLine.Service.Security
 {
-    public class CustomIdentity : IIdentity
+    public class Identity : IIdentity
     {
-        #region IIdentity Members
-
         public string Name { get; private set; }
 
         public string AuthenticationType
@@ -15,14 +13,10 @@ namespace StoreOnLine.Service.Security
 
         public bool IsAuthenticated
         {
-            get
-            {
-                return !string.IsNullOrEmpty(Name);
-            }
+            get { return !string.IsNullOrEmpty(Name); }
         }
 
-        #endregion
-        public CustomIdentity(string name)
+        public Identity(string name)
         {
             Name = name;
         }

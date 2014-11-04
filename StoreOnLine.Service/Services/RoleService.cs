@@ -10,24 +10,24 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "Roles";
 
-        public IEnumerable<Roles> GetRolesBySiteId()
+        public IEnumerable<Rol> GetRolesBySiteId()
         {
             return null;// Db.Roles.ToList();
         }
 
-        public void Add(Roles e)
+        public void Add(Rol e)
         {
             //Db.Roles.Add(e);
             Db.SaveChanges();
         }
 
-        public void Update(Roles e)
+        public void Update(Rol e)
         {
             Db.Entry(e).State = EntityState.Modified;
             Db.SaveChanges();
         }
 
-        public void Delete(Roles e, bool physical = false)
+        public void Delete(Rol e, bool physical = false)
         {
             if (physical)
             {

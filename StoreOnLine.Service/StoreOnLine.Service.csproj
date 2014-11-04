@@ -82,7 +82,7 @@
     <Compile Include="Business\ModuleSettingString.cs" />
     <Compile Include="Business\SiteSettingString.cs" />
     <Compile Include="Business\CacheMemory.cs" />
-    <Compile Include="Business\Enums.cs" />
+    <Compile Include="Constants\Enums.cs" />
     <Compile Include="Helpers\HtmlHelpers.cs" />
     <Compile Include="Business\ICacheService.cs" />
     <Compile Include="Business\PageRoute.cs" />
@@ -91,8 +91,8 @@
     <Compile Include="Business\LocalizeResources.cs" />
     <Compile Include="Business\RestartApplication.cs" />
     <Compile Include="Security\CurrentUser.cs" />
-    <Compile Include="Security\CustomIdentity.cs" />
-    <Compile Include="Security\CustomPrincipal.cs" />
+    <Compile Include="Security\Identity.cs" />
+    <Compile Include="Security\Principal.cs" />
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\SessionPersister.cs" />
     <Compile Include="Business\SeoUrl.cs" />

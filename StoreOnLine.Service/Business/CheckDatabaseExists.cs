@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace StoreOnLine.Service.Business
 {
+    /// <summary>
+    /// Revisa si una base de datos existe
+    /// todo me parece que esto tmb lo hace entity pero aca no uso entity
+    /// </summary>
     public class CheckDatabaseExists
     {
         public static bool IsDefaultDatabaseExists()
@@ -14,7 +13,6 @@ namespace StoreOnLine.Service.Business
             var connectionString = Sql.Conn();
             try
             {
-                //just try to connect
                 using (var conn = new SqlConnection(connectionString))
                 {
                     conn.Open();

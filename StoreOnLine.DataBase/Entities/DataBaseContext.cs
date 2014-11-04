@@ -6,6 +6,7 @@ using System.Data.Entity;
 using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.DataBase.Model.Security;
+using StoreOnLine.DataBase.Modules;
 
 
 namespace StoreOnLine.DataBase.Entities
@@ -44,7 +45,7 @@ namespace StoreOnLine.DataBase.Entities
         public DbSet<Ubigeo> Ubigeos { get; set; }
         public DbSet<ContactNumber> ContactNumbers { get; set; }
         public DbSet<Document> Documents { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<Model.Security.User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
 
         public DbSet<Company> Companies { get; set; }
@@ -53,23 +54,23 @@ namespace StoreOnLine.DataBase.Entities
 
 
 
-
-        public DbSet<Pages> Pages { get; set; }
-        public DbSet<PageModules> PageModules { get; set; }
-        public DbSet<ModuleDefinitions> ModuleDefinitions { get; set; }
-        public DbSet<LocalizeResources> LocalizeResources { get; set; }
-        public DbSet<LocalizeProperties> LocalizeProperties { get; set; }
-        public DbSet<SiteSettings> SiteSettings { get; set; }
-        public DbSet<Languages> Languages { get; set; }
-        //public DbSet<Users> Users { get; set; }
-      //  public DbSet<Helps> Helps { get; set; }
-       // public DbSet<Roles> Roles { get; set; }
+        #region CMS
+        public DbSet<Page> Pages { get; set; }
+        public DbSet<PageModule> PageModules { get; set; }
+        public DbSet<ModuleDefinition> ModuleDefinitions { get; set; }
+        public DbSet<LocalizeResource> LocalizeResources { get; set; }
+        public DbSet<LocalizeProperty> LocalizeProperties { get; set; }
+        public DbSet<SiteSetting> SiteSettings { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<CMS.User> UsersCms { get; set; }
+        public DbSet<Helps> Helps { get; set; }
+        public DbSet<CMS.Rol> RolesCms { get; set; }
         public DbSet<UserInRoles> UserInRoles { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<ModuleSetting> ModuleSettings { get; set; }
         ////Modules
-        //public DbSet<HtmlContents> HtmlContents { get; set; }
-        //public DbSet<ContactForm> ContactForms { get; set; }
-
+        public DbSet<HtmlContent> HtmlContents { get; set; }
+        public DbSet<ContactForm> ContactForms { get; set; }
+        #endregion
     }
 }

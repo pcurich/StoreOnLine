@@ -3,11 +3,14 @@ using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.CMS
 {
+    /// <summary>
+    /// todo
+    /// </summary>
     public class Helps : DataBaseId
     {
-        [Key]
-        public string SiteId { get; set; }
-        [Key]
+        public int SiteSettingId { get; set; }
+        public SiteSetting SiteSetting { get; set; }
         public string Description { get; set; }
     }
 }
+

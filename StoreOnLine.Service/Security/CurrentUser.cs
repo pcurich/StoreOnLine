@@ -17,7 +17,7 @@ namespace StoreOnLine.Service.Security
 
         public static int GetUserId()
         {
-            var user = db.Users.SingleOrDefault(c => c.UserName == HttpContext.Current.User.Identity.Name);
+            var user = db.UsersCms.SingleOrDefault(c => c.UserName == HttpContext.Current.User.Identity.Name);
             if (user != null)
             {
                 return user.Id;

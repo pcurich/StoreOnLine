@@ -2,7 +2,7 @@
 
 namespace StoreOnLine.DataBase.CMS
 {
-    public class Languages : DataBaseId
+    public class Language : DataBaseId
     {
         public string LanguageName { get; set; }
         public string LanguageImageName { get; set; }

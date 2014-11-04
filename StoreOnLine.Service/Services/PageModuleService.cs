@@ -15,25 +15,25 @@ namespace StoreOnLine.Service.Services
         readonly LocalizePropertyService _propertyservice = new LocalizePropertyService();
         readonly LogService _log = new LogService();
 
-        public IEnumerable<PageModules> GetModuleByPageId(int pageId)
+        public IEnumerable<PageModule> GetModuleByPageId(int pageId)
         {
             return Db.PageModules.Where(c => c.Id == pageId).ToList();
         }
 
-        public PageModules FindPageModule(int id)
+        public PageModule FindPageModule(int id)
         {
             //var m = from p in Db.pagemodules join c in Db.moduledefinitions on p.ModuleDefId equals c.ModuleDefId where p.ModuleId == id select new { p, c.FeatureName };
             return Db.PageModules.Find(id);
         }
 
-        public PageModules GetPageModuleById(int id)
+        public PageModule GetPageModuleById(int id)
         {
             //return cache.Get(key, cacheinminute, () => Db.pages.Where(c => c.PageId == id).SingleOrDefault());
             //return Db.pagemodules.Where(c => c.ModuleId == id).SingleOrDefault();
             return Cache.Get(Key, CacheInMinute, () => Db.PageModules.SingleOrDefault(c => c.Id == id));
         }
 
-        public bool InsertPageModule(PageModules e)
+        public bool InsertPageModule(PageModule e)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace StoreOnLine.Service.Services
             }
         }
 
-        public bool UpdatePageModule(PageModules e)
+        public bool UpdatePageModule(PageModule e)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace StoreOnLine.Service.Services
             }
         }
 
-        public bool DeletePageModule(PageModules e)
+        public bool DeletePageModule(PageModule e)
         {
             try
             {

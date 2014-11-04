@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.CMS
 {
-    public class Users : DataBaseId
+    /// <summary>
+    /// Informacion de un usuario
+    /// </summary>
+    public class User : DataBaseId
     {
         public string UserName { get; set; }
         public string Email { get; set; }
@@ -18,7 +22,7 @@ namespace StoreOnLine.DataBase.CMS
         public int FailedPasswordAttemptCount { get; set; }
         public int FailedPasswordAnswerAttemptCount { get; set; }
         public bool IsDelete { get; set; }
-    }
 
-    //Usado para almacenar informacion de un usuario
+        public List<UserInRoles> UserInRoleses { get; set; }
+    }
 }

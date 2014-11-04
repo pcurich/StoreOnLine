@@ -3,10 +3,12 @@ using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.CMS
 {
-    public class SiteSettings:DataBaseId
+    /// <summary>
+    /// todo
+    /// </summary>
+    public class SiteSetting:DataBaseId
     {
         [Key]
-        //[Column(Order = 1)]
         public string SettingKey { get; set; }
         public string SettingValue { get; set; }
        // [UIHint("DbTypeDropDown")]

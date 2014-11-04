@@ -11,3 +11,7 @@ $(document).ready(function () {
 
 enums
 http://stackoverflow.com/questions/424366/c-sharp-string-enums
+
+var post = context.Posts.Find(2);
+// Load the blog related to a given post
+context.Entry(post).Refer ence(p => p.Blog).Load();

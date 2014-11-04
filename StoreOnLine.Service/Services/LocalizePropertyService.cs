@@ -14,12 +14,12 @@ namespace StoreOnLine.Service.Services
         /// </summary>
         /// <param name="cultureId">culture id</param>
         /// <returns></returns>
-        public IEnumerable<LocalizeProperties> GetPropertiesByCulture(int cultureId)
+        public IEnumerable<LocalizeProperty> GetPropertiesByCulture(int cultureId)
         {
             return Db.LocalizeProperties.Where(c => c.Id == cultureId).ToList();
         }
 
-        public void AddProperty(LocalizeProperties e)
+        public void AddProperty(LocalizeProperty e)
         {
             e.PropertyType = e.PropertyType.ToLower();
             e.SeoValue = e.SeoValue;
@@ -27,7 +27,7 @@ namespace StoreOnLine.Service.Services
             Db.SaveChanges();
         }
 
-        public void UpdateProperty(LocalizeProperties e)
+        public void UpdateProperty(LocalizeProperty e)
         {
             e.SeoValue = e.SeoValue;
             Db.Entry(e).State = EntityState.Modified;
@@ -46,7 +46,7 @@ namespace StoreOnLine.Service.Services
                 Db.SaveChanges();
             }
             else
-                AddProperty(new LocalizeProperties { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = type, PropertyKey = id, PropertyValue = value });
+                AddProperty(new LocalizeProperty { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = type, PropertyKey = id, PropertyValue = value });
             //PropertyString.UpdateKey(type, id, value);
             //because linq still cache so we have to remove
             PropertyString.RemoveKey(type, id);
@@ -62,9 +62,9 @@ namespace StoreOnLine.Service.Services
                 PropertyString.RemoveKey(l.PropertyType, l.PropertyKey);
         }
 
-        public void Delete(LocalizeProperties e)
+        public void Delete(LocalizeProperty e)
         {
-            LocalizeProperties l = Db.LocalizeProperties.SingleOrDefault(p => p.CultureId == e.CultureId && p.PropertyType == e.PropertyType && p.PropertyKey == e.PropertyKey);
+            LocalizeProperty l = Db.LocalizeProperties.SingleOrDefault(p => p.CultureId == e.CultureId && p.PropertyType == e.PropertyType && p.PropertyKey == e.PropertyKey);
             Db.LocalizeProperties.Remove(l);
             Db.SaveChanges();
 
@@ -74,7 +74,7 @@ namespace StoreOnLine.Service.Services
 
         public void pageName_Proerties_Add(int id, string name, string seoValue)
         {
-            var p = new LocalizeProperties
+            var p = new LocalizeProperty
             {
                 PropertyType = "page",
                 PropertyKey = id.ToString(CultureInfo.InvariantCulture),
@@ -117,7 +117,7 @@ namespace StoreOnLine.Service.Services
 
         public void moduleTitle_Proerties_Add(int id, string name)
         {
-            var p = new LocalizeProperties
+            var p = new LocalizeProperty
             {
                 PropertyType = "module",
                 PropertyKey = id.ToString(CultureInfo.InvariantCulture),
@@ -132,7 +132,7 @@ namespace StoreOnLine.Service.Services
         public void moduleTitle_Proerties_Update(int id, string name)
         {
             string propertyId = id.ToString(CultureInfo.InvariantCulture);
-            LocalizeProperties l = Db.LocalizeProperties.SingleOrDefault(p => p.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && p.PropertyType.ToLower() == "module" && p.PropertyKey == propertyId);
+            LocalizeProperty l = Db.LocalizeProperties.SingleOrDefault(p => p.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && p.PropertyType.ToLower() == "module" && p.PropertyKey == propertyId);
             if (l != null)
             {
                 l.PropertyValue = name;

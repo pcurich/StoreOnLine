@@ -4,7 +4,7 @@ using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.CMS
 {
-    public class LocalizeProperties : DataBaseId
+    public class LocalizeProperty : DataBaseId
     {
         [Key]
         [Column(Order = 1)]

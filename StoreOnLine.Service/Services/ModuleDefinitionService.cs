@@ -10,24 +10,24 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "ModuleDefinitions";
 
-        public IEnumerable<ModuleDefinitions> GetModuleDefinitionList()
+        public IEnumerable<ModuleDefinition> GetModuleDefinitionList()
         {
             return Db.ModuleDefinitions.ToList();
         }
 
-        public void Add(ModuleDefinitions e)
+        public void Add(ModuleDefinition e)
         {
             Db.ModuleDefinitions.Add(e);
             Db.SaveChanges();
         }
 
-        public void Update(ModuleDefinitions e)
+        public void Update(ModuleDefinition e)
         {
             Db.Entry(e).State = EntityState.Modified;
             Db.SaveChanges();
         }
 
-        public void Delete(ModuleDefinitions e)
+        public void Delete(ModuleDefinition e)
         {
             var l = Db.ModuleDefinitions.SingleOrDefault(p => p.Id == e.Id);
             Db.ModuleDefinitions.Remove(l);

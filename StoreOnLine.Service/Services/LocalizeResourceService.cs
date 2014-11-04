@@ -11,19 +11,19 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "resource-{0}";
 
-        public IEnumerable<LocalizeResources> GetResourceAll()
+        public IEnumerable<LocalizeResource> GetResourceAll()
         {
             Key = string.Format(Cacheid, "all");
             return Db.LocalizeResources.ToList();
         }
 
-        public IEnumerable<LocalizeResources> GetResourceByCulture(string cultureId)
+        public IEnumerable<LocalizeResource> GetResourceByCulture(string cultureId)
         {
             Key = string.Format(Cacheid, cultureId);
             return Db.LocalizeResources.Where(c => c.CultureId == cultureId).ToList();
         }
 
-        public void AddResource(LocalizeResources e)
+        public void AddResource(LocalizeResource e)
         {
             if (
                 Db.LocalizeResources.Any(
@@ -38,7 +38,7 @@ namespace StoreOnLine.Service.Services
             Db.SaveChanges();
         }
 
-        public void UpdateResource(LocalizeResources update)
+        public void UpdateResource(LocalizeResource update)
         {
             Db.Entry(update).State = EntityState.Modified;
             Db.SaveChanges();
@@ -59,7 +59,7 @@ namespace StoreOnLine.Service.Services
             }
             else
             {
-                AddResource(new LocalizeResources
+                AddResource(new LocalizeResource
                 {
                     CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
                     ResourceKey = id,
@@ -85,7 +85,7 @@ namespace StoreOnLine.Service.Services
                 ResourceString.RemoveKey(l.ResourceType, l.ResourceKey);
         }
 
-        public void Delete(LocalizeResources resource)
+        public void Delete(LocalizeResource resource)
         {
             var l =
                 Db.LocalizeResources.SingleOrDefault(

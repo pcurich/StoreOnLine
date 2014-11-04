@@ -4,14 +4,22 @@ using System.Web;
 
 namespace StoreOnLine.Service.Business
 {
+    /// <summary>
+    ///  Es utilizada como cache de data para rapido acceso 
+    /// </summary>
     public class CacheMemory : ICacheService
     {
         public T Get<T>(string cacheId, int duration, Func<T> getItemCallback) where T : class
         {
             var item = HttpRuntime.Cache.Get(cacheId) as T;
-            if (item != null) return item;
+            
+            if (item != null) 
+                return item;
+
             item = getItemCallback();
-            HttpRuntime.Cache.Insert(cacheId, item, null, DateTime.Now.AddMinutes(duration), System.Web.Caching.Cache.NoSlidingExpiration);
+            HttpRuntime.Cache.Insert(cacheId, item, null,
+                                     DateTime.Now.AddMinutes(duration),
+                                     System.Web.Caching.Cache.NoSlidingExpiration);
 
             return item;
         }
@@ -37,8 +45,8 @@ namespace StoreOnLine.Service.Business
             }
 
             ////modify web.config to remove cache
-            var config=System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
-            var setting=config.AppSettings.Settings["RefreshCache"];
+            var config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
+            var setting = config.AppSettings.Settings["RefreshCache"];
 
             config.AppSettings.Settings["RefreshCache"].Value = setting.Value == "1" ? "0" : "1";
             config.Save();
@@ -53,6 +61,4 @@ namespace StoreOnLine.Service.Business
 
         }
     }
-
-    //Es utilizada como cache de data para rapido acceso 
 }

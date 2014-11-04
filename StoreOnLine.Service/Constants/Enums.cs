@@ -1,7 +1,19 @@
-﻿namespace StoreOnLine.Service.Business
+﻿namespace StoreOnLine.Service.Constants
 {
     public sealed class Enums
     {
+        #region config.xml
+
+        public static readonly string ConnectionStrings = "StoreOnLineContext";
+
+        #endregion
+
+        #region Table
+
+        public static readonly string TableLocalizeProperty = "LocalizeProperties";
+
+        #endregion
+
         #region roles
 
         public static readonly string Administrators = "Administrators";
@@ -9,8 +21,8 @@
         public static readonly string Allusers = "All Users";
         public static readonly string ViewRoles = "All Users";
         public static readonly string PrintRoles = "All Users";
-        public static readonly string EditRoles = "Administrators;Content Administrators";
-        public static readonly string CreateRoles = "Administrators;Content Administrators";
+        public static readonly string EditRoles = "Administrators; Content Administrators";
+        public static readonly string CreateRoles = "Administrators; Content Administrators";
 
         #endregion
 

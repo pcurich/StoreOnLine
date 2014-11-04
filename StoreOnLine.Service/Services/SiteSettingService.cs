@@ -10,18 +10,18 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "SiteSettings";
 
-        public IEnumerable<SiteSettings> GetSiteSettingBySiteId()
+        public IEnumerable<SiteSetting> GetSiteSettingBySiteId()
         {
             return Db.SiteSettings.ToList();
         }
 
-        public void AddSiteSetting(SiteSettings e)
+        public void AddSiteSetting(SiteSetting e)
         {
             Db.SiteSettings.Add(e);
             Db.SaveChanges();
         }
 
-        public void UpdateSiteSetting(SiteSettings e)
+        public void UpdateSiteSetting(SiteSetting e)
         {
             Db.Entry(e).State = EntityState.Modified;
             Db.SaveChanges();
@@ -39,7 +39,7 @@ namespace StoreOnLine.Service.Services
             Db.SaveChanges();
             SiteSettingString.UpdateKey(e.SettingKey, e.SettingValue);
         }
-        public void Delete(SiteSettings e, bool physical = false)
+        public void Delete(SiteSetting e, bool physical = false)
         {
             if (physical)
             {
