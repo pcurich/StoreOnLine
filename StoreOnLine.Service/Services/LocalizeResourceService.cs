@@ -10,6 +10,15 @@ namespace StoreOnLine.Service.Services
     public class LocalizeResourceservice : BaseService
     {
         private const string Cacheid = "resource-{0}";
+        private int languageId;
+
+        public LocalizeResourceservice()
+        {
+            var language =
+                Db.Languages.FirstOrDefault(
+                    o => o.TwoLetterIsoLanguageName == CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            languageId = language.Id;
+        }
 
         public IEnumerable<LocalizeResource> GetResourceAll()
         {
@@ -17,10 +26,10 @@ namespace StoreOnLine.Service.Services
             return Db.LocalizeResources.ToList();
         }
 
-        public IEnumerable<LocalizeResource> GetResourceByCulture(string cultureId)
+        public IEnumerable<LocalizeResource> GetResourceByCulture(int languageId)
         {
-            Key = string.Format(Cacheid, cultureId);
-            return Db.LocalizeResources.Where(c => c.CultureId == cultureId).ToList();
+            Key = string.Format(Cacheid, languageId);
+            return Db.LocalizeResources.Where(c => c.LanguageId == languageId).ToList();
         }
 
         public void AddResource(LocalizeResource e)
@@ -28,7 +37,7 @@ namespace StoreOnLine.Service.Services
             if (
                 Db.LocalizeResources.Any(
                     c =>
-                        c.CultureId == e.CultureId &&
+                        c.LanguageId == e.LanguageId &&
                         c.ResourceType == e.ResourceType &&
                         c.ResourceKey == e.ResourceKey)
                 )
@@ -49,7 +58,7 @@ namespace StoreOnLine.Service.Services
         {
             var e =
                 Db.LocalizeResources.SingleOrDefault(
-                    p => p.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName &&
+                    p => p.LanguageId == languageId &&
                          p.ResourceType == type && p.ResourceKey == id);
 
             if (e != null)
@@ -61,7 +70,7 @@ namespace StoreOnLine.Service.Services
             {
                 AddResource(new LocalizeResource
                 {
-                    CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName,
+                    LanguageId = languageId,
                     ResourceKey = id,
                     ResourceType = type,
                     ResourceValue = value
@@ -76,7 +85,7 @@ namespace StoreOnLine.Service.Services
             var l =
                 Db.LocalizeResources.SingleOrDefault(
                     p =>
-                        p.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && p.ResourceType == type &&
+                        p.LanguageId == languageId && p.ResourceType == type &&
                         p.ResourceKey == id);
             Db.LocalizeResources.Remove(l);
             Db.SaveChanges();
@@ -90,7 +99,7 @@ namespace StoreOnLine.Service.Services
             var l =
                 Db.LocalizeResources.SingleOrDefault(
                     p =>
-                        p.CultureId == resource.CultureId && p.ResourceType == resource.ResourceType &&
+                        p.LanguageId == resource.LanguageId && p.ResourceType == resource.ResourceType &&
                         p.ResourceKey == resource.ResourceKey);
             Db.LocalizeResources.Remove(l);
             Db.SaveChanges();

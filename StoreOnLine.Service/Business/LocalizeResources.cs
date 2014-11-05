@@ -64,19 +64,19 @@ namespace StoreOnLine.Service.Business
             //command to retrieve the resource the matches
             //a specific type, culture and key
 
-            _mCmdGetResourceByTypeAndKey = new SqlCommand("SELECT resourceType, CultureId, resourceKey, resourceValue FROM LocalizeResources WHERE (resourceType=@resourceType) AND (CultureId=@CultureId) AND (resourceKey=@resourceKey)")
+            _mCmdGetResourceByTypeAndKey = new SqlCommand("SELECT resourceType, LanguageId, resourceKey, resourceValue FROM LocalizeResources WHERE (resourceType=@resourceType) AND (LanguageId=@LanguageId) AND (resourceKey=@resourceKey)")
             {
                 Connection = _mConnection
             };
             _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("resourceType", resourceType);
-            _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("CultureId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("LanguageId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             _mCmdGetResourceByTypeAndKey.Parameters.AddWithValue("resourceKey", resourceKey);
 
             // we should only get one back, but just in case, we'll iterate reader results
             var resources = new StringCollection();
 
             string resourceValue;
-            //var _resource = db.resources.Where(r => r.ResourceType == resourceType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.ResourceKey == resourceKey);
+            //var _resource = db.resources.Where(r => r.ResourceType == resourceType && r.LanguageId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.ResourceKey == resourceKey);
 
             try
             {
@@ -109,7 +109,7 @@ namespace StoreOnLine.Service.Business
 
                 //update new key to database
                 var db = new DataBase.Entities.StoreOnLineContext();
-                var lr = new DataBase.CMS.LocalizeResource { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, ResourceType = resourceType, ResourceKey = resourceKey, ResourceValue = resourceValue };
+                var lr = new DataBase.CMS.LocalizeResource { LanguageId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, ResourceType = resourceType, ResourceKey = resourceKey, ResourceValue = resourceValue };
 
                 db.LocalizeResources.Add(lr);
                 db.SaveChanges();

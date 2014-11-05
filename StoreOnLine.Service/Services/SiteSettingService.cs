@@ -39,6 +39,7 @@ namespace StoreOnLine.Service.Services
             Db.SaveChanges();
             SiteSettingString.UpdateKey(e.SettingKey, e.SettingValue);
         }
+
         public void Delete(SiteSetting e, bool physical = false)
         {
             if (physical)

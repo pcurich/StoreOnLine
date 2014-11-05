@@ -30,24 +30,29 @@ namespace StoreOnLine.Service.Services
             Db.Logs.Add(log);
             Db.SaveChanges();
         }
+
         public IEnumerable<Log> GetLogBySiteId(string siteId)
         {
             return Db.Logs.ToList();
         }
+
         public Log GetLogById(int id)
         {
             return Db.Logs.Find(id);
         }
+
         public Log GetLogLatest()
         {
             return Db.Logs.Find(Db.Logs.Max(c => c.Id));
         }
+
         public void DeleteById(int id)
         {
             var p = Db.Logs.Find(id);
             Db.Logs.Remove(p);
             Db.SaveChanges();
         }
+
         public void DeleteAll()
         {
             var log = Db.Logs.ToList();

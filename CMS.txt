@@ -19,7 +19,7 @@ http://www.billtechblog.com/2014/03/cms-mvc-part-6-pageroute-class.html
 CMS MVC part 7: SQL class - easy to call sql precedures with or without parameters
 http://www.billtechblog.com/2014/03/cms-mvc-part-7-sql-class.html
 
-CMS MVC part 8: Html Helpers Class(*)
+CMS MVC part 8: Html Helpers Class
 http://www.billtechblog.com/2014/03/cms-mvc-part-8-html-helpers-class.html
 
 CMS MVC part 9: Create simple Mvc pager helper class
@@ -61,7 +61,7 @@ http://www.billtechblog.com/2014/03/cms-mvc-part-20-create-master-page.html
 CMS MVC part 21: Create page controller to load dynamic Page, Module in CMS
 http://www.billtechblog.com/2014/03/cms-mvc-part-21-create-page-controller.html
 
-CMS MVC part 22: Loading dynamic modules into Cms page areas - BaseController
+CMS MVC part 22: Loading dynamic modules into Cms page areas - BaseController(*)
 http://www.billtechblog.com/2014/03/cms-mvc-part-22-loading-dynamic-modules.html
 
 CMS MVC part 23: Loading dynamic modules into Cms page areas - SEO Url

@@ -76,21 +76,21 @@ namespace StoreOnLine.Service.Business
             //a specific type, culture and key
 
             _mCmdGetPropertyByTypeAndKey = new SqlCommand(
-                "SELECT propertyType, CultureId, propertyKey, propertyValue " +
+                "SELECT propertyType, LanguageId, propertyKey, propertyValue " +
                 "FROM " + Enums.TableLocalizeProperty + 
-                " WHERE (propertyType=@propertyType) AND (CultureId=@CultureId) AND (propertyKey=@propertyKey)")
+                " WHERE (propertyType=@propertyType) AND (LanguageId=@LanguageId) AND (propertyKey=@propertyKey)")
             {
                 Connection = _mConnection
             };
             _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("propertyType", propertyType);
-            _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("CultureId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("LanguageId", CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
             _mCmdGetPropertyByTypeAndKey.Parameters.AddWithValue("propertyKey", propertyKey);
 
             // we should only get one back, but just in case, we'll iterate reader results
             var resources = new StringCollection();
             string resourceValue;
 
-            //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
+            //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.LanguageId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
             try
             {
                 _mConnection.Open();
@@ -117,7 +117,7 @@ namespace StoreOnLine.Service.Business
 
                 //update new key to database
                 var db = new DataBase.Entities.StoreOnLineContext();
-                var lp = new DataBase.CMS.LocalizeProperty { CultureId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
+                var lp = new DataBase.CMS.LocalizeProperty { LanguageId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, PropertyType = propertyType, PropertyKey = propertyKey, PropertyValue = resourceValue, SeoValue = resourceValue };
 
                 db.LocalizeProperties.Add(lp);
                 db.SaveChanges();

@@ -150,7 +150,7 @@ namespace StoreOnLine.Service.Business
             // we should only get one back, but just in case, we'll iterate reader results
             var resources = new StringCollection();
             string resourceValue;
-            //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.CultureId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
+            //var _resource = db.resources.Where(r => r.propertyType == propertyType && r.LanguageId == CultureInfo.CurrentCulture.TwoLetterISOLanguageName && r.propertyKey == propertyKey);
             try
             {
                 _mConnection.Open();

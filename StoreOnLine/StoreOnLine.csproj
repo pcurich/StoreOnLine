@@ -43,9 +43,6 @@
     <Reference Include="Antlr3.Runtime">
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Elmah">
-      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
-    </Reference>
     <Reference Include="Elmah.Mvc">
       <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
     </Reference>
@@ -734,6 +731,7 @@
     <Content Include="Views\Shared\_LogInLayout.cshtml" />
     <Content Include="Views\Shared\_Accordion.cshtml" />
     <Content Include="Views\Shared\_SupervisorLayout.cshtml" />
+    <Content Include="Views\Shared\_layout2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -757,6 +755,10 @@
     <ProjectReference Include="..\StoreOnLine.Domain\StoreOnLine.Domain.csproj">
       <Project>{b02e95c4-77a6-4e83-9b2c-f3c8bc7d9510}</Project>
       <Name>StoreOnLine.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StoreOnLine.Service\StoreOnLine.Service.csproj">
+      <Project>{af343ce3-3cac-4ab4-90bf-1f5ff73bf2d7}</Project>
+      <Name>StoreOnLine.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\StoreOnLine.Util\StoreOnLine.Util.csproj">
       <Project>{d81aa3ac-7e3c-4fcb-ac24-e6d9b1e5d28b}</Project>
