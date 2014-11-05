@@ -4,10 +4,9 @@
     if (Model.Headers != null)
     {
 
-    <table id="DataTablePerson" class="table table-striped">
+    <table id="DataTablePerson" class="table table-striped" >
         <thead>
             <tr>
-
                 <th>
                     @Html.DisplayName(Model.Headers.CompanyName)
                 </th>
@@ -37,33 +36,43 @@
             </tr>
         </thead>
         <tbody>
+
             @foreach (var item in Model.ReportDetails)
             {
                 <tr>
-                    @Html.DisplayName(item.CompanyName)
+                    <td>
+                        @Html.DisplayName(item.CompanyName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(item.CompanyBaseCode)
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(item.Regimen)
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(item.UserCode)
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(item.UserName)
+                    </td>
+
+                    <td>
+                        @Html.DisplayName(item.Rol)
+                    </td>
+
+                   @foreach (var dia in item.Days)
+                    {
+                    <td>
+                        @Html.DisplayName(dia.Activity)
+                    </td>
+                    }
                 </tr>
-                <tr>
-                    @Html.DisplayName(item.CompanyBaseCode)
-                </tr>
-                <tr>
-                    @Html.DisplayName(item.Regimen)
-                </tr>
-                <tr>
-                    @Html.DisplayName(item.UserCode)
-                </tr>
-                <tr>
-                    @Html.DisplayName(item.UserName)
-                </tr>
-                <tr>
-                    @Html.DisplayName(item.Rol)
-                </tr>
-                foreach (var dia in item.Days)
-                {
-                <tr>
-                    @Html.DisplayName(dia.Activity)
-                </tr>
-                }
             }
+
         </tbody>
     </table>
     }

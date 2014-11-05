@@ -93,8 +93,6 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     schedule.ScheduleTo.DayOfYear < DateTime.Now.DayOfYear)
                 {
                     schedule.IsDone = true;
-                    //schedule.Company = null;
-                    //schedule.ScheduleDetails = null;
                     _repositorySchedule.SaveSchedule(schedule);
 
                     var newCompany = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
@@ -118,18 +116,22 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     var details =
                         schedule.ScheduleDetails.Where(o => o.TimeStart.DayOfYear == DateTime.Now.DayOfYear)
                             .Select(o => new ScheduleDetailView().ToView(o)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
-                    //if (details != null)
-                    //{
-                    //    details.BaseCodeFrom = company.CompanyCode;
-                    //    details.BaseCodeTo = company.CompanyCode;
-                    //}
-                    
+
+                    var appointees = (List<int>)Session["appointees"];
+
+                    if (appointees == null)
+                    {
+                        appointees = new List<int>();
+                    }
+
+                    Session["appointees"] = appointees;
+
                     ViewBag.Person = GetPersonList(details != null ? details.PersonId.ToString() : null);
                     var salida = new ScheduleDetailView();
                     salida.BaseCodeFrom = company.CompanyCode;
                     salida.BaseCodeTo = company.CompanyCode;
                     salida.TimeStart = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, 0, 0);
-                    salida.TimeEnd = DateTime.Now;
+                    salida.TimeEnd = salida.TimeStart.AddHours(schedule.ScheduleHuors);
                     return View(details ?? salida);
                 }
             }
@@ -170,6 +172,14 @@ namespace StoreOnLine.Areas.Merchant.Controllers
         public ActionResult OnTime(ScheduleDetailView model)
         {
             ViewBag.Action = "OnTime";
+            var appointees = (List<int>)Session["appointees"];
+
+            if (appointees == null)
+            {
+                appointees = new List<int>();
+            }
+
+            appointees.Add(model.PersonId);
 
             if (ModelState.IsValid)
             {
@@ -185,23 +195,37 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         timeEnd = scheduleDetails.TimeEnd;
                         //terminar su tarea y crearle una nueva
                         scheduleDetails.TimeEnd = DateTime.Now;
-                        //scheduleDetails.Person = null;
-                        //scheduleDetails.Schedule = null;
+
                         var elapsedTicks = scheduleDetails.TimeEnd.Ticks - scheduleDetails.TimeStart.Ticks;
                         var elapsedSpan = new TimeSpan(elapsedTicks);
                         scheduleDetails.TotalTime = Convert.ToInt16(elapsedSpan.TotalMinutes);
                         _repositorySchedule.SaveScheduleDetail(scheduleDetails);
                     }
-                }
-                var m = model.ToBd(model);
-                m.Person = null;
-                m.Schedule = null;
-                m.TimeStart = DateTime.Now;
-                m.TimeEnd = timeEnd;
-                m.Id = 0;
-                _repositorySchedule.SaveScheduleDetail(m);
 
-                ViewBag.Resumen = GetResumen(m.ScheduleId);
+                }
+                var scheduleDetailsPerson =
+                        schedule.ScheduleDetails.FirstOrDefault(o => o.PersonId == model.PersonId &&
+                                                                     o.TimeStart.DayOfYear == DateTime.Now.DayOfYear);
+                if (scheduleDetailsPerson != null)
+                {
+                    scheduleDetailsPerson.TimeStart = DateTime.Now;
+                    scheduleDetailsPerson.TimeEnd = DateTime.Now.AddHours(schedule.ScheduleHuors);
+                    scheduleDetailsPerson.TypeOfTask = model.TypeOfTask;
+                    _repositorySchedule.SaveScheduleDetail(scheduleDetailsPerson);
+                }
+                else
+                {
+                    var m = model.ToBd(model);
+                    m.Person = null;
+                    m.Schedule = null;
+                    m.TimeStart = DateTime.Now;
+                    m.TimeEnd = timeEnd;
+                    m.Id = 0;
+                    _repositorySchedule.SaveScheduleDetail(m);
+                }
+
+
+                ViewBag.Resumen = GetResumen(schedule.Id);
 
                 TempData["message"] = string.Format("ha sido guardado");
                 return Json(new { ok = true, newurl = "OnTime?companyId=" + schedule.CompanyId + "&scheduleId=" + schedule.Id });
@@ -235,7 +259,31 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
         public SelectList GetPersonList(string selected)
         {
-            return _repositoryPerson.GetPersons(selected, 3);
+            List<int> appointees = (List<int>)Session["appointees"];
+            var repo = _repositoryPerson.Persons.Where(o => !o.IsDeleted && o.RoleId == 3).ToList();
+
+            if (appointees != null)
+            {
+                foreach (var appointee in appointees)
+                {
+                    foreach (var person in repo)
+                    {
+                        if (person.Id == appointee)
+                        {
+                            repo.Remove(person);
+                            break;
+                        }
+                    }
+                }
+            }
+
+
+            return new SelectList(repo.Select(r => new SelectListItem
+            {
+                Text = r.FirstName + " " + r.LastName,
+                Value = r.Id.ToString(),
+                Selected = (r.Id.ToString() == selected)
+            }).ToList(), "Value", "Text");
         }
 
 

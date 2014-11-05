@@ -70,7 +70,7 @@ namespace StoreOnLine.Areas.Report.Controllers
             return View(model);
         }
 
-        private List<ReportDetailView> GetReportDetail(ReportDetailView headers, string BaseCode, int month, int year)
+        private List<ReportDetailView> GetReportDetail(ReportDetailView headers, string baseCode, int month, int year)
         {
             var salida = new List<ReportDetailView>();
 
@@ -78,37 +78,33 @@ namespace StoreOnLine.Areas.Report.Controllers
             var endTime = new DateTime(year, month + 1, 1).AddDays(-1);
 
             //  PEOPLE ASSIGNED
-            var people = _personRepository.Persons.Where(o => o.BaseCode == BaseCode).ToList();
+            var people = _personRepository.Persons.Where(o => o.BaseCode == baseCode /*&& o.RoleId==3*/).ToList();
 
             //INTERNAL
-            var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == BaseCode).ToList();
+            var schedulesInternal = _scheduleRepository.Schedules.Where(o => o.BaseCode == baseCode).ToList();
             Company company = null;
-            bool lleno = true;
 
             foreach (var schedule in schedulesInternal)
             {
-                if (lleno)
+                foreach (var person in people)
                 {
-                    lleno = false;
+                    var repoScheduleDetails = new ReportDetailView(endTime.Day);
 
-                    foreach (var person in people)
-                    {
-                        var repoScheduleDetails = new ReportDetailView(endTime.Day);
+                    company = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId);
 
-                        company = _companyRepository.Companies.FirstOrDefault(o => o.Id == schedule.CompanyId);
+                    repoScheduleDetails.CompanyName = company.CompanyName;
+                    repoScheduleDetails.CompanyBaseCode = company.CompanyCode;
 
-                        repoScheduleDetails.CompanyName = company.CompanyName;
-                        repoScheduleDetails.CompanyBaseCode = company.CompanyCode;
+                    repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
+                                                  "x" + schedule.ScheduleHuors;
+                    repoScheduleDetails.Rol = person.Role.RoleName;
+                    repoScheduleDetails.UserCode = person.User.UserCode;
+                    repoScheduleDetails.UserName = person.User.UserName;
 
-                        repoScheduleDetails.Regimen = schedule.ScheduleDaysWorkPerWeek + "x" + schedule.ScheduleDaysOff +
-                                                      "x" + schedule.ScheduleHuors;
-                        repoScheduleDetails.Rol = person.Role.RoleName;
-                        repoScheduleDetails.UserCode = person.User.UserCode;
-                        repoScheduleDetails.UserName = person.User.UserName;
-
-                        salida.Add(repoScheduleDetails);
-                    }
+                    salida.Add(repoScheduleDetails);
                 }
+
+                //FOR INTERNAL
                 for (var day = 1; day <= headers.Days.Count; day++)
                 {
                     foreach (var person in people)
@@ -117,17 +113,15 @@ namespace StoreOnLine.Areas.Report.Controllers
                         var scheduleDetails =
                             schedule.ScheduleDetails.FirstOrDefault(o => o.TimeStart.DayOfYear == dateTime.DayOfYear
                                                                          && o.PersonId == person.Id &&
-                                                                         o.BaseCodeFrom == BaseCode);
+                                                                         o.BaseCodeFrom == baseCode && o.BaseCodeTo == baseCode);
 
                         if (scheduleDetails == null)
                         {
                             continue;
                         }
-                        if (scheduleDetails.BaseCodeTo != null)
-                        {
-                            salida.FirstOrDefault(o => o.UserName == person.User.UserName).CompanyBaseCode =
-                                scheduleDetails.BaseCodeTo;
-                        }
+
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName).CompanyBaseCode =
+                            scheduleDetails.BaseCodeTo;
 
                         salida.FirstOrDefault(o => o.UserName == person.User.UserName).Days[day - 1].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
 
@@ -139,7 +133,39 @@ namespace StoreOnLine.Areas.Report.Controllers
 
                     }
                 }
+
+                //FOR EXTERNAL
+                for (var day = 1; day <= headers.Days.Count; day++)
+                {
+                    foreach (var person in people)
+                    {
+                        var dateTime = new DateTime(year, month, day);
+                        var scheduleDetails =
+                            schedule.ScheduleDetails.FirstOrDefault(o => o.TimeStart.DayOfYear == dateTime.DayOfYear
+                                                                         && o.PersonId == person.Id &&
+                                                                         o.ScheduleId == schedule.Id);
+
+                        if (scheduleDetails == null)
+                        {
+                            continue;
+                        }
+
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName && o.CompanyBaseCode==schedule.Company.CompanyCode).CompanyBaseCode =
+                            scheduleDetails.BaseCodeTo;
+
+
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName && o.CompanyBaseCode == schedule.Company.CompanyCode).Days[day - 1].Activity = scheduleDetails.TypeOfTask ?? "NOINFO";
+
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName && o.CompanyBaseCode == schedule.Company.CompanyCode).Days[day - 1].Number = day;
+                        salida.FirstOrDefault(o => o.UserName == person.User.UserName && o.CompanyBaseCode == schedule.Company.CompanyCode).Days[day - 1].AbbNameDay =
+                            new DateTime(startTime.Year, startTime.Month, day).ToString("ddd",
+                                CultureInfo.CurrentUICulture)
+                                .Replace(".", "");
+
+                    }
+                }
             }
+            ExportFile();
             return salida;
         }
 
