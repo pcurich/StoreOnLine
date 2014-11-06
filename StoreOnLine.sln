@@ -20,6 +20,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreOnLine.Service", "StoreOnLine.Service\StoreOnLine.Service.csproj", "{AF343CE3-3CAC-4AB4-90BF-1F5FF73BF2D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructura", "Infraestructura", "{840604F9-8CA0-4611-A5C9-D6D5621EDAA7}"
+	ProjectSection(SolutionItems) = preProject
+		cacheProfiles.txt = cacheProfiles.txt
+		CacheSetting.txt = CacheSetting.txt
+		Caching.txt = Caching.txt
+		Localization_Culture.txt = Localization_Culture.txt
+		resourses.txt = resourses.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,5 +62,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{840604F9-8CA0-4611-A5C9-D6D5621EDAA7} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
 	EndGlobalSection
 EndGlobal

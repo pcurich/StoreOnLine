@@ -1,0 +1,24 @@
+Los archivos Resx  pueden almacenar text y conjuntos binarios
+	String.resx almacenara recursos por defecto
+	String.es.resx almacenara recursos para la cultura española
+
+Creo mi archivo resources.resx 
+cambio a publica la propiedad para el ensamblado
+coloco grreting y como valor Hello
+
+Para usarlo en la vista solo debo colocar 
+
+Resources.greeting
+
+Creo mi archivo resources.fr.resx 
+coloco grreting y como valor Boungour
+
+Le cambio el idioma prederterminado del browser y se ve que la palabra cambia
+de idioma
+
+Pero al tener el cache en el controler activo, debo de agregar una cabecera mas 
+en VaryByHeader="X-requestes-with; Accept-Languages" para que se vea refrescado el cambio cuando la diracion es larga
+
+USAR ELMAH
+https://code.google.com/p/elmah/
+

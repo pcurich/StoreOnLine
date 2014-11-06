@@ -1,0 +1,31 @@
+ki1'0
+Thread.CurrentCulture las propiedades impactan en el formato
+	ejemplo: DateTime.Now.ToString()
+Thread.CurrentUICulture impacta en el recurso que se carga
+	ejemplo se selecciona el lenguaje a ver
+ASP.NET puede setear acorde con las cabeceras http
+	Accept-language header
+	uso <globalization> seccion en web.config
+
+<system.web>
+	<globalization culture="auto" uiculture="auto"/>
+<system.web/>
+
+x ejemplo en una vista tengo un numero que representa dinero 
+y otro que representa fecha
+@{
+	var amount =10.0m
+	var someDate= new DateTime(2014,1,1);
+}
+
+muestro:
+	@amount.ToString("c")
+	@someDate.ToShortDateString()
+
+y en config.xml coloco 
+<system.web>
+	<globalization culture="auto" uiculture="auto"/>
+<system.web/>
+
+el uiculture depende del browser
+http://afana.me/post/aspnet-mvc-internationalization.aspx

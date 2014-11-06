@@ -97,7 +97,7 @@
     <Compile Include="Security\SessionPersister.cs" />
     <Compile Include="Business\SeoUrl.cs" />
     <Compile Include="Business\Sql.cs" />
-    <Compile Include="Services\ContactFormService.cs" />
+    <Compile Include="Security\ContactFormService.cs" />
     <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\LocalizePropertyService.cs" />
     <Compile Include="Services\LocalizeResourceService.cs" />

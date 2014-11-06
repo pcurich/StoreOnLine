@@ -1,0 +1,16 @@
+VaryByParam
+	VaryBy"*" al cache para cada permitacion de todos los paramrtros
+	VaryBy"none" para toda la cache del mismo contenido
+	VaryBy"name" para cada valor de un nombre de parametro
+
+Location
+	Cache en Server, client, client and server
+
+VaryByHeader
+	Vary en las cabeceras http como por ejemplo Accept-Language
+
+VaryByCustom
+	Implementa un metodo personalizado en global.asax
+
+Sql Dependency
+	Cache hasta que la data en el servidor cambie

@@ -1,0 +1,21 @@
+Action Filter
+	Funciona con loc controladores y con child actions
+
+public class CacheController: Controller
+{
+	[OuputCache(Duration=60, VaryByParam="none")]
+	public ActionResult Index()
+	{
+	//La consulta se actualiza cada 60 segundos 
+		return View();
+	}
+
+	[ChildActionOnly]
+	[OuputCache(Duration=60)]
+	public ActionResult sayHello()
+	{
+		//Se llama de la vista asi :
+		//@Html.Action("sayHello")
+		return Content("hELLO");
+	}
+}

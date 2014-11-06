@@ -1,4 +1,5 @@
-﻿using StoreOnLine.DataBase.Model.Security;
+﻿using System.Net.Configuration;
+using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Service.Business;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,41 +11,39 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "Users-{0}";
 
-        public IEnumerable<User> GetUsersBySiteId()
+        public IEnumerable<DataBase.CMS.User> GetUsers()
         {
-            return Db.Users.ToList();
+            return Db.UsersCms.ToList();
         }
 
-        public User GetUserById(int id)
+        public User GetUserById(int userId)
         {
-            return Db.Users.Find(id);
+            return Db.Users.Find(userId);
         }
 
-        public void Add(User e)
+        public int Add(DataBase.CMS.User e)
         {
-            Db.Users.Add(e);
-            Db.SaveChanges();
+            Db.UsersCms.Add(e);
+            return Db.SaveChanges();
         }
 
-        public void Update(User e)
+        public int Update(DataBase.CMS.User e)
         {
             Db.Entry(e).State = EntityState.Modified;
-            Db.SaveChanges();
+            return Db.SaveChanges();
         }
 
-        public void Delete(User e, bool physical = false)
+        public int Delete(DataBase.CMS.User e, bool physical = false)
         {
             if (physical)
             {
-                var l = Db.Users.SingleOrDefault(p => p.Id == e.Id);
-                Db.Users.Remove(l);
-                Db.SaveChanges();
+                var l = Db.UsersCms.SingleOrDefault(p => p.Id == e.Id);
+                Db.UsersCms.Remove(l);
+                return Db.SaveChanges();
             }
-            else
-            {
-                e.IsDeleted = true;
-                Update(e);
-            }
+
+            e.IsDeleted = true;
+            return Update(e);
         }
 
         public void ClearCache()

@@ -10,15 +10,15 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "SiteSettings";
 
-        public IEnumerable<SiteSetting> GetSiteSettingBySiteId()
+        public IEnumerable<SiteSetting> GetSiteSetting()
         {
             return Db.SiteSettings.ToList();
         }
 
-        public void AddSiteSetting(SiteSetting e)
+        public int Add(SiteSetting e)
         {
             Db.SiteSettings.Add(e);
-            Db.SaveChanges();
+            return Db.SaveChanges();
         }
 
         public void UpdateSiteSetting(SiteSetting e)

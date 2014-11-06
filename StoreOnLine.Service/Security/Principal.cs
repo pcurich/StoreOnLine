@@ -6,6 +6,9 @@ using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.Service.Security
 {
+    /// <summary>
+    /// Se utiliza para la autenticacion 
+    /// </summary>
     public class Principal : IPrincipal
     {
         readonly StoreOnLineContext _db = new StoreOnLineContext();

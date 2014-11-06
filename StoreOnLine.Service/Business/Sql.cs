@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using StoreOnLine.Service.Constants;
 
 namespace StoreOnLine.Service.Business
 {
@@ -15,7 +16,7 @@ namespace StoreOnLine.Service.Business
     {
         public static string Conn()
         {
-            return System.Configuration.ConfigurationManager.ConnectionStrings["CoreDBContext"].ConnectionString;
+            return System.Configuration.ConfigurationManager.ConnectionStrings[Enums.ConnectionStrings].ConnectionString;
         }
 
         public static string Conn(string connectionstraing)

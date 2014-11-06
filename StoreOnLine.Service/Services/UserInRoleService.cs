@@ -10,41 +10,60 @@ namespace StoreOnLine.Service.Services
     {
         private const string Cacheid = "Roles";
 
-        public IEnumerable<UserInRoles> GetBySiteId()
+        public IEnumerable<UserInRoles> GetUserInRoles()
         {
             return Db.UserInRoles.ToList();
         }
 
         public IEnumerable<UserInRoles> GetByRoleName(string roleName)
         {
-            return string.IsNullOrEmpty(roleName) ? null : Db.UserInRoles.Where(c => c.RoleName == roleName).ToList();
+            if (roleName == null || "".Equals(roleName)) 
+                return null;
+
+            var userInRol = (from uir in Db.UserInRoles
+                join r in Db.RolesCms on uir.RolId equals r.Id
+                where r.RoleName == roleName
+                select uir).ToList();
+
+            return userInRol;
         }
 
-        public void Add(UserInRoles e)
+        public IEnumerable<UserInRoles> GetByUserName(string userName)
+        {
+            if (userName == null || "".Equals(userName))
+                return null;
+
+            var userInRol = (from uir in Db.UserInRoles
+                             join u in Db.UsersCms on uir.UserId equals u.Id
+                             where u.UserName == userName
+                             select uir).ToList();
+
+            return userInRol;
+        }
+
+        public int Add(UserInRoles e)
         {
             Db.UserInRoles.Add(e);
-            Db.SaveChanges();
+            return Db.SaveChanges();
         }
 
-        private void Update(UserInRoles e)
+        private int Update(UserInRoles e)
         {
             Db.Entry(e).State = EntityState.Modified;
-            Db.SaveChanges();
+            return Db.SaveChanges();
         }
 
-        public void Delete(UserInRoles e, bool physical = false)
+        public int Delete(UserInRoles e, bool physical = false)
         {
             if (physical)
             {
-                var l = Db.UserInRoles.SingleOrDefault(p => p.RoleName == e.RoleName && p.UserName == e.UserName);
+                var l = Db.UserInRoles.SingleOrDefault(p => p.RolId == e.RolId && p.UserId == e.UserId);
                 Db.UserInRoles.Remove(l);
-                Db.SaveChanges();
+                return Db.SaveChanges();
             }
-            else
-            {
-                e.IsDeleted = true;
-                Update(e);
-            }
+
+            e.IsDeleted = true;
+            return Update(e);
         }
 
         public void ClearCache()

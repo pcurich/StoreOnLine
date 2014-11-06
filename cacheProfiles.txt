@@ -1,0 +1,18 @@
+Cache Profiles 
+
+[oUTputCache(CacheProfile="Aggresive", VaryByParam="firstName")]
+public ActionResult Index(string firstName)
+{
+	return View()
+}
+
+El valor de la duracion se almacena en el config.xml 
+asi:
+<caching>
+	<outputCacheSetting>
+		<outputCacheProfiles>
+			<add name ="Aggresive" duration=300>
+			<add name ="Mild" duration=10>
+		</outputCacheProfiles>
+	</outputCacheSetting>
+</caching>
