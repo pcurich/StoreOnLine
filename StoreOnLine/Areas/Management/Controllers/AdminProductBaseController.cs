@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using StoreOnLine.Areas.Management.Models;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Concrete;
+using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Resources;
 
@@ -45,7 +46,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             ViewBag.ProductUnit = GetCategories();
             ViewBag.GetCampaings = GetCampaings();
             ViewBag.ProductSupplier = GetCategories();
-            return View("Edit",  new ProductBaseView {ProductImagens = new List<Imagen>(), IsStatus =true});
+            return View("Edit", new ProductBaseView { ProductImagens = new List<Imagen>(), IsStatus = true });
         }
 
         public ViewResult Edit(int productId)
@@ -103,7 +104,7 @@ namespace StoreOnLine.Areas.Management.Controllers
             return RedirectToAction("Index");
             // there is something wrong with the data values
         }
- 
+
         [HttpPost]
         public ActionResult Delete(int productId)
         {
@@ -119,13 +120,13 @@ namespace StoreOnLine.Areas.Management.Controllers
 
         private List<SelectListItem> GetCategories()
         {
-            var repo = _repositoryCategory.Categories.Where(o => o.IsStatus).ToList();
+            var repo = _repositoryCategory.Categories.Where(o => o.Active).ToList();
             return repo.Select(r => new SelectListItem { Text = r.CategoryName, Value = Convert.ToString(r.Id) }).ToList();
         }
 
         private List<SelectListItem> GetCampaings()
         {
-            var repo = _repositoryCampaing.Campaigns.Where(o => o.IsStatus).ToList();
+            var repo = _repositoryCampaing.Campaigns.Where(o => o.Active).ToList();
             return repo.Select(r => new SelectListItem { Text = r.CampaignName, Value = Convert.ToString(r.Id) }).ToList();
         }
         #endregion

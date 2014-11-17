@@ -1,0 +1,6 @@
+Paras las categorias tenemos las siguientes tablas :
+CategoryShop   -las categorias asociadas a una tienda, la tienda sale cuando se logea el usuario
+CategoryGroup  -las categorias asociadas a un grupo, un grupo es la agrupacion de varios lenguajes
+CategoryLang   -Aca las categorias poseen un nombre segun el idioma y la tienda
+Category	   -Permite dar los parametros que deben estar en el CMS
+CategoryProduct - Agrupa productos con categorias

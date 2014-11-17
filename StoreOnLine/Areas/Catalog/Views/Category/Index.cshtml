@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(Html.Kendo().Grid<CategoryLang>().Name("CategoryGrid")
+.ToolBar(toolbar => toolbar.Create().Text(@StoreOnLine.Resources.Resources.CategoryCreate))
+.Events(events => events.Edit("EditCaption"))
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id);
+    columns.Bound(p => p.Name);
+    columns.Bound(p => p.Description);
+    columns.Bound(p => p.Active);
+    columns.Command(comand =>
+    {
+        comand.Edit();
+        comand.Destroy();
+    });
+})
+.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditCategoryLang"))
+.Pageable()
+.Sortable()
+.Scrollable()
+.HtmlAttributes(new { style = "height:430px;" })
+.DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(false)
+    .PageSize(15)
+    .Events(events => events.Error("error_handler"))
+    .Model(model => model.Id(p => p.Id))
+    .Create(c => c.Action("Create", "Category"))
+    .Read(r => r.Action("Read", "Category"))
+    .Update(u => u.Action("Update", "Category"))
+    .Destroy(d => d.Action("Delete", "Category"))
+    )
+);
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function(key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function() {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        };
+
+        function EditCaption(e) {
+            $('.k-window-title').text('@StoreOnLine.Resources.Resources.CategoryCreate');
+            $('.k-grid-update').text('@StoreOnLine.Resources.Resources.CategoryEdit');
+            $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.CategoryCancel');
+        };
+    </script>
+}

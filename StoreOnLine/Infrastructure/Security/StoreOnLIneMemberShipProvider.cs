@@ -1,17 +1,22 @@
-﻿using StoreOnLine.DataBase.Abstract;
+﻿using System.Data.Entity.Core.Common.CommandTrees;
+using StoreOnLine.DataBase.Abstract;
 using System;
 using System.Linq;
 using System.Web.Security;
+using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.CmsEmploye;
 
 namespace StoreOnLine.Infrastructure.Security
 {
     public class StoreOnLIneMemberShipProvider : MembershipProvider
     {
-        private readonly ISecurityRepository _repositorySecurity;
+        private readonly StoreOnLineContext _db = new StoreOnLineContext();
 
-        public StoreOnLIneMemberShipProvider(ISecurityRepository repository )
+        private Employer _employer;
+
+        public Employer GetEmployer()
         {
-            _repositorySecurity = repository;
+            return _employer;
         }
 
         public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer,
@@ -48,10 +53,13 @@ namespace StoreOnLine.Infrastructure.Security
 
         public override bool ValidateUser(string username, string password)
         {
-            var user=_repositorySecurity.Users.FirstOrDefault(o => o.UserName == username && o.UserPassword == password);
-            if (user != null) return true;
-            user =_repositorySecurity.Users.FirstOrDefault(o => o.UserCode == username && o.UserPassword == password);
-            return user != null;
+            var employer = (from e in _db.Employers
+                            where
+                                (e.UserName == username && e.Password == password) ||
+                                (e.Email == username && e.Password == password)
+                            select e).FirstOrDefault();
+            _employer = employer;
+            return employer != null;
         }
 
         public override bool UnlockUser(string userName)

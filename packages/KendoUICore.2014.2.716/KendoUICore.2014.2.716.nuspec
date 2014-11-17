@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>KendoUICore</id>
+    <version>2014.2.716</version>
+    <title>Telerik Kendo UI Core</title>
+    <authors>Telerik</authors>
+    <owners>Telerik</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <projectUrl>http://www.telerik.com/kendo-ui/open-source-core</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Kendo UI Core is a free and open-source distribution of Kendo UI.</description>
+    <summary>Kendo UI Core provides access to the web's best UI widgets and key framework features essential for developing great experiences for the web and mobile.</summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="jQuery" version="1.9.1" />
+    </dependencies>
+  </metadata>
+</package>

@@ -54,5 +54,17 @@
         public static readonly string JsTinyInitial = "/Scripts/tiny_mce/tiny_mce_init.js";
         public static readonly string JsaJaxBusy = "/Scripts/site/ajaxbusy.js";
         #endregion
+
+        #region Sessions
+
+        public static readonly string EmployerOnLine = "EmployerOnLine";
+
+        #endregion
+
+        #region Roles
+
+        public static readonly string RolEnSuperAdmin = "SuperAdmin";
+                
+        #endregion
     }
 }

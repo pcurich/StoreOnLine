@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using StoreOnLine.DataBase.Model.CmsProduct;
 
 namespace StoreOnLine.DataBase.Model.Products
 {

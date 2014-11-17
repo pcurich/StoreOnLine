@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.Products;
 
 namespace StoreOnLine.DataBase.Concrete

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Resources;
 
@@ -30,7 +31,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new Category
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 CategoryName = view.CategoryName,
                 CategoryDescription = view.CategoryDescription,
                 CategoryPhoto= imagen
@@ -42,7 +43,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new CategoryView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 CategoryName = db.CategoryName,
                 CategoryDescription = db.CategoryDescription
             };

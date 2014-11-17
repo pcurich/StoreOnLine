@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using StoreOnLine.DataBase.Model.CmsProduct;
 
 namespace StoreOnLine.DataBase.Model.Products
 {

@@ -109,7 +109,7 @@ namespace StoreOnLine.Service.Business
 
                 //update new key to database
                 var db = new DataBase.Entities.StoreOnLineContext();
-                var lr = new DataBase.CMS.LocalizeResource { LanguageId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName, ResourceType = resourceType, ResourceKey = resourceKey, ResourceValue = resourceValue };
+                var lr = new DataBase.CMS.LocalizeResource { /*LanguageId = CultureInfo.CurrentCulture.TwoLetterISOLanguageName,*/ ResourceType = resourceType, ResourceKey = resourceKey, ResourceValue = resourceValue };
 
                 db.LocalizeResources.Add(lr);
                 db.SaveChanges();

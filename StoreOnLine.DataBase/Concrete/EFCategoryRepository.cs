@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.Products;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,7 +18,6 @@ namespace StoreOnLine.DataBase.Concrete
             get
             {
                 return _context.Categories
-                    .Include(o=>o.CategoryPhoto)
                     .Where(o=>!o.IsDeleted);
             }
         }
@@ -57,7 +57,7 @@ namespace StoreOnLine.DataBase.Concrete
                 else
                 {
                     dbEntry.IsDeleted = true;
-                    dbEntry.IsStatus = false;
+                    dbEntry.Active = false;
                     _context.Entry(dbEntry).State = EntityState.Modified;
                 }
 

@@ -33,7 +33,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new Supplier
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 SupplierName = view.SupplierName,
                 SupplierDescription = view.SupplierDescription,
                 SupplierDocument = view.SupplierDocument
@@ -45,7 +45,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new SupplierView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 SupplierName = db.SupplierName,
                 SupplierDescription = db.SupplierDescription,
                 SupplierDocument = db.SupplierDocument

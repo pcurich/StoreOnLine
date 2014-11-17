@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Model.Shopping;
 

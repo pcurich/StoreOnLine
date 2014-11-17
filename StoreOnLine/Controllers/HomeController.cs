@@ -13,7 +13,7 @@ namespace StoreOnLine.Controllers
 {
     //[Authorize(Roles = "trader")] // applies to all actions
     [Authorize] // applies to all actions
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         //[ShowMessage] // applies to just this action
         //[OutputCache(Duration = 60)] // applies to just this action
@@ -136,13 +136,13 @@ namespace StoreOnLine.Controllers
         public ActionResult Login(string username, string password, string returnUrl)
         {
             //bool result = FormsAuthentication.Authenticate(username, password);
-            var userProvider = new StoreOnLIneMemberShipProvider(_repositorySecurity);
+            var userProvider = new StoreOnLIneMemberShipProvider();
             var result = userProvider.ValidateUser(username, password);
             if (result)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
 
-                var rolProvider = new StoreOnLIneRoleProvider(_repositoryPerson);
+                var rolProvider = new StoreOnLIneRoleProvider();
                 // return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
                 if (rolProvider.IsUserInRole(username, RoleList.Admin.ToString()))
                 {

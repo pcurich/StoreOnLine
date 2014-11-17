@@ -35,7 +35,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new Unit
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 UnitName  = view.UnitName,
                 UnitDescription = view.UnitDescription,
                 UnitCode = view.UnitCode,
@@ -48,7 +48,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new UnitView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 UnitName = db.UnitName,
                 UnitDescription = db.UnitDescription,
                 UnitCode   = db.UnitCode

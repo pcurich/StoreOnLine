@@ -49,7 +49,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new ScheduleDetail
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 ScheduleId = view.ScheduleId,
                 PersonId=view.PersonId,
                 TimeStart = view.TimeStart,
@@ -66,7 +66,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new ScheduleDetailView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 ScheduleId = db.ScheduleId,
                 PersonId = db.PersonId,
                 TimeStart = db.TimeStart,

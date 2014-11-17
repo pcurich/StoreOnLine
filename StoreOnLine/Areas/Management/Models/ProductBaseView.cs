@@ -64,7 +64,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new ProductBase
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 ProductName = view.ProductName,
                 ProductDescription = view.ProductDescription,
                 ProductBasePrice = view.ProductBasePrice,
@@ -82,7 +82,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new ProductBaseView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 ProductName = db.ProductName,
                 ProductDescription = db.ProductDescription,
                 ProductBasePrice = db.ProductBasePrice,

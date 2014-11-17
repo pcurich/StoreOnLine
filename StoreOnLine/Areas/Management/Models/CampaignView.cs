@@ -29,7 +29,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new Campaign
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 CampaignName = view.CampaignName,
                 CampaignDescription = view.CampaignDescription,
                 CampaignPhoto = imagen
@@ -41,7 +41,7 @@ namespace StoreOnLine.Areas.Management.Models
             return new CampaignView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 CampaignName = db.CampaignName,
                 CampaignDescription = db.CampaignDescription
             };

@@ -12,20 +12,21 @@ namespace StoreOnLine.Service.Services
 
         public IEnumerable<Language> GetLanguageBySiteId()
         {
-            return Db.Languages.ToList();
+            return null;//Db.Languages.ToList();
         }
         public IOrderedQueryable<Language> GetLanguagePublic()
         {
-            Key = Cacheid;
-            return Cache.Get(Key, CacheInMinute, () => from p in Db.Languages
-                                                       where p.Public
-                                                       orderby p.LanguageName
-                                                       ascending
-                                                       select p);
+            //Key = Cacheid;
+            //return Cache.Get(Key, CacheInMinute, () => from p in Db.Languages
+            //                                           where p.Public
+            //                                           orderby p.LanguageName
+            //                                           ascending
+            //                                           select p);
+            return null;
         }
         public void AddLanguage(Language e)
         {
-            Db.Languages.Add(e);
+           // Db.Languages.Add(e);
             Db.SaveChanges();
         }
         public void UpdateLanguage(Language e)

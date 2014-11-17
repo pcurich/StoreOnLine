@@ -12,8 +12,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public PersonConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 HasRequired(p => p.Address);
                 HasRequired(p => p.User);
                 HasRequired(p => p.ContactNumber);
@@ -26,8 +26,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public AddressConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 HasRequired(p => p.Ubigeo);
                 ToTable("Address");
             }
@@ -36,8 +36,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public UbigeoConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 ToTable("Ubigeo");
             }
         }
@@ -46,8 +46,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public DocumentTypeConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 ToTable("DocumentType");
             }
         }
@@ -55,8 +55,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public ContactNumberConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 ToTable("ContactNumber");
             }
         }
@@ -64,8 +64,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public UserConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 ToTable("User");
             }
         }
@@ -73,8 +73,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public RoleConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 ToTable("Role");
             }
         }
@@ -82,8 +82,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public CompanyConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 HasRequired(p => p.Address);
                 HasRequired(p => p.ContactNumber);
                 HasRequired(p => p.Person);
@@ -97,8 +97,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public ScheduleConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 //HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);
                 ToTable("Schedule");
             }
@@ -107,8 +107,8 @@ namespace StoreOnLine.DataBase.Entities
         {
             public ScheduleDetailConfiguration()
             {
-                Property(p => p.AddedDate).IsRequired().HasColumnType("datetime2");
-                Property(p => p.ModificationDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.AddDate).IsRequired().HasColumnType("datetime2");
+                Property(p => p.UpdDate).IsRequired().HasColumnType("datetime2");
                 Property(p => p.TimeStart).IsRequired().HasColumnType("datetime2");
                 Property(p => p.TimeEnd).IsRequired().HasColumnType("datetime2");
                 //HasRequired(p => p.Person).WithRequiredDependent().WillCascadeOnDelete(false);

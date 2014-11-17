@@ -78,7 +78,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new Schedule
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 ScheduleFrom = dateFrom,
                 ScheduleTo = dateTo,
                 ScheduleDaysWorkPerWeek = Convert.ToInt16(view.ScheduleDaysWorkPerWeek),
@@ -95,7 +95,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             return new ScheduleView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 ScheduleFrom = db.ScheduleFrom.ToShortDateString(),
                 ScheduleTo = db.ScheduleTo.ToShortDateString(),
                 ScheduleDaysWorkPerWeek = Convert.ToString(db.ScheduleDaysWorkPerWeek),

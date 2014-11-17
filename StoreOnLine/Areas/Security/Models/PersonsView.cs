@@ -133,7 +133,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new Person
             {
                 Id = view.Id,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 FirstName = view.FirstName,
                 LastName = view.LastName,
                 BirthDate = date,
@@ -155,7 +155,7 @@ namespace StoreOnLine.Areas.Security.Models
             return new PersonView
             {
                 Id = db.Id,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 FirstName = db.FirstName,
                 LastName = db.LastName,
                 BirthDate = db.BirthDate.ToShortDateString(),

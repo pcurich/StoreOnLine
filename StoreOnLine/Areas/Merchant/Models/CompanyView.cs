@@ -105,7 +105,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             {
                 Id = view.Id,
                 StatusOfSchedule = view.EstadoTarea,
-                IsStatus = view.IsStatus,
+                Active = view.IsStatus,
                 CompanyType = companyType,
                 CompanyName = view.CompanyName,
                 CompanyActivity = view.CompanyActivity,
@@ -127,7 +127,7 @@ namespace StoreOnLine.Areas.Merchant.Models
             {
                 Id = db.Id,
                 EstadoTarea = db.StatusOfSchedule,
-                IsStatus = db.IsStatus,
+                IsStatus = db.Active,
                 CompanyName = db.CompanyName,
                 CompanyActivity = db.CompanyActivity,
                 CompanyCif = db.CompanyCif,

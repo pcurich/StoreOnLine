@@ -21,10 +21,10 @@
     foreach (var property in ViewData.ModelMetadata.Properties)
     {
         if (property.PropertyName != "Name" && property.PropertyName != "GiftWrap" &&
-            property.PropertyName != "Id" && property.PropertyName != "IsStatus" &&
-            property.PropertyName != "IsDeleted" && property.PropertyName != "AddedUser" &&
-            property.PropertyName != "ModificationUser" && property.PropertyName != "ModificationDate" &&
-            property.PropertyName != "AddedDate"
+            property.PropertyName != "Id" && property.PropertyName != "Active" &&
+            property.PropertyName != "IsDeleted" && property.PropertyName != "AddUser" &&
+            property.PropertyName != "UpdUser" && property.PropertyName != "UpdDate" &&
+            property.PropertyName != "AddDate"
             )
         {
             <div class="form-group">

@@ -14,34 +14,34 @@ namespace StoreOnLine.DataBase.Entities
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public Boolean IsStatus { get; set; }
+        public bool Active { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public Boolean IsDeleted { get; set; }
+        public bool IsDeleted { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public String AddedUser { get; set; }
+        public String AddUser { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public String ModificationUser { get; set; }
+        public String UpdUser { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public DateTime ModificationDate { get; set; }
+        public DateTime? UpdDate { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public DateTime AddedDate { get; set; }
+        public DateTime? AddDate { get; set; }
 
         protected DataBaseId()
         {
-            AddedDate = DateTime.Now;
-            ModificationDate = DateTime.Now;
-            AddedUser = "System";
-            ModificationUser = "System";
+            AddDate = DateTime.Now;
+            UpdDate = DateTime.Now;
+            AddUser = "System";
+            UpdUser = "System";
         }
 
     }

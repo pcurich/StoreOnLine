@@ -4,24 +4,34 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" type="text/css" />
-    <link href="~/Content/ErrorStyles.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+
+    @Styles.Render("~/bundles/bootstrap")
+    @Styles.Render("~/bundles/Error")
+    @Styles.Render("~/bundles/kendocss")
+    @Styles.Render("~/bundles/Site")
+
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/kendojs")
+    @Scripts.Render("~/bundles/SiteJs")
+
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <a class="navbar-brand" href="#"></a>
+    <div class="container">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
     </div>
-    @RenderBody()
+    
 </body>
 
-
-<script src="~/Scripts/jquery-1.11.1.js"></script>
-<script src="~/Scripts/jquery.validate.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
-<script src="~/Scripts/bootstrap.js"></script>
-
 </html>
+
+

@@ -17,9 +17,12 @@ namespace StoreOnLine
 
             //routes.MapMvcAttributeRoutes();//Attribute Routing
 
-            routes.MapRoute("Default", "{controller}/{action}/{id}",
-                            new
+            routes.MapRoute(
+                name: "Default",
+                url: "{culture}/{controller}/{action}/{id}",
+                defaults: new
                             {
+                                culture="en",
                                 controller = "Home",
                                 action = "Index",
                                 id = UrlParameter.Optional

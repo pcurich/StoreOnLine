@@ -1,14 +1,19 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using StoreOnLine.Areas.Security.Models;
+using StoreOnLine.Controllers;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure.Abstract;
 using StoreOnLine.Infrastructure.Security;
+using StoreOnLine.Service.Constants;
+using StoreOnLine.Service.Service.Employers;
 
 namespace StoreOnLine.Areas.Security.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IAuthProvider _authProvider;
         private readonly ISecurityRepository _repositorySecurity;
@@ -26,36 +31,28 @@ namespace StoreOnLine.Areas.Security.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Login(LoginViewModel model, string returnUrl)
-        //{
-        //    if (!ModelState.IsValid) return View();
-        //    if (_authProvider.Authenticate(model.UserName, model.Password))
-        //    {
-        //        return Redirect(returnUrl ?? Url.Action("Index", "Admin", new { Area = "Management" }));
-        //    }
-
-        //    ModelState.AddModelError("", "Incorrect username or password");
-        //    return View();
-        //}
-
-
+ 
         [HttpPost]
-        public ActionResult Login(User user, string username, string password, string returnUrl)
+        public ActionResult Login(ViewEmployer viewEmployer, string username, string password, string returnUrl)
         {
-            user.UserName = username;
+            //return Redirect(Url.Action("Index", "Category", new { Area = "Catalog" }));
+            viewEmployer.UserName = username;
             //bool result = FormsAuthentication.Authenticate(username, password);
-            var userProvider = new StoreOnLIneMemberShipProvider(_repositorySecurity);
+            var userProvider = new StoreOnLIneMemberShipProvider();
             var result = userProvider.ValidateUser(username, password);
+
+            Session[Enums.EmployerOnLine] = ServEmployer.GetCurrentViewEmployer();// userProvider.GetEmployer();
+
             if (result)
             {
                 FormsAuthentication.SetAuthCookie(username, false);
 
-                var rolProvider = new StoreOnLIneRoleProvider(_repositoryPerson);
+                var rolProvider = new StoreOnLIneRoleProvider();
                 // return Redirect(returnUrl ?? Url.Action("Index", "Admin"));
-                if (rolProvider.IsUserInRole(username, RoleList.Administrador.ToString()))
+                if (rolProvider.IsUserInRole(username, Enums.RolEnSuperAdmin))
                 {
-                    return Redirect(Url.Action("Index", "Person", new { Area = "Security" }));
+                    return Redirect(Url.Action("Index", "Category", new { Area = "Catalog" }));
+                    //return Redirect(Url.Action("Index", "Person", new { Area = "Security" }));
                 }
 
                 if (rolProvider.IsUserInRole(username, RoleList.Supervisor.ToString()))

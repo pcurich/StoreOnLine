@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.Resources;
 
 namespace StoreOnLine.DataBase.Model.Products

@@ -166,7 +166,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                     if (scheduleDetail != null)
                     {
                         scheduleDetail.TypeOfTask = TypeOfTask.DesAsignado.ToString();
-                        scheduleDetail.IsStatus = false;
+                        scheduleDetail.Active = false;
                         scheduleDetail.Schedule = null;
                         _repositorySchedule.SaveScheduleDetail(scheduleDetail);
                     }

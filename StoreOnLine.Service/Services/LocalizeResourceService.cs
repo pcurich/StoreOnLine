@@ -14,10 +14,10 @@ namespace StoreOnLine.Service.Services
 
         public LocalizeResourceservice()
         {
-            var language =
-                Db.Languages.FirstOrDefault(
-                    o => o.TwoLetterIsoLanguageName == CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
-            languageId = language.Id;
+            //var language =
+            //    Db.Languages.FirstOrDefault(
+            //        o => o.TwoLetterIsoLanguageName == CultureInfo.CurrentCulture.TwoLetterISOLanguageName);
+            //languageId = language.Id;
         }
 
         public IEnumerable<LocalizeResource> GetResourceAll()

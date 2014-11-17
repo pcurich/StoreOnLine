@@ -56,7 +56,7 @@ namespace StoreOnLine.DataBase.Concrete
             else
             {
                 dbEntry.IsDeleted = true;
-                dbEntry.IsStatus = false;
+                dbEntry.Active = false;
                 _context.Entry(dbEntry).State = EntityState.Modified;
             }
 

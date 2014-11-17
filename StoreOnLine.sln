@@ -29,6 +29,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestructura", "Infraest
 		resourses.txt = resourses.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreOnLine.Resources", "StoreOnLine.Resources\StoreOnLine.Resources.csproj", "{830F08F8-3EB2-4862-A05D-7751700122A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notas", "Notas", "{0204BC37-63F4-4F41-B785-299118470166}"
+	ProjectSection(SolutionItems) = preProject
+		Category.txt = Category.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kendoui", "Kendoui", "{9D064487-D004-47F9-A6E9-A0013754E810}"
+	ProjectSection(SolutionItems) = preProject
+		Color.txt = Color.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,11 +71,17 @@ Global
 		{AF343CE3-3CAC-4AB4-90BF-1F5FF73BF2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF343CE3-3CAC-4AB4-90BF-1F5FF73BF2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF343CE3-3CAC-4AB4-90BF-1F5FF73BF2D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{830F08F8-3EB2-4862-A05D-7751700122A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{830F08F8-3EB2-4862-A05D-7751700122A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{830F08F8-3EB2-4862-A05D-7751700122A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{830F08F8-3EB2-4862-A05D-7751700122A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{840604F9-8CA0-4611-A5C9-D6D5621EDAA7} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
+		{0204BC37-63F4-4F41-B785-299118470166} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
+		{9D064487-D004-47F9-A6E9-A0013754E810} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
 	EndGlobalSection
 EndGlobal

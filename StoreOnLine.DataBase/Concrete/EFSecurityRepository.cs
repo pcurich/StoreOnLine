@@ -14,11 +14,7 @@ namespace StoreOnLine.DataBase.Concrete
 
         public IEnumerable<Role> Roles
         {
-            get
-            {
-                return _context.Roles
-                    .Where(o => !o.IsDeleted);
-            }
+            get { return null; }
         }
 
         public IEnumerable<User> Users
@@ -33,9 +29,10 @@ namespace StoreOnLine.DataBase.Concrete
 
         public SelectList GetRoles(string selected = null)
         {
-            var id = Convert.ToInt16(selected ?? "0");
-            var repo = _context.Roles.Where(o => !o.IsDeleted);
-            return new SelectList(repo.Select(r => new SelectListItem { Text = r.RoleName, Value = r.RoleCode, Selected = (r.Id == id) }).ToList(), "Value", "Text");
+            //var id = Convert.ToInt16(selected ?? "0");
+            //var repo = _context.Roles.Where(o => !o.IsDeleted);
+            //return new SelectList(repo.Select(r => new SelectListItem { Text = r.RoleName, Value = r.RoleCode, Selected = (r.Id == id) }).ToList(), "Value", "Text");
+            return null;
         }
 
         public SelectList GetUser(string selected = null)

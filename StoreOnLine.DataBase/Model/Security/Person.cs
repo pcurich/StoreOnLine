@@ -8,14 +8,14 @@ namespace StoreOnLine.DataBase.Model.Security
     {
         public Person ()
         {
-            IsStatus = true;
+            Active = true;
         }
-        public Person(int id,bool isStatus, string firstName, string lastName, DateTime birthDate,
+        public Person(int id,bool active, string firstName, string lastName, DateTime birthDate,
             int documentId, int contactNumberId, int addressId, 
             int userId, int roleId, string baseCode)
         {
             Id = id;
-            IsStatus = isStatus;
+            Active = active;
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;
@@ -27,12 +27,12 @@ namespace StoreOnLine.DataBase.Model.Security
             BaseCode = baseCode;
         }
 
-        public Person(int id, bool isStatus, string firstName, string lastName, DateTime birthDate,
+        public Person(int id, bool active, string firstName, string lastName, DateTime birthDate,
             Document document, ContactNumber contactNumber, Address address,
             User user, int roleId, string baseCode)
         {
             Id = id;
-            IsStatus = isStatus;
+            Active = active;
             FirstName = firstName;
             LastName = lastName;
             BirthDate = birthDate;

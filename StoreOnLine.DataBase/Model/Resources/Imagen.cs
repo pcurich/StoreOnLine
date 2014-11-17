@@ -15,7 +15,7 @@ namespace StoreOnLine.DataBase.Model.Resources
         public Imagen()
         {
             IsPrincipal = true;
-            IsStatus = true;
+            Active = true;
         }
     }
 }

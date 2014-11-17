@@ -1,0 +1,3 @@
+Interesante para construir un color picker
+
+http://blogs.telerik.com/kendoui/posts/13-10-29/diving-into-asp.net-mvc-templates
