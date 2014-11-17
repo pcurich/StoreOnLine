@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.CMS;
 using StoreOnLine.DataBase.Model.CmsEmploye;
+using StoreOnLine.DataBase.Model.CmsGroup;
 using StoreOnLine.DataBase.Model.CmsLanguage;
 using StoreOnLine.DataBase.Model.CmsShop;
 using StoreOnLine.Util.Xml;
@@ -62,7 +60,6 @@ namespace StoreOnLine.DataBase.Entities
 
         internal static void LoadEmployerShop(StoreOnLineContext context, string str)
         {
-
             var elemt = XmlSerialization<List<EmployerShop>>.Deserialize(str);
             foreach (var e in elemt)
             {
@@ -73,5 +70,30 @@ namespace StoreOnLine.DataBase.Entities
             }
             context.SaveChanges();
         }
+
+        #region Group
+        internal static void LoadGroup(StoreOnLineContext context, string str)
+        {
+            var elemt = XmlSerialization<List<Group>>.Deserialize(str);
+            foreach (var e in elemt)
+            {
+                e.Active = true;
+                context.Groups.Add(e);
+            }
+            context.SaveChanges();
+        }
+
+        internal static void LoadGroupLang(StoreOnLineContext context, string str)
+        {
+            var elemt = XmlSerialization<List<GroupLang>>.Deserialize(str);
+            foreach (var e in elemt)
+            {
+                e.Active = true;
+                e.LanguageId = context.Languages.First(o => o.Cultura.Equals("es-PE")).Id;
+                context.GroupLangs.Add(e);
+            }
+            context.SaveChanges();
+        }
+        #endregion
     }
 }

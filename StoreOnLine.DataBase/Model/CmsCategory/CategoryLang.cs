@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.CmsGroup;
+using StoreOnLine.DataBase.Model.CmsLanguage;
 
 namespace StoreOnLine.DataBase.Model.CmsCategory
 {
     public class CategoryLang : DataBaseId
     {
-        public CategoryGroup CategoryGroup { get; set; }
-        public int CategoryGroupId { get; set; }
+        public Language Language { get; set; }
+        public int LanguageId { get; set; }
 
         [Display(Name = "CategoryName", ResourceType = typeof(StoreOnLine.Resources.Resources))]
         [Required(ErrorMessageResourceType = typeof(StoreOnLine.Resources.Resources),ErrorMessageResourceName = "CategoryNameRequired")]

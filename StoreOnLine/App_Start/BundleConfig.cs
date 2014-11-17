@@ -26,7 +26,8 @@ namespace StoreOnLine
             bundles.Add(new ScriptBundle("~/bundles/kendojs").Include(
             "~/Scripts/kendo/2014.2.716/kendo.all.min.js",
                 // "~/Scripts/kendo/kendo.timezones.min.js", // uncomment if using the Scheduler
-            "~/Scripts/kendo/2014.2.716/kendo.aspnetmvc.min.js"));
+            "~/Scripts/kendo/2014.2.716/kendo.aspnetmvc.min.js",
+            "~/Scripts/cultures/kendo.culture." + System.Globalization.CultureInfo.InstalledUICulture.TextInfo.CultureName + ".min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/SiteJs").Include(
                 "~/Scripts/Site/Site.js",

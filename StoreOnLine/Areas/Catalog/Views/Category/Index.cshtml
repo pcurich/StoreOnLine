@@ -5,17 +5,18 @@
 @(Html.Kendo().Grid<CategoryLang>().Name("CategoryGrid")
 .ToolBar(toolbar => toolbar.Create().Text(@StoreOnLine.Resources.Resources.CategoryCreate))
 .Events(events => events.Edit("EditCaption"))
+.Events(e => e.DataBound("onRowBound"))
 .Columns(columns =>
 {
-    columns.Bound(p => p.Id);
-    columns.Bound(p => p.Name);
-    columns.Bound(p => p.Description);
-    columns.Bound(p => p.Active);
+    columns.Bound(p => p.Id).Width(12);
+    columns.Bound(p => p.Name).Width(50);
+    columns.Bound(p => p.Description).Width(100);
+    columns.Bound(p => p.Active).Width(40);
     columns.Command(comand =>
     {
         comand.Edit();
         comand.Destroy();
-    });
+    }).Width(50);
 })
 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditCategoryLang"))
 .Pageable()
@@ -33,7 +34,7 @@
     .Update(u => u.Action("Update", "Category"))
     .Destroy(d => d.Action("Delete", "Category"))
     )
-);
+)
 
 @section Scripts
 {
@@ -41,9 +42,9 @@
         function error_handler(e) {
             if (e.errors) {
                 var message = "Errors:\n";
-                $.each(e.errors, function(key, value) {
+                $.each(e.errors, function (key, value) {
                     if ('errors' in value) {
-                        $.each(value.errors, function() {
+                        $.each(value.errors, function () {
                             message += this + "\n";
                         });
                     }
@@ -57,5 +58,11 @@
             $('.k-grid-update').text('@StoreOnLine.Resources.Resources.CategoryEdit');
             $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.CategoryCancel');
         };
+
+        function onRowBound(e) {
+            $(".k-grid-edit").find("span").addClass("k-icon k-edit");
+            $(".k-grid-Delete").find("span").addClass("k-icon k-delete");
+            $(".k-grid-View").find("span").addClass("k-icon km-view");
+        }
     </script>
 }

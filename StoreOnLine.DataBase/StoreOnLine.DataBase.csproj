@@ -224,6 +224,7 @@
     <Content Include="Files\Employer.xml" />
     <Content Include="Files\EmployerShop.xml" />
     <Content Include="Files\Group.xml" />
+    <Content Include="Files\GroupLang.xml" />
     <Content Include="Files\Language.xml" />
     <Content Include="Files\Shop.xml" />
     <Content Include="Files\Rol.xml" />

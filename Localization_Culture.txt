@@ -29,3 +29,5 @@ y en config.xml coloco
 
 el uiculture depende del browser
 http://afana.me/post/aspnet-mvc-internationalization.aspx
+
+http://www.hanselman.com/blog/GlobalizationInternationalizationAndLocalizationInASPNETMVC3JavaScriptAndJQueryPart1.aspx

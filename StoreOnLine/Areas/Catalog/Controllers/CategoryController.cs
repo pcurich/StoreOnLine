@@ -19,7 +19,6 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         // GET: /Catalog/Category/
         public ActionResult Index()
         {
-            ServCategory.GetAll();
             return View();
         }
 
@@ -33,7 +32,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
             if (category != null && ModelState.IsValid)
             {
-                ServCategory.AddCategory(category);
+                ServCategory.Create(category);
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }

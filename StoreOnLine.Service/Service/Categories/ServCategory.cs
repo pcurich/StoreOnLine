@@ -22,7 +22,7 @@ namespace StoreOnLine.Service.Service.Categories
         readonly IDictionary<int, CategoryProduct> _categoryProduct = new Dictionary<int, CategoryProduct>();
 
         private readonly int _shopId;
-        private readonly int _groupId;
+        private readonly int _languageId;
 
         public static ServCategory Instance(int shopId, int groupId)
         {
@@ -32,7 +32,7 @@ namespace StoreOnLine.Service.Service.Categories
                 {
                     if (_instance == null)
                     {
-                        _instance = new ServCategory(shopId,groupId);
+                        _instance = new ServCategory(shopId, groupId);
                     }
                 }
             }
@@ -40,14 +40,14 @@ namespace StoreOnLine.Service.Service.Categories
             return _instance;
         }
 
-        public ServCategory(int shopId, int groupId)
+        public ServCategory(int shopId, int languageId)
         {
-            _groupId = groupId;
+            _languageId = languageId;
             _shopId = shopId;
 
             CategoryShop(shopId);
             Category();
-            CategoryGroup(groupId);
+            CategoryGroup(languageId);
             CategoryLang();
             CategoryProduct();
         }
@@ -75,21 +75,23 @@ namespace StoreOnLine.Service.Service.Categories
             return result;
         }
 
-        public int AddCategory(CategoryLang categoryLang)
+        public int Create(CategoryLang categoryLang)
         {
             categoryLang.AddDate = DateTime.Now;
             categoryLang.UpdDate = DateTime.Now;
-            categoryLang.CategoryGroupId = _groupId;
-            
-            if (!_categoryGroups.ContainsKey(_groupId))
-            {
-                  //todo    
-            }
+            categoryLang.LanguageId = _languageId;
 
-            Db.CategoryLangs.Add(categoryLang);
-            var result = Db.SaveChanges();
-            _categoryLangs.Add(result, categoryLang);
-            return result;
+            var newcategoryLang=Db.CategoryLangs.Add(categoryLang);
+            var newId = Db.SaveChanges();
+
+            var category = new Category { CategoryLangId = newId, UpdDate = DateTime.Now, AddDate = DateTime.Now };
+            var newcategory =Db.Categories.Add(category);
+            Db.SaveChanges();
+
+            _categoryLangs.Add(newcategoryLang.Id, newcategoryLang);
+            _categories.Add(newcategory.Id, newcategory);
+
+            return 1;
         }
 
         public int Delete(CategoryLang categoryLang)
@@ -117,8 +119,8 @@ namespace StoreOnLine.Service.Service.Categories
         internal void CategoryLang()
         {
             var categoryLangs = (from cl in Db.CategoryLangs
-                                 join cg in Db.CategoryGroups on cl.CategoryGroupId equals cg.Id
-                                 where cg.GroupId == _groupId
+                                 join l in Db.Languages on cl.LanguageId equals l.Id
+                                 where l.Id == _languageId
                                  select cl).ToList();
 
 

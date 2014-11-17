@@ -40,7 +40,12 @@ namespace StoreOnLine.DataBase.Entities
                 DataInitial.LoadLanguage(context, pathFile + "Language.xml");
                 DataInitial.LoadRol(context, pathFile + "Rol.xml");
                 DataInitial.LoadShop(context, pathFile + "Shop.xml");
-               
+                
+                #region Group
+                DataInitial.LoadGroup(context, pathFile + "Group.xml");
+                DataInitial.LoadGroupLang(context, pathFile + "GroupLang.xml");
+                #endregion
+                
                 DataInitial.LoadEmployer(context, pathFile + "Employer.xml");
                 DataInitial.LoadEmployerShop(context, pathFile + "EmployerShop.xml");
                 //LoadImagen(context, pathImg);
