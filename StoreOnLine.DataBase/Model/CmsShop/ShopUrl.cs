@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.CmsShop

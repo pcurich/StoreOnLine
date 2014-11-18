@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using System;
 

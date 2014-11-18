@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Web.Mvc;
+using StoreOnLine.DataBase.Data;
 using StoreOnLine.HtmlHelpers;
 using StoreOnLine.Service.Service.Categories;
 using StoreOnLine.Service.Service.Employers;
@@ -11,10 +12,12 @@ namespace StoreOnLine.Controllers
 {
     public class BaseController : Controller
     {
-        public ServEmployer ServEmployer;
-        public ServCategory ServCategory;
-        public ServLanguage ServLanguage;
-        public ServRol ServRol;
+        public IUnitOfWork Service;
+
+        public BaseController(IUnitOfWork service)
+        {
+            Service = service;
+        }
 
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
@@ -51,15 +54,15 @@ namespace StoreOnLine.Controllers
 
         private void ExecutedServices()
         {
-            ServLanguage = new ServLanguage();
-            ServRol = new ServRol();
+            //ServLanguage = new ServLanguage();
+            //ServRol = new ServRol();
             var userName=System.Web.HttpContext.Current.User.Identity.Name;
             if (userName=="")
             {
                 userName = "pcurich";
             }
 
-            ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
+           // ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
         }
     }
 }

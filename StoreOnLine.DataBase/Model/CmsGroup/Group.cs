@@ -1,4 +1,5 @@
 ﻿using System;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.CmsGroup

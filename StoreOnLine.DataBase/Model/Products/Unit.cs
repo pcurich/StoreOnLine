@@ -1,4 +1,5 @@
 ﻿using System.Xml.Serialization;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using System;
 using System.Collections.Generic;

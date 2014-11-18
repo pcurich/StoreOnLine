@@ -1,5 +1,7 @@
 ﻿using System;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model;
 
 namespace StoreOnLine.DataBase.CMS
 {

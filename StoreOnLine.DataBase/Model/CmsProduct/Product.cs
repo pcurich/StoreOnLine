@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.Products;

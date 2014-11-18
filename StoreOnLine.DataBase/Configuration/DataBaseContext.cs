@@ -1,4 +1,5 @@
-﻿using StoreOnLine.DataBase.CMS;
+﻿using System;
+using System.Data.Entity;
 using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.CmsGender;
@@ -7,32 +8,28 @@ using StoreOnLine.DataBase.Model.CmsLanguage;
 using StoreOnLine.DataBase.Model.CmsShop;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;
-using System;
-using System.Data.Entity;
 using StoreOnLine.DataBase.Model.Providers;
 using StoreOnLine.DataBase.Model.Resources;
 using StoreOnLine.DataBase.Model.Security;
-using StoreOnLine.DataBase.Modules;
 
-
-namespace StoreOnLine.DataBase.Entities
+namespace StoreOnLine.DataBase.Configuration
 {
     public partial class StoreOnLineContext : DbContext
     {
         public StoreOnLineContext()
         {
-            Configuration.LazyLoadingEnabled = false; //http://sebys.com.ar/2011/06/01/entity-framework-4-1-cf-y-lazy-load/
-            Configuration.AutoDetectChangesEnabled = true;
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.ValidateOnSaveEnabled = true;
+            //Configuration.LazyLoadingEnabled = false; //http://sebys.com.ar/2011/06/01/entity-framework-4-1-cf-y-lazy-load/
+            //Configuration.AutoDetectChangesEnabled = true;
+            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.ValidateOnSaveEnabled = true;
         }
         public StoreOnLineContext(String nameOrConnectionString)
             : base(nameOrConnectionString)
         {
-            Configuration.LazyLoadingEnabled = false; //http://sebys.com.ar/2011/06/01/entity-framework-4-1-cf-y-lazy-load/
-            Configuration.AutoDetectChangesEnabled = true;
-            Configuration.ProxyCreationEnabled = false;
-            Configuration.ValidateOnSaveEnabled = true;
+            //Configuration.LazyLoadingEnabled = false; //http://sebys.com.ar/2011/06/01/entity-framework-4-1-cf-y-lazy-load/
+            //Configuration.AutoDetectChangesEnabled = true;
+            //Configuration.ProxyCreationEnabled = false;
+            //Configuration.ValidateOnSaveEnabled = true;
         }
 
         public DbSet<ProductBase> ProductBases { get; set; }

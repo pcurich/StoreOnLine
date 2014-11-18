@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Security;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.Infrastructure.Security

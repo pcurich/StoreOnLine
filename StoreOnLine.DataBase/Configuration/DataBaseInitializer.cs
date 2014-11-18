@@ -1,20 +1,20 @@
-﻿using StoreOnLine.DataBase.Model.CmsCategory;
-using StoreOnLine.DataBase.Model.CmsLanguage;
-using StoreOnLine.DataBase.Model.Companies;
-using StoreOnLine.DataBase.Model.Products;
-using StoreOnLine.DataBase.Model.Providers;
-using StoreOnLine.DataBase.Model.Resources;
-using StoreOnLine.DataBase.Model.Security;
-using StoreOnLine.Util.Xml;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Model.CmsCategory;
+using StoreOnLine.DataBase.Model.Companies;
+using StoreOnLine.DataBase.Model.Products;
+using StoreOnLine.DataBase.Model.Providers;
+using StoreOnLine.DataBase.Model.Resources;
+using StoreOnLine.DataBase.Model.Security;
+using StoreOnLine.Util.Xml;
 
-namespace StoreOnLine.DataBase.Entities
+namespace StoreOnLine.DataBase.Configuration
 {
     public partial class StoreOnLineContext
     {
@@ -199,7 +199,7 @@ namespace StoreOnLine.DataBase.Entities
                         IsDone = false, ScheduleDaysWorkPerWeek = 6, ScheduleDaysOff = 1,
                         ScheduleTurn=ScheduleTurn.Mañana.ToString(), ScheduleHuors = 9,
                         BaseCode= pb.CompanyCode, Active = true, IsDeleted = false,
-                        AddDate = DateTime.Now, UpdDate = DateTime.Now
+                        AddDate = Util.DateTime.DateTimeConvert.GetDateTimeNow(), UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow()
                     } };
                 }
                 context.Companies.Add(pb);

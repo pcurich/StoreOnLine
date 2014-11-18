@@ -69,7 +69,7 @@ namespace StoreOnLine.Service.Service.Categories
 
         public int Update(CategoryLang categoryLang)
         {
-            Db.Entry(categoryLang).State = EntityState.Modified;
+            Db.CategoryLangs.Attach(categoryLang);
             var result = Db.SaveChanges();
             _categoryLangs[categoryLang.Id] = categoryLang;
             return result;
@@ -77,14 +77,14 @@ namespace StoreOnLine.Service.Service.Categories
 
         public int Create(CategoryLang categoryLang)
         {
-            categoryLang.AddDate = DateTime.Now;
-            categoryLang.UpdDate = DateTime.Now;
+            categoryLang.AddDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
+            categoryLang.UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
             categoryLang.LanguageId = _languageId;
 
             var newcategoryLang=Db.CategoryLangs.Add(categoryLang);
             var newId = Db.SaveChanges();
 
-            var category = new Category { CategoryLangId = newId, UpdDate = DateTime.Now, AddDate = DateTime.Now };
+            var category = new Category { CategoryLangId = newId, UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow(), AddDate = Util.DateTime.DateTimeConvert.GetDateTimeNow() };
             var newcategory =Db.Categories.Add(category);
             Db.SaveChanges();
 

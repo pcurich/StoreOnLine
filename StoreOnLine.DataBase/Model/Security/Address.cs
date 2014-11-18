@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.Security

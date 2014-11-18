@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Concrete;
+using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.Configuration;
 using StoreOnLine.DataBase.Model.Products;
 using StoreOnLine.DataBase.Abstract;
@@ -32,6 +33,7 @@ namespace StoreOnLine.Infrastructure
                 WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
             };
 
+            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
             _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();

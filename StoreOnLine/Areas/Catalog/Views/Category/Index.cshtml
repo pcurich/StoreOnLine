@@ -8,10 +8,10 @@
 .Events(e => e.DataBound("onRowBound"))
 .Columns(columns =>
 {
-    columns.Bound(p => p.Id).Width(12);
-    columns.Bound(p => p.Name).Width(50);
-    columns.Bound(p => p.Description).Width(100);
-    columns.Bound(p => p.Active).Width(40);
+    columns.Bound(p => p.Id);//.Width(12);
+    columns.Bound(p => p.Name);//.Width(50);
+    columns.Bound(p => p.Description);//.Width(100);
+    columns.Bound(p => p.Active);//.Width(40);
     columns.Command(comand =>
     {
         comand.Edit();
@@ -19,10 +19,15 @@
     }).Width(50);
 })
 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditCategoryLang"))
+.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
 .Pageable()
 .Sortable()
+.ColumnMenu()
+.Navigatable()
 .Scrollable()
+.Resizable(resize => resize.Columns(true))   
 .HtmlAttributes(new { style = "height:430px;" })
+.Filterable()
 .DataSource(dataSource => dataSource
     .Ajax()
     .ServerOperation(false)

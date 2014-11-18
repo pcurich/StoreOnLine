@@ -13,6 +13,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
     {
         public CategoryController()
         {
+            Service.CategoryLangRepository.GetCategoryLangForCultura()
             ServCategory = ServCategory.Instance(1, 1);
         }
         //

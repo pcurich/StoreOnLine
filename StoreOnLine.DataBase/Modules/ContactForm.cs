@@ -1,6 +1,8 @@
 ﻿using StoreOnLine.DataBase.CMS;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using System;
+using StoreOnLine.DataBase.Model;
 
 namespace StoreOnLine.DataBase.Modules
 {

@@ -8,7 +8,7 @@ using StoreOnLine.DataBase.Model.CmsShop;
 using StoreOnLine.Util.Xml;
 using Rol = StoreOnLine.DataBase.Model.CmsRol.Rol;
 
-namespace StoreOnLine.DataBase.Entities
+namespace StoreOnLine.DataBase.Configuration
 {
     public class DataInitial
     {

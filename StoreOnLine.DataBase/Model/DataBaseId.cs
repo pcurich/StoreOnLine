@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
- 
 using System.Xml.Serialization;
 
-namespace StoreOnLine.DataBase.Entities
+namespace StoreOnLine.DataBase.Model
 {
-
     public abstract class DataBaseId
     {
         [HiddenInput(DisplayValue = false)]
@@ -30,16 +28,16 @@ namespace StoreOnLine.DataBase.Entities
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public DateTime? UpdDate { get; set; }
+        public long? UpdDate { get; set; }
 
         [HiddenInput(DisplayValue = false)]
         [XmlIgnore]
-        public DateTime? AddDate { get; set; }
+        public long? AddDate { get; set; }
 
         protected DataBaseId()
         {
-            AddDate = DateTime.Now;
-            UpdDate = DateTime.Now;
+            AddDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
+            UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
             AddUser = "System";
             UpdUser = "System";
         }

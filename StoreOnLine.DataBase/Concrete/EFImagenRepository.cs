@@ -1,4 +1,5 @@
 ﻿using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Resources;
 using System.Collections.Generic;

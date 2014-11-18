@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.Products;

@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Security;
 using System.Collections.Generic;
