@@ -1,7 +1,5 @@
 ﻿
 using System.Collections.Generic;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Security;
 
 namespace StoreOnLine.DataBase.Model.Companies

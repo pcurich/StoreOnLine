@@ -4,26 +4,20 @@ using System.Web.UI.WebControls;
 using StoreOnLine.Areas.Security.Models;
 using StoreOnLine.Controllers;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure.Abstract;
 using StoreOnLine.Infrastructure.Security;
 using StoreOnLine.Service.Constants;
-using StoreOnLine.Service.Service.Employers;
 
 namespace StoreOnLine.Areas.Security.Controllers
 {
     public class AccountController : BaseController
     {
-        private readonly IAuthProvider _authProvider;
-        private readonly ISecurityRepository _repositorySecurity;
-        private readonly IPersonRepository _repositoryPerson;
-
-        public AccountController(IAuthProvider auth, ISecurityRepository repositorySecurity, IPersonRepository repositoryPerson)
+        public AccountController(IUnitOfWork service)
+            : base(service)
         {
-            _authProvider = auth;
-            _repositorySecurity = repositorySecurity;
-            _repositoryPerson = repositoryPerson;
         }
 
         public ViewResult Login()
@@ -33,15 +27,15 @@ namespace StoreOnLine.Areas.Security.Controllers
 
  
         [HttpPost]
-        public ActionResult Login(ViewEmployer viewEmployer, string username, string password, string returnUrl)
+        public ActionResult Login(Employer employer, string username, string password, string returnUrl)
         {
             //return Redirect(Url.Action("Index", "Category", new { Area = "Catalog" }));
-            viewEmployer.UserName = username;
+            employer.UserName = username;
             //bool result = FormsAuthentication.Authenticate(username, password);
             var userProvider = new StoreOnLIneMemberShipProvider();
             var result = userProvider.ValidateUser(username, password);
 
-            Session[Enums.EmployerOnLine] = ServEmployer.GetCurrentViewEmployer();// userProvider.GetEmployer();
+            Session[Enums.EmployerOnLine] = Service.EmployerRepository.CurrentEmployer();// userProvider.GetEmployer();
 
             if (result)
             {

@@ -1,7 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsGroup;
 using StoreOnLine.DataBase.Model.CmsLanguage;
 
 namespace StoreOnLine.DataBase.Model.CmsCategory

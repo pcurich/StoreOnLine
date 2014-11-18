@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsShop;
+﻿using StoreOnLine.DataBase.Model.CmsShop;
 
 namespace StoreOnLine.DataBase.Model.CmsEmploye
 {
-    public class EmployerShop:DataBaseId
+    public class EmployerShop : DataBaseId
     {
         public Employer Employer { get; set; }
         public int EmployeId { get; set; }

@@ -1,26 +1,25 @@
 ﻿using System;
 using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Data.ICmsCategory;
+using StoreOnLine.DataBase.Data.ICmsEmployer;
 using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.DataBase.Data
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        private StoreOnLineContext DbContext { get; set; }
-
         public UnitOfWork()
         {
             CreateDbContext();
         }
 
-        //repositories
         #region Repositries
 
+        #region Category
         private ICategory _categoriesRepository;
         private ICategoryLang _categoryLanRepository;
-        private ICategoryShop _categoryShopRepository;
         private IRepository<CategoryProduct> _categoryProductRepository;
+        private ICategoryShop _categoryShopRepository;
 
         //get Category repo
         public ICategory CategoryRepository
@@ -40,16 +39,51 @@ namespace StoreOnLine.DataBase.Data
             get { return _categoryShopRepository ?? (_categoryShopRepository = new RepoCategoryShop(DbContext)); }
         }
 
-        //get CategoryProduct repo
+        //get CategoryProduct repo todo
         public IRepository<CategoryProduct> CategoryProductRepository
         {
-            get { return _categoryProductRepository ?? (_categoryProductRepository = new StoreRepository<CategoryProduct>(DbContext)); }
+            get
+            {
+                return _categoryProductRepository ??
+                       (_categoryProductRepository = new StoreRepository<CategoryProduct>(DbContext));
+            }
         }
 
         #endregion
 
+        #region Employer
+
+        private IEmployer _employerRepository;
+        private IEmployerShop _employerShopRepository;
+
+        public IEmployer EmployerRepository
+        {
+            get
+            {
+                return _employerRepository ??
+                     (_employerRepository = new RepoEmployer(DbContext));
+            }
+        }
+
+        public IEmployerShop EmployerShopRepository
+        {
+            get
+            {
+                return _employerShopRepository ??
+                     (_employerShopRepository = new RepoEmployerShop(DbContext));
+            }
+        }
+
+        #endregion
+
+        #endregion
+
+        private StoreOnLineContext DbContext { get; set; }
+
+        //repositories
+
         /// <summary>
-        /// Save pending changes to the database
+        ///     Save pending changes to the database
         /// </summary>
         public void Commit()
         {
@@ -75,7 +109,6 @@ namespace StoreOnLine.DataBase.Data
             // we'd have to be careful. We're not being that careful.
         }
 
-
         #region IDisposable
 
         public void Dispose()
@@ -94,6 +127,5 @@ namespace StoreOnLine.DataBase.Data
         }
 
         #endregion
-
     }
 }

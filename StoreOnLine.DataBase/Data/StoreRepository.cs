@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Data;
+using System.ComponentModel;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using StoreOnLine.DataBase.Model;
 
 namespace StoreOnLine.DataBase.Data
 {
     /// <summary>
-    /// The EF-dependent, generic repository for data access
+    ///     The EF-dependent, generic repository for data access
     /// </summary>
     /// <typeparam name="T">Type of entity for this Repository.</typeparam>
-    public class StoreRepository<T> : IRepository<T> where T : class
+    public class StoreRepository<T> : IRepository<T> where T : DataBaseId
     {
-        protected DbContext DbContext { get; set; }
-        protected DbSet<T> DbSet { get; set; }
-
         public StoreRepository(DbContext dbContext)
         {
             if (dbContext == null)
@@ -22,6 +20,9 @@ namespace StoreOnLine.DataBase.Data
             DbContext = dbContext;
             DbSet = DbContext.Set<T>();
         }
+
+        protected DbContext DbContext { get; set; }
+        protected DbSet<T> DbSet { get; set; }
 
         public virtual IQueryable<T> GetAll()
         {
@@ -48,31 +49,43 @@ namespace StoreOnLine.DataBase.Data
 
         public virtual void Update(T entity)
         {
-            DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+            var elementoDb = DbSet.Find(entity.Id);
+
+            for (var i = 0; i < TypeDescriptor.GetProperties(entity).Count; i++)
+            {
+                var property = TypeDescriptor.GetProperties(entity)[i];
+                if (!property.Name.Equals("Id") && property.GetValue(entity) != null)
+                {
+                    property.SetValue(elementoDb, property.GetValue(entity));
+                }
+            }
+
+            DbEntityEntry dbEntityEntry = DbContext.Entry(elementoDb);
             if (dbEntityEntry.State == EntityState.Detached)
             {
-                DbSet.Attach(entity);
+                DbSet.Attach(elementoDb);
             }
             dbEntityEntry.State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)
         {
-            DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
+            var elementoDb = DbSet.Find(entity.Id);
+            DbEntityEntry dbEntityEntry = DbContext.Entry(elementoDb);
             if (dbEntityEntry.State != EntityState.Deleted)
             {
                 dbEntityEntry.State = EntityState.Deleted;
             }
             else
             {
-                DbSet.Attach(entity);
-                DbSet.Remove(entity);
+                DbSet.Attach(elementoDb);
+                DbSet.Remove(elementoDb);
             }
         }
 
         public virtual void Delete(int id)
         {
-            var entity = GetById(id);
+            T entity = GetById(id);
             if (entity == null) return; // not found; assume already deleted.
             Delete(entity);
         }

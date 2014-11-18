@@ -5,6 +5,7 @@ using System.Web.Routing;
 using System.Web.Security;
 using Antlr.Runtime.Misc;
 using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure;
 using StoreOnLine.Infrastructure.Security;
@@ -21,10 +22,9 @@ namespace StoreOnLine.Controllers
         private readonly ISecurityRepository _repositorySecurity;
         private readonly IPersonRepository _repositoryPerson;
 
-        public HomeController(ISecurityRepository repositorySecurity, IPersonRepository repositoryPerson)
+
+        public HomeController(IUnitOfWork service) : base(service)
         {
-            _repositorySecurity = repositorySecurity;
-            _repositoryPerson = repositoryPerson;
         }
 
         public ActionResult Index()

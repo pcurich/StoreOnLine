@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsGroup;
-using StoreOnLine.DataBase.Model.CmsShop;
+﻿using StoreOnLine.DataBase.Model.CmsShop;
 
 namespace StoreOnLine.DataBase.Model.CmsLanguage
 {

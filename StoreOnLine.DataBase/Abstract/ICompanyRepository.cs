@@ -1,5 +1,5 @@
-﻿using StoreOnLine.DataBase.Model.Companies;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using StoreOnLine.DataBase.Model.Companies;
 
 namespace StoreOnLine.DataBase.Abstract
 {

@@ -1,11 +1,8 @@
-﻿using System.Data.Entity.Core.Common.CommandTrees;
-using StoreOnLine.DataBase.Abstract;
+﻿using StoreOnLine.DataBase.Configuration;
+using StoreOnLine.DataBase.Model.CmsEmploye;
 using System;
 using System.Linq;
 using System.Web.Security;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsEmploye;
 
 namespace StoreOnLine.Infrastructure.Security
 {

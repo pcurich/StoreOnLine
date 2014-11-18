@@ -1,31 +1,31 @@
-﻿using System;
-using System.Globalization;
-using System.Web.Mvc;
-using StoreOnLine.Controllers;
-using StoreOnLine.DataBase.Model.CmsCategory;
-using StoreOnLine.Service.Service.Categories;
+﻿using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using StoreOnLine.Controllers;
+using StoreOnLine.DataBase.Data;
+using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.Areas.Catalog.Controllers
 {
     public class CategoryController : BaseController
     {
-        public CategoryController()
+        public CategoryController(IUnitOfWork service)
+            : base(service)
         {
-            Service.CategoryLangRepository.GetCategoryLangForCultura()
-            ServCategory = ServCategory.Instance(1, 1);
+            Service.CategoryLangRepository.GetCategoryLangForCultura(1);
+
         }
         //
         // GET: /Catalog/Category/
         public ActionResult Index()
         {
+            Service.Commit();
             return View();
         }
 
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(ServCategory.GetAll().ToDataSourceResult(request));
+            return Json(Service.CategoryLangRepository.GetAll().ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -33,7 +33,8 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
             if (category != null && ModelState.IsValid)
             {
-                ServCategory.Create(category);
+                category.LanguageId = 149;//todo
+                Service.CategoryLangRepository.Add(category);
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
@@ -43,7 +44,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
             if (category != null && ModelState.IsValid)
             {
-                ServCategory.Update(category);
+                Service.CategoryLangRepository.Update(category);
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
@@ -53,9 +54,16 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
             if (category != null)
             {
-                ServCategory.Delete(category);
+                Service.CategoryLangRepository.Delete(category);
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            Service.Commit();
+            base.Dispose(disposing);
+        }
+
     }
 }

@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Linq;
 using StoreOnLine.DataBase.Abstract;
 using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.Companies;
 
 namespace StoreOnLine.DataBase.Concrete

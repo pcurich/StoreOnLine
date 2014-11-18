@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using StoreOnLine.DataBase.Model.Security;
-using System.Collections.Generic;
 
 namespace StoreOnLine.DataBase.Abstract
 {

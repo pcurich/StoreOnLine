@@ -3,17 +3,14 @@ using System.Threading;
 using System.Web.Mvc;
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.HtmlHelpers;
-using StoreOnLine.Service.Service.Categories;
-using StoreOnLine.Service.Service.Employers;
-using StoreOnLine.Service.Service.Languages;
-using StoreOnLine.Service.Service.Roles;
+ 
 
 namespace StoreOnLine.Controllers
 {
     public class BaseController : Controller
     {
         public IUnitOfWork Service;
-
+ 
         public BaseController(IUnitOfWork service)
         {
             Service = service;
@@ -61,8 +58,8 @@ namespace StoreOnLine.Controllers
             {
                 userName = "pcurich";
             }
-
-           // ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
+            Service.EmployerRepository.GetEmployersByName(userName);
+            // ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
         }
     }
 }

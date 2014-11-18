@@ -1,10 +1,11 @@
 ﻿using StoreOnLine.DataBase.Data.ICmsCategory;
+using StoreOnLine.DataBase.Data.ICmsEmployer;
 using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.DataBase.Data
 {
     /// <summary>
-    /// Interface for the My Unit of Work"
+    ///     Interface for the My Unit of Work"
     /// </summary>
     public interface IUnitOfWork
     {
@@ -15,6 +16,9 @@ namespace StoreOnLine.DataBase.Data
         ICategory CategoryRepository { get; }
         ICategoryLang CategoryLangRepository { get; }
         ICategoryShop CategoryShopRepository { get; }
-        IRepository<CategoryProduct> CategoryProductRepository { get; }
+        IRepository<CategoryProduct> CategoryProductRepository { get; }//todo
+
+        IEmployer EmployerRepository { get; }
+        IEmployerShop EmployerShopRepository { get; }
     }
 }

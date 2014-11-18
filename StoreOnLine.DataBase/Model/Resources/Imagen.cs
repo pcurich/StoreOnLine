@@ -1,6 +1,4 @@
-﻿using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using System;
+﻿using System;
 
 namespace StoreOnLine.DataBase.Model.Resources
 {

@@ -33,7 +33,8 @@ namespace StoreOnLine.Infrastructure
                 WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
             };
 
-            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>();
+            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+
             _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
             _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();

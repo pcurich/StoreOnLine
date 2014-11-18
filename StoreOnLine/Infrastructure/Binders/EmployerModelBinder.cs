@@ -1,26 +1,28 @@
 ﻿using System.Web.Mvc;
-using StoreOnLine.Service.Service.Employers;
+using StoreOnLine.DataBase.Model.CmsEmploye;
 
 namespace StoreOnLine.Infrastructure.Binders
 {
-    public class UserModelBinder : IModelBinder
+    public class EmployerModelBinder : IModelBinder
     {
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            // get the Cart from the session
-            ViewEmployer user = null;
+            // get the user from the session
+            Employer user = null;
             if (controllerContext.HttpContext.Session != null)
             {
-                user = (ViewEmployer)controllerContext.HttpContext.Session[Service.Constants.Enums.EmployerOnLine];
+                user = (Employer)controllerContext.HttpContext.Session[Service.Constants.Enums.EmployerOnLine];
             }
             // create the Cart if there wasn't one in the session data
-            if (user != null) return user;
-            user = new ViewEmployer();
+            if (user != null) 
+                return user;
+
+            user = new  Employer();
             if (controllerContext.HttpContext.Session != null)
             {
                 controllerContext.HttpContext.Session[Service.Constants.Enums.EmployerOnLine] = user;
             }
-            // return the cart
+            // return the user
             return user;
         }
     }

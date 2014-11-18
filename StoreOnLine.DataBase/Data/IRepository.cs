@@ -1,8 +1,9 @@
 ﻿using System.Linq;
+using StoreOnLine.DataBase.Model;
 
 namespace StoreOnLine.DataBase.Data
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : DataBaseId
     {
         IQueryable<T> GetAll();
         T GetById(int id);

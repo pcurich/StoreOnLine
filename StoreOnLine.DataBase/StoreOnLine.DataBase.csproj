@@ -88,48 +88,6 @@
     <Compile Include="Abstract\ISupplierRepository.cs" />
     <Compile Include="Abstract\IUbigeoRepository.cs" />
     <Compile Include="Abstract\IUnitRepository.cs" />
-    <Compile Include="CMS\Account.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\Helps.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\Language.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\LocalizeProperty.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\LocalizeResource.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\Log.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\ModuleDefinition.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\ModuleSetting.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\Page.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\PageModule.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\Rol.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\SiteSetting.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\User.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CMS\UserInRoles.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Concrete\CartRepository.cs" />
     <Compile Include="Concrete\EFCategoryRepository.cs" />
     <Compile Include="Concrete\EFCompanyRepository.cs" />
@@ -150,6 +108,10 @@
     <Compile Include="Data\ICmsCategory\RepoCategory.cs" />
     <Compile Include="Data\ICmsCategory\RepoCategoryLang.cs" />
     <Compile Include="Data\ICmsCategory\RepoCategoryShop.cs" />
+    <Compile Include="Data\ICmsEmployer\IEmployer.cs" />
+    <Compile Include="Data\ICmsEmployer\IEmployerShop.cs" />
+    <Compile Include="Data\ICmsEmployer\RepoEmployer.cs" />
+    <Compile Include="Data\ICmsEmployer\RepoEmployerShop.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\StoreRepository.cs" />
@@ -207,8 +169,6 @@
     <Compile Include="Model\Shopping\CartLine.cs" />
     <Compile Include="Model\Shopping\Shipping.cs" />
     <Compile Include="Model\Shopping\ShippingDetails.cs" />
-    <Compile Include="Modules\ContactForm.cs" />
-    <Compile Include="Modules\HtmlContent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;

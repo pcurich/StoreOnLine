@@ -3,12 +3,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using StoreOnLine.DataBase.Entities;
+using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Model.CmsEmploye;
-using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.DataBase.Model.Shopping;
 using StoreOnLine.Infrastructure.Binders;
-using StoreOnLine.Service.Service.Employers;
 
 namespace StoreOnLine
 {
@@ -19,7 +17,7 @@ namespace StoreOnLine
             AreaRegistration.RegisterAllAreas();
             //Database.SetInitializer(new StoreOnLineContext.StoreOnLineInitializerDropCreateDatabaseAlways());
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
-            ModelBinders.Binders.Add(typeof(ViewEmployer), new UserModelBinder());
+            ModelBinders.Binders.Add(typeof(Employer), new EmployerModelBinder());
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             //FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

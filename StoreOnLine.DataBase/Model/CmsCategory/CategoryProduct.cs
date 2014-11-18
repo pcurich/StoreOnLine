@@ -1,6 +1,4 @@
-﻿using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsProduct;
+﻿using StoreOnLine.DataBase.Model.CmsProduct;
 
 namespace StoreOnLine.DataBase.Model.CmsCategory
 {

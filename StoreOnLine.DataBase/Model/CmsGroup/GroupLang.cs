@@ -1,6 +1,4 @@
-﻿using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsLanguage;
+﻿using StoreOnLine.DataBase.Model.CmsLanguage;
 
 namespace StoreOnLine.DataBase.Model.CmsGroup
 {

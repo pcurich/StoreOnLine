@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.Companies
 {

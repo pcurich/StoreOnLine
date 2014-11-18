@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace StoreOnLine.DataBase.Model.Data
 {

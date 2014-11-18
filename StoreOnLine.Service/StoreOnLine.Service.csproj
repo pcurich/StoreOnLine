@@ -77,16 +77,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service\Employers\ServEmployer.cs" />
-    <Compile Include="Service\Employers\ViewEmployer.cs" />
-    <Compile Include="Service\Languages\ServLanguage.cs" />
-    <Compile Include="Service\Roles\ServRol.cs" />
-    <Compile Include="Service\ServBase.cs" />
     <Compile Include="Cache\CacheMemory.cs" />
     <Compile Include="Cache\ICacheServices.cs" />
     <Compile Include="Constants\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Categories\ServCategory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

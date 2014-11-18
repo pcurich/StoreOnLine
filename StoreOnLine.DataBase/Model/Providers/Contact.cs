@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Xml;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
 
 namespace StoreOnLine.DataBase.Model.Providers
 {

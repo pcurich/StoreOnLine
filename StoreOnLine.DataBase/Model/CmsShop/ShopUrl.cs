@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-
-namespace StoreOnLine.DataBase.Model.CmsShop
+﻿namespace StoreOnLine.DataBase.Model.CmsShop
 {
     public class ShopUrl: DataBaseId
     {

@@ -1,8 +1,5 @@
 ﻿using System;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
 using StoreOnLine.DataBase.Model.CmsProduct;
-using StoreOnLine.DataBase.Model.Products;
 
 namespace StoreOnLine.DataBase.Model.Shopping
 {

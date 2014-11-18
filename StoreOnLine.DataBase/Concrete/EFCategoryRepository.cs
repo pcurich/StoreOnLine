@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using StoreOnLine.DataBase.Abstract;
-using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-using StoreOnLine.DataBase.Model.CmsCategory;
-using StoreOnLine.DataBase.Model.Products;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.Linq;
+using StoreOnLine.DataBase.Abstract;
+using StoreOnLine.DataBase.Configuration;
+using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.DataBase.Concrete
 {

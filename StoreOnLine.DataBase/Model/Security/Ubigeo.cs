@@ -1,7 +1,4 @@
-﻿using StoreOnLine.DataBase.Configuration;
-using StoreOnLine.DataBase.Entities;
-
-namespace StoreOnLine.DataBase.Model.Security
+﻿namespace StoreOnLine.DataBase.Model.Security
 {
     public class Ubigeo : DataBaseId
     {

@@ -4,7 +4,7 @@ using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.DataBase.Data.ICmsCategory
 {
-    public class RepoCategoryLang:StoreRepository<CategoryLang>,ICategoryLang
+    public class RepoCategoryLang : StoreRepository<CategoryLang>, ICategoryLang
     {
         public RepoCategoryLang(DbContext dbContext) : base(dbContext)
         {
@@ -13,6 +13,11 @@ namespace StoreOnLine.DataBase.Data.ICmsCategory
         public IQueryable<CategoryLang> GetCategoryLangForCultura(int languageId)
         {
             return GetAll().Where(o => o.LanguageId == languageId);
+        }
+
+        public void dd()
+        {
+            
         }
     }
 }
