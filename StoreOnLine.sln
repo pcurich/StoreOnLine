@@ -41,6 +41,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kendoui", "Kendoui", "{9D06
 		Color.txt = Color.txt
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log", "Log", "{EB7133E2-70A1-4FB7-B8B0-6B5DAFDEF8D0}"
+	ProjectSection(SolutionItems) = preProject
+		Notaas.txt = Notaas.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,5 +88,6 @@ Global
 		{840604F9-8CA0-4611-A5C9-D6D5621EDAA7} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
 		{0204BC37-63F4-4F41-B785-299118470166} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
 		{9D064487-D004-47F9-A6E9-A0013754E810} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
+		{EB7133E2-70A1-4FB7-B8B0-6B5DAFDEF8D0} = {61237E9B-19B2-4E35-AECC-9F066E9A3796}
 	EndGlobalSection
 EndGlobal
