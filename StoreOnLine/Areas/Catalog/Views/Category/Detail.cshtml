@@ -1,0 +1,79 @@
+﻿@model CategoryLang
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var ajaxOptions = new AjaxOptions
+    {
+
+    };
+}
+
+<div class="container-fluid">
+    <div class="panel panel-primary">
+        <div class="panel-heading">@StoreOnLine.Resources.Resources.CategoryTitle</div>
+        <div class="panel-body">
+            @using (Ajax.BeginForm("Edit", "AdminCategory", ajaxOptions, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+            {
+                @Html.HiddenFor(o => o.Id)
+                <div class="form-group">
+                    @Html.LabelFor(o => o.Name, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(o => o.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.Active, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.CheckBoxFor(o => o.Active)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.Description, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.Kendo().EditorFor(o => o.Description)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.MetaTitle, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(o => o.MetaTitle, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.MetaDescription, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(o => o.MetaDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.MetaKeywords, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(o => o.MetaKeywords, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.LinkRewrite, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @Html.EditorFor(o => o.LinkRewrite, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(o => o.CategoryRols, htmlAttributes: new { @class = "col-lg-2 control-label" })
+                    <div class="col-lg-10">
+                        @{ Html.RenderPartial("_Rol", Model.CategoryRols); }
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+    </div>
+</div>
+

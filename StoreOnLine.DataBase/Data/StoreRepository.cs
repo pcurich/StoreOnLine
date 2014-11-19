@@ -13,12 +13,15 @@ namespace StoreOnLine.DataBase.Data
     /// <typeparam name="T">Type of entity for this Repository.</typeparam>
     public class StoreRepository<T> : IRepository<T> where T : DataBaseId
     {
-        public StoreRepository(DbContext dbContext)
+        private  readonly string _user;
+        public StoreRepository(DbContext dbContext,string user)
         {
             if (dbContext == null)
                 throw new ArgumentNullException("dbContext");
             DbContext = dbContext;
             DbSet = DbContext.Set<T>();
+            _user = user;
+
         }
 
         protected DbContext DbContext { get; set; }
@@ -36,6 +39,10 @@ namespace StoreOnLine.DataBase.Data
 
         public void Add(T entity)
         {
+            entity.UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
+            entity.AddDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
+            entity.UpdUser = _user;
+            entity.AddUser = _user;
             DbEntityEntry dbEntityEntry = DbContext.Entry(entity);
             if (dbEntityEntry.State != EntityState.Detached)
             {
@@ -50,7 +57,8 @@ namespace StoreOnLine.DataBase.Data
         public virtual void Update(T entity)
         {
             var elementoDb = DbSet.Find(entity.Id);
-
+            entity.UpdDate = Util.DateTime.DateTimeConvert.GetDateTimeNow();
+            entity.UpdUser = _user;
             for (var i = 0; i < TypeDescriptor.GetProperties(entity).Count; i++)
             {
                 var property = TypeDescriptor.GetProperties(entity)[i];
@@ -86,7 +94,8 @@ namespace StoreOnLine.DataBase.Data
         public virtual void Delete(int id)
         {
             T entity = GetById(id);
-            if (entity == null) return; // not found; assume already deleted.
+            if (entity == null) 
+                return; // not found; assume already deleted.
             Delete(entity);
         }
     }

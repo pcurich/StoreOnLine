@@ -1,0 +1,19 @@
+﻿<div class="col-lg-10">
+    @(Html.Kendo().Grid<CategoryRol>().Name("RolGrid")
+.Editable(editable => editable.Mode(GridEditMode.InLine))
+.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+.Columns(columns =>
+{
+    columns.Bound(p => p.HasPermition);//.Width(100);
+    columns.Bound(p => p.Id);//.Width(12);
+    columns.Bound(p => p.Rol.Name);//.Width(50);
+})
+.Resizable(resize => resize.Columns(true))
+.DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(false)
+    .Model(model => model.Id(p => p.Id))
+    //.Read(r => r.Action("ReadRol", "Category")).AutoSync(true)
+    )
+      )
+</div>

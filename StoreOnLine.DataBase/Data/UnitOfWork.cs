@@ -2,53 +2,67 @@
 using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Data.ICmsCategory;
 using StoreOnLine.DataBase.Data.ICmsEmployer;
+using StoreOnLine.DataBase.Data.ICmsRol;
 using StoreOnLine.DataBase.Model.CmsCategory;
 
 namespace StoreOnLine.DataBase.Data
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        public UnitOfWork()
+        private string _user;
+        public UnitOfWork(string user)
         {
+            _user = user;
             CreateDbContext();
         }
 
         #region Repositries
-
+        
         #region Category
         private ICategory _categoriesRepository;
         private ICategoryLang _categoryLanRepository;
+        private IRepository<CategoryRol> _categoryRolRepository; 
         private IRepository<CategoryProduct> _categoryProductRepository;
         private ICategoryShop _categoryShopRepository;
 
         //get Category repo
         public ICategory CategoryRepository
         {
-            get { return _categoriesRepository ?? (_categoriesRepository = new RepoCategory(DbContext)); }
+            get { return _categoriesRepository ?? (_categoriesRepository = new RepoCategory(DbContext, _user)); }
         }
 
         //get CategoryLang repo
         public ICategoryLang CategoryLangRepository
         {
-            get { return _categoryLanRepository ?? (_categoryLanRepository = new RepoCategoryLang(DbContext)); }
+            get { return _categoryLanRepository ?? (_categoryLanRepository = new RepoCategoryLang(DbContext, _user)); }
         }
 
         //get CategoryShop repo
         public ICategoryShop CategoryShopRepository
         {
-            get { return _categoryShopRepository ?? (_categoryShopRepository = new RepoCategoryShop(DbContext)); }
+            get { return _categoryShopRepository ?? (_categoryShopRepository = new RepoCategoryShop(DbContext, _user)); }
+        }
+
+        public IRepository<CategoryRol> CategoryRolRepository
+        {
+            get{return _categoryRolRepository ??(_categoryRolRepository = new StoreRepository<CategoryRol>(DbContext, _user));}
         }
 
         //get CategoryProduct repo todo
         public IRepository<CategoryProduct> CategoryProductRepository
         {
-            get
-            {
-                return _categoryProductRepository ??
-                       (_categoryProductRepository = new StoreRepository<CategoryProduct>(DbContext));
-            }
+            get{return _categoryProductRepository ??(_categoryProductRepository = new StoreRepository<CategoryProduct>(DbContext, _user));}
         }
 
+        #endregion
+
+        #region Rol
+        private IRol _rolRepository;
+
+        public IRol RolRepository
+        {
+            get { return _rolRepository ?? (_rolRepository = new RepoRol(DbContext, _user)); }
+        }
         #endregion
 
         #region Employer
@@ -61,7 +75,7 @@ namespace StoreOnLine.DataBase.Data
             get
             {
                 return _employerRepository ??
-                     (_employerRepository = new RepoEmployer(DbContext));
+                     (_employerRepository = new RepoEmployer(DbContext, _user));
             }
         }
 
@@ -70,7 +84,7 @@ namespace StoreOnLine.DataBase.Data
             get
             {
                 return _employerShopRepository ??
-                     (_employerShopRepository = new RepoEmployerShop(DbContext));
+                     (_employerShopRepository = new RepoEmployerShop(DbContext, _user));
             }
         }
 
@@ -127,5 +141,11 @@ namespace StoreOnLine.DataBase.Data
         }
 
         #endregion
+
+
+        public void SetCurrentUser(string user)
+        {
+            _user = user;
+        }
     }
 }

@@ -6,7 +6,8 @@ namespace StoreOnLine.DataBase.Data.ICmsEmployer
 {
     public class RepoEmployerShop : StoreRepository<EmployerShop>, IEmployerShop
     {
-        public RepoEmployerShop(DbContext dbContext) : base(dbContext)
+        public RepoEmployerShop(DbContext dbContext, string user)
+            : base(dbContext,user)
         {
         }
 

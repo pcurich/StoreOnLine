@@ -1257,6 +1257,8 @@
     <Content Include="Content\fonts\fontawesome-webfontba72.woff" />
     <Content Include="Content\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Areas\Catalog\Views\Shared\EditorTemplates\EditCategoryLang.cshtml" />
+    <Content Include="Areas\Catalog\Views\Category\Detail.cshtml" />
+    <Content Include="Areas\Catalog\Views\Shared\_Rol.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />

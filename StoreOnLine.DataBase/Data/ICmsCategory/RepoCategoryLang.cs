@@ -6,7 +6,8 @@ namespace StoreOnLine.DataBase.Data.ICmsCategory
 {
     public class RepoCategoryLang : StoreRepository<CategoryLang>, ICategoryLang
     {
-        public RepoCategoryLang(DbContext dbContext) : base(dbContext)
+        public RepoCategoryLang(DbContext dbContext, string user)
+            : base(dbContext,user)
         {
         }
 

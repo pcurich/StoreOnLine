@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using StoreOnLine.Controllers;
@@ -35,6 +36,14 @@ namespace StoreOnLine.Areas.Catalog.Controllers
             {
                 category.LanguageId = 149;//todo
                 Service.CategoryLangRepository.Add(category);
+                //Service.Commit();
+                //var rols = Service.RolRepository.GetRolByLanguage(149);
+                //foreach (var rol in rols)
+                //{
+                //    category.CategoryRols.Add(new CategoryRol { RolId = rol.Id, CategoryLangId = category.Id, Rol = rol });
+                //}
+                //Service.CategoryLangRepository.Update(category);
+                //Service.Commit();
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
@@ -57,6 +66,22 @@ namespace StoreOnLine.Areas.Catalog.Controllers
                 Service.CategoryLangRepository.Delete(category);
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult Detail(int categoryId)
+        {
+            var category = Service.CategoryLangRepository.GetById(categoryId);
+            var rols = Service.RolRepository.GetRolByLanguage(149);
+            foreach (var rol in rols)
+            {
+                category.CategoryRols.Add(new CategoryRol { RolId = rol.Id, CategoryLangId = categoryId, Rol = rol});
+            }
+            return View(category);
+        }
+
+        public ActionResult ReadRol([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(Service.CategoryRolRepository.GetAll().ToDataSourceResult(request));
         }
 
         protected override void Dispose(bool disposing)

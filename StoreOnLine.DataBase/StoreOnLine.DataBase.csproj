@@ -112,6 +112,8 @@
     <Compile Include="Data\ICmsEmployer\IEmployerShop.cs" />
     <Compile Include="Data\ICmsEmployer\RepoEmployer.cs" />
     <Compile Include="Data\ICmsEmployer\RepoEmployerShop.cs" />
+    <Compile Include="Data\ICmsRol\IRol.cs" />
+    <Compile Include="Data\ICmsRol\RepoRol.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\IUnitOfWork.cs" />
     <Compile Include="Data\StoreRepository.cs" />
@@ -122,7 +124,7 @@
     <Compile Include="Model\DataBaseId.cs" />
     <Compile Include="Configuration\DataBaseInitializer.cs" />
     <Compile Include="Configuration\DataInitial.cs" />
-    <Compile Include="Model\CmsCategory\CategoryGroup.cs" />
+    <Compile Include="Model\CmsCategory\CategoryRol.cs" />
     <Compile Include="Model\CmsCategory\CategoryLang.cs" />
     <Compile Include="Model\CmsCategory\CategoryProduct.cs" />
     <Compile Include="Model\CmsCategory\CategoryShop.cs" />
@@ -130,12 +132,11 @@
     <Compile Include="Model\CmsEmploye\EmployerShop.cs" />
     <Compile Include="Model\CmsGender\Gender.cs" />
     <Compile Include="Model\CmsGender\GenderLang.cs" />
-    <Compile Include="Model\CmsGroup\GroupLang.cs" />
     <Compile Include="Model\CmsLanguage\Language.cs" />
     <Compile Include="Model\CmsLanguage\LanguageShop.cs" />
     <Compile Include="Model\CmsRol\Rol.cs" />
     <Compile Include="Model\CmsShop\Shop.cs" />
-    <Compile Include="Model\CmsShop\ShopGroup.cs" />
+    <Compile Include="Model\CmsShop\ShopRol.cs" />
     <Compile Include="Model\CmsShop\ShopUrl.cs" />
     <Compile Include="Model\Companies\Company.cs" />
     <Compile Include="Model\Companies\Schedule.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="Model\Data\LocalizeResources.cs" />
     <Compile Include="Model\Data\PageModules.cs" />
     <Compile Include="Model\Data\Pages.cs" />
-    <Compile Include="Model\CmsGroup\Group.cs" />
     <Compile Include="Model\Resources\Feature.cs" />
     <Compile Include="Model\Resources\Imagen.cs" />
     <Compile Include="Model\Products\Campaign .cs" />

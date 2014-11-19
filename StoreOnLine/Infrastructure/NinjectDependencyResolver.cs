@@ -33,7 +33,9 @@ namespace StoreOnLine.Infrastructure
                 WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
             };
 
-            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope();
+            var user = System.Web.HttpContext.Current == null ? "System" : System.Web.HttpContext.Current.User.Identity.Name;
+
+            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope().WithConstructorArgument("user", user);
 
             _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
             _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();

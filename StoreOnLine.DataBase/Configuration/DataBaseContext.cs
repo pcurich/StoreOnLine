@@ -3,8 +3,8 @@ using System.Data.Entity;
 using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.CmsGender;
-using StoreOnLine.DataBase.Model.CmsGroup;
 using StoreOnLine.DataBase.Model.CmsLanguage;
+using StoreOnLine.DataBase.Model.CmsRol;
 using StoreOnLine.DataBase.Model.CmsShop;
 using StoreOnLine.DataBase.Model.Companies;
 using StoreOnLine.DataBase.Model.Products;
@@ -76,7 +76,7 @@ namespace StoreOnLine.DataBase.Configuration
 
         #region CmsFinal
         public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryGroup> CategoryGroups { get; set; }
+        public DbSet<CategoryRol> CategoryRols { get; set; }
         public DbSet<CategoryLang> CategoryLangs { get; set; }
         public DbSet<CategoryProduct> CategoryProducts { get; set; }
         public DbSet<CategoryShop> CategoryShops { get; set; }
@@ -84,17 +84,14 @@ namespace StoreOnLine.DataBase.Configuration
         public DbSet<Gender> Genders { get; set; }
         public DbSet<GenderLang> GenderLangs { get; set; }
 
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<GroupLang> GroupLangs { get; set; }
-
         public DbSet<Language> Languages { get; set; }
         public DbSet<LanguageShop> LanguageShops { get; set; }
 
         public DbSet<Shop> Shops { get; set; }
-        public DbSet<ShopGroup> ShopGroups { get; set; }
+        public DbSet<ShopRol> ShopRols { get; set; }
         public DbSet<ShopUrl> ShopUrls { get; set; }
 
-        public DbSet<Model.CmsRol.Rol> Rols { get; set; }
+        public DbSet<Rol> Rols { get; set; }
         public DbSet<Employer>  Employers { get; set; }
         public DbSet<EmployerShop> EmployerShops  { get; set; }
 

@@ -58,6 +58,7 @@ namespace StoreOnLine.Controllers
             {
                 userName = "pcurich";
             }
+            Service.SetCurrentUser(userName);
             Service.EmployerRepository.GetEmployersByName(userName);
             // ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
         }

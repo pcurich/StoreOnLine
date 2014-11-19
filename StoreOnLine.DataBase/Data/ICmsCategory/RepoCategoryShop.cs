@@ -6,8 +6,8 @@ namespace StoreOnLine.DataBase.Data.ICmsCategory
 {
     public class RepoCategoryShop : StoreRepository<CategoryShop>, ICategoryShop
     {
-        public RepoCategoryShop(DbContext dbContext)
-            : base(dbContext)
+        public RepoCategoryShop(DbContext dbContext, string user)
+            : base(dbContext,user)
         {
         }
 

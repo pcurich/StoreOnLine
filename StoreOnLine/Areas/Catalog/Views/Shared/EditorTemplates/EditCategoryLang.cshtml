@@ -5,8 +5,7 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(o=>o.UpdDate)
-        @Html.HiddenFor(o=>o.AddDate)
+        @Html.HiddenFor(o=>o.Id)
         <fieldset>
             <legend></legend>
             <div class="editor-label">
@@ -20,7 +19,7 @@
                 @Html.LabelFor(model => model.Description)
             </div>
             <div class="editor-field">
-                @Html.EditorFor(model => model.Description)
+                @Html.TextAreaFor(model => model.Description,new { @cols = 30, @rows = 10 })
                 @Html.ValidationMessageFor(model => model.Description)
             </div>
             <div class="editor-label">

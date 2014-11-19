@@ -8,8 +8,8 @@ namespace StoreOnLine.DataBase.Data.ICmsEmployer
     {
         private Employer _currentEmployer;
 
-        public RepoEmployer(DbContext dbContext)
-            : base(dbContext)
+        public RepoEmployer(DbContext dbContext, string user)
+            : base(dbContext,user)
         {
         }
 

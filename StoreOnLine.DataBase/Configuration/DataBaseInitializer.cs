@@ -39,12 +39,8 @@ namespace StoreOnLine.DataBase.Configuration
                 DataInitial.LoadLanguage(context, pathFile + "Language.xml");
                 DataInitial.LoadRol(context, pathFile + "Rol.xml");
                 DataInitial.LoadShop(context, pathFile + "Shop.xml");
-                
-                #region Group
-                DataInitial.LoadGroup(context, pathFile + "Group.xml");
-                DataInitial.LoadGroupLang(context, pathFile + "GroupLang.xml");
-                #endregion
-                
+
+
                 DataInitial.LoadEmployer(context, pathFile + "Employer.xml");
                 DataInitial.LoadEmployerShop(context, pathFile + "EmployerShop.xml");
                 //LoadImagen(context, pathImg);
@@ -105,7 +101,7 @@ namespace StoreOnLine.DataBase.Configuration
 
         #region LoadMethods
 
-        
+
 
         private static void LoadCategory(StoreOnLineContext context, String str)
         {
@@ -168,7 +164,7 @@ namespace StoreOnLine.DataBase.Configuration
             }
             context.SaveChanges();
         }
-       
+
         private static void LoadPersons(StoreOnLineContext context, string str)
         {
             var elemt = XmlSerialization<List<Person>>.Deserialize(str);

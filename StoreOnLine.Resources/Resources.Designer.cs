@@ -115,6 +115,33 @@ namespace StoreOnLine.Resources {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a CATEGORIA.
+        /// </summary>
+        public static string CategoryTitle {
+            get {
+                return ResourceManager.GetString("CategoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a CATEGORIES.
+        /// </summary>
+        public static string CategoryTitles {
+            get {
+                return ResourceManager.GetString("CategoryTitles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a View.
+        /// </summary>
+        public static string CategoryView {
+            get {
+                return ResourceManager.GetString("CategoryView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Click here.
         /// </summary>
         public static string LoginClick {
@@ -174,6 +201,15 @@ namespace StoreOnLine.Resources {
         public static string LoginTitle {
             get {
                 return ResourceManager.GetString("LoginTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
     }

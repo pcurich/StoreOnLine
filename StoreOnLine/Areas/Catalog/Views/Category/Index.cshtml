@@ -1,8 +1,11 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@(Html.Kendo().Grid<CategoryLang>().Name("CategoryGrid")
+<div class="panel panel-primary">
+    <div class="panel-heading">@StoreOnLine.Resources.Resources.CategoryTitle   <span class="badge">42</span></div>
+    <div class="panel-body">
+        
+        @(Html.Kendo().Grid<CategoryLang>().Name("CategoryGrid")
 .ToolBar(toolbar => toolbar.Create().Text(@StoreOnLine.Resources.Resources.CategoryCreate))
 .Events(events => events.Edit("EditCaption"))
 .Events(e => e.DataBound("onRowBound"))
@@ -16,7 +19,8 @@
     {
         comand.Edit();
         comand.Destroy();
-    }).Width(50);
+        comand.Custom(@StoreOnLine.Resources.Resources.CategoryView).Click("showCategory");
+    });//.Width(50);
 })
 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditCategoryLang"))
 .Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
@@ -24,9 +28,9 @@
 .Sortable()
 .ColumnMenu()
 .Navigatable()
-.Scrollable()
-.Resizable(resize => resize.Columns(true))   
-.HtmlAttributes(new { style = "height:430px;" })
+.Scrollable(p => p.Virtual(true))
+.Resizable(resize => resize.Columns(true))
+.HtmlAttributes(new { style = "height:550px;" })
 .Filterable()
 .DataSource(dataSource => dataSource
     .Ajax()
@@ -40,7 +44,8 @@
     .Destroy(d => d.Action("Delete", "Category"))
     )
 )
-
+    </div>
+</div>
 @section Scripts
 {
     <script type="text/javascript">
@@ -60,7 +65,7 @@
 
         function EditCaption(e) {
             $('.k-window-title').text('@StoreOnLine.Resources.Resources.CategoryCreate');
-            $('.k-grid-update').text('@StoreOnLine.Resources.Resources.CategoryEdit');
+            $('.k-grid-update').text('@StoreOnLine.Resources.Resources.Save');
             $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.CategoryCancel');
         };
 
@@ -69,5 +74,14 @@
             $(".k-grid-Delete").find("span").addClass("k-icon k-delete");
             $(".k-grid-View").find("span").addClass("k-icon km-view");
         }
+
+        function showCategory(e) {
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+            var url = '@Url.Action("Detail", "Category", new { categoryId = "__id__" })';
+            window.location.href = url.replace('__id__', dataItem.Id);
+        }
+
     </script>
 }

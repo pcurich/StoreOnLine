@@ -135,6 +135,15 @@
   <data name="CategoryNameStringLenght" xml:space="preserve">
     <value>Debe ser menos de 50 caracteres</value>
   </data>
+  <data name="CategoryTitle" xml:space="preserve">
+    <value>CATEGORIA</value>
+  </data>
+  <data name="CategoryTitles" xml:space="preserve">
+    <value>CATEGORIAS</value>
+  </data>
+  <data name="CategoryView" xml:space="preserve">
+    <value>Ver</value>
+  </data>
   <data name="LoginClick" xml:space="preserve">
     <value>Click Aqui</value>
   </data>
@@ -155,5 +164,8 @@
   </data>
   <data name="LoginTitle" xml:space="preserve">
     <value>Bienvenido a Chocolandia</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
   </data>
 </root>

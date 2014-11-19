@@ -1,14 +1,14 @@
-﻿using StoreOnLine.DataBase.Model.CmsGroup;
+﻿using StoreOnLine.DataBase.Model.CmsRol;
 
 namespace StoreOnLine.DataBase.Model.CmsShop
 {
-    public class ShopGroup : DataBaseId
+    public class ShopRol : DataBaseId
     {
         public Shop Shop { get; set; }
         public int ShopId { get; set; }
 
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
+        public int RolId { get; set; }
+        public Rol Rol { get; set; }
 
         public string Name { get; set; }//Default
         public bool SharedCustumer { get; set; }
