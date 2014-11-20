@@ -64,6 +64,10 @@
         #region Roles
 
         public static readonly string RolEnSuperAdmin = "SuperAdmin";
+        public static readonly string RolEnLogistica = "Logistica";
+        public static readonly string RolEnVendedor = "Vendedor";
+        public static readonly string RolEnTraductor = "Traductor"; 
+
                 
         #endregion
     }

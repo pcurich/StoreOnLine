@@ -5,28 +5,27 @@ using Kendo.Mvc.UI;
 using StoreOnLine.Controllers;
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.CmsCategory;
+using StoreOnLine.DataBase.Model.CmsRol;
 
 namespace StoreOnLine.Areas.Catalog.Controllers
 {
     public class CategoryController : BaseController
     {
-        public CategoryController(IUnitOfWork service)
-            : base(service)
+        public CategoryController(IUnitOfWork service): base(service)
         {
             Service.CategoryLangRepository.GetCategoryLangForCultura(1);
-
         }
         //
         // GET: /Catalog/Category/
         public ActionResult Index()
         {
-            Service.Commit();
             return View();
         }
 
+        [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(Service.CategoryLangRepository.GetAll().ToDataSourceResult(request));
+            return Json(Service.CategoryLangRepository.GetAll().ToDataSourceResult(request),JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -36,14 +35,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
             {
                 category.LanguageId = 149;//todo
                 Service.CategoryLangRepository.Add(category);
-                //Service.Commit();
-                //var rols = Service.RolRepository.GetRolByLanguage(149);
-                //foreach (var rol in rols)
-                //{
-                //    category.CategoryRols.Add(new CategoryRol { RolId = rol.Id, CategoryLangId = category.Id, Rol = rol });
-                //}
-                //Service.CategoryLangRepository.Update(category);
-                //Service.Commit();
+                Service.Commit();
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
@@ -54,6 +46,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
             if (category != null && ModelState.IsValid)
             {
                 Service.CategoryLangRepository.Update(category);
+                Service.Commit();
             }
             return Json(new[] { category }.ToDataSourceResult(request, ModelState));
         }
@@ -70,19 +63,22 @@ namespace StoreOnLine.Areas.Catalog.Controllers
 
         public ActionResult Detail(int categoryId)
         {
+            
             var category = Service.CategoryLangRepository.GetById(categoryId);
+            var categoryRol = Service.CategoryRolRepository.GetAll().Where(o => o.CategoryLangId == categoryId);
             var rols = Service.RolRepository.GetRolByLanguage(149);
-            foreach (var rol in rols)
+            category.AddRols(rols, categoryId);
+
+            if (categoryRol.Any())
             {
-                category.CategoryRols.Add(new CategoryRol { RolId = rol.Id, CategoryLangId = categoryId, Rol = rol});
+                return View(category);
             }
+            
+            Service.Commit();
+
             return View(category);
         }
-
-        public ActionResult ReadRol([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(Service.CategoryRolRepository.GetAll().ToDataSourceResult(request));
-        }
+ 
 
         protected override void Dispose(bool disposing)
         {

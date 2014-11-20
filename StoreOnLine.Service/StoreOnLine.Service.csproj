@@ -87,10 +87,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StoreOnLine.DataBase\StoreOnLine.DataBase.csproj">
-      <Project>{888f27bc-b38c-486f-98a2-ece55ae6b349}</Project>
-      <Name>StoreOnLine.DataBase</Name>
-    </ProjectReference>
     <ProjectReference Include="..\StoreOnLine.Util\StoreOnLine.Util.csproj">
       <Project>{d81aa3ac-7e3c-4fcb-ac24-e6d9b1e5d28b}</Project>
       <Name>StoreOnLine.Util</Name>

@@ -204,6 +204,10 @@
       <Project>{830f08f8-3eb2-4862-a05d-7751700122a5}</Project>
       <Name>StoreOnLine.Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StoreOnLine.Service\StoreOnLine.Service.csproj">
+      <Project>{af343ce3-3cac-4ab4-90bf-1f5ff73bf2d7}</Project>
+      <Name>StoreOnLine.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StoreOnLine.Util\StoreOnLine.Util.csproj">
       <Project>{d81aa3ac-7e3c-4fcb-ac24-e6d9b1e5d28b}</Project>
       <Name>StoreOnLine.Util</Name>

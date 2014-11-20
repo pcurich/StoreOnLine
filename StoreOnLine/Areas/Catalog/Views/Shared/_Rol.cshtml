@@ -1,19 +1,23 @@
-﻿<div class="col-lg-10">
-    @(Html.Kendo().Grid<CategoryRol>().Name("RolGrid")
-.Editable(editable => editable.Mode(GridEditMode.InLine))
-.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
-.Columns(columns =>
-{
-    columns.Bound(p => p.HasPermition);//.Width(100);
-    columns.Bound(p => p.Id);//.Width(12);
-    columns.Bound(p => p.Rol.Name);//.Width(50);
-})
-.Resizable(resize => resize.Columns(true))
-.DataSource(dataSource => dataSource
-    .Ajax()
-    .ServerOperation(false)
-    .Model(model => model.Id(p => p.Id))
-    //.Read(r => r.Action("ReadRol", "Category")).AutoSync(true)
-    )
-      )
+﻿@model IEnumerable<CategoryRol>
+
+<div class="col-lg-10">
+    <table id="DataTableCategory" class="table table-striped ">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Id</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>@item.Id</td>
+                    <td>@item.Rol.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

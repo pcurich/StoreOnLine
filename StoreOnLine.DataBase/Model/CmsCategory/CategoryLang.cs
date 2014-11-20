@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using StoreOnLine.DataBase.Model.CmsLanguage;
+using StoreOnLine.DataBase.Model.CmsRol;
 
 namespace StoreOnLine.DataBase.Model.CmsCategory
 {
@@ -23,9 +24,13 @@ namespace StoreOnLine.DataBase.Model.CmsCategory
 
         public IList<CategoryRol> CategoryRols { get; set; }
 
-        public CategoryLang()
+        public void  AddRols(IEnumerable<Rol> rols, int categoryId)
         {
-            CategoryRols= new List<CategoryRol>();
+            CategoryRols = new List<CategoryRol>();
+            foreach (var rol in rols)
+            {
+                CategoryRols.Add(new CategoryRol { Active = true, RolId = rol.Id, CategoryLangId = categoryId, Rol = rol});
+            }
         }
 
     }
