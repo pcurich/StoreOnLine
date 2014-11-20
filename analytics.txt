@@ -1,0 +1,6 @@
+
+Comercio electrónico mejorado: seguimiento web (analytics.js)
+https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce
+
+Diez métricas esenciales de e-commerce para Google Analytics
+http://www.prestashop.com/blog/es/diez-metricas-esenciales-de-e-commerce-para-google-analytics/#Buy-to-Detail-Rate

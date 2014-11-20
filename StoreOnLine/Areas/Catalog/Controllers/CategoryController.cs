@@ -79,12 +79,5 @@ namespace StoreOnLine.Areas.Catalog.Controllers
             return View(category);
         }
  
-
-        protected override void Dispose(bool disposing)
-        {
-            Service.Commit();
-            base.Dispose(disposing);
-        }
-
     }
 }

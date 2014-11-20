@@ -27,12 +27,12 @@ namespace StoreOnLine.DataBase.Data
         protected DbContext DbContext { get; set; }
         protected DbSet<T> DbSet { get; set; }
 
-        public virtual IQueryable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
             return DbSet;
         }
 
-        public virtual T GetById(int id)
+        public T GetById(int id)
         {
             return DbSet.Find(id);
         }
