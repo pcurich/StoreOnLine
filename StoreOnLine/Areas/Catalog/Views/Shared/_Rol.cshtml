@@ -4,7 +4,8 @@
     <table id="DataTableCategoryRol" class="table table-striped ">
         <thead>
             <tr>
-                <th>http://viralpatel.net/blogs/multiple-checkbox-select-deselect-jquery-tutorial-example/</th>
+                <th>
+                    <input type="checkbox" id="selectall" /></th>
                 <th>Id</th>
                 <th>Rol</th>
             </tr>
@@ -13,7 +14,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.CheckBox(item.Rol.Name, new { onchange = "SomeMethod(this)" })</td>
+                    <td>@Html.CheckBox("case", item.HasPermition, new { onchange = "SomeMethod(this)", id = @item.Rol.Id, @class = "case" })</td>
                     <td>@item.Rol.Id</td>
                     <td>@item.Rol.Name</td>
                 </tr>
@@ -22,8 +23,30 @@
     </table>
 </div>
 
-
 <script type="text/javascript">
+    $(function () {
+
+        // add multiple select / deselect functionality
+        $("#selectall").click(function () {
+
+            $('.case').prop('checked', this.checked);
+        });
+
+        // if all checkbox are selected, check the selectall checkbox
+        // and viceversa
+        $(".case").click(function () {
+
+            if ($(".case").length == $(".case:checked").length) {
+                $("#selectall").prop("checked", true);
+            } else {
+                $("#selectall").prop("checked", false);
+            }
+
+        });
+    });
+
+
+
     function SomeMethod(checkboxInput) {
         alert("checkedChanged" + checkboxInput);
         //$.ajax({
