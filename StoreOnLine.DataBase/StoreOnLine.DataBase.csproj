@@ -112,6 +112,8 @@
     <Compile Include="Data\ICmsEmployer\IEmployerShop.cs" />
     <Compile Include="Data\ICmsEmployer\RepoEmployer.cs" />
     <Compile Include="Data\ICmsEmployer\RepoEmployerShop.cs" />
+    <Compile Include="Data\ICmsLanguage\ILanguage.cs" />
+    <Compile Include="Data\ICmsLanguage\RepoLanguage.cs" />
     <Compile Include="Data\ICmsRol\IRol.cs" />
     <Compile Include="Data\ICmsRol\RepoRol.cs" />
     <Compile Include="Data\IRepository.cs" />

@@ -3,16 +3,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var ajaxOptions = new AjaxOptions
     {
-
+        Url = Url.Action("Detail", "Category"),
+        LoadingElementDuration = 1000,
+        LoadingElementId = "loading",
+        HttpMethod = "Post",
+        OnSuccess = "OnSuccess"
     };
 }
 
 <div class="container-fluid">
-    <div class="panel panel-primary">
-        <div class="panel-heading">@StoreOnLine.Resources.Resources.CategoryTitle</div>
-        <div class="panel-body">
-            @using (Ajax.BeginForm("Edit", "AdminCategory", ajaxOptions, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
-            {
+    @using (Ajax.BeginForm("Detail", "Category", ajaxOptions, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">@StoreOnLine.Resources.Resources.CategoryTitle</div>
+            <div class="panel-body">
+
                 @Html.HiddenFor(o => o.Id)
                 <div class="form-group">
                     @Html.LabelFor(o => o.Name, htmlAttributes: new { @class = "col-lg-2 control-label" })
@@ -24,7 +29,9 @@
                 <div class="form-group">
                     @Html.LabelFor(o => o.Active, htmlAttributes: new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
-                        @Html.CheckBoxFor(o => o.Active)
+                        <div class="bootstrap-switch bootstrap-switch-small">
+                            @Html.CheckBoxFor(m => m.Active)
+                        </div>
                     </div>
                 </div>
 
@@ -69,11 +76,29 @@
                         @{ Html.RenderPartial("_Rol", Model.CategoryRols); }
                     </div>
                 </div>
-            }
+
+            </div>
         </div>
-    </div>
-    <div class="panel-footer">
-        <a href='@Url.Action("Index", "Category")' class="btn btn-primary">Regresar</a>
-    </div>
+        <div class="panel-footer">
+            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <div id="loading" class="ui-icon-loading" style="display: none">
+                <p>Loading Data</p>
+            </div>
+            @Html.ActionLink("Regresar", "Index", new { @class = "btn btn-default" })
+        </div>
+    }
 </div>
 
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function OnSuccess(data) {
+            var salida = '@TempData["message"]';
+            console.log(salida);
+            //$.notify("ui-loader-default", "Do not press this button" + salida, "success");
+            alert("This is the OnSuccessCallback: " + salida);
+        }
+    </script>
+}

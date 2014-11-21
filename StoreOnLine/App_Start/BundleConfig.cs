@@ -13,8 +13,10 @@ namespace StoreOnLine
                 "~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
-                "~/Scripts/bootstrap.js"));
-            
+                "~/Scripts/bootstrap.js",
+                "~/Scripts/bootstrap-switch.js",
+                "~/Scripts/notify.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
               "~/Scripts/jquery.unobtrusive*",
@@ -46,7 +48,8 @@ namespace StoreOnLine
 
             bundles.Add(new StyleBundle("~/bundles/bootstrap").Include(
               "~/Content/bootstrap.css",
-              "~/Content/bootstrap-theme.css"));
+              "~/Content/bootstrap-theme.css",
+              "~/Content/bootstrap-switch/bootstrap3/bootstrap-switch.css"));//todo cambiar esto no necesito la version 2, hacerlo como el js
 
             bundles.Add(new StyleBundle("~/bundles/kendocss").Include(
                 "~/Content/kendo/2014.2.716/kendo.common-bootstrap.min.css",

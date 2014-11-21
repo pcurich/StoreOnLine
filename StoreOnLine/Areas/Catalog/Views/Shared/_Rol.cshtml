@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<CategoryRol>
 
 <div class="col-lg-10">
-    <table id="DataTableCategory" class="table table-striped ">
+    <table id="DataTableCategoryRol" class="table table-striped ">
         <thead>
             <tr>
-                <th></th>
+                <th>http://viralpatel.net/blogs/multiple-checkbox-select-deselect-jquery-tutorial-example/</th>
                 <th>Id</th>
                 <th>Rol</th>
             </tr>
@@ -13,11 +13,25 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td><input type="checkbox"/></td>
-                    <td>@item.Id</td>
+                    <td>@Html.CheckBox(item.Rol.Name, new { onchange = "SomeMethod(this)" })</td>
+                    <td>@item.Rol.Id</td>
                     <td>@item.Rol.Name</td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+
+<script type="text/javascript">
+    function SomeMethod(checkboxInput) {
+        alert("checkedChanged" + checkboxInput);
+        //$.ajax({
+        //    type: 'POST',
+        //    url: Your / Action,
+        //    data: { newValue: checkboxInput.checked },
+        //    success: success,
+        //    dataType: 'json'
+        //});
+    }
+</script>

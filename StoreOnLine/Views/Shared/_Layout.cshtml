@@ -13,10 +13,11 @@
     @Styles.Render("~/bundles/kendocss")
     @Styles.Render("~/bundles/Site")
 
-    @Scripts.Render("~/bundles/bootstrapjs")
+    
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/kendojs")
+    @Scripts.Render("~/bundles/bootstrapjs")
     @Scripts.Render("~/bundles/SiteJs")
 
 
@@ -25,6 +26,17 @@
         function myAlert() {
             $.notify("Do not press this button", '@TempData["message"]');
         }
+
+        $(document).ready(function () {
+            $('#Active').bootstrapSwitch({
+                size: 'small',
+                onText: 'Si',
+                offText: 'No',
+                onColor: 'success',
+                offColor: 'danger',
+                radioAllOff: 'false'
+            });
+        });
 
     </script>
 

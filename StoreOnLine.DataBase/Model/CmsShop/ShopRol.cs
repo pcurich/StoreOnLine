@@ -2,7 +2,7 @@
 
 namespace StoreOnLine.DataBase.Model.CmsShop
 {
-    public class ShopRol : DataBaseId
+    public class ShopRol : DataBaseId//todo revisar si esto deberia ir o no 
     {
         public Shop Shop { get; set; }
         public int ShopId { get; set; }

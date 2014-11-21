@@ -15,10 +15,5 @@ namespace StoreOnLine.DataBase.Data.ICmsCategory
         {
             return GetAll().Where(o => o.LanguageId == languageId);
         }
-
-        public void dd()
-        {
-            
-        }
     }
 }

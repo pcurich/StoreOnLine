@@ -38,8 +38,17 @@ namespace StoreOnLine.Controllers
             cultureName = CultureHelper.GetImplementedCulture(cultureName); // This is safe
 
             // Modify current thread's cultures            
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName);
-            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(cultureName); //es-PE
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture; //es-ES
+
+            if (cultureName.Length == 2) //es  o  es-PE
+            {
+                Service.LanguageRepository.GetLanguageByTwoLetter(cultureName);
+            }
+            else
+            {
+                Service.LanguageRepository.GetLanguageByCultura(cultureName);
+            }
 
             cultureName = CultureHelper.GetImplementedCulture(cultureName);
             RouteData.Values["culture"] = cultureName;
