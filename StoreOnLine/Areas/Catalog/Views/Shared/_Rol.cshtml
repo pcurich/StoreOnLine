@@ -14,7 +14,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.CheckBox("case", item.HasPermition, new { onchange = "SomeMethod(this)", id = @item.Rol.Id, @class = "case" })</td>
+                    <td>@Html.CheckBox("case", item.HasPermition, new { onchange = "SomeMethod(" + @item.Rol.Id + ")", id = @item.Rol.Id, @class = "case" })</td>
                     <td>@item.Rol.Id</td>
                     <td>@item.Rol.Name</td>
                 </tr>
@@ -48,13 +48,16 @@
 
 
     function SomeMethod(checkboxInput) {
-        alert("checkedChanged" + checkboxInput);
-        //$.ajax({
-        //    type: 'POST',
-        //    url: Your / Action,
-        //    data: { newValue: checkboxInput.checked },
-        //    success: success,
-        //    dataType: 'json'
-        //});
+        var idRol = $(checkboxInput)[0];
+        //alert("checkedChanged" + checkboxInput.Id);
+        var url = '@Url.Action("UpdateCategoryRol", new { categoryId = 1, rolId = "__id__" })';
+        var data = {categoryId: @Model.ElementAt(0).CategoryLangId , rolId: idRol};
+        $.ajax({
+            type: 'POST',
+            url: url.replace('__id__', idRol),
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+
+        });
     }
 </script>

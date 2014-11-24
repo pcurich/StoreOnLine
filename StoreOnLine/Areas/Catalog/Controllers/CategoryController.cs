@@ -87,14 +87,24 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Detail(CategoryLang category)
+        public ActionResult Detail(CategoryLang model)
         {
-            if (category != null && ModelState.IsValid)
+            if (model != null && ModelState.IsValid)
             {
-                Service.CategoryLangRepository.Update(category);
+                Service.CategoryLangRepository.Update(model);
                 Service.Commit();
             }
             return View();
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UpdateCategoryRol(int categoryId, int rolId)
+        {
+            var category =Service.CategoryRolRepository.GetAll()
+                .First(o => o.CategoryLangId == categoryId && o.RolId == rolId);
+            category.HasPermition = !category.HasPermition;
+            Service.Commit();
+            return Json("OK", JsonRequestBehavior.AllowGet);
         }
 
     }
