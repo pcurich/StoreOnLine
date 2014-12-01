@@ -65,11 +65,12 @@ namespace StoreOnLine.Areas.Merchant.Controllers
 
             if (company != null && schedule != null && company.HasSchedule)
             {
-                if (schedule.ScheduleTo.DayOfYear > DateTime.Now.DayOfYear)
+                if (schedule.ScheduleFrom.DayOfYear < DateTime.Now.DayOfYear && 
+                    schedule.ScheduleTo.DayOfYear < DateTime.Now.DayOfYear)
                 {
                     schedule.IsDone = true;
-                    schedule.Company = null;
-                    schedule.ScheduleDetails = null;
+                    //schedule.Company = null;
+                    //schedule.ScheduleDetails = null;
                     _repositorySchedule.SaveSchedule(schedule);
 
                     var newCompany = _repositoryCompany.Companies.FirstOrDefault(o => o.Id == companyId);
@@ -79,10 +80,10 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                         if (restantes == 0)
                         {
                             company.StatusOfSchedule = StatusOfSchedule.SinRequerimientos.ToString();
-                            company.Schedules = null;
-                            company.Address = null;
-                            company.ContactNumber = null;
-                            company.Person = null;
+                            //company.Schedules = null;
+                            //company.Address = null;
+                            //company.ContactNumber = null;
+                            //company.Person = null;
                             _repositoryCompany.SaveCompany(company);
                         }
                     }
@@ -95,7 +96,7 @@ namespace StoreOnLine.Areas.Merchant.Controllers
                 if (schedule.ScheduleDetails != null)
                 {
                     var details =
-                        schedule.ScheduleDetails.Where(o => o.TimeStart.Day == DateTime.Now.Day)
+                        schedule.ScheduleDetails.Where(o => o.TimeStart.DayOfYear == DateTime.Now.DayOfYear)
                             .Select(o => new ScheduleDetailView().ToView(o)).OrderByDescending(o => o.Id).Take(1).FirstOrDefault();
 
                     ViewBag.Person = GetPersonList(details != null ? details.PersonId.ToString() : null);

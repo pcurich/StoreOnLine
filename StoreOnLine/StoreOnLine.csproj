@@ -660,6 +660,7 @@
     <Compile Include="Areas\Merchant\Models\ScheduleDetailView.cs" />
     <Compile Include="Areas\Merchant\Models\ScheduleView.cs" />
     <Compile Include="Areas\Report\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Report\Models\Day.cs" />
     <Compile Include="Areas\Report\ReportAreaRegistration.cs" />
     <Compile Include="Areas\Security\Controllers\AccountController.cs" />
     <Compile Include="Areas\Security\Controllers\PersonController.cs" />
@@ -735,7 +736,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Management\Views\AdminImg\" />
     <Folder Include="Areas\Merchant\Views\Shared\" />
-    <Folder Include="Areas\Report\Models\" />
     <Folder Include="Areas\Report\Views\Shared\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Areas\Security\Views\User\" />
