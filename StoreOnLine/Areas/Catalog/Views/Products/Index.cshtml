@@ -1,0 +1,99 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        @{Html.RenderPartial("_BreadCrumb", new StoreOnLine.HtmlHelpers.PageTitleHelpers(
+              (string)ViewBag.Big,
+              (string)ViewBag.Small,
+              (string)ViewBag.Area,
+              (string)ViewBag.Controller,
+              (string)ViewBag.Action)
+              );}
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@StoreOnLine.Resources.Resources.ProductTitle   <span class="badge">42</span></div>
+    <div class="panel-body">
+
+        @(Html.Kendo().Grid<ProductLang>().Name("ProductGrid")
+.ToolBar(toolbar => toolbar.Create().Text(@StoreOnLine.Resources.Resources.ProductCreate))
+.Events(events => events.Edit("EditCaption"))
+.Events(e => e.DataBound("onRowBound"))
+.Columns(columns =>
+{
+    columns.Bound(p => p.Id);//.Width(12);
+    columns.Bound(p => p.Name);//.Width(50);
+    columns.Bound(p => p.Description);//.Width(100);
+    columns.Bound(p => p.Active);//.Width(40);
+    columns.Command(comand =>
+    {
+        comand.Edit();
+        comand.Destroy();
+        comand.Custom(@StoreOnLine.Resources.Resources.View).Click("showProduct");
+    });//.Width(50);
+})
+.Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditProductLang"))
+.Selectable(selectable => selectable.Mode(GridSelectionMode.Multiple))
+.Pageable()
+.Sortable()
+.ColumnMenu()
+.Navigatable()
+.Scrollable(p => p.Virtual(true))
+.Resizable(resize => resize.Columns(true))
+.HtmlAttributes(new { style = "height:550px;" })
+.Filterable()
+.DataSource(dataSource => dataSource
+    .Ajax()
+    .ServerOperation(false)
+    .PageSize(15)
+    .Events(events => events.Error("error_handler"))
+    .Model(model => model.Id(p => p.Id))
+    .Create(c => c.Action("Create", "Products"))
+    .Read(r => r.Action("Read", "Products"))
+    .Update(u => u.Action("Update", "Products"))
+    .Destroy(d => d.Action("Delete", "Products"))
+    )
+)
+    </div>
+</div>
+@section Scripts
+{
+    <script type="text/javascript">
+        function error_handler(e) {
+            if (e.errors) {
+                var message = "Errors:\n";
+                $.each(e.errors, function (key, value) {
+                    if ('errors' in value) {
+                        $.each(value.errors, function () {
+                            message += this + "\n";
+                        });
+                    }
+                });
+                alert(message);
+            }
+        };
+
+        function EditCaption(e) {
+            $('.k-window-title').text('@StoreOnLine.Resources.Resources.ProductCreate');
+            $('.k-grid-update').text('@StoreOnLine.Resources.Resources.Save');
+            $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.Cancel');
+        };
+
+        function onRowBound(e) {
+            $(".k-grid-edit").find("span").addClass("k-icon k-edit");
+            $(".k-grid-Delete").find("span").addClass("k-icon k-delete");
+            $(".k-grid-View").find("span").addClass("k-icon km-view");
+        }
+
+        function showProduct(e) {
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+
+            var url = '@Url.Action("Detail", "Product", new { ProductId = "__id__" })';
+            window.location.href = url.replace('__id__', dataItem.Id);
+        }
+
+    </script>
+}

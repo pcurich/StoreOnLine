@@ -4,6 +4,7 @@ using StoreOnLine.DataBase.Model.CmsCategory;
 using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.CmsGender;
 using StoreOnLine.DataBase.Model.CmsLanguage;
+using StoreOnLine.DataBase.Model.CmsProduct;
 using StoreOnLine.DataBase.Model.CmsRol;
 using StoreOnLine.DataBase.Model.CmsShop;
 using StoreOnLine.DataBase.Model.Companies;
@@ -32,8 +33,7 @@ namespace StoreOnLine.DataBase.Configuration
             //Configuration.ValidateOnSaveEnabled = true;
         }
 
-        public DbSet<ProductBase> ProductBases { get; set; }
-        public DbSet<ProductComposite> ProductComposites { get; set; }
+        
 
         public DbSet<Campaign> Campaigns { get; set; }
         public DbSet<Unit> Units { get; set; }
@@ -94,6 +94,9 @@ namespace StoreOnLine.DataBase.Configuration
         public DbSet<Rol> Rols { get; set; }
         public DbSet<Employer>  Employers { get; set; }
         public DbSet<EmployerShop> EmployerShops  { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<ProductLang> ProductLangs { get; set; }
 
         #endregion
     }

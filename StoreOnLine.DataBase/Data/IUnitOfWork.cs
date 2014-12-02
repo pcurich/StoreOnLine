@@ -1,9 +1,9 @@
 ﻿using StoreOnLine.DataBase.Data.ICmsCategory;
 using StoreOnLine.DataBase.Data.ICmsEmployer;
 using StoreOnLine.DataBase.Data.ICmsLanguage;
+using StoreOnLine.DataBase.Data.ICmsProduct;
 using StoreOnLine.DataBase.Data.ICmsRol;
 using StoreOnLine.DataBase.Model.CmsCategory;
-using StoreOnLine.DataBase.Model.CmsRol;
 
 namespace StoreOnLine.DataBase.Data
 {
@@ -27,6 +27,11 @@ namespace StoreOnLine.DataBase.Data
         ICategoryShop CategoryShopRepository { get; }
         IRepository<CategoryRol> CategoryRolRepository { get; }
         IRepository<CategoryProduct> CategoryProductRepository { get; }//todo
+        #endregion
+
+        #region Products
+        IProduct ProductRepository { get; }
+        IProductLang ProductLangRepository { get; }
         #endregion
 
         #region Rol

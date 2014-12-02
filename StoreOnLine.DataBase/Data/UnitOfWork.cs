@@ -3,6 +3,7 @@ using StoreOnLine.DataBase.Configuration;
 using StoreOnLine.DataBase.Data.ICmsCategory;
 using StoreOnLine.DataBase.Data.ICmsEmployer;
 using StoreOnLine.DataBase.Data.ICmsLanguage;
+using StoreOnLine.DataBase.Data.ICmsProduct;
 using StoreOnLine.DataBase.Data.ICmsRol;
 using StoreOnLine.DataBase.Model.CmsCategory;
 
@@ -112,6 +113,22 @@ namespace StoreOnLine.DataBase.Data
         public ILanguage LanguageRepository
         {
             get { return _languageRepository ?? (_languageRepository = new RepoLanguage(DbContext, _user)); }
+        }
+
+        #endregion
+
+        #region
+        private IProduct _productRepository;
+        public IProduct ProductRepository
+        {
+            get { return _productRepository ?? (_productRepository = new RepoProduct(DbContext, _user)); }
+        }
+
+        private IProductLang _productLangRepository;
+
+        public IProductLang ProductLangRepository
+        {
+            get { return _productLangRepository ?? (_productLangRepository = new RepoProductLang(DbContext, _user)); }
         }
 
         #endregion

@@ -31,7 +31,7 @@
     {
         comand.Edit();
         comand.Destroy();
-        comand.Custom(@StoreOnLine.Resources.Resources.CategoryView).Click("showCategory");
+        comand.Custom(@StoreOnLine.Resources.Resources.View).Click("showCategory");
     });//.Width(50);
 })
 .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("EditCategoryLang"))
@@ -78,7 +78,7 @@
         function EditCaption(e) {
             $('.k-window-title').text('@StoreOnLine.Resources.Resources.CategoryCreate');
             $('.k-grid-update').text('@StoreOnLine.Resources.Resources.Save');
-            $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.CategoryCancel');
+            $('.k-grid-cancel').text('@StoreOnLine.Resources.Resources.Cancel');
         };
 
         function onRowBound(e) {

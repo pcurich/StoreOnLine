@@ -74,21 +74,7 @@ namespace StoreOnLine.DataBase.Configuration
 
         public class StoreOnLineInitializerCreateDatabaseIfNotExists : CreateDatabaseIfNotExists<StoreOnLineContext>
         {
-            protected override void Seed(StoreOnLineContext context)
-            {
-                var pbs = new List<ProductBase>
-                {
-                    new ProductBase {ProductName = "Football", ProductBasePrice = 25M, ProductSupplierId = 1},
-                    new ProductBase {ProductName = "Surf board", ProductBasePrice = 179M, ProductSupplierId = 1},
-                    new ProductBase {ProductName = "Running shoes", ProductBasePrice = 95M, ProductSupplierId = 1}
-                };
-
-                foreach (var pb in pbs)
-                {
-                    context.ProductBases.Add(pb);
-                }
-
-            }
+            
 
             public override void InitializeDatabase(StoreOnLineContext context)
             {

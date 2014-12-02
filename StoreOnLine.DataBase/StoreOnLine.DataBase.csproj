@@ -75,32 +75,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Abstract\ICampaingRepository.cs" />
-    <Compile Include="Abstract\ICartRepository.cs" />
-    <Compile Include="Abstract\ICategoryRepository.cs" />
-    <Compile Include="Abstract\ICompanyRepository.cs" />
-    <Compile Include="Abstract\IImagenRepository.cs" />
-    <Compile Include="Abstract\IOrderProcessor.cs" />
-    <Compile Include="Abstract\IPersonRepository.cs" />
-    <Compile Include="Abstract\IProductsRepository.cs" />
-    <Compile Include="Abstract\IScheduleRepository.cs" />
-    <Compile Include="Abstract\ISecurityRepository.cs" />
-    <Compile Include="Abstract\ISupplierRepository.cs" />
-    <Compile Include="Abstract\IUbigeoRepository.cs" />
-    <Compile Include="Abstract\IUnitRepository.cs" />
-    <Compile Include="Concrete\CartRepository.cs" />
-    <Compile Include="Concrete\EFCategoryRepository.cs" />
-    <Compile Include="Concrete\EFCompanyRepository.cs" />
-    <Compile Include="Concrete\EFImagenRepository.cs" />
-    <Compile Include="Concrete\EFPersonRepository.cs" />
-    <Compile Include="Concrete\EFProductRepository.cs" />
-    <Compile Include="Concrete\EFCampaingRepository.cs" />
-    <Compile Include="Concrete\EFScheduleRepository.cs" />
-    <Compile Include="Concrete\EFSecurityRepository.cs" />
-    <Compile Include="Concrete\EFSupplierRepository.cs" />
-    <Compile Include="Concrete\EFUbigeoRepository.cs" />
-    <Compile Include="Concrete\EFUnitRepository.cs" />
-    <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Const\ObjectName.cs" />
     <Compile Include="Data\ICmsCategory\ICategory.cs" />
     <Compile Include="Data\ICmsCategory\ICategoryLang.cs" />
@@ -114,6 +88,10 @@
     <Compile Include="Data\ICmsEmployer\RepoEmployerShop.cs" />
     <Compile Include="Data\ICmsLanguage\ILanguage.cs" />
     <Compile Include="Data\ICmsLanguage\RepoLanguage.cs" />
+    <Compile Include="Data\ICmsProduct\IProduct.cs" />
+    <Compile Include="Data\ICmsProduct\IProductLang.cs" />
+    <Compile Include="Data\ICmsProduct\RepoProduct.cs" />
+    <Compile Include="Data\ICmsProduct\RepoProductLang.cs" />
     <Compile Include="Data\ICmsRol\IRol.cs" />
     <Compile Include="Data\ICmsRol\RepoRol.cs" />
     <Compile Include="Data\IRepository.cs" />
@@ -123,6 +101,7 @@
     <Compile Include="Default\Sources.cs" />
     <Compile Include="Configuration\DataBaseConfiguration.cs" />
     <Compile Include="Configuration\DataBaseContext.cs" />
+    <Compile Include="Model\CmsProduct\ProductLang.cs" />
     <Compile Include="Model\DataBaseId.cs" />
     <Compile Include="Configuration\DataBaseInitializer.cs" />
     <Compile Include="Configuration\DataInitial.cs" />

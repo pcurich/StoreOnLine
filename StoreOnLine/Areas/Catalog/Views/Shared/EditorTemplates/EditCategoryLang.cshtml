@@ -1,34 +1,30 @@
 ﻿@model CategoryLang
 
 <div class="container-fluid">
-    @using (Html.BeginForm())
+    @using (Html.BeginForm(new { @class = "form-horizontal" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(o=>o.Id)
-        <fieldset>
-            <legend></legend>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Name)
+        @Html.HiddenFor(o => o.Id)
+
+        <div class="row form-group">
+            @Html.LabelFor(o => o.Name, htmlAttributes: new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.EditorFor(o => o.Name, new { htmlAttributes = new { @class = "form-control" } })
             </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="row form-group">
+            @Html.LabelFor(o => o.Description, htmlAttributes: new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.TextAreaFor(o => o.Description, new { @class = "form-control", @rows = 10, @cols = 40 })
             </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Description)
+        </div>
+        <div class=" row form-group">
+            @Html.LabelFor(o => o.Active, htmlAttributes: new { @class = "col-lg-2 control-label" })
+            <div class="col-lg-10">
+                @Html.CheckBoxFor(o => o.Active)
             </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.Description,new { @cols = 30, @rows = 10 })
-                @Html.ValidationMessageFor(model => model.Description)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Active)
-            </div>
-            <div class="editor-field">
-                @Html.CheckBoxFor(model => model.Active)
-                @Html.ValidationMessageFor(model => model.Active)
-            </div>
-        </fieldset>
+        </div>
     }
 </div>

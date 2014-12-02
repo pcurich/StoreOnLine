@@ -12,7 +12,7 @@ namespace StoreOnLine.DataBase.Model.Shopping
         {
             get
             {
-                if (Product != null) return Product.ProductSalePrice*Quantity;
+                if (Product != null) return Product.Price*Quantity;
                 return 0;
             }
         }

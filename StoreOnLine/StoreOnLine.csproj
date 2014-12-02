@@ -1259,6 +1259,8 @@
     <Content Include="Areas\Catalog\Views\Shared\EditorTemplates\EditCategoryLang.cshtml" />
     <Content Include="Areas\Catalog\Views\Category\Detail.cshtml" />
     <Content Include="Areas\Catalog\Views\Shared\_Rol.cshtml" />
+    <Content Include="Areas\Catalog\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Catalog\Views\Shared\EditorTemplates\EditProductLang.cshtml" />
     <None Include="Scripts\jquery-1.11.1.intellisense.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.js" />
     <Content Include="Scripts\DataTables-1.10.2\dataTables.autoFill.min.js" />
@@ -1529,7 +1531,6 @@
     <Folder Include="Areas\Catalog\Views\Features\" />
     <Folder Include="Areas\Catalog\Views\Manufacturers\" />
     <Folder Include="Areas\Catalog\Views\Monitoring\" />
-    <Folder Include="Areas\Catalog\Views\Products\" />
     <Folder Include="Areas\Catalog\Views\Product\" />
     <Folder Include="Areas\Catalog\Views\Suppliers\" />
     <Folder Include="Areas\Catalog\Views\Tags\" />

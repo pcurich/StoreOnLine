@@ -11,7 +11,8 @@ namespace StoreOnLine.Areas.Catalog.Controllers
 {
     public class CategoryController : BaseController
     {
-        public CategoryController(IUnitOfWork service) : base(service)
+        public CategoryController(IUnitOfWork service)
+            : base(service)
         {
             DummySeo("Categorias");
         }
@@ -114,7 +115,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
             }
 
             return Redirect("Index");
-            
+
         }
     }
 }

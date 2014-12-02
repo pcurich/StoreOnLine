@@ -3,11 +3,11 @@ using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using StoreOnLine.DataBase.Concrete;
+
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.Configuration;
 using StoreOnLine.DataBase.Model.Products;
-using StoreOnLine.DataBase.Abstract;
+
 using StoreOnLine.Infrastructure.Abstract;
 using StoreOnLine.Infrastructure.Concrete;
 using StoreOnLine.Models;
@@ -37,19 +37,19 @@ namespace StoreOnLine.Infrastructure
 
             _kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope().WithConstructorArgument("user", user);
 
-            _kernel.Bind<IProductsRepository>().To<ProductsRepository>();
-            _kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
-            _kernel.Bind<ICampaingRepository>().To<CampaingRepository>();
-            _kernel.Bind<IUnitRepository>().To<UnitRepository>();
-            _kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+            //_kernel.Bind<IProductsRepository>().To<ProductsRepository>();
+            //_kernel.Bind<ICategoryRepository>().To<CategoryRepository>();
+            //_kernel.Bind<ICampaingRepository>().To<CampaingRepository>();
+            //_kernel.Bind<IUnitRepository>().To<UnitRepository>();
+            //_kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
             _kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
-            _kernel.Bind<IImagenRepository>().To<ImagenRepository>();
-            _kernel.Bind<ISupplierRepository>().To<SupplierRepository>();
-            _kernel.Bind<IPersonRepository>().To<PersonRepository>();
-            _kernel.Bind<IUbigeoRepository>().To<UbigeoRepository>().InSingletonScope();
-            _kernel.Bind<ISecurityRepository>().To<SecurityRepository>().InSingletonScope();
-            _kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
-            _kernel.Bind<IScheduleRepository>().To<ScheduleRepository>();
+            //_kernel.Bind<IImagenRepository>().To<ImagenRepository>();
+            //_kernel.Bind<ISupplierRepository>().To<SupplierRepository>();
+            //_kernel.Bind<IPersonRepository>().To<PersonRepository>();
+            //_kernel.Bind<IUbigeoRepository>().To<UbigeoRepository>().InSingletonScope();
+            //_kernel.Bind<ISecurityRepository>().To<SecurityRepository>().InSingletonScope();
+            //_kernel.Bind<ICompanyRepository>().To<CompanyRepository>();
+            //_kernel.Bind<IScheduleRepository>().To<ScheduleRepository>();
 
 
             _kernel.Bind<IProgressBar>().To<ProgressBarView>().InSingletonScope();

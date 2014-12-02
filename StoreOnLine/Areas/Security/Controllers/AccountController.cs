@@ -1,15 +1,11 @@
-﻿using System.Web.Mvc;
-using System.Web.Security;
-using System.Web.UI.WebControls;
-using StoreOnLine.Areas.Security.Models;
-using StoreOnLine.Controllers;
-using StoreOnLine.DataBase.Abstract;
+﻿using StoreOnLine.Controllers;
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.CmsEmploye;
 using StoreOnLine.DataBase.Model.Security;
-using StoreOnLine.Infrastructure.Abstract;
 using StoreOnLine.Infrastructure.Security;
 using StoreOnLine.Service.Constants;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace StoreOnLine.Areas.Security.Controllers
 {

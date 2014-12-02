@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CategoryCancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="CategoryCreate" xml:space="preserve">
@@ -141,9 +141,6 @@
   <data name="CategoryTitles" xml:space="preserve">
     <value>CATEGORIES</value>
   </data>
-  <data name="CategoryView" xml:space="preserve">
-    <value>View</value>
-  </data>
   <data name="LoginClick" xml:space="preserve">
     <value>Click here</value>
   </data>
@@ -165,7 +162,19 @@
   <data name="LoginTitle" xml:space="preserve">
     <value>Welcome to Chocolandia</value>
   </data>
+  <data name="ProductCreate" xml:space="preserve">
+    <value>New Product</value>
+  </data>
+  <data name="ProductTitle" xml:space="preserve">
+    <value>PRODUCT</value>
+  </data>
+  <data name="ProductTitles" xml:space="preserve">
+    <value>PRODUCTS</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
   </data>
 </root>

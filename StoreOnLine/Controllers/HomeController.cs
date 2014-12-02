@@ -1,14 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Web.Routing;
-using System.Web.Security;
-using Antlr.Runtime.Misc;
-using StoreOnLine.DataBase.Abstract;
-using StoreOnLine.DataBase.Data;
+﻿using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.Security;
 using StoreOnLine.Infrastructure;
 using StoreOnLine.Infrastructure.Security;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Security;
 
 namespace StoreOnLine.Controllers
 {
@@ -19,8 +16,8 @@ namespace StoreOnLine.Controllers
         //[ShowMessage] // applies to just this action
         //[OutputCache(Duration = 60)] // applies to just this action
 
-        private readonly ISecurityRepository _repositorySecurity;
-        private readonly IPersonRepository _repositoryPerson;
+        //private readonly ISecurityRepository _repositorySecurity;
+        //private readonly IPersonRepository _repositoryPerson;
 
 
         public HomeController(IUnitOfWork service) : base(service)
