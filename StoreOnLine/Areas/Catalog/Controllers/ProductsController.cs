@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using StoreOnLine.Controllers;
+using StoreOnLine.DataBase.Data;
 
 namespace StoreOnLine.Areas.Catalog.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         //
         // GET: /Catalog/Products/
+        public ProductsController(IUnitOfWork service) : base(service)
+        {
+        }
+
         public ActionResult Index()
         {
             return View();

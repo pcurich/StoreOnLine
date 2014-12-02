@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Threading;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.HtmlHelpers;
- 
+
 
 namespace StoreOnLine.Controllers
 {
     public class BaseController : Controller
     {
         public IUnitOfWork Service;
- 
+
         public BaseController(IUnitOfWork service)
         {
             Service = service;
@@ -60,16 +61,28 @@ namespace StoreOnLine.Controllers
 
         private void ExecutedServices()
         {
-            //ServLanguage = new ServLanguage();
-            //ServRol = new ServRol();
-            var userName=System.Web.HttpContext.Current.User.Identity.Name;
-            if (userName=="")
+            var userName = System.Web.HttpContext.Current.User.Identity.Name;
+            if (userName == "")
             {
                 userName = "pcurich";
             }
             Service.SetCurrentUser(userName);
             Service.EmployerRepository.GetEmployersByName(userName);
-            // ServEmployer = ServEmployer.Instance(userName);//Cambiar esto 
+        }
+
+        public void CreateBreadCrumb(string bigTitle,string smallTitle, string area, string controller, string action, string optional="" )
+        {
+            ViewBag.Big = bigTitle;
+            ViewBag.Small = smallTitle;
+            ViewBag.Area = area;
+            ViewBag.Controller = controller;
+            ViewBag.Action = action;
+            ViewBag.Optional = optional;
+        }
+
+        public void DummySeo(string title)
+        {
+            ViewBag.Title = title;
         }
     }
 }

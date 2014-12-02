@@ -49,6 +49,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Google", "Google", "{8CC079C8-900F-458A-986B-546A2BBC8C89}"
 	ProjectSection(SolutionItems) = preProject
 		analytics.txt = analytics.txt
+		seo.txt = seo.txt
 	EndProjectSection
 EndProject
 Global

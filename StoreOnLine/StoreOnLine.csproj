@@ -1376,7 +1376,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_Layout.Mobile.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\Shared\_Title.cshtml" />
+    <Content Include="Views\Shared\_BreadCrumb.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
@@ -1530,6 +1530,7 @@
     <Folder Include="Areas\Catalog\Views\Manufacturers\" />
     <Folder Include="Areas\Catalog\Views\Monitoring\" />
     <Folder Include="Areas\Catalog\Views\Products\" />
+    <Folder Include="Areas\Catalog\Views\Product\" />
     <Folder Include="Areas\Catalog\Views\Suppliers\" />
     <Folder Include="Areas\Catalog\Views\Tags\" />
     <Folder Include="Areas\Security\Views\Shared\" />

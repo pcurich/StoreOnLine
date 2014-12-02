@@ -1,6 +1,4 @@
-﻿@model IEnumerable<CategoryRol>
-
-<div class="col-lg-10">
+﻿<div class="col-lg-10">
     <table id="DataTableCategoryRol" class="table table-striped ">
         <thead>
             <tr>
@@ -14,7 +12,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.CheckBox("case", item.HasPermition, new { onchange = "SomeMethod(" + @item.Rol.Id + ")", id = @item.Rol.Id, @class = "case" })</td>
+                    <td>@Html.EditorFor(item.ha new { onchange = "SomeMethod(" + @item.Rol.Id + ")",   @class = "case" })</td>
                     <td>@item.Rol.Id</td>
                     <td>@item.Rol.Name</td>
                 </tr>

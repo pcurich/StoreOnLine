@@ -1,37 +1,39 @@
-﻿using Kendo.Mvc.Extensions;
+﻿using System.Data.Entity;
+using System.Linq;
+using System.Web.Mvc;
+using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using StoreOnLine.Controllers;
 using StoreOnLine.DataBase.Data;
 using StoreOnLine.DataBase.Model.CmsCategory;
-using StoreOnLine.DataBase.Model.CmsLanguage;
-using System.Linq;
-using System.Web.Mvc;
 
 namespace StoreOnLine.Areas.Catalog.Controllers
 {
     public class CategoryController : BaseController
     {
-        private readonly IQueryable<CategoryLang> _categories;
-        private readonly Language _currentLanguage;
-
-        public CategoryController(IUnitOfWork service)
-            : base(service)
+        public CategoryController(IUnitOfWork service) : base(service)
         {
-            _currentLanguage = Service.LanguageRepository.GetCurrentLanguage();
-            _categories = Service.CategoryLangRepository.GetCategoryLangForCultura(_currentLanguage.Id);
-
+            DummySeo("Categorias");
         }
         //
         // GET: /Catalog/Category/
         public ActionResult Index()
         {
+            CreateBreadCrumb("Categorias", "Lista de categorias", "Catalog", "Category", "Index");
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post | HttpVerbs.Get)]
         public ActionResult Read([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(_categories.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+            var categoryLangs = Service.CategoryLangRepository.
+                GetCategoryLangForCultura(Service.LanguageRepository.GetCurrentLanguage().Id).ToList();
+
+            foreach (var categoryLang in categoryLangs)
+            {
+                categoryLang.CategoryRols = null;
+            }
+            return Json(categoryLangs.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -39,7 +41,7 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
             if (category != null && ModelState.IsValid)
             {
-                category.LanguageId = _currentLanguage.Id;//todo
+                category.LanguageId = Service.LanguageRepository.GetCurrentLanguage().Id;//todo
                 Service.CategoryLangRepository.Add(category);
                 Service.Commit();
             }
@@ -72,40 +74,47 @@ namespace StoreOnLine.Areas.Catalog.Controllers
         {
 
             var category = Service.CategoryLangRepository.GetById(categoryId);
-            var categoryRol = Service.CategoryRolRepository.GetAll().Where(o => o.CategoryLangId == categoryId);
-            var rols = Service.RolRepository.GetRolByLanguage(_currentLanguage.Id);
-            category.AddRols(rols, categoryId);
-            
+            var categoryRol = Service.CategoryRolRepository.GetAll().Include(p => p.Rol).Where(o => o.CategoryLangId == categoryId).ToList();
+
+            category.CategoryRols = categoryRol;
+
             if (categoryRol.Any())
             {
                 return View(category);
             }
             //si no esta registrado en base de datos lo inserto
+            var rols = Service.RolRepository.GetRolByLanguage(Service.LanguageRepository.GetCurrentLanguage().Id).ToList();
+            category.AddRols(rols, categoryId);
             Service.Commit();
-
+            DummySeo("Categoria: " + category.Name);
             return View(category);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Detail(CategoryLang model)
+        public ActionResult Detail(CategoryLang model, FormCollection form)
         {
             if (model != null && ModelState.IsValid)
             {
+                //var old = Service.CategoryLangRepository.GetById(model.Id);
+                //model.Language = old.Language;
+
+                foreach (var categoryRol in model.CategoryRols)
+                {
+                    Service.CategoryRolRepository.Update(categoryRol);
+                }
+
+                model.CategoryRols = null;
                 Service.CategoryLangRepository.Update(model);
                 Service.Commit();
+
+                if ("Guardar".Equals(Request.Form["save"]))
+                {
+                    return View(Service.CategoryLangRepository.GetById(model.Id));
+                }
             }
-            return View();
-        }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateCategoryRol(int categoryId, int rolId)
-        {
-            var category =Service.CategoryRolRepository.GetAll()
-                .First(o => o.CategoryLangId == categoryId && o.RolId == rolId);
-            category.HasPermition = !category.HasPermition;
-            Service.Commit();
-            return Json("OK", JsonRequestBehavior.AllowGet);
+            return Redirect("Index");
+            
         }
-
     }
 }

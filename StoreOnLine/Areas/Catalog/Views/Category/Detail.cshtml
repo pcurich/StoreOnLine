@@ -19,6 +19,10 @@
             <div class="panel-body">
 
                 @Html.HiddenFor(o => o.Id)
+                @Html.HiddenFor(o => o.LanguageId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
                 <div class="form-group">
                     @Html.LabelFor(o => o.Name, htmlAttributes: new { @class = "col-lg-2 control-label" })
                     <div class="col-lg-10">
@@ -72,19 +76,102 @@
 
                 <div class="form-group">
                     @Html.LabelFor(o => o.CategoryRols, htmlAttributes: new { @class = "col-lg-2 control-label" })
-                    <div class="col-lg-10">
+                    @* <div class="col-lg-10">
                         @{ Html.RenderPartial("_Rol", Model.CategoryRols); }
+                    </div>*@
+                    <div class="col-lg-10">
+                        <table id="DataTableCategoryRol" class="table table-striped ">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="selectall" /></th>
+                                    <th>Id</th>
+                                    <th>Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < Model.CategoryRols.Count; i++)
+                                {
+                                    <tr>
+                                        @* <td>@Html.CheckBox("CategoryRols.HasPermition", new { onchange = "SomeMethod(" + @item.Rol.Id + ")", @class = "case" })</td>*@
+                                        <td>
+                                            @Html.CheckBoxFor(x => x.CategoryRols[i].HasPermition)
+                                            @Html.HiddenFor(x => x.CategoryRols[i].RolId)
+                                            @Html.HiddenFor(x => x.CategoryRols[i].CategoryLangId)
+                                            @Html.HiddenFor(x => x.CategoryRols[i].Id)
+                                        </td>
+                                        <td>@Model.CategoryRols[i].Rol.Id</td>
+                                        <td>@Model.CategoryRols[i].Rol.Name</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
+
+
+
+                    <script type="text/javascript">
+                        $(function () {
+
+                            // add multiple select / deselect functionality
+                            $("#selectall").click(function () {
+
+                                $('.case').prop('checked', this.checked);
+                            });
+
+                            // if all checkbox are selected, check the selectall checkbox
+                            // and viceversa
+                            $(".case").click(function () {
+
+                                if ($(".case").length == $(".case:checked").length) {
+                                    $("#selectall").prop("checked", true);
+                                } else {
+                                    $("#selectall").prop("checked", false);
+                                }
+
+                            });
+                        });
+
+
+
+                        function SomeMethod(checkboxInput) {
+                            var idRol = $(checkboxInput)[0];
+                            //alert("checkedChanged" + checkboxInput.Id);
+                            var url = '@Url.Action("UpdateCategoryRol", new { categoryId = 1, rolId = "__id__" })';
+                            var data = {categoryId: @Model.CategoryRols.First().CategoryLangId , rolId: idRol};
+                            //$.ajax({
+                            //    type: 'POST',
+                            //    url: url.replace('__id__', idRol),
+                            //    contentType: 'application/json; charset=utf-8',
+                            //    data: JSON.stringify(data)
+
+                            //});
+                        }
+                    </script>
+
                 </div>
 
             </div>
         </div>
         <div class="panel-footer">
-            <input type="submit" value="Guardar" class="btn btn-primary" />
+            <div class="btn-group pull-right">
+                <a class="btn btn-primary" href="#"><i class="glyphicon glyphicon-floppy-save"></i></a>
+                <input type="submit" value="Guardar" class="btn btn-primary" name="Save" />
+            </div>
+
+            <div class="btn-group pull-right">
+                <a class="btn btn-primary" href="#"><i class="glyphicon glyphicon-floppy-save"></i></a>
+                <input type="submit" value="Guardar y Permanecer" class="btn btn-primary" name="Save" />
+            </div>
+
+            <div class="btn-group">
+                <a class="btn btn-danger" href="#"><i class="glyphicon glyphicon-floppy-remove"></i></a>
+                <a class="btn btn-danger" href="@Url.Action("Index")">Cancelar</a>
+            </div>
+
             <div id="loading" class="ui-icon-loading" style="display: none">
                 <p>Loading Data</p>
             </div>
-            @Html.ActionLink("Regresar", "Index", new { @class = "btn btn-default" })
         </div>
     }
 </div>
@@ -92,7 +179,6 @@
 
 @section Scripts{
     <script type="text/javascript">
-
 
         function OnSuccess(data) {
             var salida = '@TempData["message"]';

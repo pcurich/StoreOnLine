@@ -21,7 +21,7 @@ namespace StoreOnLine.DataBase.Data
             DbContext = dbContext;
             DbSet = DbContext.Set<T>();
             _user = user;
-
+        
         }
 
         protected DbContext DbContext { get; set; }
