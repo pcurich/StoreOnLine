@@ -4,8 +4,8 @@ namespace StoreOnLine.DataBase.Model.CmsProduct
 {
     public class ProductLang:DataBaseId
     {
-        public Language Language { get; set; }
-        public int LanguageId { get; set; }
+        public LanguageShop LanguageShop { get; set; }
+        public int LanguageShopId { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

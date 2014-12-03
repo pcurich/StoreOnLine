@@ -101,6 +101,8 @@
     <Compile Include="Default\Sources.cs" />
     <Compile Include="Configuration\DataBaseConfiguration.cs" />
     <Compile Include="Configuration\DataBaseContext.cs" />
+    <Compile Include="Model\CmsProduct\Attachment.cs" />
+    <Compile Include="Model\CmsProduct\ProductAttachment.cs" />
     <Compile Include="Model\CmsProduct\ProductLang.cs" />
     <Compile Include="Model\DataBaseId.cs" />
     <Compile Include="Configuration\DataBaseInitializer.cs" />

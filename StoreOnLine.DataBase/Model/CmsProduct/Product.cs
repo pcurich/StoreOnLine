@@ -19,15 +19,24 @@ namespace StoreOnLine.DataBase.Model.CmsProduct
         public decimal Price { get; set; }
         public decimal PriceBase { get; set; }
         public decimal AditionalShippingCost { get; set; }
+        public string Reference { get; set; }
         public float Width { get; set; }
         public float Height { get; set; }
         public float Depth { get; set; }
         public float Weight { get; set; }
         public float OutOfStock { get; set; }
         public float QuantityDiscount { get; set; }
+        public bool AvailableForOrder { get; set; }
+        public DateTime AvailableDate { get; set; }
+        public string Condition { get; set; }//new used refurbished
+        public bool ShowPrice { get; set; }
+        public bool Indexed { get; set; }
+        public string Visibility { get; set; } //both catalog search
 
         public ProductLang ProductLang { get; set; }
         public int ProductLangId { get; set; }
+
+        public IList<ProductAttachment> ProductAttachments { get; set; }
 
         //public String ProductName { get; set; }
         //public String ProductDescription { get; set; }
